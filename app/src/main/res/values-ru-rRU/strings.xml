@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Список новостей</string>
+    <!--<string name="DesignEngineer">Инженер-конструктор и радиотехник</string>
+    <string name="Master">Магистр в области радиотехники</string>-->
+    <string name="developerFeedback">Обратная связь с разработчиком:</string>
+    <string name="Description">Даннное приложение поможет вам быть в курсе последний новостей</string>
+    <string name="Hint">Введите сообщение…</string>
+    <string name="Send">Отправить сообщение</string>
+    <string name="About" translatable="false">О приложении</string>
+    <string name="News" translatable="false">Приложение «Список новостей из New York Times»</string>
+</resources>

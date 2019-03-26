@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">List of new</string>
+    <string name="News">News list from NY Times</string>
+    <!--<string name="DesignEngineer">Design engineer and radio technician</string>
+    <string name="Master">Master’s degree in radio technician</string>-->
+    <string name="Description">"This application will help you keep up to date with the latest news "</string>
+    <string name="developerFeedback">Developer Feedback:</string>
+    <string name="Send">Send Message</string>
+    <string name="addresses" translatable="false">my mail</string>
+    <string name="subject" translatable="false">contacting</string>
+    <string name="LinkToTelegram" translatable="false">https://t.me/roman_ov</string>
+    <string name="Hint">Enter a message…</string>
+
+    <string name="About" >About the application</string>
+    <string name="categoryName1" translatable="false">DARWIN AVARDS</string>
+    <string name="categoryName2" translatable="false">CRIMINAL</string>
+    <string name="categoryName3" translatable="false">ANIMALS</string>
+    <string name="categoryName4" translatable="false">MUSIC</string>
+    <string name="title" translatable="false">Text title</string>
+    <string name="textForText" translatable="false">TextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForText</string>
+
+    <string name="NewsDetails_name" translatable="false">NewsDetails_name</string>
+
+    <!--Strings for news_recycler_activity -->
+    <string name="err_data_is_empty">There is no data for your request</string>
+    <string name="btn_try_again">Try again</string>
+
+</resources>

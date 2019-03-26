@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- preference_for_scrollbarSize -->
+    <dimen name="scrollbarSize">2dp</dimen>
+    <!-- preference_for_major_(most used)_margin-->
+    <dimen name="BaseMargin">16dp</dimen>
+    <!-- preference_for_margin_LinearLayout-->
+    <dimen name="marginStartL">50dp</dimen>
+    <!-- preference_for_margin_TextView_after_ImageView-->
+    <dimen name="marginStartT">8dp</dimen>
+    <!-- preference_for_textSize-->
+    <dimen name="textSize">16sp</dimen>
+    <!-- preference_for_height_View-->
+    <dimen name="heightView">1dp</dimen>
+
+    <!-- preference_for_major_(most used)_margin-->
+    <dimen name="BaseMargin8">8dp</dimen>
+    <!-- preference_for_major_(most used)_margin-->
+    <dimen name="BaseMargin4">4dp</dimen>
+    <!-- preference_for_height_Text_for_2_strings-->
+    <dimen name="Marginheight2">4dp</dimen>
+    <!-- preference_for_image-->
+    <dimen name="image_size">110dp</dimen>
+    <!-- preference_for_item_divider-->
+    <dimen name="ItemDecoration_size_4">4dp</dimen>
+
+    <!-- preference_for_LinearLayoutError_in_Main_recycler-->
+    <dimen name="margin_lt_error">16dp</dimen>
+
+
+
+
+
+
+
+</resources>
