@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.Date;
 
-public class Example {
+public class NewsItemDTO {
 
     @SerializedName("subsection")
     @Expose
