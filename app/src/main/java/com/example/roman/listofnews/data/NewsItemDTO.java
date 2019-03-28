@@ -20,7 +20,7 @@ public class NewsItemDTO {
     private Date updatedDate;
     @SerializedName("multimedia")
     @Expose
-    private String multimedia;
+    private String multimediaUrl;
 
     public String getSubsection() {
         return subsection;
@@ -54,12 +54,12 @@ public class NewsItemDTO {
         this.updatedDate = updatedDate;
     }
 
-    public String getMultimedia() {
-        return multimedia;
+    public String getMultimediaURL () {
+        return multimediaUrl;
     }
 
-    public void setMultimedia(String multimedia) {
-        this.multimedia = multimedia;
+    public void setMultimediaURL (String multimediaUrl) {
+        this.multimediaUrl = multimediaUrl;
     }
 
 }

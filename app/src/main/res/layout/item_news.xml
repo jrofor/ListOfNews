@@ -59,7 +59,7 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textStyle="bold" />
                     <TextView
-                        android:id="@+id/tv_preview"
+                        android:id="@+id/tv_abstract"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/BaseMargin8"
