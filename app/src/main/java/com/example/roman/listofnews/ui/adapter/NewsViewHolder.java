@@ -2,6 +2,7 @@ package com.example.roman.listofnews.ui.adapter;
 
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,15 +33,25 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
 
     private static final int LayuotItem = R.layout.item_news;
 
-    public NewsViewHolder(@NonNull View itemView, RequestManager glideRequestManager) {
+    public interface OnItemClickListener {
+        void OnItemClick(int position); }
+
+    public NewsViewHolder(@NonNull View itemView, RequestManager glideRequestManager, @Nullable OnItemClickListener clickListener) {
         super(itemView);
         this.imageLoader = glideRequestManager;
         findViews(itemView);
+        itemView.setOnClickListener(view -> {
+            int position = getAdapterPosition();
+            if (clickListener != null && position != RecyclerView.NO_POSITION) {
+                clickListener.OnItemClick(getAdapterPosition());
+            }
+        });
+
     }
 
-    public NewsViewHolder create (@NonNull ViewGroup parent, RequestManager glideRequestManager) {
-        final View view = LayoutInflater.from(parent.getContext()).inflate(LayuotItem, parent, false ), clickListener дописать;
-        return new NewsViewHolder(view, glideRequestManager);
+    public NewsViewHolder create (@NonNull ViewGroup parent, RequestManager glideRequestManager, OnItemClickListener clickList ) {
+        final View view = LayoutInflater.from(parent.getContext()).inflate(LayuotItem, parent, false ), clickListener;
+        return new NewsViewHolder(view, glideRequestManager, clickList )  ;
 
     }
 
