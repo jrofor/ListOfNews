@@ -49,7 +49,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public NewsViewHolder create (@NonNull ViewGroup parent, RequestManager glideRequestManager, OnItemClickListener clickList ) {
+    public static NewsViewHolder create (@NonNull ViewGroup parent, RequestManager glideRequestManager, OnItemClickListener clickList ) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(LayuotItem, parent, false ), clickListener;
         return new NewsViewHolder(view, glideRequestManager, clickList )  ;
 
