@@ -2,7 +2,7 @@ package com.example.roman.listofnews.ux.Endpoint;
 
 import android.support.annotation.NonNull;
 
-import com.example.roman.listofnews.data.NewsDTO.NewsItemDTO;
+import com.example.roman.listofnews.ux.NewsDTO.NewsItemDTO;
 import com.example.roman.listofnews.ux.DefaultResponse;
 
 import java.util.List;

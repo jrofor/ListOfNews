@@ -1,4 +1,4 @@
-package com.example.roman.listofnews.data.NewsDTO;
+package com.example.roman.listofnews.ux.NewsDTO;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -20,7 +20,7 @@ public class NewsItemDTO {
     private Date updatedDate;
     @SerializedName("multimedia")
     @Expose
-    private String multimediaUrl;
+    private MultimediaDTO multimediaUrl;
 
     public String getSubsection() {
         return subsection;
@@ -55,10 +55,10 @@ public class NewsItemDTO {
     }
 
     public String getMultimediaURL () {
-        return multimediaUrl;
+        return multimediaUrl.getOriginalSize().getUrl();
     }
 
-    public void setMultimediaURL (String multimediaUrl) {
+    public void setMultimediaURL (MultimediaDTO multimediaUrl) {
         this.multimediaUrl = multimediaUrl;
     }
 

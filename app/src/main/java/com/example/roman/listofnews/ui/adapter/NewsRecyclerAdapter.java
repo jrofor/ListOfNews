@@ -2,7 +2,7 @@ package com.example.roman.listofnews.ui.adapter;
 
 import android.view.ViewGroup;
 import com.bumptech.glide.RequestManager;
-import com.example.roman.listofnews.data.NewsDTO.NewsItemDTO;
+import com.example.roman.listofnews.ux.NewsDTO.NewsItemDTO;
 
 import java.util.ArrayList;
 import java.util.List;
