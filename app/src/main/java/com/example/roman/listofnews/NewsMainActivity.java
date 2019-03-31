@@ -13,7 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.bumptech.glide.Glide;
-import com.example.roman.listofnews.data.NewsItemDTO;
+import com.example.roman.listofnews.data.NewsDTO.NewsItemDTO;
 import com.example.roman.listofnews.ui.adapter.NewsRecyclerAdapter;
 import com.example.roman.listofnews.ui.State;
 import com.example.roman.listofnews.ux.DefaultResponse;

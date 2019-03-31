@@ -19,7 +19,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.example.roman.listofnews.R;
-import com.example.roman.listofnews.data.NewsItemDTO;
+import com.example.roman.listofnews.data.NewsDTO.NewsItemDTO;
 
 public class NewsViewHolder extends RecyclerView.ViewHolder {
 

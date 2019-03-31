@@ -1,4 +1,4 @@
-package com.example.roman.listofnews.data;
+package com.example.roman.listofnews.data.NewsDTO;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
