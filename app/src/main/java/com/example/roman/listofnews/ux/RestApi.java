@@ -58,4 +58,7 @@ public class RestApi {
                 .build();
     }
 
+    public HomeTopStoriesEndpoint getTSEndpoint() {
+        return TSEndpoint;
+    }
 }

@@ -24,5 +24,7 @@
     <!--Strings for news_recycler_activity -->
     <string name="err_data_is_empty">There is no data for your request</string>
     <string name="btn_try_again">Try again</string>
+    <string name="error_network">Network error. Please check your network connection and try again</string>
+    <string name="error_server">Server error. Probably sample token is done</string>
 
 </resources>

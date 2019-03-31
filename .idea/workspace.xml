@@ -14,10 +14,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0900f2a6-402b-477e-a376-1d3cd22a1d24" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/ux/ApiKeyInterceptor.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/ux/RestApi.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/ux/Endpoint/HomeTopStoriesEndpoint.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/ux/Endpoint/HomeTopStoriesEndpoint.java" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/NewsMainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/NewsMainActivity.java" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/ux/RestApi.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/ux/RestApi.java" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/news_recycler_activity.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/news_recycler_activity.xml" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -39,19 +40,44 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.6282565">
+    <splitter split-orientation="horizontal" split-proportion="0.53534484">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="NewsMainActivity.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/NewsMainActivity.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-718">
-                  <caret line="55" column="53" lean-forward="true" selection-start-line="55" selection-start-column="53" selection-end-line="55" selection-end-column="53" />
+                <state relative-caret-position="170">
+                  <caret line="37" column="29" lean-forward="false" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="29" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <element signature="e#1994#1995#0" expanded="true" />
-                    <element signature="e#2046#2047#0" expanded="true" />
+                    <element signature="e#2177#2178#0" expanded="true" />
+                    <element signature="e#2229#2230#0" expanded="true" />
+                    <element signature="e#4690#4720#0" expanded="true" />
+                    <element signature="e#5548#5579#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="news_recycler_activity.xml" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/news_recycler_activity.xml">
+              <provider editor-type-id="android-designer2">
+                <state />
+              </provider>
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="435">
+                  <caret line="56" column="30" lean-forward="false" selection-start-line="56" selection-start-column="30" selection-end-line="56" selection-end-column="30" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="459">
+                  <caret line="27" column="30" lean-forward="false" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="30" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -59,7 +85,7 @@
           <file leaf-file-name="HomeTopStoriesEndpoint.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/ux/Endpoint/HomeTopStoriesEndpoint.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="221">
+                <state relative-caret-position="68">
                   <caret line="13" column="17" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
                   <folding>
                     <element signature="imports" expanded="true" />
@@ -71,10 +97,12 @@
           <file leaf-file-name="RestApi.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/ux/RestApi.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="433">
-                  <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+                <state relative-caret-position="722">
+                  <caret line="60" column="47" lean-forward="false" selection-start-line="60" selection-start-column="34" selection-end-line="60" selection-end-column="47" />
                   <folding>
                     <element signature="imports" expanded="true" />
+                    <element signature="e#2030#2031#0" expanded="true" />
+                    <element signature="e#2063#2064#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -93,7 +121,7 @@
           <file leaf-file-name="NewsAboutActivity.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/NewsAboutActivity.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="533">
+                <state relative-caret-position="1496">
                   <caret line="110" column="51" lean-forward="false" selection-start-line="110" selection-start-column="51" selection-end-line="110" selection-end-column="51" />
                   <folding />
                 </state>
@@ -123,33 +151,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/build.gradle">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="538">
-                  <caret line="47" column="40" lean-forward="false" selection-start-line="47" selection-start-column="40" selection-end-line="47" selection-end-column="40" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="about_activity.xml" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/about_activity.xml">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="680">
-                  <caret line="46" column="16" lean-forward="false" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="16" />
-                  <folding />
-                </state>
-              </provider>
-              <provider editor-type-id="android-designer2">
-                <state />
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="NewsRecyclerAdapter.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/ui/adapter/NewsRecyclerAdapter.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-315">
+                <state relative-caret-position="85">
                   <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
                   <folding />
                 </state>
@@ -160,11 +165,11 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="NetworkGifs.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="NetworkGifs.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/../AppForTest/app/src/main/java/com/example/roman/appfortest/NetworkGifs.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1700">
-                  <caret line="122" column="18" lean-forward="false" selection-start-line="122" selection-start-column="18" selection-end-line="122" selection-end-column="18" />
+                <state relative-caret-position="3493">
+                  <caret line="236" column="62" lean-forward="false" selection-start-line="236" selection-start-column="49" selection-end-line="236" selection-end-column="62" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -175,8 +180,8 @@
           <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/../../../../Android Academy M/5/RetrofitTutorial-master/app/src/main/java/ru/mustakimov/retrofittutorial/MainActivity.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="119">
-                  <caret line="19" column="25" lean-forward="false" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+                <state relative-caret-position="391">
+                  <caret line="35" column="17" lean-forward="false" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
                   <folding />
                 </state>
               </provider>
@@ -185,14 +190,14 @@
           <file leaf-file-name="RestApi.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/../../../../Android Academy M/5/Lecture5-Code-master/app/src/main/java/ru/alexbykov/networksample/data/network/RestApi.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="144">
+                <state relative-caret-position="493">
                   <caret line="37" column="5" lean-forward="false" selection-start-line="33" selection-start-column="34" selection-end-line="33" selection-end-column="53" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ApiKeyInterceptor.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="ApiKeyInterceptor.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/../AppForTest/app/src/main/java/com/example/roman/appfortest/forNetworkGifs/ux/ApiKeyInterceptor.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="68">
@@ -2499,20 +2504,20 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/AboutActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/NewsAboutActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/news_recycler_activity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/data/NewsItem.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_news.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/data/NewsItemDTO.java" />
-        <option value="$PROJECT_DIR$/../AppForTest/app/src/main/java/com/example/roman/appfortest/NetworkGifs.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/ui/adapter/NewsRecyclerAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/ui/adapter/NewsViewHolder.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/ui/State.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/ux/DefaultResponse.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/NewsMainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/ux/Endpoint/HomeTopStoriesEndpoint.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/ux/ApiKeyInterceptor.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/ux/RestApi.java" />
+        <option value="$PROJECT_DIR$/../AppForTest/app/src/main/java/com/example/roman/appfortest/NetworkGifs.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/news_recycler_activity.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/NewsMainActivity.java" />
       </list>
     </option>
   </component>
@@ -2538,6 +2543,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -2588,49 +2596,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="listofnews" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ListOfNews" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ListOfNews" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="listofnews" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ListOfNews" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ListOfNews" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="listofnews" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-              <item name="adapter" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ListOfNews" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ListOfNews" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="listofnews" type="462c0819:PsiDirectoryNode" />
               <item name="ux" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ListOfNews" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ListOfNews" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="listofnews" type="462c0819:PsiDirectoryNode" />
-              <item name="ux" type="462c0819:PsiDirectoryNode" />
-              <item name="Endpoint" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ListOfNews" type="b2602c69:ProjectViewProjectNode" />
@@ -2662,10 +2628,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2871,7 +2834,7 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24508321" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12254161" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17746913" sideWeight="0.40922844" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -3043,13 +3006,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-land/about_activity.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="21" column="44" lean-forward="false" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/item_ecoration_size_4.xml">
@@ -3060,14 +3023,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="23" column="41" lean-forward="false" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/processDebugResources/r/com/example/roman/listofnews/R.java">
@@ -3079,13 +3042,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_news_details.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="42" column="32" lean-forward="false" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
@@ -3111,14 +3074,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="25" column="31" lean-forward="false" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../../../Android Academy M/5/RetrofitTutorial-master/app/src/main/java/ru/mustakimov/retrofittutorial/PostModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-114">
@@ -3127,31 +3082,30 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../AppForTest/app/src/main/res/layout/activity_network_gifs.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="537">
           <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_news.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_news.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1037">
           <caret line="61" column="44" lean-forward="false" selection-start-line="61" selection-start-column="44" selection-end-line="61" selection-end-column="44" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/data/NewsItemDTO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
           <caret line="56" column="34" lean-forward="false" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3159,7 +3113,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3167,15 +3120,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../AppForTest/app/src/main/java/com/example/roman/appfortest/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3183,51 +3127,31 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="52" column="105" lean-forward="false" selection-start-line="52" selection-start-column="105" selection-end-line="52" selection-end-column="117" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/news_recycler_activity.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="42" column="33" lean-forward="false" selection-start-line="42" selection-start-column="25" selection-end-line="42" selection-end-column="33" />
-          <folding>
-            <element signature="e#1723#1747#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
+        <state relative-caret-position="799">
           <caret line="47" column="40" lean-forward="false" selection-start-line="47" selection-start-column="40" selection-end-line="47" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/about_activity.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
+        <state relative-caret-position="782">
           <caret line="46" column="16" lean-forward="false" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="16" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../AppForTest/app/src/main/java/com/example/roman/appfortest/forNetworkGifs/ui/adapter/PhotoViewHolder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="37" column="63" lean-forward="false" selection-start-line="37" selection-start-column="63" selection-end-line="37" selection-end-column="63" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3235,7 +3159,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3247,51 +3170,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/NewsAboutActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="533">
-          <caret line="110" column="51" lean-forward="false" selection-start-line="110" selection-start-column="51" selection-end-line="110" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../../../Android Academy M/5/Lecture5-Code-master/app/src/main/java/ru/alexbykov/networksample/data/network/endpoints/GifEndpoint.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="15" column="83" lean-forward="true" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="83" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../AppForTest/app/src/main/java/com/example/roman/appfortest/NetworkGifs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1700">
-          <caret line="122" column="18" lean-forward="false" selection-start-line="122" selection-start-column="18" selection-end-line="122" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../Android Academy M/5/RetrofitTutorial-master/app/src/main/java/ru/mustakimov/retrofittutorial/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="19" column="25" lean-forward="false" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../Android Academy M/5/Lecture5-Code-master/app/src/main/java/ru/alexbykov/networksample/data/network/RestApi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="37" column="5" lean-forward="false" selection-start-line="33" selection-start-column="34" selection-end-line="33" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/ui/adapter/NewsRecyclerAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-315">
+        <state relative-caret-position="85">
           <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
           <folding />
         </state>
@@ -3299,19 +3187,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/ux/Endpoint/HomeTopStoriesEndpoint.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
+        <state relative-caret-position="68">
           <caret line="13" column="17" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/ux/ApiKeyInterceptor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="11" column="19" lean-forward="false" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3326,10 +3206,88 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../AppForTest/app/src/main/java/com/example/roman/appfortest/forNetworkGifs/ux/ApiKeyInterceptor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="11" column="36" lean-forward="false" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/NewsAboutActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1496">
+          <caret line="110" column="51" lean-forward="false" selection-start-line="110" selection-start-column="51" selection-end-line="110" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../AppForTest/app/src/main/java/com/example/roman/appfortest/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/ux/ApiKeyInterceptor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="11" column="19" lean-forward="false" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../Android Academy M/5/Lecture5-Code-master/app/src/main/java/ru/alexbykov/networksample/data/network/RestApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="37" column="5" lean-forward="false" selection-start-line="33" selection-start-column="34" selection-end-line="33" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="30" lean-forward="false" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../Android Academy M/5/RetrofitTutorial-master/app/src/main/java/ru/mustakimov/retrofittutorial/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="35" column="17" lean-forward="false" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/ux/RestApi.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        <state relative-caret-position="722">
+          <caret line="60" column="47" lean-forward="false" selection-start-line="60" selection-start-column="34" selection-end-line="60" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2030#2031#0" expanded="true" />
+            <element signature="e#2063#2064#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/news_recycler_activity.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="56" column="30" lean-forward="false" selection-start-line="56" selection-start-column="30" selection-end-line="56" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../AppForTest/app/src/main/java/com/example/roman/appfortest/NetworkGifs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3493">
+          <caret line="236" column="62" lean-forward="false" selection-start-line="236" selection-start-column="49" selection-end-line="236" selection-end-column="62" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -3338,21 +3296,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/roman/listofnews/NewsMainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-718">
-          <caret line="55" column="53" lean-forward="true" selection-start-line="55" selection-start-column="53" selection-end-line="55" selection-end-column="53" />
+        <state relative-caret-position="170">
+          <caret line="37" column="29" lean-forward="false" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1994#1995#0" expanded="true" />
-            <element signature="e#2046#2047#0" expanded="true" />
+            <element signature="e#2177#2178#0" expanded="true" />
+            <element signature="e#2229#2230#0" expanded="true" />
+            <element signature="e#4690#4720#0" expanded="true" />
+            <element signature="e#5548#5579#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../AppForTest/app/src/main/java/com/example/roman/appfortest/forNetworkGifs/ux/ApiKeyInterceptor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="11" column="36" lean-forward="false" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
