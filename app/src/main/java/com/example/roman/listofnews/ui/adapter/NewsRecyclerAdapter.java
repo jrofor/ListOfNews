@@ -34,8 +34,8 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder>{
 
     @NonNull
     @Override
-    public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return NewsViewHolder.create (viewGroup, glideRequestManager, (NewsViewHolder.OnItemClickListener) clickListener);
+    public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return NewsViewHolder.create (parent, glideRequestManager);
     }
 
     @Override

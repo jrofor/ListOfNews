@@ -11,7 +11,7 @@ import okhttp3.Response;
 
 public final class ApiKeyInterceptor implements Interceptor {
 
-    private static final String PARAM_API_KEY = "api_key";
+    private static final String PARAM_API_KEY = "api-key";
 
     private final String apiKey;
 

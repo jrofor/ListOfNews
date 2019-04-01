@@ -85,7 +85,12 @@ public class NewsMainActivity extends AppCompatActivity {
 
     private void setupUx() {
         loadTopStoriesHome();
+        btnTryAgain.setOnClickListener(v -> onClickTryAgain());
 
+    }
+
+    private void onClickTryAgain() {
+        loadTopStoriesHome();
     }
 
     private void loadTopStoriesHome() {

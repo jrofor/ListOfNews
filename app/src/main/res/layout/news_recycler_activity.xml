@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".NewsMainActivity"
-        tools:listitem="@layout/item_news" />
+        tools:listitem="@layout/item_news"
+        android:visibility="gone"/>
 
     <FrameLayout
         android:id="@+id/fl_loading"
@@ -29,7 +30,8 @@
     <FrameLayout
         android:id="@+id/fl_no_data"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

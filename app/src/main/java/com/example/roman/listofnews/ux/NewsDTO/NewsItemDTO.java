@@ -18,9 +18,9 @@ public class NewsItemDTO {
     @SerializedName("updated_date")
     @Expose
     private Date updatedDate;
-    @SerializedName("multimedia")
+    /*@SerializedName("multimedia")
     @Expose
-    private MultimediaDTO multimediaUrl;
+    private MultimediaDTO multimediaUrl;*/
 
     public String getSubsection() {
         return subsection;
@@ -55,11 +55,14 @@ public class NewsItemDTO {
     }
 
     public String getMultimediaURL () {
+        return "https://static01.nyt.com/images/2019/03/29/us/00levees-02/00levees-02-thumbStandard.jpg";
+    }
+    /*public String getMultimediaURL () {
         return multimediaUrl.getOriginalSize().getUrl();
     }
 
     public void setMultimediaURL (MultimediaDTO multimediaUrl) {
         this.multimediaUrl = multimediaUrl;
     }
-
+*/
 }
