@@ -14,7 +14,8 @@ import android.support.v7.widget.RecyclerView;
 
 public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder>{
     @Nullable
-    private final List<NewsItemDTO> news = new ArrayList<>();
+    //private final List<NewsItemDTO> news = new ArrayList<>();
+    private final List<AllNewsItem> news = new ArrayList<>();
     @Nullable
     private final OnItemClickListener clickListener;
     private RequestManager glideRequestManager;
@@ -40,11 +41,13 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder newsViewHolder, int position) {
-        final NewsItemDTO NIDTO = news.get(position);
+        //final NewsItemDTO NIDTO = news.get(position);
+        final AllNewsItem NIDTO = news.get(position);
         newsViewHolder.bindItem(NIDTO);
     }
 
-    public void replaceItems (List<NewsItemDTO> news ) {
+    //public void replaceItems (List<NewsItemDTO> news ) {
+    public void replaceItems (List<AllNewsItem> news ) {
         this.news.clear();
         this.news.addAll(news);
         notifyDataSetChanged();

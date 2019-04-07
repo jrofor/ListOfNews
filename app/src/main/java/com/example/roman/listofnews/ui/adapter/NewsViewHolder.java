@@ -15,11 +15,14 @@ import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.example.roman.listofnews.R;
 import com.example.roman.listofnews.ux.NewsDTO.NewsItemDTO;
+
+import java.util.List;
 
 public class NewsViewHolder extends RecyclerView.ViewHolder {
 
@@ -64,15 +67,20 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
         tvDate = itemView.findViewById(R.id.tv_date);
     }
 
-    public void bindItem (NewsItemDTO newsDTO) {
+    //public void bindItem (NewsItemDTO newsDTO) {
+    public void bindItem (AllNewsItem newsDTO) {
 
         progressBar.setVisibility(View.VISIBLE);
 
-        tvSubsection.setText(newsDTO.getSubsection());
+        tvSubsection.setText(newsDTO.getCategory());
         tvTitle.setText(newsDTO.getTitle());
-        tvAbstract.setText(newsDTO.getAbstract());
+        tvAbstract.setText(newsDTO.getPreviewText());
         tvDate.setText(newsDTO.getUpdatedDate().toString());
-        imageLoader.load(newsDTO.getMultimediaURL()).listener( new RequestListener<Drawable>() {
+        //imageLoader.load(newsDTO.getMultimediaURL()).listener( new RequestListener<Drawable>() {
+        //imageLoader.load(newsDTO.getImageUrl().getClass().toString()).listener( new RequestListener<Drawable>() {
+        //imageLoader.load(newsDTO<List.get(List.size() - 1)<OriginalSizeDTO()>).listener( new RequestListener<Drawable>() {
+        imageLoader.load(newsDTO.getImageUrl()).listener( new RequestListener<Drawable>() {
+
             @Override
             public boolean onLoadFailed(GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                 progressBar.setVisibility(View.GONE);
@@ -87,6 +95,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
         })
                 .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.AUTOMATIC))
                 .thumbnail(0.3f)
+                .transition(DrawableTransitionOptions.withCrossFade())
                 .into(ivMultimedia);
     }
 

@@ -13,11 +13,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.bumptech.glide.Glide;
+import com.example.roman.listofnews.ui.adapter.AllNewsItem;
 import com.example.roman.listofnews.ux.NewsDTO.NewsItemDTO;
 import com.example.roman.listofnews.ui.adapter.NewsRecyclerAdapter;
 import com.example.roman.listofnews.ui.State;
 import com.example.roman.listofnews.ux.DefaultResponse;
 import com.example.roman.listofnews.ux.RestApi;
+import com.example.roman.listofnews.ux.TopStoriesMapper;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,19 +33,32 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class NewsMainActivity extends AppCompatActivity {
 
+    @Nullable
     private RecyclerView rvNews;
     private NewsRecyclerAdapter NewsAdapter;
     private View viewLoading;
+    @Nullable
     private View viewNoDate;
+    @Nullable
     private View viewError;
+    @Nullable
     private TextView tvError;
+    @Nullable
     private Button btnTryAgain;
+
+    @Nullable
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Nullable
     private Call<DefaultResponse<List<NewsItemDTO>>> ResponseTSHome;
@@ -84,22 +99,35 @@ public class NewsMainActivity extends AppCompatActivity {
     }
 
     private void setupUx() {
-        loadTopStoriesHome();
+        loadItem("home");
         btnTryAgain.setOnClickListener(v -> onClickTryAgain());
 
     }
 
     private void onClickTryAgain() {
-        loadTopStoriesHome();
+        loadItem("home");
     }
 
-    private void loadTopStoriesHome() {
+    private void loadItem(@NonNull String category) {
         showState(State.Loading);
-        ResponseTSHome = RestApi.getInstanse()
+        final Disposable disposable = (Disposable) RestApi.getInstanse()
                 .getTSEndpoint()
-                .setSectionName("home");
+                .setSectionName(category)
+                .map(response ->
+                        TopStoriesMapper
+                                .map(response
+                                        .getNews()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        this::setupNews,
+                        this::handleError);
+        compositeDisposable.add(disposable);
 
-        ResponseTSHome.enqueue(new Callback<DefaultResponse<List<NewsItemDTO>>>() {
+
+
+
+        /*ResponseTSHome.enqueue(new Callback<DefaultResponse<List<NewsItemDTO>>>() {
             @Override
             public void onResponse(@NonNull Call<DefaultResponse<List<NewsItemDTO>>> call,
                                    @NonNull Response<DefaultResponse<List<NewsItemDTO>>> response) {
@@ -111,23 +139,37 @@ public class NewsMainActivity extends AppCompatActivity {
                                   @NonNull Throwable t) {
                 handleError(t);
             }
-        });
+        });*/
     }
 
-    private void checkResponseAndShowState(@NonNull Response<DefaultResponse<List<NewsItemDTO>>> response) {
+    //private void setupNews(List<NewsItemDTO> newsItems) {
+    private void setupNews(List<AllNewsItem> newsItems) {
+        showState(State.HasData);
+        updateItems(newsItems);
+    }
+
+    //private void updateItems(@Nullable List<NewsItemDTO> news) {
+    private void updateItems(@Nullable List<AllNewsItem> news) {
+        if (NewsAdapter != null) NewsAdapter.replaceItems(news);
+    }
+
+    //private void checkResponseAndShowState(@NonNull Response<DefaultResponse<List<NewsItemDTO>>> response) {
+    /*private void checkResponseAndShowState(@NonNull Response<List<AllNewsItem>> response) {
 
         if (!response.isSuccessful()) {
             showState(State.ServerError);
             return;
         }
 
-        final DefaultResponse<List<NewsItemDTO>> body = response.body();
+        //final DefaultResponse<List<NewsItemDTO>> body = response.body();
+        final List<AllNewsItem> body = response.body();
 
         if (body == null) {
             showState(State.HasData);
             return;
         }
 
+        final List<NewsItemDTO> data = body.getData();
         final List<NewsItemDTO> data = body.getData();
 
         if (data == null) {
@@ -140,9 +182,10 @@ public class NewsMainActivity extends AppCompatActivity {
             return;
         }
 
-        NewsAdapter.replaceItems(data);
+        //NewsAdapter.replaceItems(data);
+         NewsAdapter.replaceItems(body);
         showState(State.HasData);
-    }
+    } */
 
     private void handleError (Throwable throwable) {
         if (throwable instanceof IOException) {
@@ -153,8 +196,10 @@ public class NewsMainActivity extends AppCompatActivity {
     }
 
     public void showState(@NonNull State state) {
+
         switch (state) {
             case Loading:
+
                 rvNews.setVisibility(View.GONE);
                 viewError.setVisibility(View.GONE);
                 viewNoDate.setVisibility(View.GONE);

@@ -2,14 +2,16 @@ package com.example.roman.listofnews.ux;
 
 import android.support.annotation.NonNull;
 
-import com.example.roman.listofnews.ux.Endpoint.HomeTopStoriesEndpoint;
+import com.example.roman.listofnews.ux.Endpoint.TopStoriesEndpoint;
 
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class RestApi {
     private static final String URL = "https://api.nytimes.com/";
@@ -18,7 +20,7 @@ public class RestApi {
     private static final int TIMEOUT_IN_SECONDS = 2;
     private static RestApi myRestApi;
 
-    private HomeTopStoriesEndpoint TSEndpoint;
+    private TopStoriesEndpoint TSEndpoint;
 
     public static synchronized RestApi getInstanse() {
         if (myRestApi == null) {
@@ -31,7 +33,7 @@ public class RestApi {
         final OkHttpClient httpClient = buildOkHttpClient();
         final Retrofit retrofit = buildRetrofitClient(httpClient);
 
-        TSEndpoint = retrofit.create(HomeTopStoriesEndpoint.class);
+        TSEndpoint = retrofit.create(TopStoriesEndpoint.class);
     }
 
     @NonNull
@@ -40,6 +42,7 @@ public class RestApi {
                 .baseUrl(URL)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
     }
 
@@ -57,8 +60,8 @@ public class RestApi {
                 .readTimeout(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS)
                 .build();
     }
-
-    public HomeTopStoriesEndpoint getTSEndpoint() {
+    @NonNull
+    public TopStoriesEndpoint getTSEndpoint() {
         return TSEndpoint;
     }
 }
