@@ -844,6 +844,7 @@ dimen hint_alpha_material_light
 dimen hint_pressed_alpha_material_dark
 dimen hint_pressed_alpha_material_light
 dimen image_size
+dimen item_image_size
 dimen item_touch_helper_max_drag_scroll_per_frame
 dimen item_touch_helper_swipe_escape_max_velocity
 dimen item_touch_helper_swipe_escape_velocity
@@ -1029,6 +1030,7 @@ drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable image_news
 drawable image_news1
+drawable image_placeholder
 drawable item_ecoration_size_4
 drawable mtrl_snackbar_background
 drawable mtrl_tabs_default_indicator
@@ -1275,6 +1277,7 @@ id up
 id useLogo
 id view_offset_helper
 id visible
+id web_view
 id withText
 id wrap
 id wrap_content

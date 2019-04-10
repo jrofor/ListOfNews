@@ -23,6 +23,7 @@ import com.example.roman.listofnews.R;
 import com.example.roman.listofnews.ux.NewsDTO.NewsItemDTO;
 
 import java.util.List;
+import java.util.zip.Inflater;
 
 public class NewsViewHolder extends RecyclerView.ViewHolder {
 
@@ -33,28 +34,25 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     private TextView tvAbstract;
     private ImageView ivMultimedia;
     private TextView tvDate;
+    private final View itemView;
 
     private static final int LayuotItem = R.layout.item_news;
 
     public interface OnItemClickListener {
         void OnItemClick(int position); }
 
-    public NewsViewHolder(@NonNull View itemView, RequestManager glideRequestManager) { //, @Nullable OnItemClickListener clickListener
+     NewsViewHolder(@NonNull View itemView, RequestManager glideRequestManager) { //, @Nullable OnItemClickListener clickListener
         super(itemView);
+        this.itemView = itemView;
         this.imageLoader = glideRequestManager;
         findViews(itemView);
-        /*itemView.setOnClickListener(view -> {
-            int position = getAdapterPosition();
-            if (clickListener != null && position != RecyclerView.NO_POSITION) {
-                clickListener.OnItemClick(getAdapterPosition());
-            }
-        });*/
-
     }
 
-    public static NewsViewHolder create (@NonNull ViewGroup parent, RequestManager glideRequestManager) { //, OnItemClickListener clickList
-        final View view = LayoutInflater.from(parent.getContext()).inflate(LayuotItem, parent, false ); //, clickListener
-        return new NewsViewHolder(view, glideRequestManager )  ; //, clickList
+    public static NewsViewHolder create (@NonNull LayoutInflater inflater,
+                                         @NonNull ViewGroup parent,
+                                         @NonNull RequestManager glideRequestManager) { //, OnItemClickListener clickList
+        final View view = inflater.inflate(LayuotItem, parent, false), clickListener;
+        return new NewsViewHolder(view, glideRequestManager)  ; //, clickList
 
     }
 
@@ -67,8 +65,16 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
         tvDate = itemView.findViewById(R.id.tv_date);
     }
 
+
+
     //public void bindItem (NewsItemDTO newsDTO) {
-    public void bindItem (AllNewsItem newsDTO) {
+    public void bindItem (AllNewsItem newsDTO,
+                          @NonNull NewsRecyclerAdapter.OnItemClickListener clickListener) {
+        setupUx(newsDTO, clickListener);
+        setupUi(newsDTO);
+    }
+
+    public void setupUi (AllNewsItem newsDTO) {
 
         progressBar.setVisibility(View.VISIBLE);
 
@@ -76,9 +82,6 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
         tvTitle.setText(newsDTO.getTitle());
         tvAbstract.setText(newsDTO.getPreviewText());
         tvDate.setText(newsDTO.getUpdatedDate().toString());
-        //imageLoader.load(newsDTO.getMultimediaURL()).listener( new RequestListener<Drawable>() {
-        //imageLoader.load(newsDTO.getImageUrl().getClass().toString()).listener( new RequestListener<Drawable>() {
-        //imageLoader.load(newsDTO<List.get(List.size() - 1)<OriginalSizeDTO()>).listener( new RequestListener<Drawable>() {
         imageLoader.load(newsDTO.getImageUrl()).listener( new RequestListener<Drawable>() {
 
             @Override
@@ -99,4 +102,12 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
                 .into(ivMultimedia);
     }
 
+    private void setupUx(@NonNull AllNewsItem allNewsItem, NewsRecyclerAdapter.OnItemClickListener clickListener) {
+        itemView.setOnClickListener(view -> {
+            int position = getAdapterPosition();
+            if (clickListener != null && position != RecyclerView.NO_POSITION) {
+                clickListener.OnItemClick(allNewsItem);
+            }
+        });
+    }
 }

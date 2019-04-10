@@ -60,15 +60,17 @@ public class NewsMainActivity extends AppCompatActivity {
     @Nullable
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    @Nullable
-    private Call<DefaultResponse<List<NewsItemDTO>>> ResponseTSHome;
+    /*public interface OnItemClickListener {
+        void OnItemClick(int position); }*/
+    //@Nullable
+    //private Call<DefaultResponse<List<NewsItemDTO>>> ResponseTSHome;
 
-    private final NewsRecyclerAdapter.OnItemClickListener  clickListener = position -> {
+    /*private final NewsRecyclerAdapter.OnItemClickListener  newsListener = position -> {
         final String EXTRA_MESSAGE = "extra:news";
         Intent intent = new Intent(this, NewsDetailsActivity.class);
         intent.putExtra(EXTRA_MESSAGE, position);
         startActivity(intent);
-    };
+    };*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +103,8 @@ public class NewsMainActivity extends AppCompatActivity {
     private void setupUx() {
         loadItem("home");
         btnTryAgain.setOnClickListener(v -> onClickTryAgain());
+        NewsAdapter.setOnClickNewsListener(AllNewsItem ->
+                NewsDetailsActivity.start(this, AllNewsItem));
 
     }
 
@@ -253,7 +257,7 @@ public class NewsMainActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerViews() {
-        NewsAdapter = new NewsRecyclerAdapter(Glide.with(this), clickListener);
+        NewsAdapter = new NewsRecyclerAdapter(this);
         rvNews.setAdapter(NewsAdapter);
         int orientation = getResources().getConfiguration().orientation;
         onChangeColumnsWithOrientation(orientation, rvNews);

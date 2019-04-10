@@ -1,8 +1,13 @@
 package com.example.roman.listofnews.ui.adapter;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
-import com.example.roman.listofnews.ux.NewsDTO.NewsItemDTO;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.roman.listofnews.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,33 +22,38 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder>{
     //private final List<NewsItemDTO> news = new ArrayList<>();
     private final List<AllNewsItem> news = new ArrayList<>();
     @Nullable
-    private final OnItemClickListener clickListener;
+    private OnItemClickListener newsListener;
     private RequestManager glideRequestManager;
-
-
+    private final LayoutInflater inflater;
     final String TAG = "myLogs";
-    //private Handler mUiHandler = new Handler();
-    //private  MyWorkerThread  mWorkerHandler;// = new NewsAboutActivity.MyWorkerThread("loadingImageThread");
 
-
-
-    public NewsRecyclerAdapter(RequestManager glideRequestManager,  @Nullable OnItemClickListener clickListener) {
+    public NewsRecyclerAdapter(Context context) { //RequestManager glideRequestManager,  @Nullable OnItemClickListener clickListener
         //this.news = news;   @Nullable List<NewsItemDTO> news,
-        this.clickListener = clickListener;
-        this.glideRequestManager = glideRequestManager;
+        //this.clickListener = clickListener;
+        this.inflater = LayoutInflater.from(context);
+        final RequestOptions imageOption = new RequestOptions()
+                .placeholder(R.drawable.image_placeholder)
+                .fallback(R.drawable.image_placeholder)
+                .centerCrop();
+        this.glideRequestManager = Glide.with(context).applyDefaultRequestOptions(imageOption);
+
     }
 
     @NonNull
     @Override
     public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return NewsViewHolder.create (parent, glideRequestManager);
+        return NewsViewHolder.create (inflater, parent, glideRequestManager);
     }
 
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder newsViewHolder, int position) {
         //final NewsItemDTO NIDTO = news.get(position);
         final AllNewsItem NIDTO = news.get(position);
-        newsViewHolder.bindItem(NIDTO);
+        newsViewHolder.bindItem(NIDTO, newsListener);
+    }
+
+    public void setOnClickNewsListener(@NonNull OnItemClickListener newsListener) {
+        this.newsListener = newsListener;
     }
 
     //public void replaceItems (List<NewsItemDTO> news ) {
@@ -55,7 +65,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder>{
 
     public interface OnItemClickListener {
     //    void OnItemClick(NewsItem news);
-     void OnItemClick(int position); }
+     void OnItemClick(@NonNull AllNewsItem allnewsItem); }
 
     @Override
     public int getItemCount() {
