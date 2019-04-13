@@ -610,6 +610,7 @@ color cardview_shadow_start_color
 color colorAccent
 color colorPrimary
 color colorPrimaryDark
+color dark_gray
 color design_bottom_navigation_shadow_color
 color design_default_color_primary
 color design_default_color_primary_dark
@@ -696,6 +697,7 @@ color switch_thumb_normal_material_dark
 color switch_thumb_normal_material_light
 color tooltip_background_dark
 color tooltip_background_light
+color xxlight_gray
 dimen BaseMargin
 dimen BaseMargin4
 dimen BaseMargin8
@@ -1052,6 +1054,7 @@ drawable radio
 drawable telegram
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+drawable vec_error
 id ALT
 id CTRL
 id FUNCTION
@@ -1066,6 +1069,7 @@ id action_bar_root
 id action_bar_spinner
 id action_bar_subtitle
 id action_bar_title
+id action_button
 id action_container
 id action_context_bar
 id action_divider
@@ -1228,6 +1232,7 @@ id snackbar_text
 id snap
 id snapMargins
 id spacer
+id spinner_categories
 id split_action_bar
 id spread
 id spread_inside
@@ -1258,6 +1263,7 @@ id time
 id title
 id titleDividerNoCustom
 id title_template
+id toolbar
 id top
 id topPanel
 id touch_outside
@@ -1268,7 +1274,9 @@ id transition_scene_layoutid_cache
 id transition_transform
 id tv_abstract
 id tv_date
+id tv_drop_down
 id tv_error
+id tv_s_title
 id tv_subsection
 id tv_title
 id uniform
@@ -1330,6 +1338,8 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout about_activity
 layout activity_news_details
+layout categories_drop_down_spinner_item
+layout categories_spinner_item
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
 layout design_layout_snackbar
@@ -1345,6 +1355,7 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_password_icon
 layout item_news
+layout layout_error
 layout mtrl_layout_snackbar
 layout mtrl_layout_snackbar_include
 layout news_recycler_activity
@@ -1416,6 +1427,7 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string action_retry
 string addresses
 string app_name
 string appbar_scrolling_view_behavior
@@ -1427,8 +1439,10 @@ string categoryName3
 string categoryName4
 string character_counter_content_description
 string character_counter_pattern
+string cont_descr_decoration
 string developerFeedback
 string err_data_is_empty
+string error_message
 string error_network
 string error_server
 string fab_transformation_scrim_behavior
@@ -1445,6 +1459,32 @@ string status_bar_notification_info_overflow
 string subject
 string textForText
 string title
+string top_stories_category_arts
+string top_stories_category_automobiles
+string top_stories_category_books
+string top_stories_category_business
+string top_stories_category_fashion
+string top_stories_category_food
+string top_stories_category_health
+string top_stories_category_home
+string top_stories_category_insider
+string top_stories_category_magazine
+string top_stories_category_movies
+string top_stories_category_national
+string top_stories_category_nyregion
+string top_stories_category_obituaries
+string top_stories_category_opinion
+string top_stories_category_politics
+string top_stories_category_realestate
+string top_stories_category_science
+string top_stories_category_sports
+string top_stories_category_sundayreview
+string top_stories_category_technology
+string top_stories_category_theater
+string top_stories_category_tmagazine
+string top_stories_category_travel
+string top_stories_category_upshot
+string top_stories_category_world
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog

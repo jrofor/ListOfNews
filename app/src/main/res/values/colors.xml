@@ -8,5 +8,9 @@
     <!-- preference_for_background_View-->
     <color name="backgroundV">#ce2900</color>
 
+    <!-- preference_for_error_View-->
+    <color name="dark_gray">#212121</color>
+    <color name="xxlight_gray">#E0E0E0</color>
+
 
 </resources>

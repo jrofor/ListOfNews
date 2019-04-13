@@ -12,12 +12,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.bumptech.glide.Glide;
 import com.example.roman.listofnews.ui.adapter.AllNewsItem;
-import com.example.roman.listofnews.ux.NewsDTO.NewsItemDTO;
+import com.example.roman.listofnews.ui.adapter.spinner.CategoriesSpinnerAdapter;
+import com.example.roman.listofnews.ux.NewsCategory;
 import com.example.roman.listofnews.ui.adapter.NewsRecyclerAdapter;
 import com.example.roman.listofnews.ui.State;
-import com.example.roman.listofnews.ux.DefaultResponse;
 import com.example.roman.listofnews.ux.RestApi;
 import com.example.roman.listofnews.ux.TopStoriesMapper;
 
@@ -31,22 +30,25 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class NewsMainActivity extends AppCompatActivity {
 
     @Nullable
     private RecyclerView rvNews;
+    @Nullable
+    private Spinner spinnerCategories;
+
     private NewsRecyclerAdapter NewsAdapter;
+    private CategoriesSpinnerAdapter categoriesAdapter;
+
+    @Nullable
     private View viewLoading;
     @Nullable
     private View viewNoDate;
@@ -56,9 +58,15 @@ public class NewsMainActivity extends AppCompatActivity {
     private TextView tvError;
     @Nullable
     private Button btnTryAgain;
+    @Nullable
+    private Button errorAction;
+
 
     @Nullable
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+
+
 
     /*public interface OnItemClickListener {
         void OnItemClick(int position); }*/
@@ -98,18 +106,22 @@ public class NewsMainActivity extends AppCompatActivity {
     private void setupUi() {
         findView();
         setupRecyclerViews();
+        setupSpinner();
     }
+
 
     private void setupUx() {
-        loadItem("home");
-        btnTryAgain.setOnClickListener(v -> onClickTryAgain());
+        //errorAction.setOnClickListener(view -> loadItem(categoriesAdapter.getSelectedCategory().serverValue()));
+        //loadItem("home");
+
         NewsAdapter.setOnClickNewsListener(AllNewsItem ->
                 NewsDetailsActivity.start(this, AllNewsItem));
-
+        categoriesAdapter.setOnCategorySelectedListener(category -> loadItem(category.serverValue()), spinnerCategories);
+        btnTryAgain.setOnClickListener(v -> onClickTryAgain(categoriesAdapter.getSelectedCategory().serverValue()));
     }
 
-    private void onClickTryAgain() {
-        loadItem("home");
+    private void onClickTryAgain(@NonNull String category ) {
+        loadItem(category);
     }
 
     private void loadItem(@NonNull String category) {
@@ -254,6 +266,7 @@ public class NewsMainActivity extends AppCompatActivity {
         viewError = findViewById(R.id.ll_error);
         tvError = findViewById(R.id.tv_error);
         btnTryAgain = findViewById(R.id.bnt_try_again);
+        spinnerCategories = findViewById(R.id.spinner_categories);
     }
 
     private void setupRecyclerViews() {
@@ -262,6 +275,13 @@ public class NewsMainActivity extends AppCompatActivity {
         int orientation = getResources().getConfiguration().orientation;
         onChangeColumnsWithOrientation(orientation, rvNews);
     }
+
+    private void setupSpinner() {
+        final NewsCategory[] categories = NewsCategory.values();
+        categoriesAdapter = CategoriesSpinnerAdapter.createDefault(this, categories);
+        spinnerCategories.setAdapter(categoriesAdapter);
+    }
+
 
     public void onChangeColumnsWithOrientation(int orientation, RecyclerView recyclerView) {
         //This method helps change number of columns using Grid spanCount and helps add itemDecoration
