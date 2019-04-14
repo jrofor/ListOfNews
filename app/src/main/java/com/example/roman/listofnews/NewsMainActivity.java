@@ -259,7 +259,8 @@ public class NewsMainActivity extends AppCompatActivity {
         }
     }
 
-    private void findView() {
+    private void findView()
+    {
         rvNews = findViewById(R.id.rv_news);
         viewLoading = findViewById(R.id.fl_loading);
         viewNoDate = findViewById(R.id.fl_no_data);
@@ -268,7 +269,6 @@ public class NewsMainActivity extends AppCompatActivity {
         btnTryAgain = findViewById(R.id.bnt_try_again);
         spinnerCategories = findViewById(R.id.spinner_categories);
     }
-
     private void setupRecyclerViews() {
         NewsAdapter = new NewsRecyclerAdapter(this);
         rvNews.setAdapter(NewsAdapter);

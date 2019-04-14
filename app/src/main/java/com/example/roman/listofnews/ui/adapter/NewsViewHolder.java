@@ -74,7 +74,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
         setupUi(newsDTO);
     }
 
-    public void setupUi (AllNewsItem newsDTO) {
+    private void setupUi (AllNewsItem newsDTO) {
 
         progressBar.setVisibility(View.VISIBLE);
 
