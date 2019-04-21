@@ -82,28 +82,4 @@ public class NewsItemDTO{
         return url;
     }
 
-    /*@Nullable
-    public String getImageUrl() {
-     //   return imageUrl;
-    }*/
-    /*@Nullable
-    public MultimediaDTO getMultimediaUrl() {
-        return multimedia.getMultimediaPoint().getUrl();
-        //return multimedia.getMultimedia(). ;
-    }*/
-    /*public List<MPointOriginalSizeURLDTO> getMultimedia(){
-        return multimedia.getUrl();
-    }*/
-    //public String getmultimediaURL() {return multimediaURL. }
-    /*public String getMultimediaURL () {
-        return "https://static01.nyt.com/images/2019/03/29/us/00levees-02/00levees-02-thumbStandard.jpg";
-    }*/
-    /*public String getMultimediaURL () {
-        return multimediaUrl[multimediaUrl.length-1].getOriginalSize().getUrl();
-    }*/
-
-    /*public void setMultimediaURL (MultimediaDTO multimediaUrl[]) {
-        this.multimediaUrl[] = multimediaUrl[multimediaUrl.length-1];
-    }*/
-
-}
+ }
