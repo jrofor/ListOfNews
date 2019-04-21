@@ -13,25 +13,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--tools:ignore="GoogleAppIndexingWarning"
-        tools:replace="android:allowBackup"-->
+
+        <!--
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:allowBackup"
+        -->
 
 
         <!--
        tools:replace="android:appComponentFactory">
        android:appComponentFactory="whateverString"
         -->
-        <activity android:name=".NewsMainActivity">
+        <activity android:name=".NewsIntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".NewsMainActivity"/>
         <activity
             android:name=".NewsAboutActivity"
             android:label="@string/About" />
         <activity android:name=".NewsDetailsActivity" />
+
     </application>
 
 </manifest>

@@ -29,6 +29,11 @@
     <!-- preference_for_image_placeholder-->
     <dimen name="item_image_size">96dp</dimen>
 
+    <!-- preference_for_intro_tv-->
+    <dimen name="text_size_32">32sp</dimen>
+
+
+
 
 
 

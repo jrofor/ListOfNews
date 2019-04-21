@@ -6,18 +6,18 @@
                 {
                     "source": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\src\\main\\res\\values-ru-rRU\\strings.xml",
                     "from": {
-                        "startLines": "9,6,7,10,8,2,5",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "553,342,446,622,499,57,263",
-                        "endColumns": "67,102,51,100,52,52,77",
-                        "endOffsets": "616,440,493,718,547,105,336"
+                        "startLines": "9,6,7,10,8,2,5,11",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "553,342,446,622,499,57,263,724",
+                        "endColumns": "67,102,51,100,52,52,77,45",
+                        "endOffsets": "616,440,493,718,547,105,336,765"
                     },
                     "to": {
-                        "startLines": "2,3,4,5,6,7,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "55,123,226,278,379,432,485",
-                        "endColumns": "67,102,51,100,52,52,77",
-                        "endOffsets": "118,221,273,374,427,480,558"
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,123,226,278,379,432,485,563",
+                        "endColumns": "67,102,51,100,52,52,77,45",
+                        "endOffsets": "118,221,273,374,427,480,558,604"
                     }
                 }
             ]

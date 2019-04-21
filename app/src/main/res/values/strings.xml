@@ -11,7 +11,7 @@
     <string name="LinkToTelegram" translatable="false">https://t.me/roman_ov</string>
     <string name="Hint">Enter a message…</string>
 
-    <string name="About" >About the application</string>
+    <string name="About">About the application</string>
     <string name="categoryName1" translatable="false">DARWIN AVARDS</string>
     <string name="categoryName2" translatable="false">CRIMINAL</string>
     <string name="categoryName3" translatable="false">ANIMALS</string>
@@ -57,4 +57,6 @@
     <string name="error_message">Loading news was unsuccessful</string>
     <string name="action_retry">Retry</string>
     <string name="cont_descr_decoration" translatable="false">Decoration</string>
+
+    <string name="tvWelcome">Welcome!</string>
 </resources>

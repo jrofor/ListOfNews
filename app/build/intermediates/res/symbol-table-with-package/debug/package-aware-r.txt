@@ -922,6 +922,7 @@ dimen subtitle_outline_width
 dimen subtitle_shadow_offset
 dimen subtitle_shadow_radius
 dimen textSize
+dimen text_size_32
 dimen tooltip_corner_radius
 dimen tooltip_horizontal_padding
 dimen tooltip_margin
@@ -1024,6 +1025,7 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable device_2019_04_21_150953
 drawable engineer
 drawable ic_launcher_background
 drawable ic_launcher_foreground
@@ -1140,6 +1142,7 @@ id fill_horizontal
 id fill_vertical
 id filled
 id fixed
+id fl_intro_activity
 id fl_loading
 id fl_no_data
 id forever
@@ -1156,6 +1159,7 @@ id ifRoom
 id image
 id image_avatar
 id info
+id introImage
 id invisible
 id italic
 id item1
@@ -1276,6 +1280,7 @@ id tv_abstract
 id tv_date
 id tv_drop_down
 id tv_error
+id tv_intro_title
 id tv_s_title
 id tv_subsection
 id tv_title
@@ -1338,6 +1343,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout about_activity
 layout activity_news_details
+layout activity_news_intro
 layout categories_drop_down_spinner_item
 layout categories_spinner_item
 layout design_bottom_navigation_item
@@ -1485,6 +1491,7 @@ string top_stories_category_tmagazine
 string top_stories_category_travel
 string top_stories_category_upshot
 string top_stories_category_world
+string tvWelcome
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog
