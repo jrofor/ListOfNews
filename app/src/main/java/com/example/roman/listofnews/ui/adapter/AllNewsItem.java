@@ -53,7 +53,7 @@ public class AllNewsItem implements Serializable {
     public String getCategory() {return category;}
 
     @NonNull
-    public Date getUpdatedDate() {return updatedDate;}
+    public String getUpdatedDate() {return updatedDate.toString();}
 
     @NonNull
     public String getPreviewText() {return previewText;}

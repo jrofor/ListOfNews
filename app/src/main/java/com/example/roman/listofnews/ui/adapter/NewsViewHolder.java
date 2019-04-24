@@ -81,7 +81,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
         tvSubsection.setText(newsDTO.getCategory());
         tvTitle.setText(newsDTO.getTitle());
         tvAbstract.setText(newsDTO.getPreviewText());
-        tvDate.setText(newsDTO.getUpdatedDate().toString());
+        tvDate.setText(newsDTO.getUpdatedDate());
         imageLoader.load(newsDTO.getImageUrl()).listener( new RequestListener<Drawable>() {
 
             @Override

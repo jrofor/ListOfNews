@@ -15,13 +15,13 @@ import io.reactivex.disposables.Disposable;
 public class NewsIntroActivity extends AppCompatActivity {
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-
+//СДЕЛАТЬ ЗАПУСК ПРИ КАЖДОМ 2 м ОТКРЫВАНИИ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         // проверяем, первый ли раз открывается программа (запускалась интро или нет)
-        if (true   ) {// !Storage.checkIntro(this)
+        if (!Storage.checkIntro(this)) {//
             Storage.setIntroHasShown(this);
             setContentView(R.layout.activity_news_intro);
             Disposable disposable = Completable.complete()

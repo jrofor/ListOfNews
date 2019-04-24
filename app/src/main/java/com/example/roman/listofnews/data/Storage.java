@@ -18,13 +18,6 @@ public class Storage {
     private static final boolean introOff = false;
 
 
-    public static void setIntroHasShown  (Context context) {
-        SharedPreferences mSettings;
-        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mSettings.edit();  //2 //3
-        editor.putBoolean(APP_PREFERENCES_Intro , true) ;
-        editor.apply();
-    }
 
     public static boolean checkIntro  (Context context) {
         SharedPreferences mSettings;
@@ -33,7 +26,23 @@ public class Storage {
         return hasShown;
     }
 
-    public static void setCnt(Context context, int cntIntro) {
+    public static void setIntroHasShown  (Context context) {
+        SharedPreferences mSettings;
+        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mSettings.edit();  //2 //3
+        editor.putBoolean(APP_PREFERENCES_Intro , true) ;
+        editor.apply();
+    }
+
+    public static void setIntroShowAgain  (Context context) {
+        SharedPreferences mSettings;
+        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mSettings.edit();  //2 //3
+        editor.putBoolean(APP_PREFERENCES_Intro , false) ;
+        editor.apply();
+    }
+
+    public static void setCntIntro(Context context, int cntIntro) {
         SharedPreferences mSettings;
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE); //1
         SharedPreferences.Editor editor = mSettings.edit();  //2 //3
@@ -42,7 +51,7 @@ public class Storage {
 
     }
 
-    public static int getCnt(Context context) {
+    public static int getCntIntro (Context context) {
         int cntIntro;
         SharedPreferences mSettings;
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);

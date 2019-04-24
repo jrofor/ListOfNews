@@ -7,6 +7,8 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.database.Observable;
 
+import com.example.roman.listofnews.ui.adapter.AllNewsItem;
+
 import java.util.List;
 
 import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
@@ -21,10 +23,10 @@ public interface NewsDao {
     NewsEntity getNewsById(int id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(NewsEntity... newsEntity);
+    void insert(NewsEntity newsEntity);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(NewsEntity newsEntities);
+    void insertAll(NewsEntity... newsEntities);
 
     @Delete
     void delete(NewsEntity newsEntity);
@@ -32,5 +34,6 @@ public interface NewsDao {
     @Query("DELETE FROM newsEntity")
     void deleteAll();
 
+    void insertAll(AllNewsItem[] newsEntity);
 }
 

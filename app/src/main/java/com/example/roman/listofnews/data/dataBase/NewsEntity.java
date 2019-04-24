@@ -9,26 +9,28 @@ import android.support.annotation.Nullable;
 
 import java.util.Date;
 
-@Entity(tableName = "newsEntity")
+@Entity (primaryKeys = {"title", "url"})
+
 public class NewsEntity {
     public NewsEntity() {
+        //id = String.format(title, url);
     }
 
     @Ignore
     public NewsEntity(@NonNull String title, @Nullable String imageUrl, @NonNull String category,
-                      @NonNull Date updatedDate, @NonNull String previewText, @NonNull String fullText) {
+                      @NonNull String updatedDate, @NonNull String previewText, @NonNull String url) {
         this.title = title;
         this.imageUrl = imageUrl;
         this.category = category;
         this.updatedDate = updatedDate;
         this.previewText = previewText;
-        this.url = fullText;
+        this.url = url;
+        //id = String.format(this.title, url);
     }
 
-    @PrimaryKey
-    @NonNull
-    private int id;
 
+
+    @NonNull
     @ColumnInfo(name = "title")
     private String title;
     @ColumnInfo(name = "imageUrl")
@@ -36,21 +38,25 @@ public class NewsEntity {
     @ColumnInfo(name = "category")
     private String category;
     @ColumnInfo(name = "updatedDate")
-    private Date updatedDate;
+    private String updatedDate;
     @ColumnInfo(name = "previewText")
     private String previewText;
+
+    /*@NonNull
+    public String getId() {
+        return id;
+    }
+    public void setId(@NonNull String id) { this.id = id; }*/
+
+    @NonNull
     @ColumnInfo(name = "url")
     private String url;
 
     @NonNull
-    public Integer getId() {
-        return id;
-    }
-    public void setId(@NonNull Integer id) { this.id = id; }
-
     public String getTitle() {
         return title;
     }
+    @NonNull
     public void setTitle(String title) {
         this.title = title;
     }
@@ -69,10 +75,10 @@ public class NewsEntity {
         this.category = category;
     }
 
-    public Date getUpdatedDate() {
+    public String getUpdatedDate() {
         return updatedDate;
     }
-    public void setUpdatedDate(Date updatedDate) {
+    public void setUpdatedDate(String updatedDate) {
         this.updatedDate = updatedDate;
     }
 
@@ -83,9 +89,11 @@ public class NewsEntity {
         this.previewText = previewText;
     }
 
+    @NonNull
     public String getUrl() {
         return url;
     }
+    @NonNull
     public void setUrl(String previewText) {
         this.url = url;
     }
@@ -93,7 +101,7 @@ public class NewsEntity {
     @Override
     public String toString() {
         return "News{" +
-                "id='" + id + '\'' +
+               // "id='" + id + '\'' +
                 "title='" + title + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", category='" + category + '\'' +

@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.roman.listofnews.data.Storage;
 import com.example.roman.listofnews.ui.adapter.AllNewsItem;
 import com.example.roman.listofnews.ui.adapter.spinner.CategoriesSpinnerAdapter;
 import com.example.roman.listofnews.ux.NewsCategory;
@@ -317,6 +318,12 @@ public class NewsMainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onDestroy(){
+        Storage.setIntroShowAgain(this);
+        super.onDestroy();
+        //Log.d(TAG2, "ActivityTwo: onDistroy");
+    }
 
 
 
