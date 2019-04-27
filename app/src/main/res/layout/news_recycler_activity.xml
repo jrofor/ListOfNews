@@ -1,42 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
     tools:context=".NewsMainActivity">
 
-    <android.support.v7.widget.Toolbar
+    <Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:theme="@style/Base.ThemeOverlay.AppCompat.Dark">
+        <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
 
         <Spinner
             android:id="@+id/spinner_categories"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </android.support.v7.widget.Toolbar>
+            android:layout_height="wrap_content" />
+    </Toolbar>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_news"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
+        android:visibility="gone"
         tools:context=".NewsMainActivity"
-        tools:listitem="@layout/item_news"
-        android:visibility="gone"/>
+        tools:listitem="@layout/item_news" />
 
     <FrameLayout
         android:id="@+id/fl_loading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone">
+
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
     </FrameLayout>
 
     <FrameLayout
@@ -44,24 +49,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/err_data_is_empty"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </FrameLayout>
 
     <LinearLayout
         android:id="@+id/ll_error"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_marginEnd="@dimen/margin_lt_error"
         android:layout_marginStart="@dimen/margin_lt_error"
         android:gravity="center"
+        android:orientation="vertical"
         android:visibility="gone">
+
         <TextView
             android:id="@+id/tv_error"
             android:layout_width="match_parent"
@@ -69,15 +76,15 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/err_data_is_empty"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
+
         <Button
             android:id="@+id/bnt_try_again"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btn_try_again"/>
+            android:text="@string/btn_try_again" />
 
     </LinearLayout>
-
 
 
 </LinearLayout>

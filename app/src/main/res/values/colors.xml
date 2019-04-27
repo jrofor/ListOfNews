@@ -12,5 +12,7 @@
     <color name="dark_gray">#212121</color>
     <color name="xxlight_gray">#E0E0E0</color>
 
+    <!-- preference_for_FAB-->
+    <color name="color_FAB">#83008577</color>
 
 </resources>

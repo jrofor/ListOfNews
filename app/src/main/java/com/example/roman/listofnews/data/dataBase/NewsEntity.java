@@ -25,7 +25,7 @@ public class NewsEntity {
         this.updatedDate = updatedDate;
         this.previewText = previewText;
         this.url = url;
-        //id = String.format(this.title, url);
+
     }
 
 
@@ -101,7 +101,7 @@ public class NewsEntity {
     @Override
     public String toString() {
         return "News{" +
-               // "id='" + id + '\'' +
+                //"id='" + id + '\'' +
                 "title='" + title + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", category='" + category + '\'' +

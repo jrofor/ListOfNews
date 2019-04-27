@@ -34,12 +34,6 @@ public class NewsItemDTO{
     @SerializedName("url")
     private String url;
 
-    //private List<MPointOriginalSizeURLDTO> multimediaPointURL ;
-   // MultimediaPointDTO Point = multimediaPoint.get(multimediaPoint.size() - 1);
-
-    //private List <MultimediaPointDTO> multimedia;
-    //private String multimediaURL;
-
 
     public String getSubsection() {
         return subsection;

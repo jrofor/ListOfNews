@@ -8,7 +8,6 @@ import com.example.roman.listofnews.ux.NewsDTO.NewsItemDTO;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 public final class TopStoriesMapper {
@@ -37,7 +36,7 @@ public final class TopStoriesMapper {
         final String imageUrl = mapImage(multimedia);
 
         final String category = dto.getSubsection();
-        final Date updatedDate = dto.getUpdatedDate();
+        final String updatedDate = dto.getUpdatedDate().toString();
         final String preview = dto.getAbstract();
         final String url = dto.getUrl();
 

@@ -25,29 +25,4 @@ public final class MultimediaDTO {
         return url;
     }
 
-/*
-//класс для обозначения джинерика
-public class MultimediaDTO<T> {
-    private T multimedia;
-    private List<T> mult = new ArrayList<>();
-    private MPointOriginalSizeURLDTO MPoint = new MPointOriginalSizeURLDTO (mult.size() - 1);
-    //private MPointOriginalSizeURLDTO Mpoint = (mult.size() - 1);
-    //private MPointOriginalSizeURLDTO MPoint = "ss";
-
-
-
-    @Nullable
-    public MPointOriginalSizeURLDTO getMultimediaPoint (){
-        return  MPoint ;
-
-    }*/
-/*
-    private MPointOriginalSizeURLDTO MUrl;
-
-    @NonNull
-    public MPointOriginalSizeURLDTO getMulti() {
-        return
-    }
-
-*/
 }

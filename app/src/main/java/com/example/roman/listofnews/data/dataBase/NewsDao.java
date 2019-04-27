@@ -17,10 +17,11 @@ import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 public interface NewsDao {
 
     @Query("SELECT * FROM newsEntity")
-    Observable<List<NewsEntity>> getAll();
+    //Observable<List<NewsEntity>> getAll();
+    List<NewsEntity> getAll();
 
-    @Query("SELECT * FROM newsEntity WHERE id = :id")
-    NewsEntity getNewsById(int id);
+    //@Query("SELECT * FROM newsEntity WHERE id = :id")
+    //NewsEntity getNewsById(int id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(NewsEntity newsEntity);
