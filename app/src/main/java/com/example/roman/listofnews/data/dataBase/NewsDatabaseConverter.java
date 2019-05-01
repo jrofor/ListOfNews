@@ -1,52 +1,65 @@
 package com.example.roman.listofnews.data.dataBase;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
-
 import com.example.roman.listofnews.ui.adapter.AllNewsItem;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.concurrent.Callable;
-
-import io.reactivex.Completable;
-import io.reactivex.Single;
 
 public class NewsDatabaseConverter {
 
-    private final Context mContext;
+    private void toDatabase(List<AllNewsItem> NewsItems) {
 
-    public NewsDatabaseConverter(Context mContext) {
-        this.mContext = mContext;
+        final List<NewsEntity> newsEntity = new ArrayList<>();
+
+        for (AllNewsItem Item : NewsItems) {
+            final NewsEntity nEntity = ConvertItem(Item);
+            newsEntity.add(nEntity);
+        }
     }
 
-    Completable saveToDatabase (final List<AllNewsItem> AllNewsItemList) {
-        return Completable.fromCallable(new Callable<Void>() {
-            @Override
-            public Void call() throws Exception {
-                NewsAppDatabase db = NewsAppDatabase.getNewsAppDatabase(mContext);
+    private static NewsEntity ConvertItem(AllNewsItem Item) {
 
-                AllNewsItem[] newsEntity = AllNewsItemList.toArray(new AllNewsItem[AllNewsItemList.size()]);
+        final String title = Item.getTitle();
+        final String imageUrl = Item.getImageUrl();
+        final String category = Item.getCategory();
+        final String updatedDate = Item.getUpdatedDate();
+        final String previewText = Item.getPreviewText();
+        final String url = Item.getUrl();
 
-                db.newsDao.insertAll(newsEntity);
+        final String id = title.concat(url);
 
-                return null;
-            }
-        });
+        return NewsEntity.create(id,title,
+                imageUrl,
+                category,
+                updatedDate,
+                previewText,
+                url);
+
     }
 
-    Single <List<NewsEntity>> getDataFromDatabase() {
-        return Single.fromCallable(new Callable<List<NewsEntity>>() {
-            @Override
-            public List<NewsEntity> call() throws Exception {
-                NewsAppDatabase db = NewsAppDatabase.getNewsAppDatabase(mContext);
-                return db.newsDao.getAll();
-            }
-        });
+    private void fromDatabase(List<NewsEntity> newsEntities ) {
+
+        final List<AllNewsItem> NewsItems = new ArrayList<>();
+
+        for (NewsEntity Entity : newsEntities) {
+            final AllNewsItem Item = ConvertEntity(Entity);
+            NewsItems.add(Item);
+        }
     }
 
-    //Observable<List<NewsEntity>> getDataObservable() {
-    //        AppDatabase db = AppDatabase.getAppDatabase(mContext);
-    //
-    //        return db.newsAsyncDao().getAll();
+    private static AllNewsItem ConvertEntity(NewsEntity Entity) {
+
+        final String title = Entity.getTitle();
+        final String imageUrl = Entity.getImageUrl();
+        final String category = Entity.getCategory();
+        final String updatedDate = Entity.getUpdatedDate();
+        final String previewText = Entity.getPreviewText();
+        final String url = Entity.getUrl();
+
+        //final String id = title.concat(url);
+
+        return AllNewsItem.create(title, imageUrl, category, updatedDate, previewText, url);
+
+
+    }
 }

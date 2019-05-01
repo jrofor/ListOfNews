@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 
 import android.content.res.Configuration;
@@ -59,8 +60,11 @@ public class NewsMainActivity extends AppCompatActivity {
     private TextView tvError;
     @Nullable
     private Button btnTryAgain;
-    @Nullable
-    private Button errorAction;
+
+    private FloatingActionButton fabUpdate;
+
+    /*@Nullable
+    private Button errorAction;*/
 
 
     @Nullable
@@ -114,11 +118,21 @@ public class NewsMainActivity extends AppCompatActivity {
     private void setupUx() {
         //errorAction.setOnClickListener(view -> loadItem(categoriesAdapter.getSelectedCategory().serverValue()));
         //loadItem("home");
+        //categoriesAdapter.setOnCategorySelectedListener(category -> loadItem(category.serverValue()), spinnerCategories);
 
         NewsAdapter.setOnClickNewsListener(AllNewsItem ->
                 NewsDetailsActivity.start(this, AllNewsItem));
-        categoriesAdapter.setOnCategorySelectedListener(category -> loadItem(category.serverValue()), spinnerCategories);
+        fabUpdate.setOnClickListener(v -> onClickFabUpdate());
         btnTryAgain.setOnClickListener(v -> onClickTryAgain(categoriesAdapter.getSelectedCategory().serverValue()));
+    }
+
+
+    private void onClickFabUpdate() {
+        //удалить старую бд
+        loadItem(categoriesAdapter.getSelectedCategory().serverValue());
+        categoriesAdapter.setOnCategorySelectedListener(category -> loadItem(category.serverValue()), spinnerCategories);
+
+
     }
 
     private void onClickTryAgain(@NonNull String category ) {
@@ -269,6 +283,7 @@ public class NewsMainActivity extends AppCompatActivity {
         tvError = findViewById(R.id.tv_error);
         btnTryAgain = findViewById(R.id.bnt_try_again);
         spinnerCategories = findViewById(R.id.spinner_categories);
+        fabUpdate = findViewById(R.id.fab_update);
     }
     private void setupRecyclerViews() {
         NewsAdapter = new NewsRecyclerAdapter(this);

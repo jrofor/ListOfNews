@@ -16,9 +16,8 @@ import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 @Dao
 public interface NewsDao {
 
-    @Query("SELECT * FROM newsEntity")
-    //Observable<List<NewsEntity>> getAll();
-    List<NewsEntity> getAll();
+    @Query("SELECT * FROM NewsEntity")
+     List<NewsEntity> getAll();
 
     //@Query("SELECT * FROM newsEntity WHERE id = :id")
     //NewsEntity getNewsById(int id);
@@ -32,9 +31,9 @@ public interface NewsDao {
     @Delete
     void delete(NewsEntity newsEntity);
 
-    @Query("DELETE FROM newsEntity")
+    @Query("DELETE FROM NewsEntity")
     void deleteAll();
 
-    void insertAll(AllNewsItem[] newsEntity);
+
 }
 

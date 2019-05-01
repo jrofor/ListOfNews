@@ -13,6 +13,6 @@
     <color name="xxlight_gray">#E0E0E0</color>
 
     <!-- preference_for_FAB-->
-    <color name="color_FAB">#83008577</color>
+    <color name="color_FAB">#FF008577</color>
 
 </resources>

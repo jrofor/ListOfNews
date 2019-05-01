@@ -8,29 +8,36 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.Date;
-
-@Entity (primaryKeys = {"title", "url"})
-
+@Entity
 public class NewsEntity {
-    public NewsEntity() {
-        //id = String.format(title, url);
-    }
 
     @Ignore
-    public NewsEntity(@NonNull String title, @Nullable String imageUrl, @NonNull String category,
+    public NewsEntity(@NonNull String id, @NonNull String title, @Nullable String imageUrl, @NonNull String category,
                       @NonNull String updatedDate, @NonNull String previewText, @NonNull String url) {
+        this.id = id;
         this.title = title;
         this.imageUrl = imageUrl;
         this.category = category;
         this.updatedDate = updatedDate;
         this.previewText = previewText;
         this.url = url;
-
     }
 
+    @Ignore
+    public static NewsEntity create(@NonNull String id,
+                                    @NonNull String title,
+                                    @Nullable String imageUrl,
+                                    @NonNull String category,
+                                    @NonNull String updatedDate,
+                                    @NonNull String previewText,
+                                    @NonNull String url) {
+        return new NewsEntity (id, title, imageUrl, category,
+                               updatedDate, previewText, url);
+    }
 
-
+    @PrimaryKey
     @NonNull
+    private String id;
     @ColumnInfo(name = "title")
     private String title;
     @ColumnInfo(name = "imageUrl")
@@ -41,22 +48,21 @@ public class NewsEntity {
     private String updatedDate;
     @ColumnInfo(name = "previewText")
     private String previewText;
+    @ColumnInfo(name = "url")
+    private String url;
 
-    /*@NonNull
+
+    @NonNull
     public String getId() {
         return id;
     }
-    public void setId(@NonNull String id) { this.id = id; }*/
-
-    @NonNull
-    @ColumnInfo(name = "url")
-    private String url;
+    public void setId(@NonNull String id) { this.id = id; }
 
     @NonNull
     public String getTitle() {
         return title;
     }
-    @NonNull
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -89,11 +95,10 @@ public class NewsEntity {
         this.previewText = previewText;
     }
 
-    @NonNull
     public String getUrl() {
         return url;
     }
-    @NonNull
+
     public void setUrl(String previewText) {
         this.url = url;
     }
@@ -101,7 +106,7 @@ public class NewsEntity {
     @Override
     public String toString() {
         return "News{" +
-                //"id='" + id + '\'' +
+                "id='" + id + '\'' +
                 "title='" + title + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", category='" + category + '\'' +

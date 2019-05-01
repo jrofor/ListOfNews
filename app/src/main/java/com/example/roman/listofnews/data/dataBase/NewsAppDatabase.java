@@ -14,7 +14,7 @@ public abstract class NewsAppDatabase extends RoomDatabase {
     private static NewsAppDatabase singletone;
     private static final String DATABASE_NAME = "NewsRoomDb.db";
     public NewsDao newsDao;
-    //public abstract  NewsAsyncDao NewsAsyncDao;
+    public NewsAsyncDao newsAsyncDao;
 
     public static NewsAppDatabase getNewsAppDatabase(Context context) {
         if (singletone == null) {
