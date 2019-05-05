@@ -1,13 +1,9 @@
 package com.example.roman.listofnews.data.dataBase;
 
 import android.content.Context;
-
-import com.example.roman.listofnews.ui.adapter.AllNewsItem;
-
 import java.util.List;
 import io.reactivex.Observable;
 import java.util.concurrent.Callable;
-
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
@@ -19,7 +15,7 @@ public class NewsDatabaseRepository {
         this.mContext = mContext;
     }
 
-    Completable saveToDatabase(final List<NewsEntity> NewsEntityList) {
+    public Completable saveToDatabase(final List<NewsEntity> NewsEntityList) {
         return Completable.fromCallable(new Callable<Void>() {
             @Override
             public Void call() throws Exception {
@@ -27,27 +23,50 @@ public class NewsDatabaseRepository {
 
                 NewsEntity[] newsEntities = NewsEntityList.toArray(new NewsEntity[NewsEntityList.size()]);
 
-                db.newsDao.insertAll(newsEntities);
+                db.newsDao().insertAll(newsEntities);
 
                 return null;
             }
         });
     }
 
-    Single<List<NewsEntity>> getDataFromDatabase() {
+    public Single<List<NewsEntity>> getDataFromDatabase() {
         return Single.fromCallable(new Callable<List<NewsEntity>>() {
             @Override
             public List<NewsEntity> call() throws Exception {
                 NewsAppDatabase db = NewsAppDatabase.getNewsAppDatabase(mContext);
-                return db.newsDao.getAll();
+                return db.newsDao().getAll();
             }
         });
     }
 
-    Observable<List<NewsEntity>> getDataObservable() {
+    public Completable deleteAllFromDatabase() {
+        return Completable.fromCallable(new Callable<Void>() {
+            @Override
+            public Void call() throws Exception {
+                NewsAppDatabase db = NewsAppDatabase.getNewsAppDatabase(mContext);
+
+                db.newsDao().deleteAll();
+
+                return null;
+            }
+        });
+    }
+
+    public Single<Integer> checkDataInDatabase() {
+        return Single.fromCallable(new Callable<Integer>() {
+            @Override
+            public Integer call() throws Exception {
+                NewsAppDatabase db = NewsAppDatabase.getNewsAppDatabase(mContext);
+                return db.newsDao().newsEntityCount();
+            }
+        });
+    }
+
+    /*public Observable<List<NewsEntity>> getDataObservable() {
         NewsAppDatabase db = NewsAppDatabase.getNewsAppDatabase(mContext);
 
-        return db.newsAsyncDao.getAll();
-    }
+        //return db.newsAsyncDao().getAll();
+    }*/
 
 }

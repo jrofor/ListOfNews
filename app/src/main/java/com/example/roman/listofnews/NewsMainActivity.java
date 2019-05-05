@@ -10,10 +10,14 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.roman.listofnews.data.Storage;
+import com.example.roman.listofnews.data.dataBase.NewsDatabaseConverter;
+import com.example.roman.listofnews.data.dataBase.NewsDatabaseRepository;
+import com.example.roman.listofnews.data.dataBase.NewsEntity;
 import com.example.roman.listofnews.ui.adapter.AllNewsItem;
 import com.example.roman.listofnews.ui.adapter.spinner.CategoriesSpinnerAdapter;
 import com.example.roman.listofnews.ux.NewsCategory;
@@ -38,6 +42,8 @@ import android.widget.TextView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class NewsMainActivity extends AppCompatActivity {
@@ -50,6 +56,8 @@ public class NewsMainActivity extends AppCompatActivity {
     private NewsRecyclerAdapter NewsAdapter;
     private CategoriesSpinnerAdapter categoriesAdapter;
 
+
+
     @Nullable
     private View viewLoading;
     @Nullable
@@ -60,16 +68,21 @@ public class NewsMainActivity extends AppCompatActivity {
     private TextView tvError;
     @Nullable
     private Button btnTryAgain;
-
+    @Nullable
     private FloatingActionButton fabUpdate;
 
     /*@Nullable
     private Button errorAction;*/
 
 
+
     @Nullable
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
-
+    @Nullable
+    private NewsDatabaseRepository newsDatabaseRepository = new NewsDatabaseRepository(this);
+    @Nullable
+    private NewsDatabaseConverter databaseConverter = new NewsDatabaseConverter();
+    private static final String TAGroom = "RoomActivity";
 
 
 
@@ -120,15 +133,27 @@ public class NewsMainActivity extends AppCompatActivity {
         //loadItem("home");
         //categoriesAdapter.setOnCategorySelectedListener(category -> loadItem(category.serverValue()), spinnerCategories);
 
-        NewsAdapter.setOnClickNewsListener(AllNewsItem ->
-                NewsDetailsActivity.start(this, AllNewsItem));
+        checkingDatabaseForEmptiness();
         fabUpdate.setOnClickListener(v -> onClickFabUpdate());
         btnTryAgain.setOnClickListener(v -> onClickTryAgain(categoriesAdapter.getSelectedCategory().serverValue()));
+        NewsAdapter.setOnClickNewsListener(AllNewsItem ->
+                NewsDetailsActivity.start(this, AllNewsItem));
+    }
+
+    private void checkingDatabase(int cnt) {
+        //if DB not emptiness - view on screen
+         if (cnt > 0) {
+             showState(State.HasData);
+             initViews();
+             Log.d(TAGroom, "Views Items in RecyclerView from Database");
+
+         }
     }
 
 
     private void onClickFabUpdate() {
         //удалить старую бд
+
         loadItem(categoriesAdapter.getSelectedCategory().serverValue());
         categoriesAdapter.setOnCategorySelectedListener(category -> loadItem(category.serverValue()), spinnerCategories);
 
@@ -173,17 +198,101 @@ public class NewsMainActivity extends AppCompatActivity {
         });*/
     }
 
-    //private void setupNews(List<NewsItemDTO> newsItems) {
     private void setupNews(List<AllNewsItem> newsItems) {
         showState(State.HasData);
         updateItems(newsItems);
+        //clear database before update
+        deleteAllFromDatabaseWithRoom();
+        //Convert to Entities and save List AllNewsItem to database
+        saveToDatabaseWithRoom(databaseConverter.toDatabase(newsItems));
     }
 
-    //private void updateItems(@Nullable List<NewsItemDTO> news) {
     private void updateItems(@Nullable List<AllNewsItem> news) {
         if (NewsAdapter != null) NewsAdapter.replaceItems(news);
     }
 
+/**
+********************************************Database methods****************************************
+**/
+
+    private void saveToDatabaseWithRoom(List<NewsEntity> NewsEntityList) {
+        Disposable disposable = newsDatabaseRepository.saveToDatabase(NewsEntityList)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        () ->
+                                //Log.d(TAGroom, NewsEntityList.toString()),
+                                Log.d(TAGroom, "save NewsEntityList To Database"),
+                        throwable ->
+                                Log.e(TAGroom, throwable.toString()));
+        compositeDisposable.add(disposable);
+    }
+
+    private void initViews() {
+        Disposable disposable = newsDatabaseRepository.getDataFromDatabase()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe( new Consumer<List<NewsEntity>>() {
+                    @Override
+                    public void accept(List<NewsEntity> newsEntities) throws Exception {
+                        //Log.d(TAGroom, newsEntities.toString());
+
+                        // updating Items in RecyclerView from Database with converting Entities to AllNewsItem
+                        updateItems(databaseConverter.fromDatabase(newsEntities)) ;
+                        Log.d(TAGroom, "updating Items in RecyclerView from Database");
+
+                    }
+                } ,
+                         new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.e(TAGroom, throwable.toString());
+                    }
+                });
+        compositeDisposable.add(disposable);
+    }
+
+    private void deleteAllFromDatabaseWithRoom() {
+        Disposable disposable = newsDatabaseRepository.deleteAllFromDatabase()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        () ->
+                                Log.d(TAGroom, "deleteAllFromDatabase"),
+                        throwable ->
+                                Log.e(TAGroom, throwable.toString()));
+        compositeDisposable.add(disposable);
+    }
+
+
+    private void checkingDatabaseForEmptiness() {
+        Disposable disposable = newsDatabaseRepository.checkDataInDatabase()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::checkingDatabase);
+        compositeDisposable.add(disposable);
+    }
+
+
+    /*private void subscribeToData() {
+        Disposable disposable = newsDatabaseRepository.getDataObservable()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe( new Consumer<List<NewsEntity>>() {
+                    @Override
+                    public void accept(List<NewsEntity> newsEntities) throws Exception {
+                        Log.d(TAGroom, newsEntities.toString());
+                        //
+
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.e(TAGroom, throwable.toString());
+                    }
+                });
+        compositeDisposable.add(disposable);
+    }*/
     //private void checkResponseAndShowState(@NonNull Response<DefaultResponse<List<NewsItemDTO>>> response) {
     /*private void checkResponseAndShowState(@NonNull Response<List<AllNewsItem>> response) {
 
@@ -336,8 +445,10 @@ public class NewsMainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy(){
         Storage.setIntroShowAgain(this);
-        super.onDestroy();
+        compositeDisposable.dispose();
+        Log.d(TAGroom, "onDestroy()");
         //Log.d(TAG2, "ActivityTwo: onDistroy");
+        super.onDestroy();
     }
 
 

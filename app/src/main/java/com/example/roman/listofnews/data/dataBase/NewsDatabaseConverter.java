@@ -3,18 +3,20 @@ package com.example.roman.listofnews.data.dataBase;
 import com.example.roman.listofnews.ui.adapter.AllNewsItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class NewsDatabaseConverter {
 
-    private void toDatabase(List<AllNewsItem> NewsItems) {
+    public List<NewsEntity> toDatabase(List<AllNewsItem> NewsItems) {
 
-        final List<NewsEntity> newsEntity = new ArrayList<>();
+        final List<NewsEntity> newsEntities = new ArrayList<>();
 
         for (AllNewsItem Item : NewsItems) {
             final NewsEntity nEntity = ConvertItem(Item);
-            newsEntity.add(nEntity);
+            newsEntities.add(nEntity);
         }
+        return Collections.unmodifiableList(newsEntities);
     }
 
     private static NewsEntity ConvertItem(AllNewsItem Item) {
@@ -34,10 +36,9 @@ public class NewsDatabaseConverter {
                 updatedDate,
                 previewText,
                 url);
-
     }
 
-    private void fromDatabase(List<NewsEntity> newsEntities ) {
+    public List<AllNewsItem> fromDatabase(List<NewsEntity> newsEntities ) {
 
         final List<AllNewsItem> NewsItems = new ArrayList<>();
 
@@ -45,6 +46,7 @@ public class NewsDatabaseConverter {
             final AllNewsItem Item = ConvertEntity(Entity);
             NewsItems.add(Item);
         }
+        return Collections.unmodifiableList(NewsItems);
     }
 
     private static AllNewsItem ConvertEntity(NewsEntity Entity) {
@@ -56,10 +58,6 @@ public class NewsDatabaseConverter {
         final String previewText = Entity.getPreviewText();
         final String url = Entity.getUrl();
 
-        //final String id = title.concat(url);
-
         return AllNewsItem.create(title, imageUrl, category, updatedDate, previewText, url);
-
-
     }
 }

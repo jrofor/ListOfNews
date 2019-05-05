@@ -9,12 +9,12 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-@Database(entities = {NewsEntity.class}, version = 1)
+@Database(entities = {NewsEntity.class}, version = 1, exportSchema = false)
 public abstract class NewsAppDatabase extends RoomDatabase {
     private static NewsAppDatabase singletone;
     private static final String DATABASE_NAME = "NewsRoomDb.db";
-    public NewsDao newsDao;
-    public NewsAsyncDao newsAsyncDao;
+    public abstract NewsDao newsDao();
+    public abstract NewsAsyncDao newsAsyncDao();
 
     public static NewsAppDatabase getNewsAppDatabase(Context context) {
         if (singletone == null) {

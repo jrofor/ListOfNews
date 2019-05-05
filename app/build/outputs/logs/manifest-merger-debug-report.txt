@@ -12,6 +12,7 @@ MERGED from [com.android.support:recyclerview-v7:28.0.0] C:\Users\Roman_\.gradle
 MERGED from [com.android.support:cardview-v7:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\cardview-v7-28.0.0.aar\4fd027b611c0d1a90d308defba655d6e\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-v4:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\support-v4-28.0.0.aar\78d71f783391785fb75b7998102b21c6\AndroidManifest.xml:17:1-22:12
 MERGED from [io.reactivex.rxjava2:rxandroid:2.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\rxandroid-2.1.0.aar\7bd45be19eca122ba6a0fc36cffd95cd\AndroidManifest.xml:15:1-20:12
+MERGED from [android.arch.persistence.room:rxjava2:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\rxjava2-1.1.1.aar\ed7b3d188a5612dec8a87d09211147c7\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.persistence.room:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\5f629fce5b3c7c6c4f41ea57416ea6ec\AndroidManifest.xml:17:1-22:12
 MERGED from [com.github.bumptech.glide:gifdecoder:4.8.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\gifdecoder-4.8.0.aar\d4d96b3b56d5e0f4263643f1a2c5ecc4\AndroidManifest.xml:2:1-11:12
 MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\a3447f2fc6aabc8b5e2d1a7a3c0197ff\AndroidManifest.xml:17:1-22:12
@@ -144,6 +145,8 @@ MERGED from [com.android.support:support-v4:28.0.0] C:\Users\Roman_\.gradle\cach
 MERGED from [com.android.support:support-v4:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\support-v4-28.0.0.aar\78d71f783391785fb75b7998102b21c6\AndroidManifest.xml:20:5-44
 MERGED from [io.reactivex.rxjava2:rxandroid:2.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\rxandroid-2.1.0.aar\7bd45be19eca122ba6a0fc36cffd95cd\AndroidManifest.xml:18:5-43
 MERGED from [io.reactivex.rxjava2:rxandroid:2.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\rxandroid-2.1.0.aar\7bd45be19eca122ba6a0fc36cffd95cd\AndroidManifest.xml:18:5-43
+MERGED from [android.arch.persistence.room:rxjava2:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\rxjava2-1.1.1.aar\ed7b3d188a5612dec8a87d09211147c7\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.persistence.room:rxjava2:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\rxjava2-1.1.1.aar\ed7b3d188a5612dec8a87d09211147c7\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.persistence.room:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\5f629fce5b3c7c6c4f41ea57416ea6ec\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.persistence.room:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\5f629fce5b3c7c6c4f41ea57416ea6ec\AndroidManifest.xml:20:5-44
 MERGED from [com.github.bumptech.glide:gifdecoder:4.8.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\gifdecoder-4.8.0.aar\d4d96b3b56d5e0f4263643f1a2c5ecc4\AndroidManifest.xml:5:5-7:41

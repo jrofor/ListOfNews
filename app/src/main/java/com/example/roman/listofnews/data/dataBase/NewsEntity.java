@@ -8,8 +8,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.Date;
-@Entity
+@Entity(tableName = "newsEntity")
 public class NewsEntity {
+
+    public NewsEntity(){}
 
     @Ignore
     public NewsEntity(@NonNull String id, @NonNull String title, @Nullable String imageUrl, @NonNull String category,
@@ -35,8 +37,9 @@ public class NewsEntity {
                                updatedDate, previewText, url);
     }
 
-    @PrimaryKey
     @NonNull
+    @PrimaryKey
+    @ColumnInfo(name = "id")
     private String id;
     @ColumnInfo(name = "title")
     private String title;
