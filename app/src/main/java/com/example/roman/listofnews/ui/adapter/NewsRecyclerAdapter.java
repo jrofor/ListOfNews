@@ -19,7 +19,6 @@ import android.support.v7.widget.RecyclerView;
 
 public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder>{
     @Nullable
-    //private final List<NewsItemDTO> news = new ArrayList<>();
     private final List<AllNewsItem> news = new ArrayList<>();
     @Nullable
     private OnItemClickListener newsListener;
@@ -27,7 +26,12 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder>{
     private final LayoutInflater inflater;
     final String TAG = "myLogs";
 
-    public NewsRecyclerAdapter(Context context) { //RequestManager glideRequestManager,  @Nullable OnItemClickListener clickListener
+
+    public interface OnItemClickListener {
+        void OnItemClick(@NonNull AllNewsItem allnewsItem); }
+
+    public NewsRecyclerAdapter(Context context) {
+        //@Nullable OnItemClickListener clickListener;
         //this.news = news;   @Nullable List<NewsItemDTO> news,
         //this.clickListener = clickListener;
         this.inflater = LayoutInflater.from(context);
@@ -36,7 +40,6 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder>{
                 .fallback(R.drawable.image_placeholder)
                 .centerCrop();
         this.glideRequestManager = Glide.with(context).applyDefaultRequestOptions(imageOption);
-
     }
 
     @NonNull
@@ -47,7 +50,6 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder newsViewHolder, int position) {
-        //final NewsItemDTO NIDTO = news.get(position);
         final AllNewsItem NIDTO = news.get(position);
         newsViewHolder.bindItem(NIDTO, newsListener);
     }
@@ -56,16 +58,12 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder>{
         this.newsListener = newsListener;
     }
 
-    //public void replaceItems (List<NewsItemDTO> news ) {
     public void replaceItems (List<AllNewsItem> news ) {
         this.news.clear();
         this.news.addAll(news);
         notifyDataSetChanged();
     }
 
-    public interface OnItemClickListener {
-    //    void OnItemClick(NewsItem news);
-     void OnItemClick(@NonNull AllNewsItem allnewsItem); }
 
     @Override
     public int getItemCount() {

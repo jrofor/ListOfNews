@@ -130,34 +130,26 @@ public class NewsMainActivity extends AppCompatActivity {
 
     private void setupUx() {
         //errorAction.setOnClickListener(view -> loadItem(categoriesAdapter.getSelectedCategory().serverValue()));
-        //loadItem("home");
         //categoriesAdapter.setOnCategorySelectedListener(category -> loadItem(category.serverValue()), spinnerCategories);
-
-        checkingDatabaseForEmptiness();
         fabUpdate.setOnClickListener(v -> onClickFabUpdate());
         btnTryAgain.setOnClickListener(v -> onClickTryAgain(categoriesAdapter.getSelectedCategory().serverValue()));
         NewsAdapter.setOnClickNewsListener(AllNewsItem ->
                 NewsDetailsActivity.start(this, AllNewsItem));
+        checkingDatabaseForEmptiness();
     }
 
     private void checkingDatabase(int cnt) {
-        //if DB not emptiness - view on screen
+        //if DB not emptiness - declare categoriesAdapter and view items from DB on screen
          if (cnt > 0) {
+             categoriesAdapter.setOnCategorySelectedListener(category -> loadItem(category.serverValue()),spinnerCategories);
              showState(State.HasData);
+             Log.d(TAGroom, "Database not emptiness");
              initViews();
-             Log.d(TAGroom, "Views Items in RecyclerView from Database");
-
          }
     }
 
-
     private void onClickFabUpdate() {
-        //удалить старую бд
-
         loadItem(categoriesAdapter.getSelectedCategory().serverValue());
-        categoriesAdapter.setOnCategorySelectedListener(category -> loadItem(category.serverValue()), spinnerCategories);
-
-
     }
 
     private void onClickTryAgain(@NonNull String category ) {
@@ -179,8 +171,6 @@ public class NewsMainActivity extends AppCompatActivity {
                         this::setupNews,
                         this::handleError);
         compositeDisposable.add(disposable);
-
-
 
 
         /*ResponseTSHome.enqueue(new Callback<DefaultResponse<List<NewsItemDTO>>>() {
@@ -211,6 +201,13 @@ public class NewsMainActivity extends AppCompatActivity {
         if (NewsAdapter != null) NewsAdapter.replaceItems(news);
     }
 
+    private void handleError (Throwable throwable) {
+        if (throwable instanceof IOException) {
+            showState(State.NetworkError);
+            return;
+        }
+        showState(State.NetworkError);
+    }
 /**
 ********************************************Database methods****************************************
 **/
@@ -264,15 +261,14 @@ public class NewsMainActivity extends AppCompatActivity {
         compositeDisposable.add(disposable);
     }
 
-
     private void checkingDatabaseForEmptiness() {
         Disposable disposable = newsDatabaseRepository.checkDataInDatabase()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::checkingDatabase);
+                .subscribe(
+                        this::checkingDatabase);
         compositeDisposable.add(disposable);
     }
-
 
     /*private void subscribeToData() {
         Disposable disposable = newsDatabaseRepository.getDataObservable()
@@ -293,6 +289,10 @@ public class NewsMainActivity extends AppCompatActivity {
                 });
         compositeDisposable.add(disposable);
     }*/
+
+/**
+****************************************************************************************************
+**/
     //private void checkResponseAndShowState(@NonNull Response<DefaultResponse<List<NewsItemDTO>>> response) {
     /*private void checkResponseAndShowState(@NonNull Response<List<AllNewsItem>> response) {
 
@@ -327,13 +327,6 @@ public class NewsMainActivity extends AppCompatActivity {
         showState(State.HasData);
     } */
 
-    private void handleError (Throwable throwable) {
-        if (throwable instanceof IOException) {
-            showState(State.NetworkError);
-            return;
-        }
-        showState(State.NetworkError);
-    }
 
     public void showState(@NonNull State state) {
 
@@ -383,8 +376,7 @@ public class NewsMainActivity extends AppCompatActivity {
         }
     }
 
-    private void findView()
-    {
+    private void findView() {
         rvNews = findViewById(R.id.rv_news);
         viewLoading = findViewById(R.id.fl_loading);
         viewNoDate = findViewById(R.id.fl_no_data);
@@ -442,6 +434,10 @@ public class NewsMainActivity extends AppCompatActivity {
     }
 
 
+
+
+
+
     @Override
     protected void onDestroy(){
         Storage.setIntroShowAgain(this);
@@ -450,8 +446,4 @@ public class NewsMainActivity extends AppCompatActivity {
         //Log.d(TAG2, "ActivityTwo: onDistroy");
         super.onDestroy();
     }
-
-
-
-
 }
