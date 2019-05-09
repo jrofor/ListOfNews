@@ -1,6 +1,8 @@
 package com.example.roman.listofnews.data.dataBase;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+
 import java.util.List;
 import io.reactivex.Observable;
 import java.util.concurrent.Callable;
@@ -59,6 +61,16 @@ public class NewsDatabaseRepository {
             public Integer call() throws Exception {
                 NewsAppDatabase db = NewsAppDatabase.getNewsAppDatabase(mContext);
                 return db.newsDao().newsEntityCount();
+            }
+        });
+    }
+
+    public Single <NewsEntity> getEntitybyIdFromDatabase(final @NonNull String IdItem) {
+        return Single.fromCallable(new Callable<NewsEntity>() {
+            @Override
+            public NewsEntity call() throws Exception {
+                NewsAppDatabase db = NewsAppDatabase.getNewsAppDatabase(mContext);
+                return db.newsDao().getNewsById(IdItem);
             }
         });
     }

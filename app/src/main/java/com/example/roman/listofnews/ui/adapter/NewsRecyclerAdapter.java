@@ -28,7 +28,8 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder>{
 
 
     public interface OnItemClickListener {
-        void OnItemClick(@NonNull AllNewsItem allnewsItem); }
+        //void OnItemClick(@NonNull AllNewsItem allnewsItem); }
+        void OnItemClick(@NonNull String IdItem); }
 
     public NewsRecyclerAdapter(Context context) {
         //@Nullable OnItemClickListener clickListener;

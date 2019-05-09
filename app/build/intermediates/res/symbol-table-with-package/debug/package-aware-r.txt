@@ -1122,6 +1122,7 @@ id design_menu_item_action_area
 id design_menu_item_action_area_stub
 id design_menu_item_text
 id design_navigation_view
+id details_category
 id details_image_avatar
 id details_preview
 id details_textDate
@@ -1293,7 +1294,6 @@ id up
 id useLogo
 id view_offset_helper
 id visible
-id web_view
 id withText
 id wrap
 id wrap_content

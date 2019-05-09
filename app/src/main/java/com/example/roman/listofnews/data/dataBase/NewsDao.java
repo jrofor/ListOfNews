@@ -17,8 +17,8 @@ public interface NewsDao {
     @Query("SELECT COUNT(*) from newsEntity")
     Integer newsEntityCount();
 
-    //@Query("SELECT * FROM newsEntity WHERE id = :id")
-    //NewsEntity getNewsById(int id);
+    @Query("SELECT * FROM newsEntity WHERE id = :id")
+    NewsEntity getNewsById(String id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(NewsEntity newsEntity);

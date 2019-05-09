@@ -56,8 +56,6 @@ public class NewsMainActivity extends AppCompatActivity {
     private NewsRecyclerAdapter NewsAdapter;
     private CategoriesSpinnerAdapter categoriesAdapter;
 
-
-
     @Nullable
     private View viewLoading;
     @Nullable
@@ -73,8 +71,6 @@ public class NewsMainActivity extends AppCompatActivity {
 
     /*@Nullable
     private Button errorAction;*/
-
-
 
     @Nullable
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -133,8 +129,10 @@ public class NewsMainActivity extends AppCompatActivity {
         //categoriesAdapter.setOnCategorySelectedListener(category -> loadItem(category.serverValue()), spinnerCategories);
         fabUpdate.setOnClickListener(v -> onClickFabUpdate());
         btnTryAgain.setOnClickListener(v -> onClickTryAgain(categoriesAdapter.getSelectedCategory().serverValue()));
-        NewsAdapter.setOnClickNewsListener(AllNewsItem ->
-                NewsDetailsActivity.start(this, AllNewsItem));
+        //NewsAdapter.setOnClickNewsListener(AllNewsItem ->
+        //       NewsDetailsActivity.start(this, AllNewsItem));
+        NewsAdapter.setOnClickNewsListener(IdItem ->
+                NewsDetailsActivity.start(this, IdItem));
         checkingDatabaseForEmptiness();
     }
 
@@ -208,6 +206,7 @@ public class NewsMainActivity extends AppCompatActivity {
         }
         showState(State.NetworkError);
     }
+
 /**
 ********************************************Database methods****************************************
 **/
@@ -237,10 +236,9 @@ public class NewsMainActivity extends AppCompatActivity {
                         // updating Items in RecyclerView from Database with converting Entities to AllNewsItem
                         updateItems(databaseConverter.fromDatabase(newsEntities)) ;
                         Log.d(TAGroom, "updating Items in RecyclerView from Database");
-
                     }
                 } ,
-                         new Consumer<Throwable>() {
+                            new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         Log.e(TAGroom, throwable.toString());
@@ -269,6 +267,10 @@ public class NewsMainActivity extends AppCompatActivity {
                         this::checkingDatabase);
         compositeDisposable.add(disposable);
     }
+
+    //getinEntitybyIdFromDatabase  getEntitybyIdFromDatabase
+
+
 
     /*private void subscribeToData() {
         Disposable disposable = newsDatabaseRepository.getDataObservable()

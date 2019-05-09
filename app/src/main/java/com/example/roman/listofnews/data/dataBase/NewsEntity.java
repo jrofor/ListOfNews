@@ -7,7 +7,6 @@ import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import java.util.Date;
 @Entity(tableName = "newsEntity")
 public class NewsEntity {
 
@@ -101,8 +100,7 @@ public class NewsEntity {
     public String getUrl() {
         return url;
     }
-
-    public void setUrl(String previewText) {
+    public void setUrl(String url) {
         this.url = url;
     }
 

@@ -2,8 +2,8 @@ package com.example.roman.listofnews.ui.adapter;
 
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +20,6 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.example.roman.listofnews.R;
-import com.example.roman.listofnews.ux.NewsDTO.NewsItemDTO;
-
-import java.util.List;
-import java.util.zip.Inflater;
 
 public class NewsViewHolder extends RecyclerView.ViewHolder {
 
@@ -37,11 +33,10 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     private final View itemView;
 
     private static final int LayuotItem = R.layout.item_news;
+    private static final String TAG = "myLogs";
+    private static String createId  ="";
 
-    public interface OnItemClickListener {
-        void OnItemClick(int position); }
-
-     NewsViewHolder(@NonNull View itemView, RequestManager glideRequestManager) { //, @Nullable OnItemClickListener clickListener
+    private NewsViewHolder(@NonNull View itemView, RequestManager glideRequestManager) {
         super(itemView);
         this.itemView = itemView;
         this.imageLoader = glideRequestManager;
@@ -50,9 +45,9 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
 
     public static NewsViewHolder create (@NonNull LayoutInflater inflater,
                                          @NonNull ViewGroup parent,
-                                         @NonNull RequestManager glideRequestManager) { //, OnItemClickListener clickList
-        final View view = inflater.inflate(LayuotItem, parent, false), clickListener;
-        return new NewsViewHolder(view, glideRequestManager)  ; //, clickList
+                                         @NonNull RequestManager glideRequestManager) {
+        final View view = inflater.inflate(LayuotItem, parent, false);
+        return new NewsViewHolder(view, glideRequestManager)  ;
 
     }
 
@@ -65,24 +60,21 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
         tvDate = itemView.findViewById(R.id.tv_date);
     }
 
-
-
-    //public void bindItem (NewsItemDTO newsDTO) {
-    public void bindItem (AllNewsItem newsDTO,
+    public void bindItem (AllNewsItem allNewsItem,
                           @NonNull NewsRecyclerAdapter.OnItemClickListener clickListener) {
-        setupUx(newsDTO, clickListener);
-        setupUi(newsDTO);
+        setupUi(allNewsItem);
+        setupUx(allNewsItem, clickListener);
     }
 
-    private void setupUi (AllNewsItem newsDTO) {
+    private void setupUi (AllNewsItem allNewsItem) {
 
         progressBar.setVisibility(View.VISIBLE);
 
-        tvSubsection.setText(newsDTO.getCategory());
-        tvTitle.setText(newsDTO.getTitle());
-        tvAbstract.setText(newsDTO.getPreviewText());
-        tvDate.setText(newsDTO.getUpdatedDate());
-        imageLoader.load(newsDTO.getImageUrl()).listener( new RequestListener<Drawable>() {
+        tvSubsection.setText(allNewsItem.getCategory());
+        tvTitle.setText(allNewsItem.getTitle());
+        tvAbstract.setText(allNewsItem.getPreviewText());
+        tvDate.setText(allNewsItem.getUpdatedDate());
+        imageLoader.load(allNewsItem.getImageUrl()).listener( new RequestListener<Drawable>() {
 
             @Override
             public boolean onLoadFailed(GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
@@ -100,13 +92,18 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
                 .thumbnail(0.3f)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(ivMultimedia);
+
     }
 
     private void setupUx(@NonNull AllNewsItem allNewsItem, NewsRecyclerAdapter.OnItemClickListener clickListener) {
-        itemView.setOnClickListener(view -> {
+
+        itemView.setOnClickListener((View view) -> {
             int position = getAdapterPosition();
             if (clickListener != null && position != RecyclerView.NO_POSITION) {
-                clickListener.OnItemClick(allNewsItem);
+                // adding create id for database Entity
+                createId = allNewsItem.getTitle().concat(allNewsItem.getUrl()) ;
+                clickListener.OnItemClick(createId);
+                Log.d(TAG, createId);
             }
         });
     }

@@ -23,13 +23,13 @@ public class AllNewsItem implements Serializable {
     private final String url;
 
 
-    private AllNewsItem(@NonNull String title, @Nullable String imageUrl, @NonNull String category, @NonNull String updatedDate, @NonNull String previewText, @NonNull String fullText) {
+    private AllNewsItem(@NonNull String title, @Nullable String imageUrl, @NonNull String category, @NonNull String updatedDate, @NonNull String previewText, @NonNull String url) {
         this.title = title;
         this.imageUrl = imageUrl;
         this.category = category;
         this.updatedDate = updatedDate;
         this.previewText = previewText;
-        this.url = fullText;
+        this.url = url;
     }
 
     public static AllNewsItem create(@NonNull String title,
