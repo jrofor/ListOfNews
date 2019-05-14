@@ -853,6 +853,7 @@ dimen item_touch_helper_swipe_escape_max_velocity
 dimen item_touch_helper_swipe_escape_velocity
 dimen marginStartL
 dimen marginStartT
+dimen margin_fl_no_data
 dimen margin_lt_error
 dimen mtrl_bottomappbar_fabOffsetEndMode
 dimen mtrl_bottomappbar_fab_cradle_margin
@@ -1145,7 +1146,6 @@ id fill_horizontal
 id fill_vertical
 id filled
 id fixed
-id fl_fab_update
 id fl_intro_activity
 id fl_loading
 id fl_no_data

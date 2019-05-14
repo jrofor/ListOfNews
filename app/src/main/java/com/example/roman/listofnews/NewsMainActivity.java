@@ -42,7 +42,6 @@ import android.widget.TextView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -79,6 +78,7 @@ public class NewsMainActivity extends AppCompatActivity {
     @Nullable
     private NewsDatabaseConverter databaseConverter = new NewsDatabaseConverter();
     private static final String TAGroom = "RoomActivity";
+    private int mScrollOffset = 4;
 
 
 
@@ -121,6 +121,7 @@ public class NewsMainActivity extends AppCompatActivity {
         findView();
         setupRecyclerViews();
         setupSpinner();
+        setupFabScroll();
     }
 
 
@@ -399,6 +400,29 @@ public class NewsMainActivity extends AppCompatActivity {
         final NewsCategory[] categories = NewsCategory.values();
         categoriesAdapter = CategoriesSpinnerAdapter.createDefault(this, categories);
         spinnerCategories.setAdapter(categoriesAdapter);
+    }
+
+    private void setupFabScroll() {
+        rvNews.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (Math.abs(dy) > mScrollOffset) {
+                    if (dy > 0) {
+                        fabUpdate.hide();
+                    } else {
+                        fabUpdate.show();
+                    }
+
+                }
+            }
+        });
+
     }
 
 

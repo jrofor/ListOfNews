@@ -25,6 +25,8 @@
     <dimen name="ItemDecoration_size_4">4dp</dimen>
 
     <!-- preference_for_LinearLayoutError_in_Main_recycler-->
+    <dimen name="margin_fl_no_data">16dp</dimen>
+    <!-- preference_for_LinearLayoutError_in_Main_recycler-->
     <dimen name="margin_lt_error">16dp</dimen>
     <!-- preference_for_image_placeholder-->
     <dimen name="item_image_size">96dp</dimen>

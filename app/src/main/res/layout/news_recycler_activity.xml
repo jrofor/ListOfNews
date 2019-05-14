@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-
     tools:context=".NewsMainActivity">
 
     <Toolbar
@@ -21,25 +19,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </Toolbar>
-    <FrameLayout
-        android:id="@+id/fl_fab_update"
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right|bottom"
-        android:visibility="visible">
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_update"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/BaseMargin"
-            android:src="@android:drawable/stat_notify_sync_noanim"
-            app:backgroundTint="@color/color_FAB"
-            app:fabSize="normal"
-            >
-            <requestFocus />
-        </android.support.design.widget.FloatingActionButton>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="@dimen/BaseMargin"
+        android:layout_marginEnd="@dimen/BaseMargin"
+        android:src="@android:drawable/stat_notify_sync_noanim"
+        android:visibility="visible"
+        app:backgroundTint="@color/color_FAB"
+        app:fabSize="normal">
 
-    </FrameLayout>
+        <requestFocus />
+    </android.support.design.widget.FloatingActionButton>
 
     <!-- android:clipToPadding="false"
             android:paddingBottom="48dp"
@@ -49,7 +46,8 @@
         android:id="@+id/rv_news"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:layout_below="@id/toolbar"
+        android:scrollbars="vertical"
         android:visibility="gone"
         tools:context=".NewsMainActivity"
         tools:listitem="@layout/item_news" />
@@ -70,6 +68,8 @@
         android:id="@+id/fl_no_data"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/margin_fl_no_data"
+        android:layout_marginStart="@dimen/margin_fl_no_data"
         android:visibility="gone">
 
         <TextView
@@ -108,5 +108,4 @@
 
     </LinearLayout>
 
-
-</LinearLayout>
+</RelativeLayout>
