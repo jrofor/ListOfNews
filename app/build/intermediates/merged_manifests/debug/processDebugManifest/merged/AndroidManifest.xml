@@ -31,13 +31,14 @@
        tools:replace="android:appComponentFactory">
        android:appComponentFactory="whateverString"
         -->
-        <activity android:name="com.example.roman.listofnews.NewsMainActivity" >
+        <activity android:name="com.example.roman.listofnews.NewsIntroActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.example.roman.listofnews.NewsMainActivity" />
         <activity
             android:name="com.example.roman.listofnews.NewsAboutActivity"
             android:label="@string/About" />

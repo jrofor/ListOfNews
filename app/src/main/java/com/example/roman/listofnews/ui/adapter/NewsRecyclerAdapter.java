@@ -2,15 +2,14 @@ package com.example.roman.listofnews.ui.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.roman.listofnews.R;
-import com.example.roman.listofnews.data.NewsItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.support.annotation.NonNull;
@@ -18,160 +17,59 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 
 
-public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder>{
+public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder>{
     @Nullable
-    private final List<NewsItem> news;
+    private final List<AllNewsItem> news = new ArrayList<>();
     @Nullable
-    private final Context context;
-    @Nullable
-    private final OnItemClickListener clickListener;
+    private OnItemClickListener newsListener;
+    private RequestManager glideRequestManager;
     private final LayoutInflater inflater;
-
     final String TAG = "myLogs";
-    //private Handler mUiHandler = new Handler();
-    //private  MyWorkerThread  mWorkerHandler;// = new NewsAboutActivity.MyWorkerThread("loadingImageThread");
 
 
+    public interface OnItemClickListener {
+        //void OnItemClick(@NonNull AllNewsItem allnewsItem); }
+        void OnItemClick(@NonNull String IdItem); }
 
-    public NewsRecyclerAdapter(@Nullable Context context, @Nullable List<NewsItem> news, @Nullable OnItemClickListener clickListener) {
-        this.news = news;
-        this.context = context;
+    public NewsRecyclerAdapter(Context context) {
+        //@Nullable OnItemClickListener clickListener;
+        //this.news = news;   @Nullable List<NewsItemDTO> news,
+        //this.clickListener = clickListener;
         this.inflater = LayoutInflater.from(context);
-        this.clickListener = clickListener;
+        final RequestOptions imageOption = new RequestOptions()
+                .placeholder(R.drawable.image_placeholder)
+                .fallback(R.drawable.image_placeholder)
+                .centerCrop();
+        this.glideRequestManager = Glide.with(context).applyDefaultRequestOptions(imageOption);
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(
-                inflater.inflate(R.layout.item_news, parent, false), clickListener
-        );
+    public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return NewsViewHolder.create (inflater, parent, glideRequestManager);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NewsRecyclerAdapter.ViewHolder holder, int position) {
-        holder.bind(news.get(position));
-
+    public void onBindViewHolder(@NonNull NewsViewHolder newsViewHolder, int position) {
+        final AllNewsItem NIDTO = news.get(position);
+        newsViewHolder.bindItem(NIDTO, newsListener);
     }
 
-    public interface OnItemClickListener {
-    //    void OnItemClick(NewsItem news);
-     void OnItemClick(int position); }
+    public void setOnClickNewsListener(@NonNull OnItemClickListener newsListener) {
+        this.newsListener = newsListener;
+    }
+
+    public void replaceItems (List<AllNewsItem> news ) {
+        this.news.clear();
+        this.news.addAll(news);
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public int getItemCount() {
         return news.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView titleView;
-        public final TextView previewView;
-        public final TextView categoryView;
-        public final ImageView imageView;
-        public final TextView textDateView;
-
-        ViewHolder(@NonNull View itemView, OnItemClickListener clickListener) {
-            super(itemView);
-            itemView.setOnClickListener( view -> {
-                int position = getAdapterPosition();
-                if (clickListener != null && position != RecyclerView.NO_POSITION){
-                //    clickListener.OnItemClick(news.get(position));
-                    //clickListener.OnItemClickPosition( getAdapterPosition());
-                    clickListener.OnItemClick(getAdapterPosition());
-                }
-            });
-
-            titleView = itemView.findViewById(R.id.title);
-            previewView = itemView.findViewById(R.id.preview);
-            categoryView =  itemView.findViewById(R.id.CategoryName);
-            imageView = itemView.findViewById(R.id.image);
-            textDateView = itemView.findViewById(R.id.textDate);
-        }
-
-        public void bind(NewsItem news) {
-            titleView.setText(news.getTitle());
-            previewView.setText(news.getPreviewText());
-            categoryView.setText(news.getCategory().getName());
-            Glide.with(context).load(news.getImageUrl()).into(imageView);
-            textDateView.setText(news.getPublishDate().toString());
-
-
-
-        }
-
-
-
-
-    }
-
-    /*private void loadingImage(Context context, View itemView, NewsItem news, boolean received){
-        //final boolean[] received = {false};
-        mWorkerHandler = new MyWorkerThread("loadingImageThread");
-        final boolean[] finalReceived = {received};
-        Runnable task = new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(2000 );
-                    Log.d(TAG, "Sleep");
-
-                    mUiHandler.post(new Runnable() { //постим в Looper (очередь) MainThread
-                        @Override
-                        public void run() {
-                            synchronized (finalReceived[0]) {
-                                if (!finalReceived[0]) {
-                                    ImageView imageView = itemView.findViewById(R.id.image);
-                                    Glide.with(context).load(news.getImageUrl()).into(imageView);
-                                    Log.d(TAG, "Thread loadingImage");
-                                    finalReceived[0] = true;
-                                }
-                            }
-                        }
-
-                    });
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    mWorkerHandler.interrupt();    // сбрасываем состояние
-                    Log.d(TAG, "Image loaded");
-                }
-            }
-        };
-
-        mWorkerHandler.start(); //запускаем Handler
-        mWorkerHandler.prepareHandler(); //берём и прикрепляемя к Looper главного(текущего) потока
-        mWorkerHandler.postTask(task);  //постим в Looper (в конец очереди) созданный Runnable
-        //
-        if (finalReceived[0] && mWorkerHandler != null){
-            mWorkerHandler.quit();
-            Log.d(TAG, "---Thread quit---");
-            received = false;
-        }
-
-
-    }
-
-
-
-    public class MyWorkerThread extends HandlerThread {
-        private  Handler mWorkerHandler;
-        public MyWorkerThread(String name) {
-            super(name);
-        }
-
-        public void postTask (Runnable task) {
-            mWorkerHandler.post(task);
-        }
-
-        public void prepareHandler() {
-            mWorkerHandler = new Handler(getLooper());
-        }
-
-        @Override
-        public void interrupt() {
-            super.interrupt();
-        }
-    }
-*/
-
-
 }
+

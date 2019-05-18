@@ -11,7 +11,7 @@
     <string name="LinkToTelegram" translatable="false">https://t.me/roman_ov</string>
     <string name="Hint">Enter a message…</string>
 
-    <string name="About" >About the application</string>
+    <string name="About">About the application</string>
     <string name="categoryName1" translatable="false">DARWIN AVARDS</string>
     <string name="categoryName2" translatable="false">CRIMINAL</string>
     <string name="categoryName3" translatable="false">ANIMALS</string>
@@ -24,5 +24,39 @@
     <!--Strings for news_recycler_activity -->
     <string name="err_data_is_empty">There is no data for your request</string>
     <string name="btn_try_again">Try again</string>
+    <string name="error_network">Network error. Please check your network connection and try again</string>
+    <string name="error_server">Server error. Probably sample token is done</string>
 
+    <string name="top_stories_category_home">Home</string>
+    <string name="top_stories_category_opinion">Opinion</string>
+    <string name="top_stories_category_world">World</string>
+    <string name="top_stories_category_national">National</string>
+    <string name="top_stories_category_politics">Politics</string>
+    <string name="top_stories_category_upshot">Upshot</string>
+    <string name="top_stories_category_nyregion">NY region</string>
+    <string name="top_stories_category_business">Business</string>
+    <string name="top_stories_category_technology">Technology</string>
+    <string name="top_stories_category_science">Science</string>
+    <string name="top_stories_category_health">Health</string>
+    <string name="top_stories_category_sports">Sports</string>
+    <string name="top_stories_category_arts">Arts</string>
+    <string name="top_stories_category_books">Books</string>
+    <string name="top_stories_category_movies">Movies</string>
+    <string name="top_stories_category_theater">Theater</string>
+    <string name="top_stories_category_sundayreview">Sunday review</string>
+    <string name="top_stories_category_fashion">Fashion</string>
+    <string name="top_stories_category_tmagazine">T-magazine</string>
+    <string name="top_stories_category_food">Food</string>
+    <string name="top_stories_category_travel">Travel</string>
+    <string name="top_stories_category_magazine">Magazine</string>
+    <string name="top_stories_category_realestate">Real estate</string>
+    <string name="top_stories_category_automobiles">Automobiles</string>
+    <string name="top_stories_category_obituaries">Obituaries</string>
+    <string name="top_stories_category_insider">Insider</string>
+
+    <string name="error_message">Loading news was unsuccessful</string>
+    <string name="action_retry">Retry</string>
+    <string name="cont_descr_decoration" translatable="false">Decoration</string>
+
+    <string name="tvWelcome">Welcome!</string>
 </resources>

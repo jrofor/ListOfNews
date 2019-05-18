@@ -9,4 +9,5 @@
     <string name="Send">Отправить сообщение</string>
     <string name="About" translatable="false">О приложении</string>
     <string name="News" translatable="false">Приложение «Список новостей из New York Times»</string>
+    <string name="tvWelcome">Привет!</string>
 </resources>
