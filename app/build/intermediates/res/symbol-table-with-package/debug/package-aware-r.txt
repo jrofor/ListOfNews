@@ -18,6 +18,9 @@ anim design_snackbar_out
 animator design_appbar_state_list_animator
 animator design_fab_hide_motion_spec
 animator design_fab_show_motion_spec
+animator indicator_animator
+animator indicator_animator_reverse
+animator indicator_no_animator
 animator mtrl_btn_state_list_anim
 animator mtrl_btn_unelevated_state_list_anim
 animator mtrl_chip_state_list_anim
@@ -25,6 +28,7 @@ animator mtrl_fab_hide_motion_spec
 animator mtrl_fab_show_motion_spec
 animator mtrl_fab_transformation_sheet_collapse_spec
 animator mtrl_fab_transformation_sheet_expand_spec
+animator scale_with_alpha
 attr actionBarDivider
 attr actionBarItemBackground
 attr actionBarPopupTheme
@@ -147,6 +151,15 @@ attr chipStartPadding
 attr chipStrokeColor
 attr chipStrokeWidth
 attr chipStyle
+attr ci_animator
+attr ci_animator_reverse
+attr ci_drawable
+attr ci_drawable_unselected
+attr ci_gravity
+attr ci_height
+attr ci_margin
+attr ci_orientation
+attr ci_width
 attr closeIcon
 attr closeIconEnabled
 attr closeIconEndPadding
@@ -1020,6 +1033,8 @@ drawable abc_vector_test
 drawable android
 drawable avd_hide_password
 drawable avd_show_password
+drawable black_radius
+drawable black_radius_square
 drawable brain
 drawable design_bottom_navigation_item_background
 drawable design_fab_background
@@ -1059,10 +1074,12 @@ drawable telegram
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 drawable vec_error
+drawable white_radius
 id ALT
 id CTRL
 id FUNCTION
 id META
+id RelativeLayout1
 id SHIFT
 id SYM
 id action0
@@ -1106,6 +1123,7 @@ id center_vertical
 id chains
 id checkbox
 id chronometer
+id ci_indicator
 id clip_horizontal
 id clip_vertical
 id collapseActionView
@@ -1157,17 +1175,18 @@ id group_divider
 id groups
 id home
 id homeAsUp
+id horizontal
 id icon
 id icon_group
 id ifRoom
 id image
 id image_avatar
 id info
-id introImage
 id invisible
 id italic
 id item1
 id item_touch_helper_previous_elevation
+id iv_intro_Page
 id iv_multimedia
 id labeled
 id largeLabel
@@ -1195,6 +1214,7 @@ id notification_main_column
 id notification_main_column_container
 id outline
 id packed
+id pager_header
 id parallax
 id parent
 id parentPanel
@@ -1292,8 +1312,10 @@ id uniform
 id unlabeled
 id up
 id useLogo
+id vertical
 id view_offset_helper
 id visible
+id vp_Pager
 id withText
 id wrap
 id wrap_content
@@ -1383,11 +1405,15 @@ layout notification_template_media
 layout notification_template_media_custom
 layout notification_template_part_chronometer
 layout notification_template_part_time
+layout pagefragment_news_intro
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
 menu menu_list
+mipmap device_2019_05_26_about_app
+mipmap device_2019_05_26_details_of_the_news
+mipmap device_2019_05_26_list_of_news
 mipmap ic_launcher
 mipmap ic_launcher_round
 string About
@@ -1436,19 +1462,18 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string about_app
 string action_retry
 string addresses
 string app_name
 string appbar_scrolling_view_behavior
 string bottom_sheet_behavior
 string btn_try_again
-string categoryName1
-string categoryName2
-string categoryName3
-string categoryName4
+string categoryName
 string character_counter_content_description
 string character_counter_pattern
 string cont_descr_decoration
+string details_of_the_news
 string developerFeedback
 string err_data_is_empty
 string error_message
@@ -1456,7 +1481,9 @@ string error_network
 string error_server
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
+string good_news
 string hide_bottom_view_on_scroll_behavior
+string list_of_news
 string mtrl_chip_close_icon_content_description
 string password_toggle_content_description
 string path_password_eye
@@ -2021,6 +2048,7 @@ styleable ButtonBarLayout allowStacking
 styleable CardView android_minWidth android_minHeight cardBackgroundColor cardCornerRadius cardElevation cardMaxElevation cardPreventCornerOverlap cardUseCompatPadding contentPadding contentPaddingBottom contentPaddingLeft contentPaddingRight contentPaddingTop
 styleable Chip android_textAppearance android_ellipsize android_maxWidth android_text android_checkable checkedIcon checkedIconEnabled checkedIconVisible chipBackgroundColor chipCornerRadius chipEndPadding chipIcon chipIconEnabled chipIconSize chipIconTint chipIconVisible chipMinHeight chipStartPadding chipStrokeColor chipStrokeWidth closeIcon closeIconEnabled closeIconEndPadding closeIconSize closeIconStartPadding closeIconTint closeIconVisible hideMotionSpec iconEndPadding iconStartPadding rippleColor showMotionSpec textEndPadding textStartPadding
 styleable ChipGroup checkedChip chipSpacing chipSpacingHorizontal chipSpacingVertical singleLine singleSelection
+styleable CircleIndicator ci_animator ci_animator_reverse ci_drawable ci_drawable_unselected ci_gravity ci_height ci_margin ci_orientation ci_width
 styleable CollapsingToolbarLayout collapsedTitleGravity collapsedTitleTextAppearance contentScrim expandedTitleGravity expandedTitleMargin expandedTitleMarginBottom expandedTitleMarginEnd expandedTitleMarginStart expandedTitleMarginTop expandedTitleTextAppearance scrimAnimationDuration scrimVisibleHeightTrigger statusBarScrim title titleEnabled toolbarId
 styleable CollapsingToolbarLayout_Layout layout_collapseMode layout_collapseParallaxMultiplier
 styleable ColorStateListItem android_color android_alpha alpha

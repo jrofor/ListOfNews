@@ -12,12 +12,8 @@ public class Storage {
     private static final String APP_PREFERENCES_cnt = "cnt";
     private static final String APP_PREFERENCES_Intro = "Intro";
 
-
-
     private static final boolean introOn = true;
     private static final boolean introOff = false;
-
-
 
     public static boolean checkIntro  (Context context) {
         SharedPreferences mSettings;

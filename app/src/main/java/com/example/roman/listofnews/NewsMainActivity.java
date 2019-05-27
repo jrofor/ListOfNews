@@ -77,7 +77,7 @@ public class NewsMainActivity extends AppCompatActivity {
     private NewsDatabaseRepository newsDatabaseRepository = new NewsDatabaseRepository(this);
     @Nullable
     private NewsDatabaseConverter databaseConverter = new NewsDatabaseConverter();
-    private static final String TAGroom = "RoomActivity";
+    private static final String TAG = "myLogs";
     private int mScrollOffset = 4;
 
 
@@ -142,7 +142,7 @@ public class NewsMainActivity extends AppCompatActivity {
          if (cnt > 0) {
              categoriesAdapter.setOnCategorySelectedListener(category -> loadItem(category.serverValue()),spinnerCategories);
              showState(State.HasData);
-             Log.d(TAGroom, "Database not emptiness");
+             Log.d(TAG, "Database not emptiness");
              initViews();
          }
     }
@@ -219,9 +219,9 @@ public class NewsMainActivity extends AppCompatActivity {
                 .subscribe(
                         () ->
                                 //Log.d(TAGroom, NewsEntityList.toString()),
-                                Log.d(TAGroom, "save NewsEntityList To Database"),
+                                Log.d(TAG, "save NewsEntityList To Database"),
                         throwable ->
-                                Log.e(TAGroom, throwable.toString()));
+                                Log.e(TAG, throwable.toString()));
         compositeDisposable.add(disposable);
     }
 
@@ -236,13 +236,13 @@ public class NewsMainActivity extends AppCompatActivity {
 
                         // updating Items in RecyclerView from Database with converting Entities to AllNewsItem
                         updateItems(databaseConverter.fromDatabase(newsEntities)) ;
-                        Log.d(TAGroom, "updating Items in RecyclerView from Database");
+                        Log.d(TAG, "updating Items in RecyclerView from Database");
                     }
                 } ,
                             new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        Log.e(TAGroom, throwable.toString());
+                        Log.e(TAG, throwable.toString());
                     }
                 });
         compositeDisposable.add(disposable);
@@ -254,9 +254,9 @@ public class NewsMainActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         () ->
-                                Log.d(TAGroom, "deleteAllFromDatabase"),
+                                Log.d(TAG, "deleteAllFromDatabase"),
                         throwable ->
-                                Log.e(TAGroom, throwable.toString()));
+                                Log.e(TAG, throwable.toString()));
         compositeDisposable.add(disposable);
     }
 
@@ -466,10 +466,10 @@ public class NewsMainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy(){
-        Storage.setIntroShowAgain(this);
-        compositeDisposable.dispose();
-        Log.d(TAGroom, "onDestroy()");
-        //Log.d(TAG2, "ActivityTwo: onDistroy");
         super.onDestroy();
+        Storage.setIntroShowAgain(this);
+        Log.d(TAG, "Storage FALSE");
+        compositeDisposable.dispose();
+        Log.d(TAG, "onDestroy()");
     }
 }

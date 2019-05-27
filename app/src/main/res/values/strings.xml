@@ -11,11 +11,8 @@
     <string name="LinkToTelegram" translatable="false">https://t.me/roman_ov</string>
     <string name="Hint">Enter a message…</string>
 
-    <string name="About">About the application</string>
-    <string name="categoryName1" translatable="false">DARWIN AVARDS</string>
-    <string name="categoryName2" translatable="false">CRIMINAL</string>
-    <string name="categoryName3" translatable="false">ANIMALS</string>
-    <string name="categoryName4" translatable="false">MUSIC</string>
+    <string name="About">"About the application"</string>
+    <string name="categoryName">category Name</string>
     <string name="title" translatable="false">Text title</string>
     <string name="textForText" translatable="false">TextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForText</string>
 
@@ -59,4 +56,14 @@
     <string name="cont_descr_decoration" translatable="false">Decoration</string>
 
     <string name="tvWelcome">Welcome!</string>
+
+    <!-- preference_for_IntroFragmentPagerAdapter-->
+    <string name="list_of_news">List of news</string>
+    <string name="details_of_the_news">Details of the news</string>
+    <string name="about_app">About the app</string>
+    <string name="good_news">Good news…</string>
+
+
+
 </resources>
+

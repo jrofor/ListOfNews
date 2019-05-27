@@ -60,6 +60,9 @@ dependencies {
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
     implementation "android.arch.persistence.room:rxjava2:1.1.1"
 
+    implementation 'me.relex:circleindicator:1.2.2'
+
+
 
 
 
