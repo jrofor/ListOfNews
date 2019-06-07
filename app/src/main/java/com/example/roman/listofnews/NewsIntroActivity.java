@@ -75,7 +75,7 @@ public class NewsIntroActivity extends FragmentActivity {
     }
 
     private void startSecondActivity() {
-        startActivity(new Intent(this, NewsMainActivity.class));
+        startActivity(new Intent(this, NewsListFragment.class));
         finish();
     }
 

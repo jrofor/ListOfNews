@@ -1168,6 +1168,8 @@ id fl_intro_activity
 id fl_loading
 id fl_no_data
 id forever
+id frame_details
+id frame_list
 id ghost_view
 id glide_custom_view_target_tag
 id gone
@@ -1367,7 +1369,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout about_activity
-layout activity_news_details
+layout activity_main
 layout activity_news_intro
 layout categories_drop_down_spinner_item
 layout categories_spinner_item
@@ -1385,11 +1387,12 @@ layout design_navigation_item_subheader
 layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_password_icon
+layout fragment_news_details
+layout fragment_news_recycler
 layout item_news
 layout layout_error
 layout mtrl_layout_snackbar
 layout mtrl_layout_snackbar_include
-layout news_recycler_activity
 layout notification_action
 layout notification_action_tombstone
 layout notification_media_action
@@ -1474,6 +1477,8 @@ string character_counter_content_description
 string character_counter_pattern
 string cont_descr_decoration
 string details_of_the_news
+string details_preview
+string details_title
 string developerFeedback
 string err_data_is_empty
 string error_message
@@ -1493,7 +1498,6 @@ string path_password_strike_through
 string search_menu_title
 string status_bar_notification_info_overflow
 string subject
-string textForText
 string title
 string top_stories_category_arts
 string top_stories_category_automobiles

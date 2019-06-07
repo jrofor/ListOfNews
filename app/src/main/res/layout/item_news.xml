@@ -56,7 +56,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/BaseMargin8"
                         android:maxLines="2"
-                        android:text="@string/textForText"
+                        android:text="@string/details_title"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textStyle="bold" />
                     <TextView
@@ -65,7 +65,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/BaseMargin8"
                         android:maxLines="4"
-                        android:text="@string/textForText"
+                        android:text="@string/details_preview"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small" />
                 </LinearLayout>
 

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <WebView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/web_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+    -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/news_details"
+    android:label="@string/NewsDetails_name"
+    tools:context=".NewsDetailsFragment" >
+
+    <ImageView
+        android:id="@+id/details_image_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        tools:src="@tools:sample/avatars"
+        android:contentDescription="@string/details_title"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbarSize="@dimen/scrollbarSize"
+        android:scrollbarStyle="outsideInset"
+        android:layout_weight="3"
+        android:layout_margin="@dimen/BaseMargin8">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/details_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/BaseMargin8"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+            <TextView
+                android:id="@+id/details_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/details_title"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/details_textDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/BaseMargin4"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                tools:text="@tools:sample/date/ddmmyy"
+                android:textColor="@color/cardview_shadow_start_color"/>
+            <TextView
+                android:id="@+id/details_preview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/BaseMargin8"
+                android:text="@string/details_preview"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</LinearLayout>

@@ -10,21 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.roman.listofnews.NewsMainActivity;
+import com.example.roman.listofnews.NewsListFragment;
 import com.example.roman.listofnews.R;
 
 public class PageFragment extends Fragment {
 
     static final String ARGUMENT_PAGE_NUMBER = "arg_page_number";
-
-
     int pageNumber;
 
     public static PageFragment newInstance(int page) {
         PageFragment pageFragment  = new PageFragment();
-        Bundle arguments = new Bundle();
-        arguments.putInt(ARGUMENT_PAGE_NUMBER, page);
-        pageFragment.setArguments(arguments);
+        Bundle bundle = new Bundle();
+        bundle.putInt(ARGUMENT_PAGE_NUMBER, page);
+        pageFragment.setArguments(bundle);
         return pageFragment;
     }
 
@@ -60,7 +58,7 @@ public class PageFragment extends Fragment {
     }
 
     private void startSecondActivity() {
-        startActivity(new Intent(getContext(), NewsMainActivity.class));
+        startActivity(new Intent(getContext(), NewsListFragment.class));
 
     }
 }
