@@ -69,11 +69,8 @@ public class NewsListFragment extends Fragment {
     private Button btnTryAgain;
     @Nullable
     private FloatingActionButton fabUpdate;
-
     /*@Nullable
     private Button errorAction;*/
-
-
     @Nullable
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     @Nullable
@@ -83,20 +80,33 @@ public class NewsListFragment extends Fragment {
     private static final String TAG = "myLogs";
     private int mScrollOffset = 4;
     private NewsDetailsFragmentListener listener;
+    private boolean isTwoPanel;
+    static final String ARGUMENT_IS_TWO_PANEL = "arg_is_two_panel";
 
+    public static NewsListFragment newInstance(boolean isTwoPanel) {
+        NewsListFragment newsListFragment = new NewsListFragment();
+        Bundle arguments = new Bundle();
+        arguments.putBoolean(ARGUMENT_IS_TWO_PANEL, isTwoPanel);
+        newsListFragment.setArguments(arguments);
+        return newsListFragment;
+    }
+    /*
+*     static final String ARGUMENT_PAGE_NUMBER = "arg_page_number";
+int pageNumber;
 
-    /*public interface OnItemClickListener {
-        void OnItemClick(int position); }*/
-    //@Nullable
-    //private Call<DefaultResponse<List<NewsItemDTO>>> ResponseTSHome;
+public static PageFragment newInstance(int page) {
+    PageFragment pageFragment  = new PageFragment();
+    Bundle arguments = new Bundle();
+    arguments.putInt(ARGUMENT_PAGE_NUMBER, page);
+    pageFragment.setArguments(arguments);
+    return pageFragment;
+}
 
-    /*private final NewsRecyclerAdapter.OnItemClickListener  newsListener = position -> {
-        final String EXTRA_MESSAGE = "extra:news";
-        Intent intent = new Intent(this, NewsDetailsFragment.class);
-        intent.putExtra(EXTRA_MESSAGE, position);
-        startActivity(intent);
-    };*/
-
+@Override
+public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    pageNumber = getArguments().getInt(ARGUMENT_PAGE_NUMBER);
+}*/
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -105,6 +115,8 @@ public class NewsListFragment extends Fragment {
         if (getActivity() instanceof NewsDetailsFragmentListener) {
             listener = (NewsDetailsFragmentListener) getActivity();
         }
+
+        isTwoPanel = getArguments().getBoolean(ARGUMENT_IS_TWO_PANEL);
         Log.d(TAG, "--- ListFragment onAttach");
     }
 
@@ -123,6 +135,8 @@ public class NewsListFragment extends Fragment {
         Log.d(TAG, "--- ListFragment onCreateView");
         setupUi(view);
         Log.d(TAG, "ListFragment setupUi");
+        setupUx();
+        Log.d(TAG, "ListFragment setupUx");
         return view; //super.onCreateView(inflater, container, savedInstanceState);
 
     }
@@ -132,8 +146,8 @@ public class NewsListFragment extends Fragment {
     public void onStart() {
         super.onStart();
         Log.d(TAG, "--- ListFragment onStart");
-        setupUx();
-        Log.d(TAG, "ListFragment setupUx");
+        /**/
+        checkingDatabaseForEmptiness();
     }
 
     @Override
@@ -159,6 +173,8 @@ public class NewsListFragment extends Fragment {
     private void setupUx() {
         //errorAction.setOnClickListener(view -> loadItem(categoriesAdapter.getSelectedCategory().serverValue()));
         //categoriesAdapter.setOnCategorySelectedListener(category -> loadItem(category.serverValue()), spinnerCategories);
+
+
         fabUpdate.setOnClickListener(v -> onClickFabUpdate());
         btnTryAgain.setOnClickListener(v -> onClickTryAgain(categoriesAdapter.getSelectedCategory().serverValue()));
         NewsAdapter.setOnClickNewsListener(IdItem ->
@@ -167,26 +183,26 @@ public class NewsListFragment extends Fragment {
                 listener.onNewsDetailsByIdClicked(IdItem);
             }
         });
-        checkingDatabaseForEmptiness();
+        //checkingDatabaseForEmptiness();
     }
 
     private void checkingDatabase(int cnt) {
         //if DB not emptiness - declare categoriesAdapter and view items from DB on screen
          if (cnt > 0) {
-
-             showState(State.HasData);
              Log.d(TAG, "Database not emptiness");
-             categoriesAdapter.setOnCategorySelectedListener(category -> loadItem(category.serverValue()),spinnerCategories);
-
+             showState(State.HasData);
              initViews();
-             Log.d(TAG, "categoriesAdapter.setOnCategorySelectedListener");
          }
     }
 
     private void onClickFabUpdate() {
+        onSelectedListener(true);
         loadItem(categoriesAdapter.getSelectedCategory().serverValue());
-    }
 
+    }
+    private void onSelectedListener(boolean enable) {
+        if (enable) categoriesAdapter.setOnCategorySelectedListener(category -> loadItem(category.serverValue()), spinnerCategories);
+    }
     private void onClickTryAgain(@NonNull String category ) {
         loadItem(category);
     }
@@ -207,23 +223,10 @@ public class NewsListFragment extends Fragment {
                         this::handleError);
         compositeDisposable.add(disposable);
 
-
-        /*ResponseTSHome.enqueue(new Callback<DefaultResponse<List<NewsItemDTO>>>() {
-            @Override
-            public void onResponse(@NonNull Call<DefaultResponse<List<NewsItemDTO>>> call,
-                                   @NonNull Response<DefaultResponse<List<NewsItemDTO>>> response) {
-                checkResponseAndShowState(response);
-            }
-
-            @Override
-            public void onFailure(@NonNull  Call<DefaultResponse<List<NewsItemDTO>>> call,
-                                  @NonNull Throwable t) {
-                handleError(t);
-            }
-        });*/
     }
 
     private void setupNews(List<AllNewsItem> newsItems) {
+        Log.d(TAG, "/// setupNews");
         showState(State.HasData);
         updateItems(newsItems);
         //clear database before update
@@ -234,15 +237,20 @@ public class NewsListFragment extends Fragment {
 
     private void updateItems(@Nullable List<AllNewsItem> news) {
         if (NewsAdapter != null) NewsAdapter.replaceItems(news);
+
     }
 
     private void handleError (Throwable throwable) {
+        Log.d(TAG, "/// handleError");
         if (throwable instanceof IOException) {
             showState(State.NetworkError);
             return;
         }
         showState(State.NetworkError);
     }
+
+
+
 
 /**
 ********************************************Database methods****************************************
@@ -268,11 +276,12 @@ public class NewsListFragment extends Fragment {
                 .subscribe( new Consumer<List<NewsEntity>>() {
                     @Override
                     public void accept(List<NewsEntity> newsEntities) throws Exception {
-                        //Log.d(TAGroom, newsEntities.toString());
-
+                        //Log.d(TAG, newsEntities.toString());
                         // updating Items in RecyclerView from Database with converting Entities to AllNewsItem
+                        showState(State.HasData);
                         updateItems(databaseConverter.fromDatabase(newsEntities)) ;
                         Log.d(TAG, "updating Items in RecyclerView from Database");
+
                     }
                 } ,
                             new Consumer<Throwable>() {
@@ -434,24 +443,24 @@ public class NewsListFragment extends Fragment {
 
     public void onChangeColumnsWithOrientation(int orientation, RecyclerView recyclerView) {
         //This method helps change number of columns using Grid spanCount and helps add itemDecoration
-        // Checks the orientation of the screen
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        // Checks the orientation of the screen and TwoPanel fragments for Tablets (if landscape on Tablets 1 column news)
+        /*if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         } else {
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        }
+        }*/
 
-        /*if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE && !isTwoPanel) {
             DividerItemDecoration itemDecorator = new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL);
             itemDecorator.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(getActivity(), R.drawable.item_ecoration_size_4)));
             recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
             recyclerView.addItemDecoration(itemDecorator);
-        } else if (orientation == Configuration.ORIENTATION_PORTRAIT){
+        } else {
             DividerItemDecoration itemDecorator= new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
             itemDecorator.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(getActivity(), R.drawable.item_ecoration_size_4)));
             recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
             recyclerView.addItemDecoration(itemDecorator);
-        }*/
+        }
     }
 
     private void setupSpinner() {

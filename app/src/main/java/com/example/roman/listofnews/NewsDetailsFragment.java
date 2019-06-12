@@ -38,7 +38,7 @@ public class NewsDetailsFragment extends Fragment {
     TextView textDateView;
 
     private static final String TAG = "myLogs";
-    private static final String ARGUMENT_NEWS_ITEM = "args:arg_idNewsItem";
+    private static final String ARGUMENT_NEWS_ITEM = "arg_idNewsItem"; //args:
     //private static final String EXTRA_NEWS_ITEM = "extra:idNewsItem";
     private String idItem;
     //final String Id = (String) getIntent().getSerializableExtra(EXTRA_NEWS_ITEM);
@@ -52,23 +52,6 @@ public class NewsDetailsFragment extends Fragment {
 
         return newsDetailsFragment;
     }
-    /*
-    *     static final String ARGUMENT_PAGE_NUMBER = "arg_page_number";
-    int pageNumber;
-
-    public static PageFragment newInstance(int page) {
-        PageFragment pageFragment  = new PageFragment();
-        Bundle arguments = new Bundle();
-        arguments.putInt(ARGUMENT_PAGE_NUMBER, page);
-        pageFragment.setArguments(arguments);
-        return pageFragment;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        pageNumber = getArguments().getInt(ARGUMENT_PAGE_NUMBER);
-    }*/
 
 
     @Nullable

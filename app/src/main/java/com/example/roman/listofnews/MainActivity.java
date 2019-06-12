@@ -23,6 +23,8 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NewsDetailsFragmentListener {
     private static final String TAG = "myLogs";
+    private static final String F_DETAILS_TAG = "details_fragment";
+    private static final String F_LIST_TAG = "list_fragment";
     private boolean isTwoPanel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +34,10 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
         isTwoPanel = findViewById(R.id.frame_details) != null;
 
         if (savedInstanceState == null) {
-            NewsListFragment newsListFragment = new NewsListFragment();
+            NewsListFragment newsListFragment = NewsListFragment.newInstance(isTwoPanel);
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.frame_list, newsListFragment)
+                    .replace(R.id.frame_list, newsListFragment, F_LIST_TAG )
                     .addToBackStack(null)
                     .commit();
         }
@@ -45,14 +47,21 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
     @Override
     public void onNewsDetailsByIdClicked(@NonNull String idItem) {
         NewsDetailsFragment newsDetailsFragment = NewsDetailsFragment.newInstance(idItem);
+        //if (isTwoPanel || !newsDetailsFragment.isVisible())  {
         int frameId = isTwoPanel ? R.id.frame_details : R.id.frame_list;
+        //onCheckChangeOrientation(isTwoPanel);
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(frameId, newsDetailsFragment)
+                .replace(frameId, newsDetailsFragment, F_DETAILS_TAG)
                 .addToBackStack(null)
                 .commit();
+        //}
     }
 
+   /*public void onCheckChangeOrientation(boolean isTwoPanel){
+        if (isTwoPanel  && findViewById(R.id.frame_details).()) {}
+    }
+*/
     @Override
     public boolean onCreateOptionsMenu (Menu menu){
         getMenuInflater().inflate(R.menu.menu_list, menu);
@@ -99,4 +108,5 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
         Log.d(TAG, "Storage FALSE");
         super.onDestroy();
     }
+
 }
