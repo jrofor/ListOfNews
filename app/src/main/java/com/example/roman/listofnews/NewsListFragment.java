@@ -163,7 +163,7 @@ public void onCreate(@Nullable Bundle savedInstanceState) {
 
     private void setupUi(View view) {
         findView(view);
-        setupRecyclerViews();
+        setupRecyclerViews(view);
         setupSpinner();
         setupFabScroll();
 
@@ -434,14 +434,18 @@ public void onCreate(@Nullable Bundle savedInstanceState) {
         spinnerCategories = view.findViewById(R.id.spinner_categories);
         fabUpdate = view.findViewById(R.id.fab_update);
     }
-    private void setupRecyclerViews() {
+    private void setupRecyclerViews(View view) {
         NewsAdapter = new NewsRecyclerAdapter(getActivity());
         rvNews.setAdapter(NewsAdapter);
         int orientation = getResources().getConfiguration().orientation;
-        onChangeColumnsWithOrientation(orientation, rvNews);
+        onChangeColumnsWithOrientation(orientation, rvNews, view);
     }
 
-    public void onChangeColumnsWithOrientation(int orientation, RecyclerView recyclerView) {
+    public boolean onCheckIsTwoPanel(boolean isTwoPanel){
+        return isTwoPanel;
+    }
+
+    public void onChangeColumnsWithOrientation(int orientation, RecyclerView recyclerView, View view) {
         //This method helps change number of columns using Grid spanCount and helps add itemDecoration
         // Checks the orientation of the screen and TwoPanel fragments for Tablets (if landscape on Tablets 1 column news)
         /*if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -449,18 +453,19 @@ public void onCreate(@Nullable Bundle savedInstanceState) {
         } else {
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         }*/
-
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE && !isTwoPanel) {
-            DividerItemDecoration itemDecorator = new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL);
-            itemDecorator.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(getActivity(), R.drawable.item_ecoration_size_4)));
-            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-            recyclerView.addItemDecoration(itemDecorator);
-        } else {
-            DividerItemDecoration itemDecorator= new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
+            /*if (orientation == Configuration.ORIENTATION_PORTRAIT && !isTwoPanel)*/
+            DividerItemDecoration itemDecorator = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
             itemDecorator.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(getActivity(), R.drawable.item_ecoration_size_4)));
             recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
             recyclerView.addItemDecoration(itemDecorator);
-        }
+
+        /*if ((view.findViewById(R.id.tablet_ll)) == null && orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            DividerItemDecoration itemDecorator1 = new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL);
+            itemDecorator1.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(getActivity(), R.drawable.item_ecoration_size_4)));
+            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+            recyclerView.addItemDecoration(itemDecorator1);
+        }*/
+
     }
 
     private void setupSpinner() {
