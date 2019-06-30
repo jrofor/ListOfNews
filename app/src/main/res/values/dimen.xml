@@ -5,7 +5,7 @@
     <!-- preference_for_major_(most used)_margin-->
     <dimen name="BaseMargin">16dp</dimen>
     <!-- preference_for_margin_LinearLayout-->
-    <dimen name="marginStartL">50dp</dimen>
+    <dimen name="EdgeMargin">24dp</dimen>
     <!-- preference_for_margin_TextView_after_ImageView-->
     <dimen name="marginStartT">8dp</dimen>
     <!-- preference_for_textSize-->

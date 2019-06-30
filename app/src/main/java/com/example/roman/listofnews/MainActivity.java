@@ -58,14 +58,17 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
 
         if (isTwoPanel) {
             if (countBackStack == 2) {
+                //simulating the user pressing the onBackPressed
+                // with returning NewsList on left
                 getSupportFragmentManager().popBackStack();
+                // if user open details on portrait - returning NewsDetails on right
                 if (stateFragment.lastSelection.length()>0) {
                     onNewsDetailsByIdClicked(stateFragment.lastSelection);
                 }
             }
-            NewsListFragment newsListFragment = NewsListFragment.newInstance(isTwoPanel);
+            NewsListFragment backNewsListFragment = NewsListFragment.newInstance(isTwoPanel);
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frame_list, newsListFragment)
+                    .replace(R.id.frame_list, backNewsListFragment)
                     .commit();
         }
 
@@ -97,21 +100,13 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
                     .replace(R.id.frame_details, newsDetailsFragment)
                     .commit();
         } else  {
-
             if (countBackStack == 1) {
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.frame_list, newsDetailsFragment)
                         .addToBackStack(null) //for return to NewsList
                         .commit();
-            } else {
-
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.frame_list, newsDetailsFragment)
-                        .commit();
             }
-
         }
         /* //info for testing
         String outMessage = "TwoPanel: "+ String.valueOf(isTwoPanel)+" cntBackStack: "+(String.valueOf(countBackStack));
@@ -146,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
     @Override
     public void onBackPressed() {
         int  countBackStack = getSupportFragmentManager().getBackStackEntryCount();
+        //clean idItem in stateFragment when returning to NewsList
         if (countBackStack == 2 ) {
             stateFragment.lastSelection = null;
         }

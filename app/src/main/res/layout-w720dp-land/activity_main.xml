@@ -4,7 +4,23 @@
     android:id="@+id/tablet_ll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     tools:context=".MainActivity">
+
+    <FrameLayout
+        android:id="@+id/frame_full_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+        <ImageView
+            android:id="@+id/image_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:layout_gravity="center"
+            android:src="@drawable/image_news" />
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/frame_list"
