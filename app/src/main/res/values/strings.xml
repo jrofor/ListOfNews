@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">List of new</string>
     <string name="NYtimes">NY Times</string>
-    <string name="About">"About the application"</string>
+    <string name="about_label">"About the application"</string>
     <string name="Description">"This application will help you keep up to date with the latest news from NY Times"</string>
     <string name="developerFeedback">Developer Feedback:</string>
     <string name="Send">Send Message</string>

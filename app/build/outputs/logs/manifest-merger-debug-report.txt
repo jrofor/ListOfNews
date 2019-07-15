@@ -112,12 +112,6 @@ category#android.intent.category.LAUNCHER
 ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:30:17-77
 	android:name
 		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:30:27-74
-activity#com.example.roman.listofnews.NewsAboutActivity
-ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:33:9-35:45
-	android:label
-		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:35:13-42
-	android:name
-		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:34:13-46
 activity#com.example.roman.listofnews.NewsIntroActivity
 ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:36:9-38:48
 	android:label

@@ -9,7 +9,9 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
+
 import com.bumptech.glide.util.Preconditions;
 import com.example.roman.listofnews.data.Storage;
 import com.example.roman.listofnews.ui.NewsDetailsFragmentListener;
@@ -17,8 +19,9 @@ import com.example.roman.listofnews.ui.NewsDetailsFragmentListener;
 
 public class MainActivity extends AppCompatActivity implements NewsDetailsFragmentListener {
     private static final String TAG = "myLogs";
-    private static final String F_DETAILS_TAG = "details_fragment";
     private static final String F_LIST_TAG = "list_fragment";
+    private static final String F_DETAILS_TAG = "details_fragment";
+    private static final String F_ABOUT_TAG = "about_fragment";
     private boolean isTwoPanel;
     SelectionStateFragment stateFragment;
 
@@ -57,34 +60,86 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
         }
 
         if (isTwoPanel) {
-            if (countBackStack == 2) {
-                //simulating the user pressing the onBackPressed
-                // with returning NewsList on left
+            Fragment aboutByTag = getSupportFragmentManager().findFragmentByTag(F_ABOUT_TAG);
+            //check if open newsAboutFragment after newsDetailsFragment
+            if (countBackStack == 3 && aboutByTag != null) {
+                //cleaning addBackStack added in portrait
                 getSupportFragmentManager().popBackStack();
-                // if user open details on portrait - returning NewsDetails on right
+                findViewById(R.id.frame_full_screen).setVisibility(View.VISIBLE);
+
+                NewsAboutFragment newsAboutFragment = new NewsAboutFragment();
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.frame_full_screen, newsAboutFragment, F_ABOUT_TAG)
+                        .commit();
+
+                //create news fragments under newsAboutFragment
+                if (stateFragment.lastSelection.length()>0) {
+                    onNewsDetailsByIdClicked(stateFragment.lastSelection);
+                }
+                NewsListFragment backNewsListFragment = NewsListFragment.newInstance(isTwoPanel);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_list, backNewsListFragment)
+                        .commit();
+            }
+            if (countBackStack == 2 ) {
+                if (aboutByTag != null){
+                    //don't use popBackStack, NewsList from portrait set on right
+                    findViewById(R.id.frame_full_screen).setVisibility(View.VISIBLE);
+                    NewsAboutFragment newsAboutFragment = new NewsAboutFragment();
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.frame_full_screen, newsAboutFragment, F_ABOUT_TAG)
+                            .commit();
+
+                    if (stateFragment.lastSelection.length()>0) {
+                        onNewsDetailsByIdClicked(stateFragment.lastSelection);
+                    }
+                } else {
+                    //if don't use newsAboutFragment
+                    //simulating the user pressing the onBackPressed
+                    getSupportFragmentManager().popBackStack();
+                    // if user open details on portrait - returning NewsDetails on right
+                    if (stateFragment.lastSelection.length() > 0) {
+                        onNewsDetailsByIdClicked(stateFragment.lastSelection);
+                    }
+                    //returning NewsList on left
+                    NewsListFragment backNewsListFragment = NewsListFragment.newInstance(isTwoPanel);
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.frame_list, backNewsListFragment)
+                            .commit();
+                }
+            }
+
+        }
+
+        if (!isTwoPanel) {
+            Fragment aboutByTag = getSupportFragmentManager().findFragmentByTag(F_ABOUT_TAG);
+            if (countBackStack >= 2 && aboutByTag != null) {
+                for (int i=1; i < countBackStack; i++){
+                    getSupportFragmentManager().popBackStack();
+                }
+                NewsAboutFragment newsAboutFragment = new NewsAboutFragment();
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.frame_list, newsAboutFragment, F_ABOUT_TAG)
+                        .commit();
+            } else {
+                NewsListFragment backNewsListFragment = NewsListFragment.newInstance(isTwoPanel);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_list, backNewsListFragment)
+                        .commit();
                 if (stateFragment.lastSelection.length()>0) {
                     onNewsDetailsByIdClicked(stateFragment.lastSelection);
                 }
             }
-            NewsListFragment backNewsListFragment = NewsListFragment.newInstance(isTwoPanel);
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frame_list, backNewsListFragment)
-                    .commit();
-        }
 
-        if (!isTwoPanel) {
-            NewsListFragment backNewsListFragment = NewsListFragment.newInstance(isTwoPanel);
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frame_list, backNewsListFragment)
-                    .commit();
-            if (stateFragment.lastSelection.length()>0) {
-                onNewsDetailsByIdClicked(stateFragment.lastSelection);
-            }
+
         }
-         /* //info for testing
+        //info for testing
         String outMessage = "TwoPanel: "+ String.valueOf(isTwoPanel)+" cntBackStack: "+(String.valueOf(countBackStack));
         Toast.makeText(this, outMessage,Toast.LENGTH_SHORT).show();
-        */
+
     }
 
 
@@ -97,21 +152,20 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
         if (isTwoPanel) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.frame_details, newsDetailsFragment)
+                    .replace(R.id.frame_details, newsDetailsFragment, F_DETAILS_TAG)
                     .commit();
         } else  {
             if (countBackStack == 1) {
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.frame_list, newsDetailsFragment)
+                        .replace(R.id.frame_list, newsDetailsFragment, F_DETAILS_TAG)
                         .addToBackStack(null) //for return to NewsList
                         .commit();
             }
         }
-        /* //info for testing
+         //info for testing
         String outMessage = "TwoPanel: "+ String.valueOf(isTwoPanel)+" cntBackStack: "+(String.valueOf(countBackStack));
         Toast.makeText(this, outMessage,Toast.LENGTH_SHORT).show();
-        */
     }
 
     @Override
@@ -122,10 +176,23 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
+        switch (item.getItemId() ){
             case R.id.item1:
-                startActivity(new Intent(this, NewsAboutActivity.class));
-                return true;
+                int idFrame = R.id.frame_list;
+                if (isTwoPanel) {
+                    idFrame = R.id.frame_full_screen;
+                    findViewById(R.id.frame_full_screen).setVisibility(View.VISIBLE);
+                }
+                NewsAboutFragment newsAboutFragment = new NewsAboutFragment() ;
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(idFrame, newsAboutFragment, F_ABOUT_TAG)
+                        .addToBackStack(null) //for return
+                        .commit();
+
+                /*
+                startActivity(new Intent(this, NewsAboutFragment.class));
+                return true;*/
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -140,19 +207,45 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
 
     @Override
     public void onBackPressed() {
+        Fragment aboutByTag = getSupportFragmentManager().findFragmentByTag(F_ABOUT_TAG);
+        Fragment detailsByTag = getSupportFragmentManager().findFragmentByTag(F_DETAILS_TAG);
+
         int  countBackStack = getSupportFragmentManager().getBackStackEntryCount();
         //clean idItem in stateFragment when returning to NewsList
-        if (countBackStack == 2 ) {
+        if ((detailsByTag !=null) && (aboutByTag ==null) ) {
             stateFragment.lastSelection = null;
         }
 
-        if (countBackStack <= 1 || isTwoPanel) {
-            /* //info for testing
-            Toast.makeText(this, String.valueOf(countBackStack),Toast.LENGTH_SHORT).show();*/
-            finish();
-            Log.d(TAG, "--- mainActivity finish");
-            return;
+        if (!isTwoPanel && aboutByTag != null) {
+
+            NewsListFragment backNewsListFragment = NewsListFragment.newInstance(isTwoPanel);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frame_list, backNewsListFragment)
+                    .commit();
+            if (stateFragment.lastSelection.length()>0) {
+                onNewsDetailsByIdClicked(stateFragment.lastSelection);
+            }
         }
+        //FragmentA f = fragmentManager.findFragmentByTag("FragmentA_Tag"); if(f != null){ f.show(); }
+
+        //clean newsAboutFragment
+        if (isTwoPanel && aboutByTag != null ) {
+            findViewById(R.id.frame_full_screen).setVisibility(View.GONE);
+            getSupportFragmentManager().beginTransaction()
+                    .remove(aboutByTag)
+                    .commit();
+        }
+
+        if (countBackStack == 1) {
+             if ((!isTwoPanel) || (isTwoPanel && aboutByTag == null)) {
+                 //info for testing
+                 Toast.makeText(this, String.valueOf(countBackStack), Toast.LENGTH_SHORT).show();
+                 finish();
+                 Log.d(TAG, "--- mainActivity finish");
+                 return;
+             }
+        }
+
         super.onBackPressed();
     }
 

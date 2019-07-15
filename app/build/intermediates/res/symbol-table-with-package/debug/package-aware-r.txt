@@ -1426,7 +1426,6 @@ mipmap device_2019_05_26_details_of_the_news
 mipmap device_2019_05_26_list_of_news
 mipmap ic_launcher
 mipmap ic_launcher_round
-string About
 string Description
 string Hint
 string NYtimes
@@ -1473,6 +1472,7 @@ string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string about_app
 string about_email_addresses
+string about_label
 string about_open_icon_url_error
 string about_send_email_error
 string about_show_error_email_message

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundL"
     android:orientation="vertical"
-    tools:context=".NewsAboutActivity">
+    tools:context=".NewsAboutFragment">
 
     <ImageView
         android:id="@+id/image_avatar"
