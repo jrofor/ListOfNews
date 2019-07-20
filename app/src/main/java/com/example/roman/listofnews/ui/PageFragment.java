@@ -49,16 +49,8 @@ public class PageFragment extends Fragment {
             case 2:
                 ivPage.setImageResource(R.mipmap.device_2019_05_26_about_app);
                 break;
-            /*case 3:
-                startSecondActivity();
-                break;*/
         }
-
         return view;
     }
 
-    private void startSecondActivity() {
-        startActivity(new Intent(getContext(), NewsListFragment.class));
-
-    }
 }

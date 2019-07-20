@@ -1,5 +1,6 @@
 package com.example.roman.listofnews;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -23,14 +24,46 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
     private static final String F_ABOUT_TAG = "about_fragment";
     private boolean isTwoPanel;
     SelectionStateFragment stateFragment;
+    private boolean introNextTime = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "--- mainActivity onCreate");
         setContentView(R.layout.activity_main);
         setupActionBar();
         isTwoPanel = findViewById(R.id.frame_details) != null;
         int countBackStack = getSupportFragmentManager().getBackStackEntryCount();
+
+        if (savedInstanceState == null) {
+            //checking whether the program needs to opens Intro or not
+            if (!Storage.checkIntro(this)) {
+
+                startActivity(new Intent(this, NewsIntroActivity.class));
+                introNextTime = false;
+                Log.d(TAG, "--- mainActivity finish for intro");
+                finishAffinity();
+                return;
+            } else {
+                introNextTime = true;
+                //else create first fragment
+                NewsListFragment newsListFragment = NewsListFragment.newInstance(isTwoPanel);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_list, newsListFragment, F_LIST_TAG)
+                        .addToBackStack(null) //for convenient closure
+                        .commit();
+            }
+
+        } else {
+            //clean first fragment
+            getSupportFragmentManager().executePendingTransactions();
+            Fragment fragmentById = getSupportFragmentManager().findFragmentById(R.id.frame_list);
+            if (fragmentById != null) {
+                getSupportFragmentManager().beginTransaction()
+                        .remove(fragmentById)
+                        .commit();
+            }
+        }
 
         // to save idItem during reorientation
         stateFragment = (SelectionStateFragment) getSupportFragmentManager()
@@ -40,22 +73,6 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
             getSupportFragmentManager().beginTransaction()
                     .add(stateFragment, "headless")
                     .commit();
-        }
-
-        if (savedInstanceState == null) {
-            NewsListFragment newsListFragment = NewsListFragment.newInstance(isTwoPanel);
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frame_list, newsListFragment, F_LIST_TAG)
-                    .addToBackStack(null) //for convenient closure
-                    .commit();
-        } else {
-            getSupportFragmentManager().executePendingTransactions();
-            Fragment fragmentById = getSupportFragmentManager().findFragmentById(R.id.frame_list);
-            if (fragmentById != null) {
-                getSupportFragmentManager().beginTransaction()
-                        .remove(fragmentById)
-                        .commit();
-            }
         }
 
         if (isTwoPanel) {
@@ -232,8 +249,15 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
 
         int  countBackStack = getSupportFragmentManager().getBackStackEntryCount();
         //clean idItem in stateFragment when returning to NewsList
-        if ((detailsByTag !=null) && (aboutByTag ==null) ) {
-            stateFragment.lastSelection = null;
+        if ((!isTwoPanel) && (detailsByTag !=null) && (aboutByTag ==null) ) {
+            //cleaning details be in portrait for landscape
+            stateFragment.lastSelection = "";
+            Fragment detailsById = getSupportFragmentManager().findFragmentById(R.id.frame_details);
+            if (detailsById != null){
+                getSupportFragmentManager().beginTransaction()
+                        .remove(detailsById)
+                        .commit();
+            }
         }
 
         //clean newsAboutFragment
@@ -248,8 +272,8 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
              if ((!isTwoPanel) || (isTwoPanel && aboutByTag == null)) {
                  //info for testing
                  Toast.makeText(this, String.valueOf(countBackStack), Toast.LENGTH_SHORT).show();
-                 finish();
                  Log.d(TAG, "--- mainActivity finish");
+                 finish();
                  return;
              }
         }
@@ -263,11 +287,24 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
+
+
     @Override
-    protected void onDestroy() {
+    protected void onPause() {
         Storage.setIntroShowAgain(this);
         Log.d(TAG, "Storage FALSE");
-        super.onDestroy();
+        Log.d(TAG, "--- mainActivity onPause");
+        super.onPause();
     }
 
+    @Override
+    protected void onDestroy() {
+        if (introNextTime) {
+            Storage.setIntroShowAgain(this);
+            Log.d(TAG, "Storage FALSE");
+            Log.d(TAG, "--- mainActivity onDestroy");
+
+        }
+        super.onDestroy();
+    }
 }

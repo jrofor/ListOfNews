@@ -21,62 +21,50 @@ public class NewsIntroActivity extends FragmentActivity {
     PagerAdapter pagerAdapter;
 
     //private CompositeDisposable compositeDisposable = new CompositeDisposable();
-//СДЕЛАТЬ ЗАПУСК ПРИ КАЖДОМ 2 м ОТКРЫВАНИИ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-        // проверяем, первый ли раз открывается программа (запускалась интро или нет)
-        //check if the program opens for the first time (Intro started or not)
-        //if (!Storage.checkIntro(this)) {
-        if (!Storage.checkIntro(this)) {
-            Storage.setIntroHasShown(this);
-            Log.d(TAG, "Storage TRUE");
-            setContentView(R.layout.activity_news_intro);
+        setContentView(R.layout.activity_news_intro);
+        Log.d(TAG, "NewsIntroActivity onCreate");
+        Storage.setIntroHasShown(this);
+        Log.d(TAG, "Storage TRUE");
 
-            pager = (ViewPager) findViewById(R.id.vp_Pager);
-            pagerAdapter = new IntroFragmentPagerAdapter(getSupportFragmentManager(), pageCount, this);
-            pager.setAdapter(pagerAdapter);
+        pager = (ViewPager) findViewById(R.id.vp_Pager);
+        pagerAdapter = new IntroFragmentPagerAdapter(getSupportFragmentManager(), pageCount, this);
+        pager.setAdapter(pagerAdapter);
 
-            CircleIndicator indicator = (CircleIndicator) findViewById(R.id.ci_indicator);
-            indicator.setViewPager(pager);
+        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.ci_indicator);
+        indicator.setViewPager(pager);
 
-// optional
-            pagerAdapter.registerDataSetObserver(indicator.getDataSetObserver());
-
-            pager.addOnPageChangeListener (new ViewPager.OnPageChangeListener() {
-
-                @Override
-                public void onPageSelected(int position) {
-                    Log.d(TAG, "onPageSelected, position = " + position);
-                    if (position == 3) startSecondActivity();
-                }
-
+        pagerAdapter.registerDataSetObserver(indicator.getDataSetObserver());
+        pager.addOnPageChangeListener (new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                Log.d(TAG, "onPageSelected, position = " + position);
+                if (position == 3) startSecondActivity(); }
                 @Override
                 public void onPageScrolled(int position, float positionOffset,
-                                           int positionOffsetPixels) {
-                }
-
+                                           int positionOffsetPixels) { }
                 @Override
-                public void onPageScrollStateChanged(int state) {
-                }
-            });
+                public void onPageScrollStateChanged(int state) { }});
+        /*Disposable disposable = Completable.complete()
+                   .delay(10, TimeUnit.SECONDS)
+                   .subscribe(this::startSecondActivity);
+           compositeDisposable.add(disposable);*/
 
-            /*Disposable disposable = Completable.complete()
-                    .delay(10, TimeUnit.SECONDS)
-                    .subscribe(this::startSecondActivity);
-            compositeDisposable.add(disposable);*/
         }
-        else {
-            startSecondActivity();
-        }
-
-
-    }
 
     private void startSecondActivity() {
-        startActivity(new Intent(this, NewsListFragment.class));
+        startActivity(new Intent(this, MainActivity.class));
         finish();
+    }
+
+    @Override
+    protected void onPause() {
+
+        super.onPause();
     }
 
     @Override
