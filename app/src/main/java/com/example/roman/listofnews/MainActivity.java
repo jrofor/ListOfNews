@@ -1,5 +1,6 @@
 package com.example.roman.listofnews;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
@@ -24,7 +25,6 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
     private static final String F_ABOUT_TAG = "about_fragment";
     private boolean isTwoPanel;
     SelectionStateFragment stateFragment;
-    private boolean introNextTime = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,17 +36,21 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
         int countBackStack = getSupportFragmentManager().getBackStackEntryCount();
 
         if (savedInstanceState == null) {
-            //checking whether the program needs to opens Intro or not
-            if (!Storage.checkIntro(this)) {
-
+            // open in first time
+            if (Storage.openFirstTime(this)){
                 startActivity(new Intent(this, NewsIntroActivity.class));
-                introNextTime = false;
-                Log.d(TAG, "--- mainActivity finish for intro");
+                //Storage.setIntroShowAgain(this);
+                Storage.setFirstTimeShown(this);
                 finishAffinity();
                 return;
             } else {
-                introNextTime = true;
-                //else create first fragment
+                // check Switch Intro
+                if (Storage.checkSwitchIntro(this)) {
+                    if (!Storage.checkIntro(this)) openIntro();
+                    Storage.setIntroShowAgain(this);
+                }
+
+                //create first fragment
                 NewsListFragment newsListFragment = NewsListFragment.newInstance(isTwoPanel);
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_list, newsListFragment, F_LIST_TAG)
@@ -55,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
             }
 
         } else {
-            //clean first fragment
+            // else when orientation change - clean first fragment
             getSupportFragmentManager().executePendingTransactions();
             Fragment fragmentById = getSupportFragmentManager().findFragmentById(R.id.frame_list);
             if (fragmentById != null) {
@@ -179,6 +183,10 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
 
     }
 
+    private void openIntro(){
+
+    }
+
 
     @Override
     public void onNewsDetailsByIdClicked(@NonNull String idItem) {
@@ -226,10 +234,6 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
                         .replace(idFrame, newsAboutFragment, F_ABOUT_TAG)
                         .addToBackStack(null) //for return
                         .commit();
-
-                /*
-                startActivity(new Intent(this, NewsAboutFragment.class));
-                return true;*/
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -291,20 +295,13 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
 
     @Override
     protected void onPause() {
-        Storage.setIntroShowAgain(this);
-        Log.d(TAG, "Storage FALSE");
         Log.d(TAG, "--- mainActivity onPause");
         super.onPause();
     }
 
     @Override
     protected void onDestroy() {
-        if (introNextTime) {
-            Storage.setIntroShowAgain(this);
-            Log.d(TAG, "Storage FALSE");
-            Log.d(TAG, "--- mainActivity onDestroy");
-
-        }
+        Log.d(TAG, "--- mainActivity onDestroy");
         super.onDestroy();
     }
 }

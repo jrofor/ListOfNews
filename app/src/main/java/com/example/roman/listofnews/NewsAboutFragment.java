@@ -15,14 +15,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
+
+import com.example.roman.listofnews.data.Storage;
 
 public class NewsAboutFragment extends Fragment {
 
     @Nullable
-    Button SendMessageBtn;
+    Switch switchIntro;
+    @Nullable
+    Button sendMessageBtn;
     @Nullable
     EditText messageEditT;
     @Nullable
@@ -57,22 +63,42 @@ public class NewsAboutFragment extends Fragment {
 
         //////////getActivity().getActionBar().setTitle(R.string.about_label);
         findView(view);
+        switchWork();
         clickSendMessage();
         clickIcon();
     }
 
     private void findView(View view) {
         aboutMainLayout = view.findViewById(R.id.about_main_ll);
+        switchIntro = view.findViewById(R.id.about_introSw);
         messageEditT = view.findViewById(R.id.etEmailMessage);
-        SendMessageBtn = view.findViewById(R.id.btnSendMessage);
+        sendMessageBtn = view.findViewById(R.id.btnSendMessage);
         telegramIcon = view.findViewById(R.id.icon_telegram);
         githubIcon = view.findViewById(R.id.icon_github);
         nyTimesLogo = view.findViewById(R.id.logo_nytimes);
 
     }
 
+    private void switchWork() {
+        if (switchIntro != null) {
+            switchIntro.setChecked(Storage.checkSwitchIntro(getActivity()));
+        }
+
+        switchIntro.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean on) {
+                if (on) {
+                    Storage.setSwitchIntroOn(getActivity());
+                } else {
+                    Storage.setSwitchIntroOff(getActivity());
+                }
+
+            }
+        });
+    }
+
     private void clickSendMessage() {
-        SendMessageBtn.setOnClickListener(v -> {
+        sendMessageBtn.setOnClickListener(v -> {
             String message = messageEditT.getText().toString();
             if (message.isEmpty()) {
                 showErrorEmailMessage();

@@ -16,7 +16,7 @@ import me.relex.circleindicator.CircleIndicator;
 public class NewsIntroActivity extends FragmentActivity {
 
     static final String TAG = "myLogs";
-    private static final int pageCount = 4; //number of fragments in intro
+    private static final int pageCount = 5; //number of fragments in intro
     ViewPager pager;
     PagerAdapter pagerAdapter;
 
@@ -28,9 +28,10 @@ public class NewsIntroActivity extends FragmentActivity {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         setContentView(R.layout.activity_news_intro);
         Log.d(TAG, "NewsIntroActivity onCreate");
-        Storage.setIntroHasShown(this);
-        Log.d(TAG, "Storage TRUE");
-
+        if (!Storage.openFirstTime(this)) {
+            Storage.setIntroHasShown(this);
+            Log.d(TAG, "Storage IntroHasShown");
+        }
         pager = (ViewPager) findViewById(R.id.vp_Pager);
         pagerAdapter = new IntroFragmentPagerAdapter(getSupportFragmentManager(), pageCount, this);
         pager.setAdapter(pagerAdapter);
@@ -43,7 +44,7 @@ public class NewsIntroActivity extends FragmentActivity {
             @Override
             public void onPageSelected(int position) {
                 Log.d(TAG, "onPageSelected, position = " + position);
-                if (position == 3) startSecondActivity(); }
+                if (position == 4) startSecondActivity(); }
                 @Override
                 public void onPageScrolled(int position, float positionOffset,
                                            int positionOffsetPixels) { }

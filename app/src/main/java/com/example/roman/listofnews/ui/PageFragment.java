@@ -49,6 +49,9 @@ public class PageFragment extends Fragment {
             case 2:
                 ivPage.setImageResource(R.mipmap.device_2019_05_26_about_app);
                 break;
+            case 3:
+                ivPage.setImageResource(R.mipmap.device_2019_05_26_about_app);
+                break;
         }
         return view;
     }

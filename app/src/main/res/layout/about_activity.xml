@@ -46,26 +46,49 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/heightView"
-                    android:layout_marginTop="@dimen/BaseMargin"
+                    android:layout_marginTop="@dimen/BaseMargin8"
+                    android:layout_marginBottom="@dimen/BaseMargin8"
                     android:background="@color/backgroundV" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/BaseMargin"
+                    android:layout_marginBottom="@dimen/BaseMargin8"
                     android:text="@string/Description"
                     android:textSize="@dimen/textSize" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/heightView"
-                    android:layout_marginTop="@dimen/BaseMargin"
-                    android:background="@color/backgroundV" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/BaseMargin"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/BaseMargin8">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/about_intro"
+                        android:textSize="@dimen/textSize"
+                        android:layout_gravity="start"/>
+
+                    <Switch
+                        android:id="@+id/about_introSw"
+                        android:theme="@style/switchStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:checked="false" />
+                </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/heightView"
+                        android:background="@color/backgroundV"
+                        android:layout_marginBottom="@dimen/BaseMargin8"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -85,7 +108,6 @@
                     android:id="@+id/etEmailMessage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/BaseMargin"
                     android:hint="@string/Hint"
                     android:inputType="textMultiLine"
                     android:lines="2" />

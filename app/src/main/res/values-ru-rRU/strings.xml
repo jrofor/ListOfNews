@@ -14,4 +14,5 @@
     <string name="good_news">Хороших новостей…</string>
     <string name="about_send_email_error">Извините. У вас нет почтового клиента</string>
     <string name="about_show_error_email_message">Пустой текст. Пожалуйста, введите текст</string>
+    <string name="about_intro">Введение в начале</string>
 </resources>

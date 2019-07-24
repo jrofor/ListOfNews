@@ -14,6 +14,7 @@ public class IntroFragmentPagerAdapter extends FragmentPagerAdapter {
     private String PageTitle_1;
     private String PageTitle_2;
     private String PageTitle_3;
+    private String PageTitle_4;
 
     public IntroFragmentPagerAdapter(FragmentManager fm, int pageCount, Context context) {
         super(fm);
@@ -21,8 +22,9 @@ public class IntroFragmentPagerAdapter extends FragmentPagerAdapter {
         Resources res = context.getResources();
         PageTitle_0 = res.getString(R.string.list_of_news);
         PageTitle_1 = res.getString(R.string.details_of_the_news);
-        PageTitle_2 = res.getString(R.string.about_app);
-        PageTitle_3 = res.getString(R.string.good_news);
+        PageTitle_2 = res.getString(R.string.version_for_tablets);
+        PageTitle_3 = res.getString(R.string.about_app);
+        PageTitle_4 = res.getString(R.string.good_news);
     }
 
     @Override
@@ -51,6 +53,9 @@ public class IntroFragmentPagerAdapter extends FragmentPagerAdapter {
                 break;
             case 3:
                 PageTitle = PageTitle_3;
+                break;
+            case 4:
+                PageTitle = PageTitle_4;
                 break;
         }
         return PageTitle;

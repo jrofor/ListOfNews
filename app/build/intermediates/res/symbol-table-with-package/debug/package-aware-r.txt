@@ -600,6 +600,8 @@ color abc_tint_edittext
 color abc_tint_seek_thumb
 color abc_tint_spinner
 color abc_tint_switch_track
+color about_background_colorSw
+color about_colorSw
 color accent_material_dark
 color accent_material_light
 color backgroundL
@@ -1084,6 +1086,7 @@ id META
 id RelativeLayout1
 id SHIFT
 id SYM
+id about_introSw
 id about_main_ll
 id action0
 id action_bar
@@ -1472,6 +1475,7 @@ string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string about_app
 string about_email_addresses
+string about_intro
 string about_label
 string about_open_icon_url_error
 string about_send_email_error
@@ -1541,6 +1545,7 @@ string top_stories_category_travel
 string top_stories_category_upshot
 string top_stories_category_world
 string tvWelcome
+string version_for_tablets
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog
@@ -2042,6 +2047,7 @@ style Widget_MaterialComponents_TextInputLayout_OutlinedBox
 style Widget_MaterialComponents_TextInputLayout_OutlinedBox_Dense
 style Widget_MaterialComponents_Toolbar
 style Widget_Support_CoordinatorLayout
+style switchStyle
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity
 styleable ActionMenuItemView android_minWidth
