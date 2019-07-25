@@ -1,6 +1,5 @@
 package com.example.roman.listofnews;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
@@ -16,10 +15,12 @@ import android.widget.Toast;
 import com.bumptech.glide.util.Preconditions;
 import com.example.roman.listofnews.data.Storage;
 import com.example.roman.listofnews.ui.NewsDetailsFragmentListener;
+import com.example.roman.listofnews.ui.NewsIntroFragmentClose;
 
 
-public class MainActivity extends AppCompatActivity implements NewsDetailsFragmentListener {
+public class MainActivity extends AppCompatActivity implements NewsDetailsFragmentListener, NewsIntroFragmentClose {
     private static final String TAG = "myLogs";
+    private static final String F_INTRO_TAG = "intro_fragment";
     private static final String F_LIST_TAG = "list_fragment";
     private static final String F_DETAILS_TAG = "details_fragment";
     private static final String F_ABOUT_TAG = "about_fragment";
@@ -38,15 +39,16 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
         if (savedInstanceState == null) {
             // open in first time
             if (Storage.openFirstTime(this)){
-                startActivity(new Intent(this, NewsIntroActivity.class));
+                //startActivity(new Intent(this, NewsIntroFragment.class));
                 //Storage.setIntroShowAgain(this);
+                startIntroFragment();
                 Storage.setFirstTimeShown(this);
-                finishAffinity();
+                //finishAffinity();
                 return;
             } else {
                 // check Switch Intro
                 if (Storage.checkSwitchIntro(this)) {
-                    if (!Storage.checkIntro(this)) openIntro();
+                    if (!Storage.checkIntro(this)) startIntroFragment();
                     Storage.setIntroShowAgain(this);
                 }
 
@@ -183,8 +185,24 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
 
     }
 
-    private void openIntro(){
+    private void startIntroFragment(){
+        NewsIntroFragment newsIntroFragment = new NewsIntroFragment() ;
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame_list, newsIntroFragment, F_INTRO_TAG)
+                .addToBackStack(null) //for convenient closure
+                .commit();
+    }
 
+    @Override
+    public void onNewsIntroFragmentClose(){
+        Fragment introByTag = getSupportFragmentManager().findFragmentByTag(F_INTRO_TAG);
+        if (introByTag != null){
+            getSupportFragmentManager().beginTransaction()
+                    .remove(introByTag)
+                    .commit();
+            //cleaning addBackStack added in startIntroFragment
+            //getSupportFragmentManager().popBackStack();
+        }
     }
 
 

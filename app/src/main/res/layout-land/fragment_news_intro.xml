@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/fl_intro_activity"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    >
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_Pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/BaseMargin"
+        android:layout_weight="2"
+        android:layout_gravity="center_vertical|center"
+        android:scaleType="centerInside">
+
+            <android.support.v4.view.PagerTabStrip
+            android:id="@+id/pager_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp" />
+    </android.support.v4.view.ViewPager>
+
+    <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/ci_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_gravity="bottom"
+        android:paddingTop="@dimen/BaseMargin8"
+        app:ci_animator="@animator/indicator_no_animator"
+        app:ci_drawable="@drawable/white_radius"
+        app:ci_drawable_unselected="@drawable/black_radius"/>
+    <!--
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/introImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/BaseMargin"
+        android:layout_weight="2"
+        android:layout_gravity="center_vertical|center"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/device_2019_04_21_150953"
+        tools:ignore="ContentDescription" />
+    -->
+
+    <TextView
+        android:id="@+id/tv_intro_title"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_weight="3"
+        android:layout_gravity="bottom"
+        android:gravity="center_horizontal|center"
+        android:text="@string/tvWelcome"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size_32"/>
+
+</LinearLayout>

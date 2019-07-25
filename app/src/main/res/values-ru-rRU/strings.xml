@@ -5,7 +5,6 @@
     <string name="Description">Даннное приложение поможет вам быть в курсе последний новостей из New York Times</string>
     <string name="Hint">Введите сообщение…</string>
     <string name="Send">Отправить сообщение</string>
-    <string name="About" translatable="false">О приложении</string>
     <string name="News" translatable="false">Приложение «Список новостей из New York Times»</string>
     <string name="tvWelcome">Привет!</string>
     <string name="list_of_news">Список новостей</string>
@@ -15,4 +14,7 @@
     <string name="about_send_email_error">Извините. У вас нет почтового клиента</string>
     <string name="about_show_error_email_message">Пустой текст. Пожалуйста, введите текст</string>
     <string name="about_intro">Введение в начале</string>
+    <string name="about_label">О приложении</string>
+    <string name="about_open_icon_url_error">Извите. У вас нет подходящего клиента</string>
+    <string name="about_subject" translatable="false">" связаться с приложением Нью-Йорк Таймс"</string>
 </resources>

@@ -92,6 +92,10 @@
         "source": "C:\\Users\\Roman_\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\db036d5688bdff7a29c2c4c548a369cb\\res\\drawable-mdpi-v4\\abc_text_select_handle_middle_mtrl_light.png"
     },
     {
+        "merged": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_news_intro.xml.flat",
+        "source": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\src\\main\\res\\layout\\fragment_news_intro.xml"
+    },
+    {
         "merged": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\build\\intermediates\\res\\merged\\debug\\color_mtrl_btn_stroke_color_selector.xml.flat",
         "source": "C:\\Users\\Roman_\\.gradle\\caches\\transforms-1\\files-1.1\\design-28.0.0.aar\\452452e89371280010d3ae210602a84b\\res\\color\\mtrl_btn_stroke_color_selector.xml"
     },
@@ -104,16 +108,16 @@
         "source": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\src\\main\\res\\layout-land\\about_activity.xml"
     },
     {
-        "merged": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_scrubber_control_off_mtrl_alpha.png.flat",
-        "source": "C:\\Users\\Roman_\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\db036d5688bdff7a29c2c4c548a369cb\\res\\drawable-xxhdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png"
+        "merged": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_list_selector_disabled_holo_light.9.png.flat",
+        "source": "C:\\Users\\Roman_\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\db036d5688bdff7a29c2c4c548a369cb\\res\\drawable-hdpi-v4\\abc_list_selector_disabled_holo_light.9.png"
     },
     {
         "merged": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_design_ic_visibility_off.png.flat",
         "source": "C:\\Users\\Roman_\\.gradle\\caches\\transforms-1\\files-1.1\\design-28.0.0.aar\\452452e89371280010d3ae210602a84b\\res\\drawable-mdpi-v4\\design_ic_visibility_off.png"
     },
     {
-        "merged": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_list_selector_disabled_holo_light.9.png.flat",
-        "source": "C:\\Users\\Roman_\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\db036d5688bdff7a29c2c4c548a369cb\\res\\drawable-hdpi-v4\\abc_list_selector_disabled_holo_light.9.png"
+        "merged": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_scrubber_control_off_mtrl_alpha.png.flat",
+        "source": "C:\\Users\\Roman_\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\db036d5688bdff7a29c2c4c548a369cb\\res\\drawable-xxhdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png"
     },
     {
         "merged": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_abc_switch_track_mtrl_alpha.9.png.flat",
@@ -548,10 +552,6 @@
         "source": "C:\\Users\\Roman_\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\db036d5688bdff7a29c2c4c548a369cb\\res\\drawable-xhdpi-v4\\abc_list_selector_disabled_holo_light.9.png"
     },
     {
-        "merged": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\build\\intermediates\\res\\merged\\debug\\layout-land_activity_news_intro.xml.flat",
-        "source": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\src\\main\\res\\layout-land\\activity_news_intro.xml"
-    },
-    {
         "merged": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\build\\intermediates\\res\\merged\\debug\\layout_item_news.xml.flat",
         "source": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\src\\main\\res\\layout\\item_news.xml"
     },
@@ -654,10 +654,6 @@
     {
         "merged": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\build\\intermediates\\res\\merged\\debug\\interpolator-v21_mtrl_fast_out_slow_in.xml.flat",
         "source": "C:\\Users\\Roman_\\.gradle\\caches\\transforms-1\\files-1.1\\design-28.0.0.aar\\452452e89371280010d3ae210602a84b\\res\\interpolator-v21\\mtrl_fast_out_slow_in.xml"
-    },
-    {
-        "merged": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_news_intro.xml.flat",
-        "source": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\src\\main\\res\\layout\\activity_news_intro.xml"
     },
     {
         "merged": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\build\\intermediates\\res\\merged\\debug\\color_switch_thumb_material_dark.xml.flat",
@@ -1542,6 +1538,10 @@
     {
         "merged": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
         "source": "C:\\Users\\Roman_\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\db036d5688bdff7a29c2c4c548a369cb\\res\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\build\\intermediates\\res\\merged\\debug\\layout-land_fragment_news_intro.xml.flat",
+        "source": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\src\\main\\res\\layout-land\\fragment_news_intro.xml"
     },
     {
         "merged": "D:\\And\\Android Studio\\AndroidStudioProjects\\AAM\\ListOfNews\\app\\build\\intermediates\\res\\merged\\debug\\color-v23_abc_tint_edittext.xml.flat",

@@ -10,7 +10,7 @@
     <string name="about_email_addresses" translatable="false">Email</string>
     <string name="about_send_email_error">Sorry. You don\'t have any email client</string>
     <string name="about_show_error_email_message">Empty text. Please input text</string>
-    <string name="about_subject" translatable="false">contacting about app NY Times</string>
+    <string name="about_subject">contacting about app NY Times</string>
     <string name="about_open_icon_url_error">Sorry. You don\'t have an appropriate client</string>
     <string name="telegram_icon_url" translatable="false">https://t.me/roman_ov</string>
     <string name="github_icon_url" translatable="false">https://github.com/jrofor/ListOfNews</string>
