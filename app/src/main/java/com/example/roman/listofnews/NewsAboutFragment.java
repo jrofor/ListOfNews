@@ -162,5 +162,9 @@ public class NewsAboutFragment extends Fragment {
         startActivity(urlIntent);
     }
 
-
+    @Override
+    public void onDetach() {
+        Log.d(TAG, "--- AboutFragment onDetach");
+        super.onDetach();
+    }
 }

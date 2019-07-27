@@ -2,9 +2,12 @@ package com.example.roman.listofnews.ui.adapter.introPager;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.ViewGroup;
+
 import com.example.roman.listofnews.R;
 import com.example.roman.listofnews.ui.PageFragment;
 
@@ -26,6 +29,15 @@ public class IntroFragmentPagerAdapter extends FragmentPagerAdapter {
         PageTitle_3 = res.getString(R.string.about_app);
         PageTitle_4 = res.getString(R.string.good_news);
     }
+
+    /*@NonNull
+    @Override
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+            Object ret = super.instantiateItem(container, position);
+            mFragments[position] = (Fragment) ret;
+            return ret;
+
+    }*/
 
     @Override
     public Fragment getItem(int position) {

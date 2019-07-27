@@ -32,6 +32,9 @@ public class NewsIntroFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        if (getActivity() instanceof NewsIntroFragmentClose) {
+            listener = (NewsIntroFragmentClose) getActivity();
+        }
     }
 
     @Override
@@ -46,10 +49,6 @@ public class NewsIntroFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_news_intro, container, false);
         setupUi(view);
         Log.d(TAG, "NewsIntroFragment onCreate");
-            if (!Storage.openFirstTime(getContext())) {
-                Storage.setIntroHasShown(getContext());
-                Log.d(TAG, "Storage IntroHasShown");
-            }
         return view;
         }
 
@@ -66,7 +65,10 @@ public class NewsIntroFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 Log.d(TAG, "onPageSelected, position = " + position);
-                if (position == 4) listener.onNewsIntroFragmentClose(); } //startMainActivity(); }
+                if (position == 4) {
+                    if (listener != null) listener.onNewsIntroFragmentClose();
+                } //startMainActivity(); }
+            }
             @Override
             public void onPageScrolled(int position, float positionOffset,
                                        int positionOffsetPixels) { }
@@ -93,5 +95,12 @@ public class NewsIntroFragment extends Fragment {
     public void onStop() {
         super.onStop();
         //compositeDisposable.dispose();
+    }
+
+    @Override
+    public void onDetach() {
+        listener = null;
+        Log.d(TAG, "--- ListFragment onDetach");
+        super.onDetach();
     }
 }

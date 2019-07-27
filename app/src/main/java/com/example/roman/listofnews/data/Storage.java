@@ -9,7 +9,6 @@ import static java.lang.String.valueOf;
 public class Storage {
 
     private static final String APP_PREFERENCES = "mySettings";
-    private static final String APP_PREFERENCES_Intro = "Intro";
     private static final String APP_PREFERENCES_FirstTime = "FirstTime";
     private static final String APP_PREFERENCES_switchIntro = "switchIntro";
 
@@ -28,29 +27,6 @@ public class Storage {
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putBoolean(APP_PREFERENCES_FirstTime , false) ;
-        editor.apply();
-    }
-
-    public static boolean checkIntro  (Context context) {
-        SharedPreferences mSettings;
-        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        boolean hasShown = mSettings.getBoolean(APP_PREFERENCES_Intro, false);
-        return hasShown;
-    }
-
-    public static void setIntroHasShown  (Context context) {
-        SharedPreferences mSettings;
-        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mSettings.edit();  //2 //3
-        editor.putBoolean(APP_PREFERENCES_Intro , true) ;
-        editor.apply();
-    }
-
-    public static void setIntroShowAgain  (Context context) {
-        SharedPreferences mSettings;
-        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mSettings.edit();  //2 //3
-        editor.putBoolean(APP_PREFERENCES_Intro , false) ;
         editor.apply();
     }
 

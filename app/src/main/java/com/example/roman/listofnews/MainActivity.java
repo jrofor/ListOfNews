@@ -1,6 +1,5 @@
 package com.example.roman.listofnews;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +17,7 @@ import com.example.roman.listofnews.ui.NewsDetailsFragmentListener;
 import com.example.roman.listofnews.ui.NewsIntroFragmentClose;
 
 
-public class MainActivity extends AppCompatActivity implements NewsDetailsFragmentListener, NewsIntroFragmentClose {
+public class MainActivity extends AppCompatActivity implements NewsIntroFragmentClose, NewsDetailsFragmentListener {
     private static final String TAG = "myLogs";
     private static final String F_INTRO_TAG = "intro_fragment";
     private static final String F_LIST_TAG = "list_fragment";
@@ -36,22 +35,18 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
         isTwoPanel = findViewById(R.id.frame_details) != null;
         int countBackStack = getSupportFragmentManager().getBackStackEntryCount();
 
-        if (savedInstanceState == null) {
+            if (savedInstanceState == null) {
             // open in first time
             if (Storage.openFirstTime(this)){
-                //startActivity(new Intent(this, NewsIntroFragment.class));
-                //Storage.setIntroShowAgain(this);
                 startIntroFragment();
                 Storage.setFirstTimeShown(this);
-                //finishAffinity();
                 return;
             } else {
                 // check Switch Intro
                 if (Storage.checkSwitchIntro(this)) {
-                    if (!Storage.checkIntro(this)) startIntroFragment();
-                    Storage.setIntroShowAgain(this);
+                        startIntroFragment();
+                    return;
                 }
-
                 //create first fragment
                 NewsListFragment newsListFragment = NewsListFragment.newInstance(isTwoPanel);
                 getSupportFragmentManager().beginTransaction()
@@ -82,6 +77,13 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
         }
 
         if (isTwoPanel) {
+            Fragment introByTag = getSupportFragmentManager().findFragmentByTag(F_INTRO_TAG);
+            if (introByTag != null) {
+                //cleaning addBackStack added in portrait
+                getSupportFragmentManager().popBackStack();
+                getSupportFragmentManager().popBackStack();
+                startIntroFragment();
+            }
             Fragment aboutByTag = getSupportFragmentManager().findFragmentByTag(F_ABOUT_TAG);
             //check if open newsAboutFragment after newsDetailsFragment
             if (countBackStack == 3 && aboutByTag != null) {
@@ -104,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
                         .replace(R.id.frame_list, backNewsListFragment, F_LIST_TAG)
                         .commit();
             }
-            if (countBackStack == 2 ) {
+            if (countBackStack == 2 && introByTag==null) {
                 if (aboutByTag != null){
                     //don't use popBackStack, NewsList from portrait set on right
                     findViewById(R.id.frame_full_screen).setVisibility(View.VISIBLE);
@@ -143,9 +145,17 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
         }
 
         if (!isTwoPanel) {
+            Fragment introByTag = getSupportFragmentManager().findFragmentByTag(F_INTRO_TAG);
+            if (introByTag != null) {
+                //cleaning addBackStack added in landscape
+                getSupportFragmentManager().popBackStack();
+                getSupportFragmentManager().popBackStack();
+                startIntroFragment();
+                return;
+            }
             Fragment aboutByTag = getSupportFragmentManager().findFragmentByTag(F_ABOUT_TAG);
             Fragment detailsByTag = getSupportFragmentManager().findFragmentByTag(F_DETAILS_TAG);
-            if (countBackStack >= 2) {
+            if (countBackStack >= 2 && introByTag == null) {
                 getSupportFragmentManager().popBackStack();
                 NewsListFragment newsListFragment = NewsListFragment.newInstance(isTwoPanel);
                 getSupportFragmentManager().beginTransaction()
@@ -186,22 +196,44 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
     }
 
     private void startIntroFragment(){
-        NewsIntroFragment newsIntroFragment = new NewsIntroFragment() ;
+        //create first fragment
+        NewsListFragment newsListFragment = NewsListFragment.newInstance(isTwoPanel);
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frame_list, newsIntroFragment, F_INTRO_TAG)
+                .replace(R.id.frame_list, newsListFragment, F_LIST_TAG)
                 .addToBackStack(null) //for convenient closure
                 .commit();
+
+        //create intro fragment
+        if (isTwoPanel) {
+            findViewById(R.id.frame_full_screen).setVisibility(View.VISIBLE);
+
+            NewsIntroFragment newsIntroFragment = new NewsIntroFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame_full_screen, newsIntroFragment, F_INTRO_TAG)
+                    .addToBackStack(null)
+                    .commit();
+
+        } else {
+            NewsIntroFragment newsIntroFragment = new NewsIntroFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frame_list, newsIntroFragment, F_INTRO_TAG)
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 
     @Override
-    public void onNewsIntroFragmentClose(){
+    public void onNewsIntroFragmentClose() {
+        if (isTwoPanel) findViewById(R.id.frame_full_screen).setVisibility(View.GONE);
+        getSupportFragmentManager().executePendingTransactions();
         Fragment introByTag = getSupportFragmentManager().findFragmentByTag(F_INTRO_TAG);
         if (introByTag != null){
             getSupportFragmentManager().beginTransaction()
                     .remove(introByTag)
                     .commit();
             //cleaning addBackStack added in startIntroFragment
-            //getSupportFragmentManager().popBackStack();
+            getSupportFragmentManager().popBackStack();
         }
     }
 
@@ -266,8 +298,9 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
 
     @Override
     public void onBackPressed() {
-        Fragment aboutByTag = getSupportFragmentManager().findFragmentByTag(F_ABOUT_TAG);
         Fragment detailsByTag = getSupportFragmentManager().findFragmentByTag(F_DETAILS_TAG);
+        Fragment aboutByTag = getSupportFragmentManager().findFragmentByTag(F_ABOUT_TAG);
+        Fragment introByTag = getSupportFragmentManager().findFragmentByTag(F_INTRO_TAG);
 
         int  countBackStack = getSupportFragmentManager().getBackStackEntryCount();
         //clean idItem in stateFragment when returning to NewsList
@@ -283,11 +316,11 @@ public class MainActivity extends AppCompatActivity implements NewsDetailsFragme
         }
 
         //clean newsAboutFragment
-        if (isTwoPanel && aboutByTag != null ) {
+        if (isTwoPanel && (aboutByTag != null | introByTag != null )) {
             findViewById(R.id.frame_full_screen).setVisibility(View.GONE);
-            getSupportFragmentManager().beginTransaction()
+            /*getSupportFragmentManager().beginTransaction()
                     .remove(aboutByTag)
-                    .commit();
+                    .commit();*/
         }
 
         if (countBackStack == 1) {
