@@ -10,12 +10,13 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.roman.listofnews.data.Storage;
 import com.example.roman.listofnews.ui.adapter.introPager.IntroFragmentPagerAdapter;
-import com.example.roman.listofnews.ui.NewsIntroFragmentClose;
+import com.example.roman.listofnews.ui.NewsIntroFragmentListener;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -25,20 +26,21 @@ public class NewsIntroFragment extends Fragment {
     private static final int pageCount = 5; //number of fragments in intro
     ViewPager pager;
     PagerAdapter pagerAdapter;
-    private NewsIntroFragmentClose listener;
+    private NewsIntroFragmentListener listener;
 
     //private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (getActivity() instanceof NewsIntroFragmentClose) {
-            listener = (NewsIntroFragmentClose) getActivity();
+        if (getActivity() instanceof NewsIntroFragmentListener) {
+            listener = (NewsIntroFragmentListener) getActivity();
         }
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
 
     }
@@ -81,9 +83,10 @@ public class NewsIntroFragment extends Fragment {
 
     }
 
-    private void startMainActivity() {
-        startActivity(new Intent(getContext(), MainActivity.class));
-        //finish();
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override

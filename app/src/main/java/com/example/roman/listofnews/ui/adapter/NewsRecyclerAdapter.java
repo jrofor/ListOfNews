@@ -25,6 +25,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder>{
     private RequestManager glideRequestManager;
     private final LayoutInflater inflater;
     final String TAG = "myLogs";
+    private Context context;
 
 
     public interface OnItemClickListener {
@@ -35,6 +36,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder>{
         //@Nullable OnItemClickListener clickListener;
         //this.news = news;   @Nullable List<NewsItemDTO> news,
         //this.clickListener = clickListener;
+        this.context = context;
         this.inflater = LayoutInflater.from(context);
         final RequestOptions imageOption = new RequestOptions()
                 .placeholder(R.drawable.image_placeholder)
@@ -52,7 +54,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder newsViewHolder, int position) {
         final AllNewsItem NIDTO = news.get(position);
-        newsViewHolder.bindItem(NIDTO, newsListener);
+        newsViewHolder.bindItem(NIDTO, newsListener, context);
     }
 
     public void setOnClickNewsListener(@NonNull OnItemClickListener newsListener) {

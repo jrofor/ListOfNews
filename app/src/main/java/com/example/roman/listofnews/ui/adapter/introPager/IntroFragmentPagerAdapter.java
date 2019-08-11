@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.roman.listofnews.R;
@@ -30,15 +31,24 @@ public class IntroFragmentPagerAdapter extends FragmentPagerAdapter {
         PageTitle_4 = res.getString(R.string.good_news);
     }
 
-    /*@NonNull
+ /*     @NonNull
+    @Override
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+
+        return super.instantiateItem(container, position);
+        /*Object ret = super.instantiateItem(container, position);
+        PageFragment  = (PageFragment) ret;
+        return PageFragment.newInstance(position);
+    }
+
+      @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
             Object ret = super.instantiateItem(container, position);
             mFragments[position] = (Fragment) ret;
             return ret;
 
-    }*/
-
+*/
     @Override
     public Fragment getItem(int position) {
         return PageFragment.newInstance(position);

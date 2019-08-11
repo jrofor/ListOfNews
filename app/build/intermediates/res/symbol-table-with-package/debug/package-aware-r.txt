@@ -1045,6 +1045,12 @@ drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
 drawable device_2019_04_21_150953
+drawable device_2019_08_10_001102
+drawable device_2019_08_10_001556
+drawable device_about_app
+drawable device_details_of_the_news
+drawable device_for_tablet
+drawable device_list_of_news
 drawable engineer
 drawable ic_github
 drawable ic_launcher_background
@@ -1424,9 +1430,6 @@ layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
 menu menu_list
-mipmap device_2019_05_26_about_app
-mipmap device_2019_05_26_details_of_the_news
-mipmap device_2019_05_26_list_of_news
 mipmap ic_launcher
 mipmap ic_launcher_round
 string Description

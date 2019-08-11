@@ -17,4 +17,5 @@
     <string name="about_label">О приложении</string>
     <string name="about_open_icon_url_error">Извите. У вас нет подходящего клиента</string>
     <string name="about_subject" translatable="false">" связаться с приложением Нью-Йорк Таймс"</string>
+    <string name="version_for_tablets">Версия для планшета</string>
 </resources>

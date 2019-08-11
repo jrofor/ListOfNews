@@ -1,5 +1,6 @@
 package com.example.roman.listofnews.ui.adapter;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.DataSource;
@@ -32,9 +34,10 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     private TextView tvDate;
     private final View itemView;
 
-    private static final int LayuotItem = R.layout.item_news;
+    private static final int layoutItem = R.layout.item_news;
     private static final String TAG = "myLogs";
     private static String createId  ="";
+    private static String errDbOutMessage = "Error with database. Please reload news." ;
 
     private NewsViewHolder(@NonNull View itemView, RequestManager glideRequestManager) {
         super(itemView);
@@ -46,7 +49,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     public static NewsViewHolder create (@NonNull LayoutInflater inflater,
                                          @NonNull ViewGroup parent,
                                          @NonNull RequestManager glideRequestManager) {
-        final View view = inflater.inflate(LayuotItem, parent, false);
+        final View view = inflater.inflate(layoutItem, parent, false);
         return new NewsViewHolder(view, glideRequestManager)  ;
 
     }
@@ -60,10 +63,10 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
         tvDate = itemView.findViewById(R.id.tv_date);
     }
 
-    public void bindItem (AllNewsItem allNewsItem,
-                          @NonNull NewsRecyclerAdapter.OnItemClickListener clickListener) {
+    public void bindItem(AllNewsItem allNewsItem,
+                         @NonNull NewsRecyclerAdapter.OnItemClickListener clickListener, Context context) {
         setupUi(allNewsItem);
-        setupUx(allNewsItem, clickListener);
+        setupUx(allNewsItem, clickListener, context);
     }
 
     private void setupUi (AllNewsItem allNewsItem) {
@@ -95,15 +98,20 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    private void setupUx(@NonNull AllNewsItem allNewsItem, NewsRecyclerAdapter.OnItemClickListener clickListener) {
+    private void setupUx(@NonNull AllNewsItem allNewsItem, NewsRecyclerAdapter.OnItemClickListener clickListener, Context context) {
 
         itemView.setOnClickListener((View view) -> {
             int position = getAdapterPosition();
             if (clickListener != null && position != RecyclerView.NO_POSITION) {
-                // adding create id for database Entity
-                createId = allNewsItem.getTitle().concat(allNewsItem.getUrl()) ;
-                clickListener.OnItemClick(createId);
-                Log.d(TAG, createId);
+                try {
+                    // adding create id for database Entity
+                    createId = allNewsItem.getTitle().concat(allNewsItem.getUrl()) ;
+                    clickListener.OnItemClick(createId);
+                    Log.d(TAG, createId);
+                }catch (NullPointerException e){
+                    Toast.makeText(context, errDbOutMessage,Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, errDbOutMessage);
+                }
             }
         });
     }

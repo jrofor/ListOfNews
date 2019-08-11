@@ -177,10 +177,12 @@ public void onCreate(@Nullable Bundle savedInstanceState) {
 
         fabUpdate.setOnClickListener(v -> onClickFabUpdate());
         btnTryAgain.setOnClickListener(v -> onClickTryAgain(categoriesAdapter.getSelectedCategory().serverValue()));
-        NewsAdapter.setOnClickNewsListener(IdItem ->
-                //NewsDetailsFragment.start(getActivity(), IdItem));
-            { if (listener != null){
-                listener.onNewsDetailsByIdClicked(IdItem);
+        NewsAdapter.setOnClickNewsListener(new NewsRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void OnItemClick(@NonNull String IdItem) {
+                if (listener != null) {
+                    listener.onNewsDetailsByIdClicked(IdItem);
+                }
             }
         });
         //checkingDatabaseForEmptiness();

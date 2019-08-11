@@ -14,10 +14,10 @@ import android.widget.Toast;
 import com.bumptech.glide.util.Preconditions;
 import com.example.roman.listofnews.data.Storage;
 import com.example.roman.listofnews.ui.NewsDetailsFragmentListener;
-import com.example.roman.listofnews.ui.NewsIntroFragmentClose;
+import com.example.roman.listofnews.ui.NewsIntroFragmentListener;
 
 
-public class MainActivity extends AppCompatActivity implements NewsIntroFragmentClose, NewsDetailsFragmentListener {
+public class MainActivity extends AppCompatActivity implements NewsIntroFragmentListener, NewsDetailsFragmentListener {
     private static final String TAG = "myLogs";
     private static final String F_INTRO_TAG = "intro_fragment";
     private static final String F_LIST_TAG = "list_fragment";
@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
             }
             Fragment aboutByTag = getSupportFragmentManager().findFragmentByTag(F_ABOUT_TAG);
             Fragment detailsByTag = getSupportFragmentManager().findFragmentByTag(F_DETAILS_TAG);
-            if (countBackStack >= 2 && introByTag == null) {
+            if (countBackStack >= 2) {
                 getSupportFragmentManager().popBackStack();
                 NewsListFragment newsListFragment = NewsListFragment.newInstance(isTwoPanel);
                 getSupportFragmentManager().beginTransaction()
@@ -189,9 +189,9 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
                 }
             }
         }
-        //info for testing
+       /* //info for testing
         String outMessage = "TwoPanel: "+ String.valueOf(isTwoPanel)+" cntBackStack: "+(String.valueOf(countBackStack));
-        Toast.makeText(this, outMessage,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, outMessage,Toast.LENGTH_SHORT).show();*/
 
     }
 
@@ -258,9 +258,9 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
                         .commit();
             }
         }
-         //info for testing
+        /* //info for testing
         String outMessage = "TwoPanel: "+ String.valueOf(isTwoPanel)+" cntBackStack: "+(String.valueOf(countBackStack));
-        Toast.makeText(this, outMessage,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, outMessage,Toast.LENGTH_SHORT).show();*/
     }
 
     @Override
@@ -315,19 +315,26 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
             }
         }
 
-        //clean newsAboutFragment
-        if (isTwoPanel && (aboutByTag != null | introByTag != null )) {
+        //clean newsAboutFragment or newsIntroFragment
+        if (isTwoPanel) {
             findViewById(R.id.frame_full_screen).setVisibility(View.GONE);
-            /*getSupportFragmentManager().beginTransaction()
-                    .remove(aboutByTag)
-                    .commit();*/
+            if (aboutByTag != null ){
+                getSupportFragmentManager().beginTransaction()
+                        .remove(aboutByTag)
+                        .commit();
+            }
+            if (introByTag != null) {
+                getSupportFragmentManager().beginTransaction()
+                        .remove(introByTag)
+                        .commit();
+            }
         }
 
         if (countBackStack == 1) {
              if ((!isTwoPanel) || (isTwoPanel && aboutByTag == null)) {
-                 //info for testing
+                 /*//info for testing
                  Toast.makeText(this, String.valueOf(countBackStack), Toast.LENGTH_SHORT).show();
-                 Log.d(TAG, "--- mainActivity finish");
+                 Log.d(TAG, "--- mainActivity finish");*/
                  finish();
                  return;
              }

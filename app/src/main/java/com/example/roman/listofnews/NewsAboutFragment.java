@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -47,6 +49,7 @@ public class NewsAboutFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
 
     }
@@ -60,13 +63,19 @@ public class NewsAboutFragment extends Fragment {
     }
 
     private void setupUi(View view) {
-
         //////////getActivity().getActionBar().setTitle(R.string.about_label);
         findView(view);
         switchWork();
         clickSendMessage();
         clickIcon();
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
 
     private void findView(View view) {
         aboutMainLayout = view.findViewById(R.id.about_main_ll);

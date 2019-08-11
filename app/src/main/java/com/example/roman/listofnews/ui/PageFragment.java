@@ -41,16 +41,16 @@ public class PageFragment extends Fragment {
 
         switch (pageNumber) {
             case 0:
-                ivPage.setImageResource(R.mipmap.device_2019_05_26_list_of_news);
+                ivPage.setImageResource(R.drawable.device_list_of_news);
                 break;
             case 1:
-                ivPage.setImageResource(R.mipmap.device_2019_05_26_details_of_the_news);
+                ivPage.setImageResource(R.drawable.device_details_of_the_news);
                 break;
             case 2:
-                ivPage.setImageResource(R.mipmap.device_2019_05_26_about_app);
+                ivPage.setImageResource(R.drawable.device_for_tablet);
                 break;
             case 3:
-                ivPage.setImageResource(R.mipmap.device_2019_05_26_about_app);
+                ivPage.setImageResource(R.drawable.device_about_app);
                 break;
         }
         return view;
