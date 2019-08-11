@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="switchStyle" parent="Theme.AppCompat.Light">
+    <!-- active state (30% transparency for background) fefe00 fff279 ffff20-->
+    <item name="colorControlActivated">#ce2900</item>
+    </style>
+
 </resources>

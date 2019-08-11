@@ -19,6 +19,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:testOnly="true"
         android:theme="@style/AppTheme" >
 
         <!--
@@ -31,18 +32,21 @@
        tools:replace="android:appComponentFactory">
        android:appComponentFactory="whateverString"
         -->
-        <activity android:name="com.example.roman.listofnews.NewsIntroActivity" >
+        <activity android:name="com.example.roman.listofnews.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.roman.listofnews.NewsMainActivity" />
+        <!--
         <activity
-            android:name="com.example.roman.listofnews.NewsAboutActivity"
+            android:name=".NewsAboutFragment"
             android:label="@string/About" />
-        <activity android:name="com.example.roman.listofnews.NewsDetailsActivity" />
+        <activity
+            android:name=".NewsIntroFragment"
+            android:label="@string/app_name" />
+        -->
     </application>
 
 </manifest>

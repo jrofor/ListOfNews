@@ -18,6 +18,9 @@ anim design_snackbar_out
 animator design_appbar_state_list_animator
 animator design_fab_hide_motion_spec
 animator design_fab_show_motion_spec
+animator indicator_animator
+animator indicator_animator_reverse
+animator indicator_no_animator
 animator mtrl_btn_state_list_anim
 animator mtrl_btn_unelevated_state_list_anim
 animator mtrl_chip_state_list_anim
@@ -25,6 +28,7 @@ animator mtrl_fab_hide_motion_spec
 animator mtrl_fab_show_motion_spec
 animator mtrl_fab_transformation_sheet_collapse_spec
 animator mtrl_fab_transformation_sheet_expand_spec
+animator scale_with_alpha
 attr actionBarDivider
 attr actionBarItemBackground
 attr actionBarPopupTheme
@@ -147,6 +151,15 @@ attr chipStartPadding
 attr chipStrokeColor
 attr chipStrokeWidth
 attr chipStyle
+attr ci_animator
+attr ci_animator_reverse
+attr ci_drawable
+attr ci_drawable_unselected
+attr ci_gravity
+attr ci_height
+attr ci_margin
+attr ci_orientation
+attr ci_width
 attr closeIcon
 attr closeIconEnabled
 attr closeIconEndPadding
@@ -587,6 +600,8 @@ color abc_tint_edittext
 color abc_tint_seek_thumb
 color abc_tint_spinner
 color abc_tint_switch_track
+color about_background_colorSw
+color about_colorSw
 color accent_material_dark
 color accent_material_light
 color backgroundL
@@ -702,6 +717,7 @@ color xxlight_gray
 dimen BaseMargin
 dimen BaseMargin4
 dimen BaseMargin8
+dimen EdgeMargin
 dimen ItemDecoration_size_4
 dimen Marginheight2
 dimen abc_action_bar_content_inset_material
@@ -851,7 +867,6 @@ dimen item_image_size
 dimen item_touch_helper_max_drag_scroll_per_frame
 dimen item_touch_helper_swipe_escape_max_velocity
 dimen item_touch_helper_swipe_escape_velocity
-dimen marginStartL
 dimen marginStartT
 dimen margin_fl_no_data
 dimen margin_lt_error
@@ -1020,6 +1035,8 @@ drawable abc_vector_test
 drawable android
 drawable avd_hide_password
 drawable avd_show_password
+drawable black_radius
+drawable black_radius_square
 drawable brain
 drawable design_bottom_navigation_item_background
 drawable design_fab_background
@@ -1028,12 +1045,20 @@ drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
 drawable device_2019_04_21_150953
+drawable device_2019_08_10_001102
+drawable device_2019_08_10_001556
+drawable device_about_app
+drawable device_details_of_the_news
+drawable device_for_tablet
+drawable device_list_of_news
 drawable engineer
+drawable ic_github
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
+drawable ic_telegram
 drawable image_news
 drawable image_news1
 drawable image_placeholder
@@ -1059,12 +1084,16 @@ drawable telegram
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 drawable vec_error
+drawable white_radius
 id ALT
 id CTRL
 id FUNCTION
 id META
+id RelativeLayout1
 id SHIFT
 id SYM
+id about_introSw
+id about_main_ll
 id action0
 id action_bar
 id action_bar_activity_content
@@ -1097,7 +1126,7 @@ id beginning
 id blocking
 id bnt_try_again
 id bottom
-id btnSendMassege
+id btnSendMessage
 id buttonPanel
 id cancel_action
 id center
@@ -1106,6 +1135,7 @@ id center_vertical
 id chains
 id checkbox
 id chronometer
+id ci_indicator
 id clip_horizontal
 id clip_vertical
 id collapseActionView
@@ -1136,7 +1166,7 @@ id end
 id end_padder
 id enterAlways
 id enterAlwaysCollapsed
-id etEmailMassege
+id etEmailMessage
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
@@ -1150,6 +1180,9 @@ id fl_intro_activity
 id fl_loading
 id fl_no_data
 id forever
+id frame_details
+id frame_full_screen
+id frame_list
 id ghost_view
 id glide_custom_view_target_tag
 id gone
@@ -1157,17 +1190,20 @@ id group_divider
 id groups
 id home
 id homeAsUp
+id horizontal
 id icon
+id icon_github
 id icon_group
+id icon_telegram
 id ifRoom
 id image
 id image_avatar
 id info
-id introImage
 id invisible
 id italic
 id item1
 id item_touch_helper_previous_elevation
+id iv_intro_Page
 id iv_multimedia
 id labeled
 id largeLabel
@@ -1177,6 +1213,7 @@ id line3
 id listMode
 id list_item
 id ll_error
+id logo_nytimes
 id masked
 id media_actions
 id message
@@ -1195,6 +1232,7 @@ id notification_main_column
 id notification_main_column_container
 id outline
 id packed
+id pager_header
 id parallax
 id parent
 id parentPanel
@@ -1254,10 +1292,10 @@ id stretch
 id submenuarrow
 id submit_area
 id tabMode
+id tablet_ll
 id tag_transition_group
 id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
-id telegram
 id text
 id text2
 id textSpacerNoButtons
@@ -1292,8 +1330,10 @@ id uniform
 id unlabeled
 id up
 id useLogo
+id vertical
 id view_offset_helper
 id visible
+id vp_Pager
 id withText
 id wrap
 id wrap_content
@@ -1345,8 +1385,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout about_activity
-layout activity_news_details
-layout activity_news_intro
+layout activity_main
 layout categories_drop_down_spinner_item
 layout categories_spinner_item
 layout design_bottom_navigation_item
@@ -1363,11 +1402,13 @@ layout design_navigation_item_subheader
 layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_password_icon
+layout fragment_news_details
+layout fragment_news_intro
+layout fragment_news_recycler
 layout item_news
 layout layout_error
 layout mtrl_layout_snackbar
 layout mtrl_layout_snackbar_include
-layout news_recycler_activity
 layout notification_action
 layout notification_action_tombstone
 layout notification_media_action
@@ -1383,6 +1424,7 @@ layout notification_template_media
 layout notification_template_media_custom
 layout notification_template_part_chronometer
 layout notification_template_part_time
+layout pagefragment_news_intro
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
@@ -1390,11 +1432,9 @@ layout support_simple_spinner_dropdown_item
 menu menu_list
 mipmap ic_launcher
 mipmap ic_launcher_round
-string About
 string Description
 string Hint
-string LinkToTelegram
-string News
+string NYtimes
 string NewsDetails_name
 string Send
 string abc_action_bar_home_description
@@ -1436,19 +1476,26 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string about_app
+string about_email_addresses
+string about_intro
+string about_label
+string about_open_icon_url_error
+string about_send_email_error
+string about_show_error_email_message
+string about_subject
 string action_retry
-string addresses
 string app_name
 string appbar_scrolling_view_behavior
 string bottom_sheet_behavior
 string btn_try_again
-string categoryName1
-string categoryName2
-string categoryName3
-string categoryName4
+string categoryName
 string character_counter_content_description
 string character_counter_pattern
 string cont_descr_decoration
+string details_of_the_news
+string details_preview
+string details_title
 string developerFeedback
 string err_data_is_empty
 string error_message
@@ -1456,8 +1503,14 @@ string error_network
 string error_server
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
+string github_description
+string github_icon_url
+string good_news
 string hide_bottom_view_on_scroll_behavior
+string list_of_news
 string mtrl_chip_close_icon_content_description
+string nytimes_logo_description
+string nytimes_logo_url
 string password_toggle_content_description
 string path_password_eye
 string path_password_eye_mask_strike_through
@@ -1465,8 +1518,8 @@ string path_password_eye_mask_visible
 string path_password_strike_through
 string search_menu_title
 string status_bar_notification_info_overflow
-string subject
-string textForText
+string telegram_description
+string telegram_icon_url
 string title
 string top_stories_category_arts
 string top_stories_category_automobiles
@@ -1495,6 +1548,7 @@ string top_stories_category_travel
 string top_stories_category_upshot
 string top_stories_category_world
 string tvWelcome
+string version_for_tablets
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog
@@ -1996,6 +2050,7 @@ style Widget_MaterialComponents_TextInputLayout_OutlinedBox
 style Widget_MaterialComponents_TextInputLayout_OutlinedBox_Dense
 style Widget_MaterialComponents_Toolbar
 style Widget_Support_CoordinatorLayout
+style switchStyle
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity
 styleable ActionMenuItemView android_minWidth
@@ -2021,6 +2076,7 @@ styleable ButtonBarLayout allowStacking
 styleable CardView android_minWidth android_minHeight cardBackgroundColor cardCornerRadius cardElevation cardMaxElevation cardPreventCornerOverlap cardUseCompatPadding contentPadding contentPaddingBottom contentPaddingLeft contentPaddingRight contentPaddingTop
 styleable Chip android_textAppearance android_ellipsize android_maxWidth android_text android_checkable checkedIcon checkedIconEnabled checkedIconVisible chipBackgroundColor chipCornerRadius chipEndPadding chipIcon chipIconEnabled chipIconSize chipIconTint chipIconVisible chipMinHeight chipStartPadding chipStrokeColor chipStrokeWidth closeIcon closeIconEnabled closeIconEndPadding closeIconSize closeIconStartPadding closeIconTint closeIconVisible hideMotionSpec iconEndPadding iconStartPadding rippleColor showMotionSpec textEndPadding textStartPadding
 styleable ChipGroup checkedChip chipSpacing chipSpacingHorizontal chipSpacingVertical singleLine singleSelection
+styleable CircleIndicator ci_animator ci_animator_reverse ci_drawable ci_drawable_unselected ci_gravity ci_height ci_margin ci_orientation ci_width
 styleable CollapsingToolbarLayout collapsedTitleGravity collapsedTitleTextAppearance contentScrim expandedTitleGravity expandedTitleMargin expandedTitleMarginBottom expandedTitleMarginEnd expandedTitleMarginStart expandedTitleMarginTop expandedTitleTextAppearance scrimAnimationDuration scrimVisibleHeightTrigger statusBarScrim title titleEnabled toolbarId
 styleable CollapsingToolbarLayout_Layout layout_collapseMode layout_collapseParallaxMultiplier
 styleable ColorStateListItem android_color android_alpha alpha

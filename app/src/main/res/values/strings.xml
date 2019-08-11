@@ -1,27 +1,32 @@
 <resources>
     <string name="app_name">List of new</string>
-    <string name="News">News list from NY Times</string>
-    <!--<string name="DesignEngineer">Design engineer and radio technician</string>
-    <string name="Master">Master’s degree in radio technician</string>-->
-    <string name="Description">"This application will help you keep up to date with the latest news "</string>
+    <string name="NYtimes">NY Times</string>
+    <string name="about_label">"About the application"</string>
+    <string name="Description">"This application will help you keep up to date with the latest news from NY Times"</string>
+    <string name="about_intro">Introduction at the beginning</string>
     <string name="developerFeedback">Developer Feedback:</string>
     <string name="Send">Send Message</string>
-    <string name="addresses" translatable="false">my mail</string>
-    <string name="subject" translatable="false">contacting</string>
-    <string name="LinkToTelegram" translatable="false">https://t.me/roman_ov</string>
     <string name="Hint">Enter a message…</string>
+    <string name="about_email_addresses" translatable="false">Email</string>
+    <string name="about_send_email_error">Sorry. You don\'t have any email client</string>
+    <string name="about_show_error_email_message">Empty text. Please input text</string>
+    <string name="about_subject">contacting about app NY Times</string>
+    <string name="about_open_icon_url_error">Sorry. You don\'t have an appropriate client</string>
+    <string name="telegram_icon_url" translatable="false">https://t.me/roman_ov</string>
+    <string name="github_icon_url" translatable="false">https://github.com/jrofor/ListOfNews</string>
+    <string name="nytimes_logo_url" translatable="false">https://www.nytimes.com/</string>
+    <string name="github_description">Github image</string>
+    <string name="telegram_description">Telegram image</string>
+    <string name="nytimes_logo_description">NY Times logo</string>
 
-    <string name="About">About the application</string>
-    <string name="categoryName1" translatable="false">DARWIN AVARDS</string>
-    <string name="categoryName2" translatable="false">CRIMINAL</string>
-    <string name="categoryName3" translatable="false">ANIMALS</string>
-    <string name="categoryName4" translatable="false">MUSIC</string>
+    <string name="categoryName">category Name</string>
     <string name="title" translatable="false">Text title</string>
-    <string name="textForText" translatable="false">TextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForTextTextForText</string>
+    <string name="details_title" translatable="false">...</string>
+    <string name="details_preview" translatable="false">...</string>
 
     <string name="NewsDetails_name" translatable="false">NewsDetails_name</string>
 
-    <!--Strings for news_recycler_activity -->
+    <!--Strings for fragment_news_recycler -->
     <string name="err_data_is_empty">There is no data for your request</string>
     <string name="btn_try_again">Try again</string>
     <string name="error_network">Network error. Please check your network connection and try again</string>
@@ -59,4 +64,14 @@
     <string name="cont_descr_decoration" translatable="false">Decoration</string>
 
     <string name="tvWelcome">Welcome!</string>
+
+    <!-- preference_for_IntroFragmentPagerAdapter-->
+    <string name="list_of_news">List of news</string>
+    <string name="details_of_the_news">Details of the news</string>
+    <string name="version_for_tablets">Version on tablet</string>
+    <string name="about_app">About the app</string>
+    <string name="good_news">Good news…</string>
+
+
 </resources>
+

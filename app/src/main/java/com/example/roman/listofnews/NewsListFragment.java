@@ -1,23 +1,23 @@
 package com.example.roman.listofnews;
 
-import android.content.Intent;
-
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 
 import com.example.roman.listofnews.data.Storage;
 import com.example.roman.listofnews.data.dataBase.NewsDatabaseConverter;
 import com.example.roman.listofnews.data.dataBase.NewsDatabaseRepository;
 import com.example.roman.listofnews.data.dataBase.NewsEntity;
+import com.example.roman.listofnews.ui.NewsDetailsFragmentListener;
 import com.example.roman.listofnews.ui.adapter.AllNewsItem;
 import com.example.roman.listofnews.ui.adapter.spinner.CategoriesSpinnerAdapter;
 import com.example.roman.listofnews.ux.NewsCategory;
@@ -35,6 +35,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -45,14 +46,15 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class NewsMainActivity extends AppCompatActivity {
+public class NewsListFragment extends Fragment {
 
     @Nullable
     private RecyclerView rvNews;
     @Nullable
     private Spinner spinnerCategories;
-
+    @Nullable
     private NewsRecyclerAdapter NewsAdapter;
+    @Nullable
     private CategoriesSpinnerAdapter categoriesAdapter;
 
     @Nullable
@@ -67,90 +69,142 @@ public class NewsMainActivity extends AppCompatActivity {
     private Button btnTryAgain;
     @Nullable
     private FloatingActionButton fabUpdate;
-
     /*@Nullable
     private Button errorAction;*/
-
     @Nullable
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     @Nullable
-    private NewsDatabaseRepository newsDatabaseRepository = new NewsDatabaseRepository(this);
+    private NewsDatabaseRepository newsDatabaseRepository;
     @Nullable
     private NewsDatabaseConverter databaseConverter = new NewsDatabaseConverter();
-    private static final String TAGroom = "RoomActivity";
+    private static final String TAG = "myLogs";
     private int mScrollOffset = 4;
+    private NewsDetailsFragmentListener listener;
+    private boolean isTwoPanel;
+    static final String ARGUMENT_IS_TWO_PANEL = "arg_is_two_panel";
 
+    public static NewsListFragment newInstance(boolean isTwoPanel) {
+        NewsListFragment newsListFragment = new NewsListFragment();
+        Bundle arguments = new Bundle();
+        arguments.putBoolean(ARGUMENT_IS_TWO_PANEL, isTwoPanel);
+        newsListFragment.setArguments(arguments);
+        return newsListFragment;
+    }
+    /*
+*     static final String ARGUMENT_PAGE_NUMBER = "arg_page_number";
+int pageNumber;
 
+public static PageFragment newInstance(int page) {
+    PageFragment pageFragment  = new PageFragment();
+    Bundle arguments = new Bundle();
+    arguments.putInt(ARGUMENT_PAGE_NUMBER, page);
+    pageFragment.setArguments(arguments);
+    return pageFragment;
+}
 
-    /*public interface OnItemClickListener {
-        void OnItemClick(int position); }*/
-    //@Nullable
-    //private Call<DefaultResponse<List<NewsItemDTO>>> ResponseTSHome;
+@Override
+public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    pageNumber = getArguments().getInt(ARGUMENT_PAGE_NUMBER);
+}*/
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        newsDatabaseRepository = new NewsDatabaseRepository(getActivity());
+        //checking where context
+        if (getActivity() instanceof NewsDetailsFragmentListener) {
+            listener = (NewsDetailsFragmentListener) getActivity();
+        }
 
-    /*private final NewsRecyclerAdapter.OnItemClickListener  newsListener = position -> {
-        final String EXTRA_MESSAGE = "extra:news";
-        Intent intent = new Intent(this, NewsDetailsActivity.class);
-        intent.putExtra(EXTRA_MESSAGE, position);
-        startActivity(intent);
-    };*/
+        isTwoPanel = getArguments().getBoolean(ARGUMENT_IS_TWO_PANEL);
+        Log.d(TAG, "--- ListFragment onAttach");
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.news_recycler_activity);
-        setupUi();
+        Log.d(TAG, "--- ListFragment onCreate");
+        //setContentView(R.layout.fragment_news_recycler);
+        //setupUi();
     }
 
+    @Nullable
     @Override
-    protected void onStart() {
-        super.onStart();
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_news_recycler, container, false);
+        Log.d(TAG, "--- ListFragment onCreateView");
+        setupUi(view);
+        Log.d(TAG, "ListFragment setupUi");
         setupUx();
+        Log.d(TAG, "ListFragment setupUx");
+        return view; //super.onCreateView(inflater, container, savedInstanceState);
+
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "--- ListFragment onStart");
+        /**/
+        checkingDatabaseForEmptiness();
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    public void onPause() {
+        Log.d(TAG, "--- ListFragment onPause");
         unbindUx();
+        super.onPause();
     }
 
     private void unbindUx() {
         btnTryAgain.setOnClickListener(null);
     }
 
-    private void setupUi() {
-        findView();
-        setupRecyclerViews();
+    private void setupUi(View view) {
+        findView(view);
+        setupRecyclerViews(view);
         setupSpinner();
         setupFabScroll();
+
     }
 
 
     private void setupUx() {
         //errorAction.setOnClickListener(view -> loadItem(categoriesAdapter.getSelectedCategory().serverValue()));
         //categoriesAdapter.setOnCategorySelectedListener(category -> loadItem(category.serverValue()), spinnerCategories);
+
+
         fabUpdate.setOnClickListener(v -> onClickFabUpdate());
         btnTryAgain.setOnClickListener(v -> onClickTryAgain(categoriesAdapter.getSelectedCategory().serverValue()));
-        //NewsAdapter.setOnClickNewsListener(AllNewsItem ->
-        //       NewsDetailsActivity.start(this, AllNewsItem));
-        NewsAdapter.setOnClickNewsListener(IdItem ->
-                NewsDetailsActivity.start(this, IdItem));
-        checkingDatabaseForEmptiness();
+        NewsAdapter.setOnClickNewsListener(new NewsRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void OnItemClick(@NonNull String IdItem) {
+                if (listener != null) {
+                    listener.onNewsDetailsByIdClicked(IdItem);
+                }
+            }
+        });
+        //checkingDatabaseForEmptiness();
     }
 
     private void checkingDatabase(int cnt) {
         //if DB not emptiness - declare categoriesAdapter and view items from DB on screen
          if (cnt > 0) {
-             categoriesAdapter.setOnCategorySelectedListener(category -> loadItem(category.serverValue()),spinnerCategories);
+             Log.d(TAG, "Database not emptiness");
              showState(State.HasData);
-             Log.d(TAGroom, "Database not emptiness");
              initViews();
          }
     }
 
     private void onClickFabUpdate() {
+        onSelectedListener(true);
         loadItem(categoriesAdapter.getSelectedCategory().serverValue());
-    }
 
+    }
+    private void onSelectedListener(boolean enable) {
+        if (enable) categoriesAdapter.setOnCategorySelectedListener(category -> loadItem(category.serverValue()), spinnerCategories);
+    }
     private void onClickTryAgain(@NonNull String category ) {
         loadItem(category);
     }
@@ -171,23 +225,10 @@ public class NewsMainActivity extends AppCompatActivity {
                         this::handleError);
         compositeDisposable.add(disposable);
 
-
-        /*ResponseTSHome.enqueue(new Callback<DefaultResponse<List<NewsItemDTO>>>() {
-            @Override
-            public void onResponse(@NonNull Call<DefaultResponse<List<NewsItemDTO>>> call,
-                                   @NonNull Response<DefaultResponse<List<NewsItemDTO>>> response) {
-                checkResponseAndShowState(response);
-            }
-
-            @Override
-            public void onFailure(@NonNull  Call<DefaultResponse<List<NewsItemDTO>>> call,
-                                  @NonNull Throwable t) {
-                handleError(t);
-            }
-        });*/
     }
 
     private void setupNews(List<AllNewsItem> newsItems) {
+        Log.d(TAG, "/// setupNews");
         showState(State.HasData);
         updateItems(newsItems);
         //clear database before update
@@ -198,15 +239,20 @@ public class NewsMainActivity extends AppCompatActivity {
 
     private void updateItems(@Nullable List<AllNewsItem> news) {
         if (NewsAdapter != null) NewsAdapter.replaceItems(news);
+
     }
 
     private void handleError (Throwable throwable) {
+        Log.d(TAG, "/// handleError");
         if (throwable instanceof IOException) {
             showState(State.NetworkError);
             return;
         }
         showState(State.NetworkError);
     }
+
+
+
 
 /**
 ********************************************Database methods****************************************
@@ -219,9 +265,9 @@ public class NewsMainActivity extends AppCompatActivity {
                 .subscribe(
                         () ->
                                 //Log.d(TAGroom, NewsEntityList.toString()),
-                                Log.d(TAGroom, "save NewsEntityList To Database"),
+                                Log.d(TAG, "save NewsEntityList To Database"),
                         throwable ->
-                                Log.e(TAGroom, throwable.toString()));
+                                Log.e(TAG, throwable.toString()));
         compositeDisposable.add(disposable);
     }
 
@@ -232,17 +278,18 @@ public class NewsMainActivity extends AppCompatActivity {
                 .subscribe( new Consumer<List<NewsEntity>>() {
                     @Override
                     public void accept(List<NewsEntity> newsEntities) throws Exception {
-                        //Log.d(TAGroom, newsEntities.toString());
-
+                        //Log.d(TAG, newsEntities.toString());
                         // updating Items in RecyclerView from Database with converting Entities to AllNewsItem
+                        showState(State.HasData);
                         updateItems(databaseConverter.fromDatabase(newsEntities)) ;
-                        Log.d(TAGroom, "updating Items in RecyclerView from Database");
+                        Log.d(TAG, "updating Items in RecyclerView from Database");
+
                     }
                 } ,
                             new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        Log.e(TAGroom, throwable.toString());
+                        Log.e(TAG, throwable.toString());
                     }
                 });
         compositeDisposable.add(disposable);
@@ -254,9 +301,9 @@ public class NewsMainActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         () ->
-                                Log.d(TAGroom, "deleteAllFromDatabase"),
+                                Log.d(TAG, "deleteAllFromDatabase"),
                         throwable ->
-                                Log.e(TAGroom, throwable.toString()));
+                                Log.e(TAG, throwable.toString()));
         compositeDisposable.add(disposable);
     }
 
@@ -379,26 +426,53 @@ public class NewsMainActivity extends AppCompatActivity {
         }
     }
 
-    private void findView() {
-        rvNews = findViewById(R.id.rv_news);
-        viewLoading = findViewById(R.id.fl_loading);
-        viewNoDate = findViewById(R.id.fl_no_data);
-        viewError = findViewById(R.id.ll_error);
-        tvError = findViewById(R.id.tv_error);
-        btnTryAgain = findViewById(R.id.bnt_try_again);
-        spinnerCategories = findViewById(R.id.spinner_categories);
-        fabUpdate = findViewById(R.id.fab_update);
+    private void findView(View view) {
+        rvNews = view.findViewById(R.id.rv_news);
+        viewLoading = view.findViewById(R.id.fl_loading);
+        viewNoDate = view.findViewById(R.id.fl_no_data);
+        viewError = view.findViewById(R.id.ll_error);
+        tvError = view.findViewById(R.id.tv_error);
+        btnTryAgain = view.findViewById(R.id.bnt_try_again);
+        spinnerCategories = view.findViewById(R.id.spinner_categories);
+        fabUpdate = view.findViewById(R.id.fab_update);
     }
-    private void setupRecyclerViews() {
-        NewsAdapter = new NewsRecyclerAdapter(this);
+    private void setupRecyclerViews(View view) {
+        NewsAdapter = new NewsRecyclerAdapter(getActivity());
         rvNews.setAdapter(NewsAdapter);
         int orientation = getResources().getConfiguration().orientation;
-        onChangeColumnsWithOrientation(orientation, rvNews);
+        onChangeColumnsWithOrientation(orientation, rvNews, view);
+    }
+
+    public boolean onCheckIsTwoPanel(boolean isTwoPanel){
+        return isTwoPanel;
+    }
+
+    public void onChangeColumnsWithOrientation(int orientation, RecyclerView recyclerView, View view) {
+        //This method helps change number of columns using Grid spanCount and helps add itemDecoration
+        // Checks the orientation of the screen and TwoPanel fragments for Tablets (if landscape on Tablets 1 column news)
+        /*if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        } else {
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        }*/
+            /*if (orientation == Configuration.ORIENTATION_PORTRAIT && !isTwoPanel)*/
+            DividerItemDecoration itemDecorator = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
+            itemDecorator.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(getActivity(), R.drawable.item_ecoration_size_4)));
+            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
+            recyclerView.addItemDecoration(itemDecorator);
+
+        /*if ((view.findViewById(R.id.tablet_ll)) == null && orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            DividerItemDecoration itemDecorator1 = new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL);
+            itemDecorator1.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(getActivity(), R.drawable.item_ecoration_size_4)));
+            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+            recyclerView.addItemDecoration(itemDecorator1);
+        }*/
+
     }
 
     private void setupSpinner() {
         final NewsCategory[] categories = NewsCategory.values();
-        categoriesAdapter = CategoriesSpinnerAdapter.createDefault(this, categories);
+        categoriesAdapter = CategoriesSpinnerAdapter.createDefault(getActivity(), categories);
         spinnerCategories.setAdapter(categoriesAdapter);
     }
 
@@ -426,38 +500,6 @@ public class NewsMainActivity extends AppCompatActivity {
     }
 
 
-    public void onChangeColumnsWithOrientation(int orientation, RecyclerView recyclerView) {
-        //This method helps change number of columns using Grid spanCount and helps add itemDecoration
-        // Checks the orientation of the screen
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            DividerItemDecoration itemDecorator = new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL);
-            itemDecorator.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(this, R.drawable.item_ecoration_size_4)));
-            recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-            recyclerView.addItemDecoration(itemDecorator);
-        } else if (orientation == Configuration.ORIENTATION_PORTRAIT){
-            DividerItemDecoration itemDecorator= new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-            itemDecorator.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(this, R.drawable.item_ecoration_size_4)));
-            recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
-            recyclerView.addItemDecoration(itemDecorator);
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu (Menu menu){
-        getMenuInflater().inflate(R.menu.menu_list, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case R.id.item1:
-                startActivity(new Intent(this, NewsAboutActivity.class));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
 
 
@@ -465,11 +507,17 @@ public class NewsMainActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onDestroy(){
-        Storage.setIntroShowAgain(this);
+    public void onDestroy(){
+
         compositeDisposable.dispose();
-        Log.d(TAGroom, "onDestroy()");
-        //Log.d(TAG2, "ActivityTwo: onDistroy");
         super.onDestroy();
+        Log.d(TAG, "--- ListFragment onDestroy");
+    }
+
+    @Override
+    public void onDetach() {
+        listener = null;
+        super.onDetach();
+        Log.d(TAG, "--- ListFragment onDetach");
     }
 }

@@ -6,8 +6,10 @@
     <!-- preference_for_background_Layuot-->
     <color name="backgroundL">#FFFFFF</color>
     <!-- preference_for_background_View-->
-    <color name="backgroundV">#ce2900</color>
-
+    <color name="backgroundV">#ce2900</color> <!--#ce2900 C8C8C8 fff59a-->
+    <!-- preference_for_about_Switch"-->
+    <color name="about_colorSw">#ce2900</color> <!--#fff59a-->
+    <color name="about_background_colorSw">#fffbd7</color>
     <!-- preference_for_error_View-->
     <color name="dark_gray">#212121</color>
     <color name="xxlight_gray">#E0E0E0</color>
