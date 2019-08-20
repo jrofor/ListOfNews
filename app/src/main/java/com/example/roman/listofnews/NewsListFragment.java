@@ -147,7 +147,7 @@ public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onStart();
         Log.d(TAG, "--- ListFragment onStart");
         /**/
-        checkingDatabaseForEmptiness();
+        //checkingDatabaseForEmptiness();
     }
 
     @Override
@@ -166,7 +166,7 @@ public void onCreate(@Nullable Bundle savedInstanceState) {
         setupRecyclerViews(view);
         setupSpinner();
         setupFabScroll();
-
+        checkingDatabaseForEmptiness();
     }
 
 

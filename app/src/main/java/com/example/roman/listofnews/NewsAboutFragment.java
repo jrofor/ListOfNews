@@ -1,12 +1,20 @@
 package com.example.roman.listofnews;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,13 +30,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.example.roman.listofnews.data.Storage;
+import com.example.roman.listofnews.data.background.ServiceUpdate;
+
+import java.util.Objects;
 
 public class NewsAboutFragment extends Fragment {
 
     @Nullable
     Switch switchIntro;
+    @Nullable
+    Switch switchUpdate;
     @Nullable
     Button sendMessageBtn;
     @Nullable
@@ -41,6 +55,8 @@ public class NewsAboutFragment extends Fragment {
     ImageView nyTimesLogo;
     private LinearLayout aboutMainLayout;
     final String TAG = "myLogs";
+    private static final String CHANNEL_ID = "LOAD_NEWS_CHANNEL";
+    private static final Integer NOTIFY_ID = 0;
 
     @Override
     public void onAttach(Context context) {
@@ -65,7 +81,8 @@ public class NewsAboutFragment extends Fragment {
     private void setupUi(View view) {
         //////////getActivity().getActionBar().setTitle(R.string.about_label);
         findView(view);
-        switchWork();
+        switchForIntro();
+        switchForUpdate();
         clickSendMessage();
         clickIcon();
     }
@@ -80,6 +97,7 @@ public class NewsAboutFragment extends Fragment {
     private void findView(View view) {
         aboutMainLayout = view.findViewById(R.id.about_main_ll);
         switchIntro = view.findViewById(R.id.about_introSw);
+        switchUpdate = view.findViewById(R.id.about_updateSw);
         messageEditT = view.findViewById(R.id.etEmailMessage);
         sendMessageBtn = view.findViewById(R.id.btnSendMessage);
         telegramIcon = view.findViewById(R.id.icon_telegram);
@@ -88,7 +106,7 @@ public class NewsAboutFragment extends Fragment {
 
     }
 
-    private void switchWork() {
+    private void switchForIntro() {
         if (switchIntro != null) {
             switchIntro.setChecked(Storage.checkSwitchIntro(getActivity()));
         }
@@ -104,6 +122,33 @@ public class NewsAboutFragment extends Fragment {
 
             }
         });
+    }
+
+    private void switchForUpdate() {
+        if (switchUpdate !=null) {
+            //
+        }
+
+        switchUpdate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean on) {
+                Intent intent = new Intent(getContext(), ServiceUpdate.class);
+                if (on) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        getContext().startForegroundService(intent);
+                    } else {
+                        getContext().startService(intent);
+                    }
+                    //getContext().startService(intent);
+                    //showNotification("Hello!");
+                } else {
+                    NotificationManager notificationManager = (NotificationManager) Objects.requireNonNull(getContext())
+                            .getSystemService(Context.NOTIFICATION_SERVICE);
+                    Objects.requireNonNull(notificationManager).cancel(NOTIFY_ID);
+                }
+            }
+        });
+
     }
 
     private void clickSendMessage() {

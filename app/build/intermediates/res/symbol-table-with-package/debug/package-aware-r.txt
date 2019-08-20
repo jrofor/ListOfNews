@@ -1060,7 +1060,6 @@ drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_telegram
 drawable image_news
-drawable image_news1
 drawable image_placeholder
 drawable item_ecoration_size_4
 drawable mtrl_snackbar_background
@@ -1094,6 +1093,7 @@ id SHIFT
 id SYM
 id about_introSw
 id about_main_ll
+id about_updateSw
 id action0
 id action_bar
 id action_bar_activity_content
@@ -1484,12 +1484,15 @@ string about_open_icon_url_error
 string about_send_email_error
 string about_show_error_email_message
 string about_subject
+string about_update
 string action_retry
 string app_name
 string appbar_scrolling_view_behavior
 string bottom_sheet_behavior
 string btn_try_again
+string cancel_click
 string categoryName
+string channel_name
 string character_counter_content_description
 string character_counter_pattern
 string cont_descr_decoration
@@ -1509,6 +1512,8 @@ string good_news
 string hide_bottom_view_on_scroll_behavior
 string list_of_news
 string mtrl_chip_close_icon_content_description
+string notiErrorText
+string notiSuccessText
 string nytimes_logo_description
 string nytimes_logo_url
 string password_toggle_content_description
@@ -1517,6 +1522,7 @@ string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
 string search_menu_title
+string startService
 string status_bar_notification_info_overflow
 string telegram_description
 string telegram_icon_url

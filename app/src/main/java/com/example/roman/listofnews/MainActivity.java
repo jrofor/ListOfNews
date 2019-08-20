@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
         isTwoPanel = findViewById(R.id.frame_details) != null;
         int countBackStack = getSupportFragmentManager().getBackStackEntryCount();
 
-            if (savedInstanceState == null) {
+        if (savedInstanceState == null) {
             // open in first time
             if (Storage.openFirstTime(this)){
                 startIntroFragment();
@@ -156,7 +156,9 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
             Fragment aboutByTag = getSupportFragmentManager().findFragmentByTag(F_ABOUT_TAG);
             Fragment detailsByTag = getSupportFragmentManager().findFragmentByTag(F_DETAILS_TAG);
             if (countBackStack >= 2) {
-                getSupportFragmentManager().popBackStack();
+                for (int i=countBackStack; i>1;  i--){
+                    getSupportFragmentManager().popBackStack();
+                }
                 NewsListFragment newsListFragment = NewsListFragment.newInstance(isTwoPanel);
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_list, newsListFragment, F_LIST_TAG)
