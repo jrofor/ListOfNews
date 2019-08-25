@@ -11,9 +11,11 @@ public class Storage {
     private static final String APP_PREFERENCES = "mySettings";
     private static final String APP_PREFERENCES_FirstTime = "FirstTime";
     private static final String APP_PREFERENCES_switchIntro = "switchIntro";
+    private static final String APP_PREFERENCES_switchUpdate = "switchUpdate";
+    private static final String APP_PREFERENCES_tagUploadWorkManager = "tagUploadWorkManager";
 
 
-    //private static final String APP_PREFERENCES_cnt = "cnt";
+ //-----------------------------------------------------------
 
     public static boolean openFirstTime  (Context context) {
         SharedPreferences mSettings;
@@ -29,6 +31,7 @@ public class Storage {
         editor.putBoolean(APP_PREFERENCES_FirstTime , false) ;
         editor.apply();
     }
+//-----------------------------------------------------------
 
     public static boolean checkSwitchIntro(Context context) {
         SharedPreferences mSettings;
@@ -52,24 +55,43 @@ public class Storage {
         editor.putBoolean(APP_PREFERENCES_switchIntro , false) ;
         editor.apply();
     }
+//-----------------------------------------------------------
 
-    /*public static void setCntIntro(Context context, int cntIntro) {
-        SharedPreferences mSettings;
-        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE); //1
-        SharedPreferences.Editor editor = mSettings.edit();  //2 //3
-        editor.putString(APP_PREFERENCES_cnt, valueOf(cntIntro)) ;
-        editor.apply();
-
-    }
-
-    public static int getCntIntro (Context context) {
-        int cntIntro;
+    public static boolean checkSwitchUpdate(Context context) {
         SharedPreferences mSettings;
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        cntIntro = (mSettings.getInt(APP_PREFERENCES_cnt, 0)) ;
+        boolean swUpdate = mSettings.getBoolean(APP_PREFERENCES_switchUpdate, false);
+        return swUpdate;
+    }
 
-        return cntIntro;
+    public static void setSwitchUpdateOn  (Context context) {
+        SharedPreferences mSettings;
+        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putBoolean(APP_PREFERENCES_switchUpdate ,true ) ;
+        editor.apply();
+    }
 
-    }*/
+    public static void setSwitchUpdateOff  (Context context) {
+        SharedPreferences mSettings;
+        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putBoolean(APP_PREFERENCES_switchUpdate , false) ;
+        editor.apply();
+    }
+
+    public static void setTagUploadWork (Context context) {
+        SharedPreferences mSettings;
+        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putString(APP_PREFERENCES_tagUploadWorkManager, "WORK_MANAGER_UPLOAD_TAG");
+        editor.apply();
+    }
+
+    public static String getTagUploadWork (Context context) {
+        SharedPreferences mSettings;
+        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        return mSettings.getString(APP_PREFERENCES_tagUploadWorkManager, "WORK_MANAGER_UPLOAD_TAG");
+    }
 
 }

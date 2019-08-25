@@ -26,6 +26,7 @@ import com.example.roman.listofnews.ux.TopStoriesMapper;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -80,6 +81,7 @@ public class ServiceUpdate extends Service {
                 .setContentText(getString(R.string.startService))
                 .setPriority(Notification.PRIORITY_DEFAULT)
                 .setWhen(System.currentTimeMillis())
+                //.setLights(Color.parseColor("blue"), 500, 500)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
         return notification;
@@ -95,11 +97,12 @@ public class ServiceUpdate extends Service {
         Disposable disposable = (Disposable) RestApi.getInstanse()
                 .getTSEndpoint()
                 .setSectionName("home")
-                //.timeout(1, TimeUnit.MINUTES)
-                .map(response ->
-                        TopStoriesMapper
-                                .map(response
-                                        .getNews()))
+                .map(response -> TopStoriesMapper.map(response.getNews()))
+                .timeout(1, TimeUnit.MINUTES)
+                .flatMap(aLong -> RestApi.getInstanse()
+                        .getTSEndpoint()
+                        .setSectionName("home")
+                        .map(response -> TopStoriesMapper.map(response.getNews())))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -185,7 +188,10 @@ public class ServiceUpdate extends Service {
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.enableLights(true);
-            channel.setLightColor(Color.WHITE);
+            channel.getLockscreenVisibility();
+            channel.setLightColor(Color.BLUE);
+            channel.shouldShowLights();
+            //channel.setLightColor(Color.parseColor("aqua"));
             channel.enableVibration(false);
             //NotificationManager notificationManager = this.getSystemService(NotificationManager.class);
             NotificationManager notificationManager = (NotificationManager) this

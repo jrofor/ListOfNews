@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:2:1-49:12
-INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:2:1-49:12
-INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:2:1-49:12
-INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:2:1-49:12
+ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:2:1-51:12
+INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:2:1-51:12
+INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:2:1-51:12
+INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:2:1-51:12
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\64868c8f68304aa6c2d8d8516a2aed74\AndroidManifest.xml:2:1-11:12
 MERGED from [com.github.bumptech.glide:glide:4.8.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\glide-4.8.0.aar\55bb3184706538fc1638f3a072fd1a86\AndroidManifest.xml:2:1-12:12
 MERGED from [com.android.support:design:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\452452e89371280010d3ae210602a84b\AndroidManifest.xml:17:1-24:12
@@ -13,9 +13,11 @@ MERGED from [com.android.support:cardview-v7:28.0.0] C:\Users\Roman_\.gradle\cac
 MERGED from [com.android.support:support-v4:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\support-v4-28.0.0.aar\78d71f783391785fb75b7998102b21c6\AndroidManifest.xml:17:1-22:12
 MERGED from [io.reactivex.rxjava2:rxandroid:2.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\rxandroid-2.1.0.aar\7bd45be19eca122ba6a0fc36cffd95cd\AndroidManifest.xml:15:1-20:12
 MERGED from [android.arch.persistence.room:rxjava2:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\rxjava2-1.1.1.aar\ed7b3d188a5612dec8a87d09211147c7\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:17:1-123:12
 MERGED from [android.arch.persistence.room:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\5f629fce5b3c7c6c4f41ea57416ea6ec\AndroidManifest.xml:17:1-22:12
 MERGED from [me.relex:circleindicator:1.2.2] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\circleindicator-1.2.2.aar\8847de45a9a99d46bbf915f79f262853\AndroidManifest.xml:2:1-12:12
 MERGED from [com.github.bumptech.glide:gifdecoder:4.8.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\gifdecoder-4.8.0.aar\d4d96b3b56d5e0f4263643f1a2c5ecc4\AndroidManifest.xml:2:1-11:12
+MERGED from [android.arch.lifecycle:extensions:1.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.0.aar\d711a1783091e86c9cbb42a17c9c2496\AndroidManifest.xml:17:1-30:12
 MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\a3447f2fc6aabc8b5e2d1a7a3c0197ff\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\fa5df6088a0ebc330ba6b41054e8c9eb\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\1811d4ac534d19c100710d9ec7839094\AndroidManifest.xml:17:1-22:12
@@ -36,31 +38,31 @@ MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Roman_\.gr
 MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\1daaf8ef13beeef1bce27fadf5022cef\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.persistence:db-framework:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\db-framework-1.1.1.aar\59bbebd534bc781de7bdce184d01c433\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.persistence:db:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\db-1.1.1.aar\a98a998b34d8914c3cf55f56bb1cb4f9\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\1e34f031c55f266ed77eaf7df4a2ff1c\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\6e32694189378fc91907ed394d1e9688\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\25ddc4cd556b6d7a596c0d39e5b21bfc\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\1451e219d98943a63f23e86a98961c3c\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\d474b3c5e2b78acd831311f21c72ae69\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\c60b96a7f80f1c5cf34ec8ffd092887d\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\864b6c98fb6a8d0708dd690daf7d0f4e\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:print:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\5d832b37e1d22a6cbbc26a566684162e\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\632811564885ab1df521680a83d30ec7\AndroidManifest.xml:17:1-22:12
-INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:2:1-49:12
-INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:2:1-49:12
-INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:2:1-49:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\1451e219d98943a63f23e86a98961c3c\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\1e34f031c55f266ed77eaf7df4a2ff1c\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\6e32694189378fc91907ed394d1e9688\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\25ddc4cd556b6d7a596c0d39e5b21bfc\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\d474b3c5e2b78acd831311f21c72ae69\AndroidManifest.xml:17:1-22:12
+INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:2:1-51:12
+INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:2:1-51:12
+INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:2:1-51:12
 	package
 		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:4:5-43
 		INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml
 		INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml
-		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:2:1-49:12
+		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:2:1-51:12
 		INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml
 	xmlns:tools
 		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml
-		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:2:1-49:12
+		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:2:1-51:12
 		INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:2:11-69
@@ -68,20 +70,30 @@ uses-permission#android.permission.INTERNET
 ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:6:5-67
 	android:name
 		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:6:22-64
-uses-permission#android.permission.FOREGROUND_SERVICE
-ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:7:5-76
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:7:5-79
+MERGED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:24:5-79
+MERGED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:24:5-79
 	android:name
-		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:7:22-74
+		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:7:22-76
+uses-permission#android.permission.FOREGROUND_SERVICE
+ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:8:5-76
+	android:name
+		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:8:22-74
 application
-ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:9:5-47:19
+ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:10:5-49:19
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\64868c8f68304aa6c2d8d8516a2aed74\AndroidManifest.xml:9:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\64868c8f68304aa6c2d8d8516a2aed74\AndroidManifest.xml:9:5-20
 MERGED from [com.github.bumptech.glide:glide:4.8.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\glide-4.8.0.aar\55bb3184706538fc1638f3a072fd1a86\AndroidManifest.xml:10:5-20
 MERGED from [com.github.bumptech.glide:glide:4.8.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\glide-4.8.0.aar\55bb3184706538fc1638f3a072fd1a86\AndroidManifest.xml:10:5-20
 MERGED from [com.android.support:design:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\452452e89371280010d3ae210602a84b\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\452452e89371280010d3ae210602a84b\AndroidManifest.xml:22:5-20
+MERGED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:27:5-121:19
+MERGED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:27:5-121:19
 MERGED from [com.github.bumptech.glide:gifdecoder:4.8.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\gifdecoder-4.8.0.aar\d4d96b3b56d5e0f4263643f1a2c5ecc4\AndroidManifest.xml:9:5-20
 MERGED from [com.github.bumptech.glide:gifdecoder:4.8.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\gifdecoder-4.8.0.aar\d4d96b3b56d5e0f4263643f1a2c5ecc4\AndroidManifest.xml:9:5-20
+MERGED from [android.arch.lifecycle:extensions:1.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.0.aar\d711a1783091e86c9cbb42a17c9c2496\AndroidManifest.xml:22:5-28:19
+MERGED from [android.arch.lifecycle:extensions:1.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.0.aar\d711a1783091e86c9cbb42a17c9c2496\AndroidManifest.xml:22:5-28:19
 MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\93165ac302d311d1d143c22b6614235f\AndroidManifest.xml:22:5-94
 MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\93165ac302d311d1d143c22b6614235f\AndroidManifest.xml:22:5-94
 MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\b7634968a4b6df1ccad3a4dba1bba1bf\AndroidManifest.xml:22:5-23:19
@@ -89,41 +101,43 @@ MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Roman_\.gr
 	android:appComponentFactory
 		ADDED from [com.android.support:support-compat:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\93165ac302d311d1d143c22b6614235f\AndroidManifest.xml:22:18-91
 	android:supportsRtl
-		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:15:9-35
+		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:16:9-35
 	android:label
-		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:13:9-41
+		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:14:9-41
 	android:roundIcon
-		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:14:9-54
+		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:15:9-54
 	android:configChanges
-		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:11:9-55
+		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:12:9-55
 	android:icon
-		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:12:9-43
+		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:13:9-43
 	android:allowBackup
-		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:10:9-36
+		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:11:9-36
 	android:theme
-		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:16:9-40
+		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:17:9-40
+	android:name
+		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:18:9-38
 activity#com.example.roman.listofnews.MainActivity
-ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:28:9-34:20
+ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:30:9-36:20
 	android:name
-		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:28:19-47
+		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:30:19-47
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:29:13-33:29
+ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:31:13-35:29
 action#android.intent.action.MAIN
-ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:30:17-69
+ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:32:17-69
 	android:name
-		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:30:25-66
+		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:32:25-66
 category#android.intent.category.LAUNCHER
-ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:32:17-77
+ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:34:17-77
 	android:name
-		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:32:27-74
+		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:34:27-74
 service#com.example.roman.listofnews.data.background.ServiceUpdate
-ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:43:9-46:40
+ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:45:9-48:40
 	android:enabled
-		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:45:13-35
+		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:47:13-35
 	android:exported
-		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:46:13-37
+		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:48:13-37
 	android:name
-		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:44:13-58
+		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:46:13-58
 uses-sdk
 INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml
@@ -146,12 +160,16 @@ MERGED from [io.reactivex.rxjava2:rxandroid:2.1.0] C:\Users\Roman_\.gradle\cache
 MERGED from [io.reactivex.rxjava2:rxandroid:2.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\rxandroid-2.1.0.aar\7bd45be19eca122ba6a0fc36cffd95cd\AndroidManifest.xml:18:5-43
 MERGED from [android.arch.persistence.room:rxjava2:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\rxjava2-1.1.1.aar\ed7b3d188a5612dec8a87d09211147c7\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.persistence.room:rxjava2:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\rxjava2-1.1.1.aar\ed7b3d188a5612dec8a87d09211147c7\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:21:5-44
+MERGED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:21:5-44
 MERGED from [android.arch.persistence.room:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\5f629fce5b3c7c6c4f41ea57416ea6ec\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.persistence.room:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\5f629fce5b3c7c6c4f41ea57416ea6ec\AndroidManifest.xml:20:5-44
 MERGED from [me.relex:circleindicator:1.2.2] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\circleindicator-1.2.2.aar\8847de45a9a99d46bbf915f79f262853\AndroidManifest.xml:8:5-10:41
 MERGED from [me.relex:circleindicator:1.2.2] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\circleindicator-1.2.2.aar\8847de45a9a99d46bbf915f79f262853\AndroidManifest.xml:8:5-10:41
 MERGED from [com.github.bumptech.glide:gifdecoder:4.8.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\gifdecoder-4.8.0.aar\d4d96b3b56d5e0f4263643f1a2c5ecc4\AndroidManifest.xml:5:5-7:41
 MERGED from [com.github.bumptech.glide:gifdecoder:4.8.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\gifdecoder-4.8.0.aar\d4d96b3b56d5e0f4263643f1a2c5ecc4\AndroidManifest.xml:5:5-7:41
+MERGED from [android.arch.lifecycle:extensions:1.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.0.aar\d711a1783091e86c9cbb42a17c9c2496\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:extensions:1.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.0.aar\d711a1783091e86c9cbb42a17c9c2496\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\a3447f2fc6aabc8b5e2d1a7a3c0197ff\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\a3447f2fc6aabc8b5e2d1a7a3c0197ff\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\fa5df6088a0ebc330ba6b41054e8c9eb\AndroidManifest.xml:20:5-44
@@ -192,16 +210,6 @@ MERGED from [android.arch.persistence:db-framework:1.1.1] C:\Users\Roman_\.gradl
 MERGED from [android.arch.persistence:db-framework:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\db-framework-1.1.1.aar\59bbebd534bc781de7bdce184d01c433\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.persistence:db:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\db-1.1.1.aar\a98a998b34d8914c3cf55f56bb1cb4f9\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.persistence:db:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\db-1.1.1.aar\a98a998b34d8914c3cf55f56bb1cb4f9\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\1e34f031c55f266ed77eaf7df4a2ff1c\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\1e34f031c55f266ed77eaf7df4a2ff1c\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\6e32694189378fc91907ed394d1e9688\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\6e32694189378fc91907ed394d1e9688\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\25ddc4cd556b6d7a596c0d39e5b21bfc\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\25ddc4cd556b6d7a596c0d39e5b21bfc\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\1451e219d98943a63f23e86a98961c3c\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\1451e219d98943a63f23e86a98961c3c\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\d474b3c5e2b78acd831311f21c72ae69\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\d474b3c5e2b78acd831311f21c72ae69\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\c60b96a7f80f1c5cf34ec8ffd092887d\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\c60b96a7f80f1c5cf34ec8ffd092887d\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\864b6c98fb6a8d0708dd690daf7d0f4e\AndroidManifest.xml:20:5-44
@@ -210,6 +218,16 @@ MERGED from [com.android.support:print:28.0.0] C:\Users\Roman_\.gradle\caches\tr
 MERGED from [com.android.support:print:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\5d832b37e1d22a6cbbc26a566684162e\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\632811564885ab1df521680a83d30ec7\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\632811564885ab1df521680a83d30ec7\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\1451e219d98943a63f23e86a98961c3c\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\1451e219d98943a63f23e86a98961c3c\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\1e34f031c55f266ed77eaf7df4a2ff1c\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\1e34f031c55f266ed77eaf7df4a2ff1c\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\6e32694189378fc91907ed394d1e9688\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\6e32694189378fc91907ed394d1e9688\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\25ddc4cd556b6d7a596c0d39e5b21bfc\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\25ddc4cd556b6d7a596c0d39e5b21bfc\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\d474b3c5e2b78acd831311f21c72ae69\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\d474b3c5e2b78acd831311f21c72ae69\AndroidManifest.xml:20:5-44
 INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml
 INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml
 	android:targetSdkVersion
@@ -220,3 +238,201 @@ INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src
 		INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml
 		ADDED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml
 		INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml
+uses-permission#android.permission.WAKE_LOCK
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:23:5-68
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:23:22-65
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:25:5-81
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:25:22-78
+provider#androidx.work.impl.WorkManagerInitializer
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:28:9-34:35
+	android:authorities
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:30:13-68
+	android:multiprocess
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:33:13-40
+	android:exported
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:32:13-37
+	tools:targetApi
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:34:13-32
+	android:directBootAware
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:31:13-44
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:29:13-69
+service#androidx.work.impl.background.systemalarm.SystemAlarmService
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:36:9-41:35
+	android:enabled
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:39:13-72
+	android:exported
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:40:13-37
+	tools:targetApi
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:41:13-32
+	android:directBootAware
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:38:13-44
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:37:13-88
+service#androidx.work.impl.background.systemjob.SystemJobService
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:42:9-48:35
+	android:enabled
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:45:13-70
+	android:exported
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:46:13-36
+	android:permission
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:47:13-69
+	tools:targetApi
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:48:13-32
+	android:directBootAware
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:44:13-44
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:43:13-84
+receiver#androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:50:9-55:35
+	android:enabled
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:53:13-35
+	android:exported
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:54:13-37
+	tools:targetApi
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:55:13-32
+	android:directBootAware
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:52:13-44
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:51:13-88
+receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:56:9-66:20
+	android:enabled
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:59:13-36
+	android:exported
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:60:13-37
+	tools:targetApi
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:61:13-32
+	android:directBootAware
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:58:13-44
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:57:13-106
+intent-filter#action:name:android.intent.action.ACTION_POWER_CONNECTED+action:name:android.intent.action.ACTION_POWER_DISCONNECTED
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:62:13-65:29
+action#android.intent.action.ACTION_POWER_CONNECTED
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:63:17-87
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:63:25-84
+action#android.intent.action.ACTION_POWER_DISCONNECTED
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:64:17-90
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:64:25-87
+receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:67:9-77:20
+	android:enabled
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:70:13-36
+	android:exported
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:71:13-37
+	tools:targetApi
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:72:13-32
+	android:directBootAware
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:69:13-44
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:68:13-104
+intent-filter#action:name:android.intent.action.BATTERY_LOW+action:name:android.intent.action.BATTERY_OKAY
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:73:13-76:29
+action#android.intent.action.BATTERY_OKAY
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:74:17-77
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:74:25-74
+action#android.intent.action.BATTERY_LOW
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:75:17-76
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:75:25-73
+receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:78:9-88:20
+	android:enabled
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:81:13-36
+	android:exported
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:82:13-37
+	tools:targetApi
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:83:13-32
+	android:directBootAware
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:80:13-44
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:79:13-104
+intent-filter#action:name:android.intent.action.DEVICE_STORAGE_LOW+action:name:android.intent.action.DEVICE_STORAGE_OK
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:84:13-87:29
+action#android.intent.action.DEVICE_STORAGE_LOW
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:85:17-83
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:85:25-80
+action#android.intent.action.DEVICE_STORAGE_OK
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:86:17-82
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:86:25-79
+receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:89:9-98:20
+	android:enabled
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:92:13-36
+	android:exported
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:93:13-37
+	tools:targetApi
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:94:13-32
+	android:directBootAware
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:91:13-44
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:90:13-103
+intent-filter#action:name:android.net.conn.CONNECTIVITY_CHANGE
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:95:13-97:29
+action#android.net.conn.CONNECTIVITY_CHANGE
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:96:17-79
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:96:25-76
+receiver#androidx.work.impl.background.systemalarm.RescheduleReceiver
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:99:9-110:20
+	android:enabled
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:102:13-36
+	android:exported
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:103:13-37
+	tools:targetApi
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:104:13-32
+	android:directBootAware
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:101:13-44
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:100:13-88
+intent-filter#action:name:android.intent.action.BOOT_COMPLETED+action:name:android.intent.action.TIMEZONE_CHANGED+action:name:android.intent.action.TIME_SET
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:105:13-109:29
+action#android.intent.action.BOOT_COMPLETED
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:106:17-79
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:106:25-76
+action#android.intent.action.TIME_SET
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:107:17-73
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:107:25-70
+action#android.intent.action.TIMEZONE_CHANGED
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:108:17-81
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:108:25-78
+receiver#androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:111:9-120:20
+	android:enabled
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:114:13-72
+	android:exported
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:115:13-37
+	tools:targetApi
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:116:13-32
+	android:directBootAware
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:113:13-44
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:112:13-99
+intent-filter#action:name:androidx.work.impl.background.systemalarm.UpdateProxies
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:117:13-119:29
+action#androidx.work.impl.background.systemalarm.UpdateProxies
+ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:118:17-98
+	android:name
+		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:118:25-95
+provider#android.arch.lifecycle.ProcessLifecycleOwnerInitializer
+ADDED from [android.arch.lifecycle:extensions:1.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.0.aar\d711a1783091e86c9cbb42a17c9c2496\AndroidManifest.xml:23:9-27:43
+	android:authorities
+		ADDED from [android.arch.lifecycle:extensions:1.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.0.aar\d711a1783091e86c9cbb42a17c9c2496\AndroidManifest.xml:25:13-68
+	android:multiprocess
+		ADDED from [android.arch.lifecycle:extensions:1.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.0.aar\d711a1783091e86c9cbb42a17c9c2496\AndroidManifest.xml:27:13-40
+	android:exported
+		ADDED from [android.arch.lifecycle:extensions:1.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.0.aar\d711a1783091e86c9cbb42a17c9c2496\AndroidManifest.xml:26:13-37
+	android:name
+		ADDED from [android.arch.lifecycle:extensions:1.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.0.aar\d711a1783091e86c9cbb42a17c9c2496\AndroidManifest.xml:24:13-83

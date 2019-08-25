@@ -23,4 +23,5 @@
     <string name="cancel_click">"отмена "</string>
     <string name="notiSuccessText">Новости обновлены</string>
     <string name="notiErrorText">Ошибка обновления</string>
+    <string name="messagePeriodicUpload">Обновления будут приходить каждые 2 часа при зарядке устройства.</string>
 </resources>

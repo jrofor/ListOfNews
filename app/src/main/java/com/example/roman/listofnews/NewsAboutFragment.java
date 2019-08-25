@@ -19,6 +19,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,12 +31,20 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.roman.listofnews.data.Storage;
 import com.example.roman.listofnews.data.background.ServiceUpdate;
+import com.example.roman.listofnews.data.background.UploadWork;
 
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
+
+import androidx.work.Constraints;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 public class NewsAboutFragment extends Fragment {
 
@@ -55,7 +64,6 @@ public class NewsAboutFragment extends Fragment {
     ImageView nyTimesLogo;
     private LinearLayout aboutMainLayout;
     final String TAG = "myLogs";
-    private static final String CHANNEL_ID = "LOAD_NEWS_CHANNEL";
     private static final Integer NOTIFY_ID = 0;
 
     @Override
@@ -126,7 +134,7 @@ public class NewsAboutFragment extends Fragment {
 
     private void switchForUpdate() {
         if (switchUpdate !=null) {
-            //
+            switchUpdate.setChecked(Storage.checkSwitchUpdate(getActivity()));
         }
 
         switchUpdate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -134,14 +142,11 @@ public class NewsAboutFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean on) {
                 Intent intent = new Intent(getContext(), ServiceUpdate.class);
                 if (on) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        getContext().startForegroundService(intent);
-                    } else {
-                        getContext().startService(intent);
-                    }
-                    //getContext().startService(intent);
-                    //showNotification("Hello!");
+                    Storage.setSwitchUpdateOn(getActivity());
+                    startPeriodicUploadService();
                 } else {
+                    Storage.setSwitchUpdateOff(getActivity());
+                    stopPeriodicUploadService();
                     NotificationManager notificationManager = (NotificationManager) Objects.requireNonNull(getContext())
                             .getSystemService(Context.NOTIFICATION_SERVICE);
                     Objects.requireNonNull(notificationManager).cancel(NOTIFY_ID);
@@ -149,6 +154,34 @@ public class NewsAboutFragment extends Fragment {
             }
         });
 
+    }
+
+    private void startPeriodicUploadService() {
+        Constraints workConstraints = new Constraints.Builder()
+                .setRequiresCharging(true)
+                .build();
+        //set tag. Tag will safe if user reload devise
+        Storage.setTagUploadWork(getActivity());
+        //for Test
+        /*OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(UploadWork.class)
+                .setConstraints(workConstraints)
+                .addTag(Storage.getTagUploadWork(getActivity()))
+                .build();*/
+
+        PeriodicWorkRequest workRequest = new PeriodicWorkRequest.Builder(UploadWork.class, 120, TimeUnit.MINUTES, 115, TimeUnit.MINUTES)
+                .setConstraints(workConstraints)
+                .addTag(Storage.getTagUploadWork(getActivity()))
+                .build();
+
+        WorkManager.getInstance().enqueue(workRequest);
+        Toast toast = Toast.makeText(getActivity(), getString(R.string.messagePeriodicUpload) , Toast.LENGTH_LONG);
+        TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+        if( v != null) v.setGravity(Gravity.CENTER);
+        toast.show();
+    }
+
+    private void stopPeriodicUploadService() {
+        WorkManager.getInstance().cancelAllWorkByTag(Storage.getTagUploadWork(getActivity()));
     }
 
     private void clickSendMessage() {
@@ -173,8 +206,6 @@ public class NewsAboutFragment extends Fragment {
         composeEmail(new String[]{getString(R.string.about_email_addresses)},
                 getString(R.string.about_subject),
                 message);
-
-
     }
 
     public void composeEmail(String[] addresses, String subject, String message) {

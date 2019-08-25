@@ -79,6 +79,7 @@
     <string name="cancel_click">cancel</string>
     <string name="notiSuccessText">News updated</string>
     <string name="notiErrorText">Error updating</string>
+    <string name="messagePeriodicUpload">"Updates will be coming every 2 hours when device charging."</string>
 
 </resources>
 
