@@ -35,6 +35,7 @@ public class NewsIntroFragment extends Fragment {
         super.onAttach(context);
         if (getActivity() instanceof NewsIntroFragmentListener) {
             listener = (NewsIntroFragmentListener) getActivity();
+            Log.d(TAG, "--- IntroFragment onAttach");
         }
     }
 
@@ -50,7 +51,7 @@ public class NewsIntroFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news_intro, container, false);
         setupUi(view);
-        Log.d(TAG, "NewsIntroFragment onCreate");
+        Log.d(TAG, "--- IntroFragment onCreateView");
         return view;
         }
 
@@ -103,7 +104,7 @@ public class NewsIntroFragment extends Fragment {
     @Override
     public void onDetach() {
         listener = null;
-        Log.d(TAG, "--- ListFragment onDetach");
+        Log.d(TAG, "--- IntroFragment onDetach");
         super.onDetach();
     }
 }

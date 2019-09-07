@@ -18,4 +18,10 @@
     <string name="about_open_icon_url_error">Извите. У вас нет подходящего клиента</string>
     <string name="about_subject" translatable="false">" связаться с приложением Нью-Йорк Таймс"</string>
     <string name="version_for_tablets">Версия для планшета</string>
+    <string name="channel_name">Обновление новостей</string>
+    <string name="about_update">Обновление новостей</string>
+    <string name="cancel_click">"отмена "</string>
+    <string name="notiSuccessText">Новости обновлены</string>
+    <string name="notiErrorText">Ошибка обновления</string>
+    <string name="messagePeriodicUpload">Обновления будут приходить каждые 2 часа при зарядке устройства.</string>
 </resources>

@@ -147,7 +147,14 @@ public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onStart();
         Log.d(TAG, "--- ListFragment onStart");
         /**/
-        checkingDatabaseForEmptiness();
+        //checkingDatabaseForEmptiness();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        // Set title bar
+        ((MainActivity) Objects.requireNonNull(getActivity())).setupActionBar(getString(R.string.app_name), false);
     }
 
     @Override
@@ -166,7 +173,7 @@ public void onCreate(@Nullable Bundle savedInstanceState) {
         setupRecyclerViews(view);
         setupSpinner();
         setupFabScroll();
-
+        checkingDatabaseForEmptiness();
     }
 
 

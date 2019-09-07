@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundL"
+    android:orientation="horizontal"
+    tools:context="com.example.roman.listofnews.NewsAboutFragment">
+
+    <ImageView
+        android:id="@+id/image_avatar"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/image_news"
+        android:focusableInTouchMode="true" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:scrollbarSize="@dimen/scrollbarSize"
+        android:scrollbarStyle="outsideInset"
+        android:layout_weight="3"
+        android:layout_marginTop="@dimen/BaseMargin"
+        android:layout_marginBottom="@dimen/BaseMargin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/EdgeMargin"
+                android:layout_marginStart="@dimen/EdgeMargin"
+                android:layout_marginTop="@dimen/marginStartT"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/heightView"
+                    android:layout_marginTop="@dimen/BaseMargin8"
+                    android:layout_marginBottom="@dimen/BaseMargin8"
+                    android:background="@color/backgroundV" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/BaseMargin8"
+                    android:text="@string/Description"
+                    android:textSize="@dimen/textSize" />
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/BaseMargin8">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/about_intro"
+                        android:textSize="@dimen/textSize"
+                        android:layout_gravity="start"/>
+
+                    <Switch
+                        android:id="@+id/about_introSw"
+                        android:theme="@style/switchStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:checked="false" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/BaseMargin8">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/about_update"
+                        android:textSize="@dimen/textSize"
+                        android:layout_gravity="start"/>
+
+                    <Switch
+                        android:id="@+id/about_updateSw"
+                        android:theme="@style/switchStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:checked="false" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/heightView"
+                    android:background="@color/backgroundV"
+                    android:layout_marginBottom="@dimen/BaseMargin8"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/engineer" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/marginStartT"
+                        android:text="@string/developerFeedback"
+                        android:textSize="@dimen/textSize" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/etEmailMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/BaseMargin"
+                    android:hint="@string/Hint"
+                    android:inputType="textMultiLine"
+                    android:lines="2" />
+
+                <Button
+                    android:id="@+id/btnSendMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="@dimen/scrollbarSize"
+                    android:layout_marginTop="@dimen/BaseMargin"
+                    android:background="@color/backgroundL"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="@dimen/BaseMargin"
+                    android:paddingStart="@dimen/BaseMargin"
+                    android:text="@string/Send"
+                    android:textColor="@color/backgroundV"
+                    android:textSize="@dimen/textSize" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/BaseMargin"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/icon_github"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/BaseMargin8"
+                        android:contentDescription="@string/github_description"
+                        android:padding="@dimen/BaseMargin"
+                        android:src="@drawable/ic_github" />
+
+                    <ImageView
+                        android:id="@+id/icon_telegram"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/BaseMargin8"
+                        android:contentDescription="@string/telegram_description"
+                        android:padding="@dimen/BaseMargin"
+                        android:src="@drawable/ic_telegram" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/logo_nytimes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/BaseMargin8"
+                    android:layout_gravity="center"
+                    android:src="@drawable/poweredby_nytimes_200a"
+                    android:contentDescription="@string/nytimes_logo_description"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>
+

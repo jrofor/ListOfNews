@@ -1,5 +1,6 @@
 package com.example.roman.listofnews;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -7,10 +8,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,13 +22,28 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.roman.listofnews.data.Storage;
+import com.example.roman.listofnews.data.background.ServiceUpdate;
+import com.example.roman.listofnews.data.background.UploadWork;
+
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
+
+import androidx.work.Constraints;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 public class NewsAboutFragment extends Fragment {
 
+    private static final int LAYOUT = R.layout.fragment_news_about;
+
     @Nullable
     Switch switchIntro;
+    @Nullable
+    Switch switchUpdate;
     @Nullable
     Button sendMessageBtn;
     @Nullable
@@ -41,6 +56,7 @@ public class NewsAboutFragment extends Fragment {
     ImageView nyTimesLogo;
     private LinearLayout aboutMainLayout;
     final String TAG = "myLogs";
+    private static final Integer NOTIFY_ID = 0;
 
     @Override
     public void onAttach(Context context) {
@@ -57,15 +73,15 @@ public class NewsAboutFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.about_activity, container, false);
+        View view = inflater.inflate(LAYOUT, container, false);
         setupUi(view);
         return view;
     }
 
     private void setupUi(View view) {
-        //////////getActivity().getActionBar().setTitle(R.string.about_label);
         findView(view);
-        switchWork();
+        switchForIntro();
+        switchForUpdate();
         clickSendMessage();
         clickIcon();
     }
@@ -80,6 +96,7 @@ public class NewsAboutFragment extends Fragment {
     private void findView(View view) {
         aboutMainLayout = view.findViewById(R.id.about_main_ll);
         switchIntro = view.findViewById(R.id.about_introSw);
+        switchUpdate = view.findViewById(R.id.about_updateSw);
         messageEditT = view.findViewById(R.id.etEmailMessage);
         sendMessageBtn = view.findViewById(R.id.btnSendMessage);
         telegramIcon = view.findViewById(R.id.icon_telegram);
@@ -88,7 +105,7 @@ public class NewsAboutFragment extends Fragment {
 
     }
 
-    private void switchWork() {
+    private void switchForIntro() {
         if (switchIntro != null) {
             switchIntro.setChecked(Storage.checkSwitchIntro(getActivity()));
         }
@@ -104,6 +121,57 @@ public class NewsAboutFragment extends Fragment {
 
             }
         });
+    }
+
+    private void switchForUpdate() {
+        if (switchUpdate !=null) {
+            switchUpdate.setChecked(Storage.checkSwitchUpdate(getActivity()));
+        }
+
+        switchUpdate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean on) {
+                if (on) {
+                    Storage.setSwitchUpdateOn(getActivity());
+                    startPeriodicUploadService();
+                } else {
+                    Storage.setSwitchUpdateOff(getActivity());
+                    stopPeriodicUploadService();
+                    NotificationManager notificationManager = (NotificationManager) Objects.requireNonNull(getContext())
+                            .getSystemService(Context.NOTIFICATION_SERVICE);
+                    Objects.requireNonNull(notificationManager).cancel(NOTIFY_ID);
+                }
+            }
+        });
+
+    }
+
+    private void startPeriodicUploadService() {
+        Constraints workConstraints = new Constraints.Builder()
+                .setRequiresCharging(true)
+                .build();
+        //set tag. Tag will safe if user reload devise
+        Storage.setTagUploadWork(getActivity());
+        //for Test
+        /*OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(UploadWork.class)
+                .setConstraints(workConstraints)
+                .addTag(Storage.getTagUploadWork(getActivity()))
+                .build();*/
+
+        PeriodicWorkRequest workRequest = new PeriodicWorkRequest.Builder(UploadWork.class, 120, TimeUnit.MINUTES, 115, TimeUnit.MINUTES)
+                .setConstraints(workConstraints)
+                .addTag(Storage.getTagUploadWork(getActivity()))
+                .build();
+
+        WorkManager.getInstance().enqueue(workRequest);
+        Toast toast = Toast.makeText(getActivity(), getString(R.string.messagePeriodicUpload) , Toast.LENGTH_LONG);
+        TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+        if( v != null) v.setGravity(Gravity.CENTER);
+        toast.show();
+    }
+
+    private void stopPeriodicUploadService() {
+        WorkManager.getInstance().cancelAllWorkByTag(Storage.getTagUploadWork(getActivity()));
     }
 
     private void clickSendMessage() {
@@ -128,8 +196,6 @@ public class NewsAboutFragment extends Fragment {
         composeEmail(new String[]{getString(R.string.about_email_addresses)},
                 getString(R.string.about_subject),
                 message);
-
-
     }
 
     public void composeEmail(String[] addresses, String subject, String message) {
@@ -169,6 +235,13 @@ public class NewsAboutFragment extends Fragment {
             return;
         }
         startActivity(urlIntent);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        // Set title bar
+        ((MainActivity) Objects.requireNonNull(getActivity())).setupActionBar(getString(R.string.about_label), true);
     }
 
     @Override

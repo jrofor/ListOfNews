@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">List of new</string>
     <string name="NYtimes">NY Times</string>
-    <string name="about_label">"About the application"</string>
+    <string name="about_label">"About the app"</string>
     <string name="Description">"This application will help you keep up to date with the latest news from NY Times"</string>
     <string name="about_intro">Introduction at the beginning</string>
+    <string name="about_update">Updating news</string>
     <string name="developerFeedback">Developer Feedback:</string>
     <string name="Send">Send Message</string>
     <string name="Hint">Enter a message…</string>
@@ -72,6 +73,13 @@
     <string name="about_app">About the app</string>
     <string name="good_news">Good news…</string>
 
+    <!-- preference_for_notification_update-->
+    <string name="channel_name">Updating news</string>
+    <string name="startService">Updating news</string>
+    <string name="cancel_click">cancel</string>
+    <string name="notiSuccessText">News updated</string>
+    <string name="notiErrorText">Error updating</string>
+    <string name="messagePeriodicUpload">"Updates will be coming every 2 hours when device charging."</string>
 
 </resources>
 

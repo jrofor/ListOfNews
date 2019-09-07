@@ -110,7 +110,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
                     Log.d(TAG, createId);
                 }catch (NullPointerException e){
                     Toast.makeText(context, errDbOutMessage,Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, errDbOutMessage);
+                    Log.d(TAG, String.valueOf(e));
                 }
             }
         });

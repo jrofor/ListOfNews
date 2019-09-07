@@ -62,5 +62,7 @@ dependencies {
 
     implementation 'me.relex:circleindicator:1.2.2'
 
+    implementation 'android.arch.work:work-runtime:1.0.1'
+
 
 }
