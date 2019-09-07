@@ -1,22 +1,13 @@
 package com.example.roman.listofnews;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -42,11 +33,12 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import androidx.work.Constraints;
-import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
 public class NewsAboutFragment extends Fragment {
+
+    private static final int LAYOUT = R.layout.fragment_news_about;
 
     @Nullable
     Switch switchIntro;
@@ -81,13 +73,12 @@ public class NewsAboutFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.about_activity, container, false);
+        View view = inflater.inflate(LAYOUT, container, false);
         setupUi(view);
         return view;
     }
 
     private void setupUi(View view) {
-        //////////getActivity().getActionBar().setTitle(R.string.about_label);
         findView(view);
         switchForIntro();
         switchForUpdate();
@@ -140,7 +131,6 @@ public class NewsAboutFragment extends Fragment {
         switchUpdate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean on) {
-                Intent intent = new Intent(getContext(), ServiceUpdate.class);
                 if (on) {
                     Storage.setSwitchUpdateOn(getActivity());
                     startPeriodicUploadService();
@@ -245,6 +235,13 @@ public class NewsAboutFragment extends Fragment {
             return;
         }
         startActivity(urlIntent);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        // Set title bar
+        ((MainActivity) Objects.requireNonNull(getActivity())).setupActionBar(getString(R.string.about_label), true);
     }
 
     @Override

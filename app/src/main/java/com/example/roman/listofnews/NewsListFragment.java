@@ -151,6 +151,13 @@ public void onCreate(@Nullable Bundle savedInstanceState) {
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+        // Set title bar
+        ((MainActivity) Objects.requireNonNull(getActivity())).setupActionBar(getString(R.string.app_name), false);
+    }
+
+    @Override
     public void onPause() {
         Log.d(TAG, "--- ListFragment onPause");
         unbindUx();

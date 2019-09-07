@@ -16,6 +16,7 @@ import com.example.roman.listofnews.data.Storage;
 import com.example.roman.listofnews.ui.NewsDetailsFragmentListener;
 import com.example.roman.listofnews.ui.NewsIntroFragmentListener;
 
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NewsIntroFragmentListener, NewsDetailsFragmentListener {
     private static final String TAG = "myLogs";
@@ -31,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
         super.onCreate(savedInstanceState);
         Log.d(TAG, "--- mainActivity onCreate");
         setContentView(R.layout.activity_main);
-        setupActionBar();
         isTwoPanel = findViewById(R.id.frame_details) != null;
         int countBackStack = getSupportFragmentManager().getBackStackEntryCount();
 
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
                         .replace(R.id.frame_list, newsListFragment, F_LIST_TAG)
                         .addToBackStack(null) //for convenient closure
                         .commit();
+                saveStateFragment();
             }
 
         } else {
@@ -66,15 +67,6 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
             }
         }
 
-        // to save idItem during reorientation
-        stateFragment = (SelectionStateFragment) getSupportFragmentManager()
-                .findFragmentByTag("headless");
-        if (stateFragment == null) {
-            stateFragment = new SelectionStateFragment();
-            getSupportFragmentManager().beginTransaction()
-                    .add(stateFragment, "headless")
-                    .commit();
-        }
 
         if (isTwoPanel) {
             Fragment introByTag = getSupportFragmentManager().findFragmentByTag(F_INTRO_TAG);
@@ -198,13 +190,6 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
     }
 
     private void startIntroFragment(){
-        //create first fragment
-        NewsListFragment newsListFragment = NewsListFragment.newInstance(isTwoPanel);
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frame_list, newsListFragment, F_LIST_TAG)
-                .addToBackStack(null) //for convenient closure
-                .commit();
-
         //create intro fragment
         if (isTwoPanel) {
             findViewById(R.id.frame_full_screen).setVisibility(View.VISIBLE);
@@ -237,8 +222,27 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
             //cleaning addBackStack added in startIntroFragment
             getSupportFragmentManager().popBackStack();
         }
+
+        //create first fragment
+        NewsListFragment newsListFragment = NewsListFragment.newInstance(isTwoPanel);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame_list, newsListFragment, F_LIST_TAG)
+                .addToBackStack(null) //for convenient closure
+                .commit();
+        saveStateFragment();
     }
 
+    private void saveStateFragment() {
+        // to save idItem during reorientation
+        stateFragment = (SelectionStateFragment) getSupportFragmentManager()
+                .findFragmentByTag("headless");
+        if (stateFragment == null) {
+            stateFragment = new SelectionStateFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(stateFragment, "headless")
+                    .commit();
+        }
+    }
 
     @Override
     public void onNewsDetailsByIdClicked(@NonNull String idItem) {
@@ -345,10 +349,15 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
         super.onBackPressed();
     }
 
-    private void setupActionBar(){
+    public void setupActionBar(String title, Boolean addBackButton){
         final ActionBar ab = getSupportActionBar();
         final ActionBar actionBar = Preconditions.checkNotNull(ab);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle(title);
+        if (addBackButton) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        } else {
+            actionBar.setDisplayHomeAsUpEnabled(false);
+        }
     }
 
 

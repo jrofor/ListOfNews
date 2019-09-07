@@ -19,6 +19,8 @@ import com.bumptech.glide.Glide;
 import com.example.roman.listofnews.data.dataBase.NewsDatabaseRepository;
 import com.example.roman.listofnews.data.dataBase.NewsEntity;
 
+import java.util.Objects;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -39,10 +41,8 @@ public class NewsDetailsFragment extends Fragment {
 
     private static final String TAG = "myLogs";
     private static final String ARGUMENT_NEWS_ITEM = "arg_idNewsItem"; //args:
-    //private static final String EXTRA_NEWS_ITEM = "extra:idNewsItem";
     private String idItem;
-    //final String Id = (String) getIntent().getSerializableExtra(EXTRA_NEWS_ITEM);
-
+    private String titleActionBar;
 
     public static NewsDetailsFragment newInstance(String idNewsItem) {
         NewsDetailsFragment newsDetailsFragment = new NewsDetailsFragment();
@@ -59,18 +59,9 @@ public class NewsDetailsFragment extends Fragment {
     @Nullable
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    //*DataUtils newss = (DataUtils) getIntent().getSerializableExtra("extra:news");
-    //*List<NewsItem> newss = new ArrayList<>();
-    //*newss.add(DataUtils.generateNews().get(newsPosition);)
-
-    //private Context context;
-    //private final List<AllNewsItem> news = new ArrayList<>();
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(LAYOUT);
-        //Id = getIntent().getStringExtra(EXTRA_NEWS_ITEM);
     }
 
     @Nullable
@@ -105,10 +96,10 @@ public class NewsDetailsFragment extends Fragment {
     }
 
     private void setupOpeningNewsDetails (@NonNull String idItem) {
-        getInEntitybyIdFromDatabase(idItem);
+        getInEntityByIdFromDatabase(idItem);
     }
 
-    private void getInEntitybyIdFromDatabase(@NonNull String idItem) {
+    private void getInEntityByIdFromDatabase(@NonNull String idItem) {
         Disposable disposable = newsDatabaseRepository.getEntitybyIdFromDatabase(idItem)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -122,6 +113,9 @@ public class NewsDetailsFragment extends Fragment {
         fullTextView.setText(newsEntity.getPreviewText());
         Glide.with(this).load(newsEntity.getImageUrl()).into(imageView);
         textDateView.setText(newsEntity.getUpdatedDate());
+        titleActionBar = (newsEntity.getTitle());
+        // Set title bar
+        ((MainActivity) Objects.requireNonNull(getActivity())).setupActionBar(titleActionBar,true);
     }
 
 
@@ -131,17 +125,13 @@ public class NewsDetailsFragment extends Fragment {
         imageView =  (ImageView) view.findViewById(R.id.details_image_avatar);
         textDateView = (TextView) view.findViewById(R.id.details_textDate);
         categoryView =  (TextView) view.findViewById(R.id.details_category);
-
-        //int newsPosition = getIntent().getIntExtra("extra:news",0);
-        //bind(news.get(newsPosition));
     }
 
 
     @Override
     public void onDestroy(){
         compositeDisposable.dispose();
-        Log.d(TAG, "NewsDetailsFragment onDestroy()");
-        //Log.d(TAG2, "ActivityTwo: onDistroy");
+        Log.d(TAG, "--- NewsDetailsFragment onDestroy");
         super.onDestroy();
     }
 }
