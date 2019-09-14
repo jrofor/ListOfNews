@@ -80,15 +80,15 @@ public class Storage {
         editor.apply();
     }
 
-    public static void setTagUploadWork (Context context) {
+    /*public static void setTagUploadWork (Context context) {
         SharedPreferences mSettings;
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putString(APP_PREFERENCES_tagUploadWorkManager, "WORK_MANAGER_UPLOAD_TAG");
         editor.apply();
-    }
+    }*/
 
-    public static String getTagUploadWork (Context context) {
+    public static String getTagUpdateWork (Context context) {
         SharedPreferences mSettings;
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         return mSettings.getString(APP_PREFERENCES_tagUploadWorkManager, "WORK_MANAGER_UPLOAD_TAG");

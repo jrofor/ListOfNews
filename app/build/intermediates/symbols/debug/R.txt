@@ -1483,7 +1483,7 @@ int string about_email_addresses 0x7f0e002e
 int string about_intro 0x7f0e002f
 int string about_label 0x7f0e0030
 int string about_open_icon_url_error 0x7f0e0031
-int string about_send_email_error 0x7f0e0032
+int string about_send_email_error_client 0x7f0e0032
 int string about_show_error_email_message 0x7f0e0033
 int string about_subject 0x7f0e0034
 int string about_update 0x7f0e0035
@@ -1513,7 +1513,7 @@ int string github_icon_url 0x7f0e004c
 int string good_news 0x7f0e004d
 int string hide_bottom_view_on_scroll_behavior 0x7f0e004e
 int string list_of_news 0x7f0e004f
-int string messagePeriodicUpload 0x7f0e0050
+int string messagePeriodicUpdate 0x7f0e0050
 int string mtrl_chip_close_icon_content_description 0x7f0e0051
 int string notiErrorText 0x7f0e0052
 int string notiSuccessText 0x7f0e0053

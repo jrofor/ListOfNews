@@ -5220,7 +5220,7 @@ public final class R {
     public static final int about_intro=0x7f0e002f;
     public static final int about_label=0x7f0e0030;
     public static final int about_open_icon_url_error=0x7f0e0031;
-    public static final int about_send_email_error=0x7f0e0032;
+    public static final int about_send_email_error_client=0x7f0e0032;
     public static final int about_show_error_email_message=0x7f0e0033;
     public static final int about_subject=0x7f0e0034;
     public static final int about_update=0x7f0e0035;
@@ -5250,7 +5250,7 @@ public final class R {
     public static final int good_news=0x7f0e004d;
     public static final int hide_bottom_view_on_scroll_behavior=0x7f0e004e;
     public static final int list_of_news=0x7f0e004f;
-    public static final int messagePeriodicUpload=0x7f0e0050;
+    public static final int messagePeriodicUpdate=0x7f0e0050;
     public static final int mtrl_chip_close_icon_content_description=0x7f0e0051;
     public static final int notiErrorText=0x7f0e0052;
     public static final int notiSuccessText=0x7f0e0053;
