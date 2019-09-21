@@ -1,5 +1,6 @@
 package com.example.roman.listofnews;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -49,6 +50,12 @@ public class NewsDetailsFragment extends MvpAppCompatFragment implements NewsDet
         bundle.putString(ARGUMENT_NEWS_ITEM,idNewsItem);
         newsDetailsFragment.setArguments(bundle);
         return newsDetailsFragment;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        newsDatabaseRepository = new NewsDatabaseRepository(getActivity());
     }
 
     @Override

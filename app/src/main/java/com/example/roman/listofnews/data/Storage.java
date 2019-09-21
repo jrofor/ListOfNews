@@ -2,6 +2,7 @@ package com.example.roman.listofnews.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 
 import static java.lang.String.valueOf;
 
@@ -13,6 +14,7 @@ public class Storage {
     private static final String APP_PREFERENCES_switchIntro = "switchIntro";
     private static final String APP_PREFERENCES_switchUpdate = "switchUpdate";
     private static final String APP_PREFERENCES_tagUploadWorkManager = "tagUploadWorkManager";
+    private static final String APP_PREFERENCES_selectedPositionCategory = "selectedPositionCategory";
 
 
  //-----------------------------------------------------------
@@ -92,6 +94,21 @@ public class Storage {
         SharedPreferences mSettings;
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         return mSettings.getString(APP_PREFERENCES_tagUploadWorkManager, "WORK_MANAGER_UPLOAD_TAG");
+    }
+
+    public static void setSelectedPositionCategory (Context context, int position){
+        SharedPreferences mSettings;
+        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mSettings.edit();
+        //editor.putString(APP_PREFERENCES_selectedCategory , category) ;
+        editor.putInt(APP_PREFERENCES_selectedPositionCategory , position) ;
+        editor.apply();
+    }
+
+    public static int getSelectedPositionCategory (Context context) {
+        SharedPreferences mSettings;
+        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        return mSettings.getInt(APP_PREFERENCES_selectedPositionCategory, 0);
     }
 
 }

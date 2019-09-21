@@ -1407,7 +1407,7 @@ layout design_text_input_password_icon
 layout fragment_news_about
 layout fragment_news_details
 layout fragment_news_intro
-layout fragment_news_recycler
+layout fragment_news_list
 layout item_news
 layout layout_error
 layout mtrl_layout_snackbar
@@ -1517,7 +1517,8 @@ string list_of_news
 string messagePeriodicUpdate
 string mtrl_chip_close_icon_content_description
 string notiErrorText
-string notiSuccessText
+string notiSuccessText_News_from_the
+string notiSuccessText_updated
 string nytimes_logo_description
 string nytimes_logo_url
 string password_toggle_content_description
