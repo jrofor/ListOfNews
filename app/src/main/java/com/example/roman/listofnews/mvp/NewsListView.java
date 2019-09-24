@@ -17,5 +17,4 @@ public interface NewsListView extends MvpView {
 
     void updateItems(@NonNull List<AllNewsItem> newsItems);
 
-    void showResultCheckingDatabase(@NonNull int cnt);
 }

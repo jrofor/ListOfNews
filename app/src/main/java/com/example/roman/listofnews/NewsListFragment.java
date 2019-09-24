@@ -74,8 +74,6 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     @Nullable
     private View viewLoading;
     @Nullable
-    private View viewNoDate;
-    @Nullable
     private View viewError;
     @Nullable
     private TextView tvError;
@@ -83,19 +81,16 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     private Button btnTryAgain;
     @Nullable
     private FloatingActionButton fabUpdate;
-    /*@Nullable
-    private Button errorAction;*/
     @Nullable
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     @Nullable
     private NewsDatabaseRepository newsDatabaseRepository;
-    @Nullable
-    private NewsDatabaseConverter databaseConverter = new NewsDatabaseConverter();
     private static final String TAG = "myLogs";
     private int mScrollOffset = 4;
     private NewsDetailsFragmentListener listener;
     private boolean isTwoPanel;
     static final String ARGUMENT_IS_TWO_PANEL = "arg_is_two_panel";
+    private String currentState;
 
     public static NewsListFragment newInstance(boolean isTwoPanel) {
         NewsListFragment newsListFragment = new NewsListFragment();
@@ -131,8 +126,7 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
         Log.d(TAG, "--- ListFragment onCreateView");
         setupUi(view);
         //Log.d(TAG, "ListFragment setupUi");
-        return view; //super.onCreateView(inflater, container, savedInstanceState);
-
+        return view;
     }
 
 
@@ -156,6 +150,9 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     public void onPause() {
         Log.d(TAG, "--- ListFragment onPause");
         unbindUx();
+        Storage.setCurrentState(getActivity(), currentState);
+        Log.d(TAG, "*** onPause " + currentState);
+        //newsListPresenter.saveCurrentState(currentState, newsDatabaseRepository);
         super.onPause();
     }
 
@@ -169,13 +166,14 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
         setupRecyclerViews(view);
         setupSpinner();
         setupFabScroll();
-        newsListPresenter.checkingDatabase(newsDatabaseRepository);
+        currentState = Storage.getCurrentState(getActivity());
+        Log.d(TAG, "*** setupUi " + currentState);
+        newsListPresenter.setCurrentScreenState(newsDatabaseRepository, currentState);
     }
 
     private void setupUx() {
-        //errorAction.setOnClickListener(view -> loadItem(categoriesAdapter.getSelectedCategory().serverValue()));
         spinnerCategories.setOnTouchListener(spinnerOnTouch);
-        fabUpdate.setOnClickListener(v -> onClickFabUpdate());
+        fabUpdate.setOnClickListener(v -> onClickFabUpdate(categoriesAdapter.getSelectedCategory().serverValue()));
         btnTryAgain.setOnClickListener(v -> onClickTryAgain(categoriesAdapter.getSelectedCategory().serverValue()));
         NewsAdapter.setOnClickNewsListener(IdItem -> {
             if (listener != null) {
@@ -199,55 +197,14 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
         }
     };
 
-    @Override
-     public void showResultCheckingDatabase(int cnt) {
-        //if DB not emptiness - declare categoriesAdapter and view items from DB on screen
-         if (cnt > 0) {
-             Log.d(TAG, "Database not emptiness");
-             showState(State.HasData);
-             newsListPresenter.initViews(newsDatabaseRepository);
-         } else {
-             Log.d(TAG, "/// database is empty");
-             showState(State.HasNoData);
-         }
-    }
 
-    private void onClickFabUpdate() {
-        newsListPresenter.loadItem(categoriesAdapter.getSelectedCategory().serverValue(), newsDatabaseRepository);
-
-    }
-
-    private void onClickTryAgain(@NonNull String category ) {
+    private void onClickFabUpdate(@NonNull String category) {
         newsListPresenter.loadItem(category, newsDatabaseRepository);
     }
 
-    /*private void loadItem(@NonNull String category) {
-        showState(State.Loading);
-        final Disposable disposable = (Disposable) RestApi.getInstanse()
-                .getTSEndpoint()
-                .setSectionName(category)
-                .map(response ->
-                        TopStoriesMapper
-                                .map(response
-                                        .getNews()))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        this::setupNews,
-                        this::handleError);
-        compositeDisposable.add(disposable);
-
-    }*/
-
-    /*private void setupNews(List<AllNewsItem> newsItems) {
-        Log.d(TAG, "/// setupNews");
-        showState(State.HasData);
-        updateItems(newsItems);
-        //clear database before update
-        deleteAllFromDatabaseWithRoom();
-        //Convert to Entities and save List AllNewsItem to database
-        saveToDatabaseWithRoom(databaseConverter.toDatabase(newsItems));
-    }*/
+    private void onClickTryAgain(@NonNull String category) {
+        newsListPresenter.loadItem(category, newsDatabaseRepository);
+    }
 
     @Override
     public void updateItems(@Nullable List<AllNewsItem> news) {
@@ -255,183 +212,52 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
 
     }
 
-    /*private void handleError (Throwable throwable) {
-        Log.d(TAG, "/// handleError");
-        if (throwable instanceof IOException) {
-            showState(State.NetworkError);
-            return;
-        }
-        showState(State.NetworkError);
-    }*/
-
-
-
-
-/**
-********************************************Database methods****************************************
-**/
-
-    private void saveToDatabaseWithRoom(List<NewsEntity> NewsEntityList) {
-        Disposable disposable = newsDatabaseRepository.saveToDatabase(NewsEntityList)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        () ->
-                                //Log.d(TAGroom, NewsEntityList.toString()),
-                                Log.d(TAG, "save NewsEntityList To Database"),
-                        throwable ->
-                                Log.e(TAG, throwable.toString()));
-        compositeDisposable.add(disposable);
-    }
-
-    private void initViews() {
-        Disposable disposable = newsDatabaseRepository.getDataFromDatabase()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe( new Consumer<List<NewsEntity>>() {
-                    @Override
-                    public void accept(List<NewsEntity> newsEntities) throws Exception {
-                        //Log.d(TAG, newsEntities.toString());
-                        // updating Items in RecyclerView from Database with converting Entities to AllNewsItem
-                        showState(State.HasData);
-                        updateItems(databaseConverter.fromDatabase(newsEntities)) ;
-                        Log.d(TAG, "updating Items in RecyclerView from Database");
-
-                    }
-                } ,
-                            new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Log.e(TAG, throwable.toString());
-                    }
-                });
-        compositeDisposable.add(disposable);
-    }
-
-    private void deleteAllFromDatabaseWithRoom() {
-        Disposable disposable = newsDatabaseRepository.deleteAllFromDatabase()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        () ->
-                                Log.d(TAG, "deleteAllFromDatabase"),
-                        throwable ->
-                                Log.e(TAG, throwable.toString()));
-        compositeDisposable.add(disposable);
-    }
-
-    private void checkingDatabaseForEmptiness() {
-        newsListPresenter.checkingDatabase(newsDatabaseRepository);
-        /*Disposable disposable = newsDatabaseRepository.checkDataInDatabase()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        this::checkingDatabase);
-        compositeDisposable.add(disposable);*/
-    }
-
-    //getinEntitybyIdFromDatabase  getEntitybyIdFromDatabase
-
-
-
-    /*private void subscribeToData() {
-        Disposable disposable = newsDatabaseRepository.getDataObservable()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe( new Consumer<List<NewsEntity>>() {
-                    @Override
-                    public void accept(List<NewsEntity> newsEntities) throws Exception {
-                        Log.d(TAGroom, newsEntities.toString());
-                        //
-
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Log.e(TAGroom, throwable.toString());
-                    }
-                });
-        compositeDisposable.add(disposable);
-    }*/
-
 /**
 ****************************************************************************************************
 **/
-    //private void checkResponseAndShowState(@NonNull Response<DefaultResponse<List<NewsItemDTO>>> response) {
-    /*private void checkResponseAndShowState(@NonNull Response<List<AllNewsItem>> response) {
-
-        if (!response.isSuccessful()) {
-            showState(State.ServerError);
-            return;
-        }
-
-        //final DefaultResponse<List<NewsItemDTO>> body = response.body();
-        final List<AllNewsItem> body = response.body();
-
-        if (body == null) {
-            showState(State.HasData);
-            return;
-        }
-
-        final List<NewsItemDTO> data = body.getData();
-        final List<NewsItemDTO> data = body.getData();
-
-        if (data == null) {
-            showState(State.HasNoData);
-            return;
-        }
-
-        if (data.isEmpty()) {
-            showState(State.HasNoData);
-            return;
-        }
-
-        //NewsAdapter.replaceItems(data);
-         NewsAdapter.replaceItems(body);
-        showState(State.HasData);
-    } */
 
     @Override
     public void showState(@NonNull State state) {
 
         switch (state) {
             case Loading:
-
+                currentState = State.Loading.name();
                 rvNews.setVisibility(View.GONE);
                 viewError.setVisibility(View.GONE);
-                viewNoDate.setVisibility(View.GONE);
+                //viewNoDate.setVisibility(View.GONE);
 
                 viewLoading.setVisibility(View.VISIBLE);
                 break;
 
-            /*case ServerError:
-                rvNews.setVisibility(View.GONE);
-                viewNoDate.setVisibility(View.GONE);
-                viewLoading.setVisibility(View.GONE);
-
-                tvError.setText(getText(R.string.error_server));
-                viewError.setVisibility(View.VISIBLE);
-                break;*/
-
             case HasData:
+                currentState = State.HasData.name();
                 viewError.setVisibility(View.GONE);
-                viewNoDate.setVisibility(View.GONE);
                 viewLoading.setVisibility(View.GONE);
 
                 rvNews.setVisibility(View.VISIBLE);
                 break;
 
+            case ServerError:
+                currentState = State.ServerError.name();
+                rvNews.setVisibility(View.GONE);
+                viewLoading.setVisibility(View.GONE);
+
+                tvError.setText(getText(R.string.error_server));
+                viewError.setVisibility(View.VISIBLE);
+                break;
+
             case HasNoData:
-                viewError.setVisibility(View.GONE);
+                currentState = State.HasNoData.name();
                 viewLoading.setVisibility(View.GONE);
                 rvNews.setVisibility(View.GONE);
 
-                viewNoDate.setVisibility(View.VISIBLE);
+                tvError.setText(getText(R.string.err_data_is_empty));
+                viewError.setVisibility(View.VISIBLE);
                 break;
 
             case NetworkError:
+                currentState = State.NetworkError.name();
                 rvNews.setVisibility(View.GONE);
-                viewNoDate.setVisibility(View.GONE);
                 viewLoading.setVisibility(View.GONE);
 
                 tvError.setText(getText(R.string.error_network));
@@ -443,7 +269,6 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     private void findView(View view) {
         rvNews = view.findViewById(R.id.rv_news);
         viewLoading = view.findViewById(R.id.fl_loading);
-        viewNoDate = view.findViewById(R.id.fl_no_data);
         viewError = view.findViewById(R.id.ll_error);
         tvError = view.findViewById(R.id.tv_error);
         btnTryAgain = view.findViewById(R.id.bnt_try_again);

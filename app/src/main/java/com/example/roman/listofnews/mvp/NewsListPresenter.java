@@ -11,7 +11,6 @@ import com.example.roman.listofnews.data.dataBase.NewsEntity;
 import com.example.roman.listofnews.mvp.common.BasePresenter;
 import com.example.roman.listofnews.ui.State;
 import com.example.roman.listofnews.ui.adapter.AllNewsItem;
-import com.example.roman.listofnews.ux.DefaultResponse;
 import com.example.roman.listofnews.ux.RestApi;
 import com.example.roman.listofnews.ux.TopStoriesMapper;
 
@@ -22,7 +21,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Response;
 
 @InjectViewState
 public class NewsListPresenter extends BasePresenter<NewsListView> {
@@ -75,7 +73,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
             getViewState().showState(State.NetworkError);
             return;
         }
-        getViewState().showState(State.NetworkError);
+        getViewState().showState(State.ServerError);
     }
 
     /**
@@ -95,7 +93,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         disposeOnDestroy(disposable);
     }
 
-    public void initViews(@NonNull NewsDatabaseRepository newsDatabaseRepository) {
+    private void initViews(@NonNull NewsDatabaseRepository newsDatabaseRepository) {
         Disposable disposable = newsDatabaseRepository.getDataFromDatabase()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -126,18 +124,33 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         disposeOnDestroy(disposable);
     }
 
-    public void checkingDatabase(@NonNull NewsDatabaseRepository newsDatabaseRepository) {
+    public void setCurrentScreenState(@NonNull NewsDatabaseRepository newsDatabaseRepository, String state) {
+        if (State.valueOf(state).equals(State.HasData)) {
+            checkingDatabase(newsDatabaseRepository);
+        } else {
+            getViewState().showState(State.valueOf(state));
+        }
+    }
+
+    private void checkingDatabase(@NonNull NewsDatabaseRepository newsDatabaseRepository) {
         Disposable disposable = newsDatabaseRepository.checkDataInDatabase()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         cnt ->
-                                showResultCheckingDB(cnt));
+                                showResultCheckingDB(cnt, newsDatabaseRepository));
         disposeOnDestroy(disposable);
     }
 
-    private void showResultCheckingDB(@NonNull int cnt) {
-        getViewState().showResultCheckingDatabase(cnt);
+    private void showResultCheckingDB(@NonNull int cnt, NewsDatabaseRepository newsDatabaseRepository) {
+        //if DB not emptiness - declare categoriesAdapter and view items from DB on screen
+        if (cnt > 0) {
+            Log.d(TAG, "Database not emptiness");
+            initViews(newsDatabaseRepository);
+        } else {
+            Log.d(TAG, "/// database is empty");
+            getViewState().showState(State.HasNoData);
+        }
     }
 
 }
