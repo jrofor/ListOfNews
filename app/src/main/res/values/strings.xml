@@ -9,13 +9,13 @@
     <string name="Send">Send Message</string>
     <string name="Hint">Enter a message…</string>
     <string name="about_email_addresses" translatable="false">Email</string>
-    <string name="about_send_email_error">Sorry. You don\'t have any email client</string>
-    <string name="about_show_error_email_message">Empty text. Please input text</string>
-    <string name="about_subject">contacting about app NY Times</string>
-    <string name="about_open_icon_url_error">Sorry. You don\'t have an appropriate client</string>
+    <string name="about_send_email_error_client">Sorry. You don\'t have any email client</string>
+    <string name="about_show_error_email_message">Empty text. Please input message</string>
+    <string name="about_subject">Contacting about app NY Times</string>
+    <string name="about_open_icon_url_error">Sorry. You don\'t have an appropriate client (web browser)</string>
     <string name="telegram_icon_url" translatable="false">https://t.me/roman_ov</string>
     <string name="github_icon_url" translatable="false">https://github.com/jrofor/ListOfNews</string>
-    <string name="nytimes_logo_url" translatable="false">https://www.nytimes.com/</string>
+    <string name="nytimes_logo_url" translatable="false">https://help.nytimes.com/hc/en-us/articles/115014792127-Copyright-notice</string>
     <string name="github_description">Github image</string>
     <string name="telegram_description">Telegram image</string>
     <string name="nytimes_logo_description">NY Times logo</string>
@@ -27,11 +27,11 @@
 
     <string name="NewsDetails_name" translatable="false">NewsDetails_name</string>
 
-    <!--Strings for fragment_news_recycler -->
-    <string name="err_data_is_empty">There is no data for your request</string>
+    <!--Strings for fragment_news_list -->
+    <string name="err_data_is_empty">Please update the list of news or change your request.</string>
     <string name="btn_try_again">Try again</string>
-    <string name="error_network">Network error. Please check your network connection and try again</string>
-    <string name="error_server">Server error. Probably sample token is done</string>
+    <string name="error_network">Network error. Please check your network connection and try again.</string>
+    <string name="error_server">Server error.</string>
 
     <string name="top_stories_category_home">Home</string>
     <string name="top_stories_category_opinion">Opinion</string>
@@ -77,9 +77,10 @@
     <string name="channel_name">Updating news</string>
     <string name="startService">Updating news</string>
     <string name="cancel_click">cancel</string>
-    <string name="notiSuccessText">News updated</string>
+    <string name="notiSuccessText_News_from_the">"News from the "</string>
+    <string name="notiSuccessText_updated">updated</string>
     <string name="notiErrorText">Error updating</string>
-    <string name="messagePeriodicUpload">"Updates will be coming every 2 hours when device charging."</string>
+    <string name="messagePeriodicUpdate">"Updates will be coming every 3 hours when device charging."</string>
 
 </resources>
 

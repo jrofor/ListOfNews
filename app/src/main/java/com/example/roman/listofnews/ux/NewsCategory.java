@@ -1,6 +1,7 @@
 package com.example.roman.listofnews.ux;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import com.example.roman.listofnews.R;
 
@@ -48,6 +49,15 @@ public enum NewsCategory {
     @NonNull
     public String serverValue(){
         return serverValue;
+    }
+
+    @Nullable
+    public static NewsCategory findCategoryByPosition(int pos) {
+        for(NewsCategory v : values()){
+            //if( v.serverValue().equals(sV)) return v;
+            if(v.ordinal() == pos) return v;
+        }
+        return null;
     }
 
 }

@@ -7,16 +7,19 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 
+import com.arellomobile.mvp.MvpAppCompatFragment;
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.roman.listofnews.data.Storage;
 import com.example.roman.listofnews.data.dataBase.NewsDatabaseConverter;
 import com.example.roman.listofnews.data.dataBase.NewsDatabaseRepository;
 import com.example.roman.listofnews.data.dataBase.NewsEntity;
+import com.example.roman.listofnews.mvp.NewsListPresenter;
+import com.example.roman.listofnews.mvp.NewsListView;
 import com.example.roman.listofnews.ui.NewsDetailsFragmentListener;
 import com.example.roman.listofnews.ui.adapter.AllNewsItem;
 import com.example.roman.listofnews.ui.adapter.spinner.CategoriesSpinnerAdapter;
@@ -34,6 +37,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -46,7 +50,17 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class NewsListFragment extends Fragment {
+public class NewsListFragment extends MvpAppCompatFragment implements NewsListView {
+
+    private static final int LAYOUT = R.layout.fragment_news_list;
+
+    @InjectPresenter
+    NewsListPresenter newsListPresenter;
+
+    @ProvidePresenter
+    NewsListPresenter provideNewsListPresenter() {
+        return new NewsListPresenter(RestApi.getInstanse());
+    }
 
     @Nullable
     private RecyclerView rvNews;
@@ -60,8 +74,6 @@ public class NewsListFragment extends Fragment {
     @Nullable
     private View viewLoading;
     @Nullable
-    private View viewNoDate;
-    @Nullable
     private View viewError;
     @Nullable
     private TextView tvError;
@@ -69,19 +81,16 @@ public class NewsListFragment extends Fragment {
     private Button btnTryAgain;
     @Nullable
     private FloatingActionButton fabUpdate;
-    /*@Nullable
-    private Button errorAction;*/
     @Nullable
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     @Nullable
     private NewsDatabaseRepository newsDatabaseRepository;
-    @Nullable
-    private NewsDatabaseConverter databaseConverter = new NewsDatabaseConverter();
     private static final String TAG = "myLogs";
     private int mScrollOffset = 4;
     private NewsDetailsFragmentListener listener;
     private boolean isTwoPanel;
     static final String ARGUMENT_IS_TWO_PANEL = "arg_is_two_panel";
+    private String currentState;
 
     public static NewsListFragment newInstance(boolean isTwoPanel) {
         NewsListFragment newsListFragment = new NewsListFragment();
@@ -90,23 +99,7 @@ public class NewsListFragment extends Fragment {
         newsListFragment.setArguments(arguments);
         return newsListFragment;
     }
-    /*
-*     static final String ARGUMENT_PAGE_NUMBER = "arg_page_number";
-int pageNumber;
 
-public static PageFragment newInstance(int page) {
-    PageFragment pageFragment  = new PageFragment();
-    Bundle arguments = new Bundle();
-    arguments.putInt(ARGUMENT_PAGE_NUMBER, page);
-    pageFragment.setArguments(arguments);
-    return pageFragment;
-}
-
-@Override
-public void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    pageNumber = getArguments().getInt(ARGUMENT_PAGE_NUMBER);
-}*/
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -124,21 +117,16 @@ public void onCreate(@Nullable Bundle savedInstanceState) {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "--- ListFragment onCreate");
-        //setContentView(R.layout.fragment_news_recycler);
-        //setupUi();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_news_recycler, container, false);
+        View view = inflater.inflate(LAYOUT, container, false);
         Log.d(TAG, "--- ListFragment onCreateView");
         setupUi(view);
-        Log.d(TAG, "ListFragment setupUi");
-        setupUx();
-        Log.d(TAG, "ListFragment setupUx");
-        return view; //super.onCreateView(inflater, container, savedInstanceState);
-
+        //Log.d(TAG, "ListFragment setupUi");
+        return view;
     }
 
 
@@ -146,7 +134,8 @@ public void onCreate(@Nullable Bundle savedInstanceState) {
     public void onStart() {
         super.onStart();
         Log.d(TAG, "--- ListFragment onStart");
-        /**/
+        setupUx();
+        //Log.d(TAG, "ListFragment setupUx");
         //checkingDatabaseForEmptiness();
     }
 
@@ -161,11 +150,15 @@ public void onCreate(@Nullable Bundle savedInstanceState) {
     public void onPause() {
         Log.d(TAG, "--- ListFragment onPause");
         unbindUx();
+        Storage.setCurrentState(getActivity(), currentState);
+        Log.d(TAG, "*** onPause " + currentState);
+        //newsListPresenter.saveCurrentState(currentState, newsDatabaseRepository);
         super.onPause();
     }
 
     private void unbindUx() {
         btnTryAgain.setOnClickListener(null);
+        fabUpdate.setOnClickListener(null);
     }
 
     private void setupUi(View view) {
@@ -173,258 +166,98 @@ public void onCreate(@Nullable Bundle savedInstanceState) {
         setupRecyclerViews(view);
         setupSpinner();
         setupFabScroll();
-        checkingDatabaseForEmptiness();
+        currentState = Storage.getCurrentState(getActivity());
+        Log.d(TAG, "*** setupUi " + currentState);
+        newsListPresenter.setCurrentScreenState(newsDatabaseRepository, currentState);
     }
-
 
     private void setupUx() {
-        //errorAction.setOnClickListener(view -> loadItem(categoriesAdapter.getSelectedCategory().serverValue()));
-        //categoriesAdapter.setOnCategorySelectedListener(category -> loadItem(category.serverValue()), spinnerCategories);
-
-
-        fabUpdate.setOnClickListener(v -> onClickFabUpdate());
+        spinnerCategories.setOnTouchListener(spinnerOnTouch);
+        fabUpdate.setOnClickListener(v -> onClickFabUpdate(categoriesAdapter.getSelectedCategory().serverValue()));
         btnTryAgain.setOnClickListener(v -> onClickTryAgain(categoriesAdapter.getSelectedCategory().serverValue()));
-        NewsAdapter.setOnClickNewsListener(new NewsRecyclerAdapter.OnItemClickListener() {
-            @Override
-            public void OnItemClick(@NonNull String IdItem) {
-                if (listener != null) {
-                    listener.onNewsDetailsByIdClicked(IdItem);
-                }
+        NewsAdapter.setOnClickNewsListener(IdItem -> {
+            if (listener != null) {
+                listener.onNewsDetailsByIdClicked(IdItem);
             }
         });
-        //checkingDatabaseForEmptiness();
     }
 
-    private void checkingDatabase(int cnt) {
-        //if DB not emptiness - declare categoriesAdapter and view items from DB on screen
-         if (cnt > 0) {
-             Log.d(TAG, "Database not emptiness");
-             showState(State.HasData);
-             initViews();
-         }
+    private View.OnTouchListener spinnerOnTouch = new View.OnTouchListener() {
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                categoriesAdapter.setOnCategorySelectedListener(new CategoriesSpinnerAdapter.OnCategorySelectedListener() {
+                    @Override
+                    public void onSelected(@NonNull NewsCategory category) {
+                        Log.d(TAG, "--- ListFragment onSelected");
+                        newsListPresenter.loadItem(category.serverValue(), newsDatabaseRepository);
+                    }
+                }, spinnerCategories);
+            }
+            return false;
+        }
+    };
+
+
+    private void onClickFabUpdate(@NonNull String category) {
+        newsListPresenter.loadItem(category, newsDatabaseRepository);
     }
 
-    private void onClickFabUpdate() {
-        onSelectedListener(true);
-        loadItem(categoriesAdapter.getSelectedCategory().serverValue());
-
-    }
-    private void onSelectedListener(boolean enable) {
-        if (enable) categoriesAdapter.setOnCategorySelectedListener(category -> loadItem(category.serverValue()), spinnerCategories);
-    }
-    private void onClickTryAgain(@NonNull String category ) {
-        loadItem(category);
+    private void onClickTryAgain(@NonNull String category) {
+        newsListPresenter.loadItem(category, newsDatabaseRepository);
     }
 
-    private void loadItem(@NonNull String category) {
-        showState(State.Loading);
-        final Disposable disposable = (Disposable) RestApi.getInstanse()
-                .getTSEndpoint()
-                .setSectionName(category)
-                .map(response ->
-                        TopStoriesMapper
-                                .map(response
-                                        .getNews()))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        this::setupNews,
-                        this::handleError);
-        compositeDisposable.add(disposable);
-
-    }
-
-    private void setupNews(List<AllNewsItem> newsItems) {
-        Log.d(TAG, "/// setupNews");
-        showState(State.HasData);
-        updateItems(newsItems);
-        //clear database before update
-        deleteAllFromDatabaseWithRoom();
-        //Convert to Entities and save List AllNewsItem to database
-        saveToDatabaseWithRoom(databaseConverter.toDatabase(newsItems));
-    }
-
-    private void updateItems(@Nullable List<AllNewsItem> news) {
+    @Override
+    public void updateItems(@Nullable List<AllNewsItem> news) {
         if (NewsAdapter != null) NewsAdapter.replaceItems(news);
 
     }
 
-    private void handleError (Throwable throwable) {
-        Log.d(TAG, "/// handleError");
-        if (throwable instanceof IOException) {
-            showState(State.NetworkError);
-            return;
-        }
-        showState(State.NetworkError);
-    }
-
-
-
-
-/**
-********************************************Database methods****************************************
-**/
-
-    private void saveToDatabaseWithRoom(List<NewsEntity> NewsEntityList) {
-        Disposable disposable = newsDatabaseRepository.saveToDatabase(NewsEntityList)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        () ->
-                                //Log.d(TAGroom, NewsEntityList.toString()),
-                                Log.d(TAG, "save NewsEntityList To Database"),
-                        throwable ->
-                                Log.e(TAG, throwable.toString()));
-        compositeDisposable.add(disposable);
-    }
-
-    private void initViews() {
-        Disposable disposable = newsDatabaseRepository.getDataFromDatabase()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe( new Consumer<List<NewsEntity>>() {
-                    @Override
-                    public void accept(List<NewsEntity> newsEntities) throws Exception {
-                        //Log.d(TAG, newsEntities.toString());
-                        // updating Items in RecyclerView from Database with converting Entities to AllNewsItem
-                        showState(State.HasData);
-                        updateItems(databaseConverter.fromDatabase(newsEntities)) ;
-                        Log.d(TAG, "updating Items in RecyclerView from Database");
-
-                    }
-                } ,
-                            new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Log.e(TAG, throwable.toString());
-                    }
-                });
-        compositeDisposable.add(disposable);
-    }
-
-    private void deleteAllFromDatabaseWithRoom() {
-        Disposable disposable = newsDatabaseRepository.deleteAllFromDatabase()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        () ->
-                                Log.d(TAG, "deleteAllFromDatabase"),
-                        throwable ->
-                                Log.e(TAG, throwable.toString()));
-        compositeDisposable.add(disposable);
-    }
-
-    private void checkingDatabaseForEmptiness() {
-        Disposable disposable = newsDatabaseRepository.checkDataInDatabase()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        this::checkingDatabase);
-        compositeDisposable.add(disposable);
-    }
-
-    //getinEntitybyIdFromDatabase  getEntitybyIdFromDatabase
-
-
-
-    /*private void subscribeToData() {
-        Disposable disposable = newsDatabaseRepository.getDataObservable()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe( new Consumer<List<NewsEntity>>() {
-                    @Override
-                    public void accept(List<NewsEntity> newsEntities) throws Exception {
-                        Log.d(TAGroom, newsEntities.toString());
-                        //
-
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Log.e(TAGroom, throwable.toString());
-                    }
-                });
-        compositeDisposable.add(disposable);
-    }*/
-
 /**
 ****************************************************************************************************
 **/
-    //private void checkResponseAndShowState(@NonNull Response<DefaultResponse<List<NewsItemDTO>>> response) {
-    /*private void checkResponseAndShowState(@NonNull Response<List<AllNewsItem>> response) {
 
-        if (!response.isSuccessful()) {
-            showState(State.ServerError);
-            return;
-        }
-
-        //final DefaultResponse<List<NewsItemDTO>> body = response.body();
-        final List<AllNewsItem> body = response.body();
-
-        if (body == null) {
-            showState(State.HasData);
-            return;
-        }
-
-        final List<NewsItemDTO> data = body.getData();
-        final List<NewsItemDTO> data = body.getData();
-
-        if (data == null) {
-            showState(State.HasNoData);
-            return;
-        }
-
-        if (data.isEmpty()) {
-            showState(State.HasNoData);
-            return;
-        }
-
-        //NewsAdapter.replaceItems(data);
-         NewsAdapter.replaceItems(body);
-        showState(State.HasData);
-    } */
-
-
+    @Override
     public void showState(@NonNull State state) {
 
         switch (state) {
             case Loading:
-
+                currentState = State.Loading.name();
                 rvNews.setVisibility(View.GONE);
                 viewError.setVisibility(View.GONE);
-                viewNoDate.setVisibility(View.GONE);
+                //viewNoDate.setVisibility(View.GONE);
 
                 viewLoading.setVisibility(View.VISIBLE);
                 break;
 
+            case HasData:
+                currentState = State.HasData.name();
+                viewError.setVisibility(View.GONE);
+                viewLoading.setVisibility(View.GONE);
+
+                rvNews.setVisibility(View.VISIBLE);
+                break;
+
             case ServerError:
+                currentState = State.ServerError.name();
                 rvNews.setVisibility(View.GONE);
-                viewNoDate.setVisibility(View.GONE);
                 viewLoading.setVisibility(View.GONE);
 
                 tvError.setText(getText(R.string.error_server));
                 viewError.setVisibility(View.VISIBLE);
                 break;
 
-            case HasData:
-                viewError.setVisibility(View.GONE);
-                viewNoDate.setVisibility(View.GONE);
-                viewLoading.setVisibility(View.GONE);
-
-                rvNews.setVisibility(View.VISIBLE);
-                break;
-
             case HasNoData:
-                viewError.setVisibility(View.GONE);
+                currentState = State.HasNoData.name();
                 viewLoading.setVisibility(View.GONE);
                 rvNews.setVisibility(View.GONE);
 
-                viewNoDate.setVisibility(View.VISIBLE);
+                tvError.setText(getText(R.string.err_data_is_empty));
+                viewError.setVisibility(View.VISIBLE);
                 break;
 
             case NetworkError:
+                currentState = State.NetworkError.name();
                 rvNews.setVisibility(View.GONE);
-                viewNoDate.setVisibility(View.GONE);
                 viewLoading.setVisibility(View.GONE);
 
                 tvError.setText(getText(R.string.error_network));
@@ -436,7 +269,6 @@ public void onCreate(@Nullable Bundle savedInstanceState) {
     private void findView(View view) {
         rvNews = view.findViewById(R.id.rv_news);
         viewLoading = view.findViewById(R.id.fl_loading);
-        viewNoDate = view.findViewById(R.id.fl_no_data);
         viewError = view.findViewById(R.id.ll_error);
         tvError = view.findViewById(R.id.tv_error);
         btnTryAgain = view.findViewById(R.id.bnt_try_again);
@@ -481,6 +313,7 @@ public void onCreate(@Nullable Bundle savedInstanceState) {
         final NewsCategory[] categories = NewsCategory.values();
         categoriesAdapter = CategoriesSpinnerAdapter.createDefault(getActivity(), categories);
         spinnerCategories.setAdapter(categoriesAdapter);
+        spinnerCategories.setSelection(Storage.getSelectedPositionCategory(getActivity()));
     }
 
     private void setupFabScroll() {

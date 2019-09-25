@@ -17,10 +17,12 @@ import android.widget.Toast;
 
 import com.example.roman.listofnews.MainActivity;
 import com.example.roman.listofnews.R;
+import com.example.roman.listofnews.data.Storage;
 import com.example.roman.listofnews.data.dataBase.NewsDatabaseConverter;
 import com.example.roman.listofnews.data.dataBase.NewsDatabaseRepository;
 import com.example.roman.listofnews.data.dataBase.NewsEntity;
 import com.example.roman.listofnews.ui.adapter.AllNewsItem;
+import com.example.roman.listofnews.ux.NewsCategory;
 import com.example.roman.listofnews.ux.RestApi;
 import com.example.roman.listofnews.ux.TopStoriesMapper;
 
@@ -81,7 +83,6 @@ public class ServiceUpdate extends Service {
                 .setContentText(getString(R.string.startService))
                 .setPriority(Notification.PRIORITY_DEFAULT)
                 .setWhen(System.currentTimeMillis())
-                //.setLights(Color.parseColor("blue"), 500, 500)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
         return notification;
@@ -96,12 +97,17 @@ public class ServiceUpdate extends Service {
     private void loadNews(){
         Disposable disposable = (Disposable) RestApi.getInstanse()
                 .getTSEndpoint()
-                .setSectionName("home")
+                .setSectionName(
+                        NewsCategory.findCategoryByPosition(
+                                Storage.getSelectedPositionCategory(this))
+                                .serverValue())
                 .map(response -> TopStoriesMapper.map(response.getNews()))
                 .timeout(1, TimeUnit.MINUTES)
                 .flatMap(aLong -> RestApi.getInstanse()
                         .getTSEndpoint()
-                        .setSectionName("home")
+                        .setSectionName(NewsCategory.findCategoryByPosition(
+                                Storage.getSelectedPositionCategory(this))
+                                .serverValue())
                         .map(response -> TopStoriesMapper.map(response.getNews())))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -131,7 +137,11 @@ public class ServiceUpdate extends Service {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe( () -> {
                             Log.d(TAG, "//s// save NewsEntityList To Database");
-                            notifyMessage(getString(R.string.notiSuccessText));
+                            notifyMessage((getString(R.string.notiSuccessText_News_from_the)
+                                    + NewsCategory.findCategoryByPosition(
+                                            Storage.getSelectedPositionCategory(this))
+                                            .serverValue())
+                                    + getString(R.string.notiSuccessText_updated));
                         },
                         throwable -> Log.e(TAG, throwable.toString()));
         compositeDisposable.add(disposable);
@@ -158,9 +168,7 @@ public class ServiceUpdate extends Service {
                 | Intent.FLAG_ACTIVITY_NEW_TASK ); // or open existing  //open new activity
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-       /* Intent cancelIntent = new Intent(this, MainActivity.class);
-        PendingIntent cancelPendingIntent = PendingIntent.getActivity(this, 0, cancelIntent, 0);
-*/
+
         // create the NotificationChannel
         createNotificationChannel();
         //create notification
@@ -169,7 +177,6 @@ public class ServiceUpdate extends Service {
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setWhen(System.currentTimeMillis())
-                //.addAction(R.mipmap.ic_launcher,getString(R.string.cancel_click) , cancelPendingIntent)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
 
@@ -191,9 +198,7 @@ public class ServiceUpdate extends Service {
             channel.getLockscreenVisibility();
             channel.setLightColor(Color.BLUE);
             channel.shouldShowLights();
-            //channel.setLightColor(Color.parseColor("aqua"));
             channel.enableVibration(false);
-            //NotificationManager notificationManager = this.getSystemService(NotificationManager.class);
             NotificationManager notificationManager = (NotificationManager) this
                     .getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.createNotificationChannel(channel);

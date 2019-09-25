@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
                         .replace(R.id.frame_list, newsListFragment, F_LIST_TAG)
                         .addToBackStack(null) //for convenient closure
                         .commit();
-                saveStateFragment();
+                //saveStateFragment();
             }
 
         } else {
@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
             }
         }
 
+        saveStateFragment();
 
         if (isTwoPanel) {
             Fragment introByTag = getSupportFragmentManager().findFragmentByTag(F_INTRO_TAG);

@@ -13,9 +13,11 @@ public class Storage {
     private static final String APP_PREFERENCES_switchIntro = "switchIntro";
     private static final String APP_PREFERENCES_switchUpdate = "switchUpdate";
     private static final String APP_PREFERENCES_tagUploadWorkManager = "tagUploadWorkManager";
+    private static final String APP_PREFERENCES_selectedPositionCategory = "selectedPositionCategory";
+    private static final String APP_PREFERENCES_currentState = "currentState";
 
 
- //-----------------------------------------------------------
+//-----------------------------------------------------------
 
     public static boolean openFirstTime  (Context context) {
         SharedPreferences mSettings;
@@ -79,19 +81,52 @@ public class Storage {
         editor.putBoolean(APP_PREFERENCES_switchUpdate , false) ;
         editor.apply();
     }
+//-----------------------------------------------------------
 
-    public static void setTagUploadWork (Context context) {
+    /*public static void setTagUploadWork (Context context) {
         SharedPreferences mSettings;
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putString(APP_PREFERENCES_tagUploadWorkManager, "WORK_MANAGER_UPLOAD_TAG");
         editor.apply();
-    }
+    }*/
 
-    public static String getTagUploadWork (Context context) {
+    public static String getTagUpdateWork (Context context) {
         SharedPreferences mSettings;
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         return mSettings.getString(APP_PREFERENCES_tagUploadWorkManager, "WORK_MANAGER_UPLOAD_TAG");
     }
+//-----------------------------------------------------------
+
+    public static void setSelectedPositionCategory (Context context, int position){
+        SharedPreferences mSettings;
+        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mSettings.edit();
+        //editor.putString(APP_PREFERENCES_selectedCategory , category) ;
+        editor.putInt(APP_PREFERENCES_selectedPositionCategory , position) ;
+        editor.apply();
+    }
+
+    public static int getSelectedPositionCategory (Context context) {
+        SharedPreferences mSettings;
+        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        return mSettings.getInt(APP_PREFERENCES_selectedPositionCategory, 0);
+    }
+//-----------------------------------------------------------
+
+    public static void setCurrentState (Context context, String nameState){
+        SharedPreferences mSettings;
+        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putString(APP_PREFERENCES_currentState , nameState) ;
+        editor.apply();
+    }
+
+    public static String getCurrentState (Context context) {
+        SharedPreferences mSettings;
+        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        return mSettings.getString(APP_PREFERENCES_currentState, "HasNoData");
+    }
+//-----------------------------------------------------------
 
 }

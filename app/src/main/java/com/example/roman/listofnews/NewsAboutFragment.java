@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -25,18 +24,18 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arellomobile.mvp.MvpAppCompatFragment;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.roman.listofnews.data.Storage;
-import com.example.roman.listofnews.data.background.ServiceUpdate;
-import com.example.roman.listofnews.data.background.UploadWork;
+import com.example.roman.listofnews.mvp.NewsAboutPresenter;
+import com.example.roman.listofnews.mvp.NewsAboutView;
 
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
-import androidx.work.Constraints;
-import androidx.work.PeriodicWorkRequest;
-import androidx.work.WorkManager;
+public class NewsAboutFragment extends MvpAppCompatFragment implements NewsAboutView{
 
-public class NewsAboutFragment extends Fragment {
+    @InjectPresenter
+    NewsAboutPresenter newsAboutPresenter;
 
     private static final int LAYOUT = R.layout.fragment_news_about;
 
@@ -67,7 +66,6 @@ public class NewsAboutFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
-
     }
 
     @Nullable
@@ -75,6 +73,7 @@ public class NewsAboutFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(LAYOUT, container, false);
         setupUi(view);
+        Log.d(TAG, "--- AboutFragment onCreateView");
         return view;
     }
 
@@ -92,6 +91,190 @@ public class NewsAboutFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        onChangeSwitchIntro();
+        onChangeSwitchUpdate();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        // Set title bar
+        ((MainActivity) Objects.requireNonNull(getActivity())).setupActionBar(getString(R.string.about_label), true);
+    }
+
+
+//=======================================================================================switchIntro
+
+    private void switchForIntro() {
+        if (switchIntro != null) {
+            newsAboutPresenter.setCheckedValueSwIntro();
+        }
+    }
+
+    @Override
+    public void setValueSwIntro() {
+        switchIntro.setChecked(Storage.checkSwitchIntro(getActivity()));
+    }
+
+    private void onChangeSwitchIntro() {
+        switchIntro.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean on) {
+                newsAboutPresenter.onCheckedChangedSwIntro(on);
+            }
+        });
+    }
+
+    @Override
+    public void saveValueSwIntro(@NonNull Boolean on) {
+        if (on) {
+            Storage.setSwitchIntroOn(getActivity());
+        } else {
+            Storage.setSwitchIntroOff(getActivity());
+        }
+    }
+
+//======================================================================================switchUpdate
+
+    private void switchForUpdate() {
+        if (switchUpdate !=null) {
+            newsAboutPresenter.setCheckedValueSwUpdate();
+        }
+    }
+
+    @Override
+    public void setValueSwUpdate() {
+        switchUpdate.setChecked(Storage.checkSwitchUpdate(getActivity()));
+    }
+
+    private void onChangeSwitchUpdate() {
+        switchUpdate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean on) {
+                newsAboutPresenter.onCheckedChangedSwUpdate(on);
+            }
+        });
+    }
+
+    @Override
+    public void saveValueAndWorkSwUpdate(@NonNull Boolean on) {
+        if (on) {
+            Storage.setSwitchUpdateOn(getActivity());
+            //setting tag for stop PeriodicWorkRequest. Tag will save if user reload devices
+            newsAboutPresenter.startPeriodicUpdateService(Storage.getTagUpdateWork(getActivity()));
+        } else {
+            Storage.setSwitchUpdateOff(getActivity());
+            newsAboutPresenter.stopPeriodicUpdateService(Storage.getTagUpdateWork(getActivity()));
+            NotificationManager notificationManager = (NotificationManager) Objects.requireNonNull(getContext())
+                    .getSystemService(Context.NOTIFICATION_SERVICE);
+            Objects.requireNonNull(notificationManager).cancel(NOTIFY_ID);
+        }
+    }
+
+    @Override
+    public void showWorkPeriodicUpdateService() {
+        Toast toast = Toast.makeText(getActivity(), getString(R.string.messagePeriodicUpdate) , Toast.LENGTH_LONG);
+        TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+        if( v != null) v.setGravity(Gravity.CENTER);
+        toast.show();
+    }
+
+//==================================================================================clickSendMessage
+
+    private void clickSendMessage() {
+        sendMessageBtn.setOnClickListener(v -> {
+            String message = messageEditT.getText().toString();
+            if (message.isEmpty()) {
+                newsAboutPresenter.ErrorEmailMessage();
+                return;
+            }
+            newsAboutPresenter.onClickSendMessage(message);
+        });
+    }
+
+    @Override
+    public void showErrorEmailMessage() {
+        Snackbar.make(
+                aboutMainLayout,
+                R.string.about_show_error_email_message,
+                Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void sendingMessage(@NonNull String message) {
+        composeEmail(new String[]{getString(R.string.about_email_addresses)},
+                getString(R.string.about_subject),
+                message);
+    }
+
+    public void composeEmail(String[] addresses, String subject, String message) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // "mailto:"  +""" " only email apps should handle this
+        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT,message);
+        if (intent.resolveActivity(getActivity().getPackageManager()) == null) {
+            newsAboutPresenter.ErrorEmailClient();
+            return;
+        }
+        startActivity(intent);
+    }
+
+    @Override
+    public void showErrorEmailClient() {
+        Snackbar.make(
+                aboutMainLayout,
+                R.string.about_send_email_error_client,
+                Snackbar.LENGTH_SHORT).show();
+    }
+
+//=========================================================================================clickIcon
+
+    private void clickIcon() {
+        telegramIcon.setOnClickListener(v ->
+                newsAboutPresenter.onClickTelegramIcon());
+        githubIcon.setOnClickListener(v ->
+                newsAboutPresenter.onClickGithubIcon());
+        nyTimesLogo.setOnClickListener(v ->
+                newsAboutPresenter.onClickNyTimesLogo());
+    }
+
+    @Override
+    public void openUrlTelegramIcon() {
+        openUrl(getString(R.string.telegram_icon_url));
+    }
+
+    @Override
+    public void openUrlGithubIcon() {
+        openUrl(getString(R.string.github_icon_url));
+    }
+
+    @Override
+    public void openUrlNyTimesLogo() {
+        openUrl(getString(R.string.nytimes_logo_url));
+    }
+
+    private void openUrl(String url) {
+        Intent urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        if (urlIntent.resolveActivity(getActivity().getPackageManager()) == null) {
+            newsAboutPresenter.ErrorWebClient();
+            return;
+        }
+        startActivity(urlIntent);
+    }
+
+    @Override
+    public void showErrorWebClient() {
+        Snackbar.make(
+                aboutMainLayout,
+                R.string.about_open_icon_url_error,
+                Snackbar.LENGTH_SHORT).show();
+    }
+
+//==================================================================================================
 
     private void findView(View view) {
         aboutMainLayout = view.findViewById(R.id.about_main_ll);
@@ -103,145 +286,6 @@ public class NewsAboutFragment extends Fragment {
         githubIcon = view.findViewById(R.id.icon_github);
         nyTimesLogo = view.findViewById(R.id.logo_nytimes);
 
-    }
-
-    private void switchForIntro() {
-        if (switchIntro != null) {
-            switchIntro.setChecked(Storage.checkSwitchIntro(getActivity()));
-        }
-
-        switchIntro.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean on) {
-                if (on) {
-                    Storage.setSwitchIntroOn(getActivity());
-                } else {
-                    Storage.setSwitchIntroOff(getActivity());
-                }
-
-            }
-        });
-    }
-
-    private void switchForUpdate() {
-        if (switchUpdate !=null) {
-            switchUpdate.setChecked(Storage.checkSwitchUpdate(getActivity()));
-        }
-
-        switchUpdate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean on) {
-                if (on) {
-                    Storage.setSwitchUpdateOn(getActivity());
-                    startPeriodicUploadService();
-                } else {
-                    Storage.setSwitchUpdateOff(getActivity());
-                    stopPeriodicUploadService();
-                    NotificationManager notificationManager = (NotificationManager) Objects.requireNonNull(getContext())
-                            .getSystemService(Context.NOTIFICATION_SERVICE);
-                    Objects.requireNonNull(notificationManager).cancel(NOTIFY_ID);
-                }
-            }
-        });
-
-    }
-
-    private void startPeriodicUploadService() {
-        Constraints workConstraints = new Constraints.Builder()
-                .setRequiresCharging(true)
-                .build();
-        //set tag. Tag will safe if user reload devise
-        Storage.setTagUploadWork(getActivity());
-        //for Test
-        /*OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(UploadWork.class)
-                .setConstraints(workConstraints)
-                .addTag(Storage.getTagUploadWork(getActivity()))
-                .build();*/
-
-        PeriodicWorkRequest workRequest = new PeriodicWorkRequest.Builder(UploadWork.class, 120, TimeUnit.MINUTES, 115, TimeUnit.MINUTES)
-                .setConstraints(workConstraints)
-                .addTag(Storage.getTagUploadWork(getActivity()))
-                .build();
-
-        WorkManager.getInstance().enqueue(workRequest);
-        Toast toast = Toast.makeText(getActivity(), getString(R.string.messagePeriodicUpload) , Toast.LENGTH_LONG);
-        TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
-        if( v != null) v.setGravity(Gravity.CENTER);
-        toast.show();
-    }
-
-    private void stopPeriodicUploadService() {
-        WorkManager.getInstance().cancelAllWorkByTag(Storage.getTagUploadWork(getActivity()));
-    }
-
-    private void clickSendMessage() {
-        sendMessageBtn.setOnClickListener(v -> {
-            String message = messageEditT.getText().toString();
-            if (message.isEmpty()) {
-                showErrorEmailMessage();
-                return;
-            }
-            sendingMessage(message);
-        });
-    }
-
-    private void showErrorEmailMessage() {
-        Snackbar.make(
-                aboutMainLayout,
-                R.string.about_show_error_email_message,
-                Snackbar.LENGTH_SHORT).show();
-    }
-
-    private void sendingMessage(String message) {
-        composeEmail(new String[]{getString(R.string.about_email_addresses)},
-                getString(R.string.about_subject),
-                message);
-    }
-
-    public void composeEmail(String[] addresses, String subject, String message) {
-
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:")); // "mailto:"  +""" " only email apps should handle this
-        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
-        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        intent.putExtra(Intent.EXTRA_TEXT,message);
-        if (intent.resolveActivity(getActivity().getPackageManager()) == null) {
-            Snackbar.make(
-                    aboutMainLayout,
-                    R.string.about_send_email_error,
-                    Snackbar.LENGTH_SHORT).show();
-            return;
-        }
-        startActivity(intent);
-    }
-
-    private void clickIcon() {
-        telegramIcon.setOnClickListener(v ->
-                openUrl(getString(R.string.telegram_icon_url)));
-        githubIcon.setOnClickListener(v ->
-                openUrl(getString(R.string.github_icon_url)));
-        nyTimesLogo.setOnClickListener(v ->
-                openUrl(getString(R.string.nytimes_logo_url)));
-
-    }
-
-    private void openUrl(String url) {
-        Intent urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        if (urlIntent.resolveActivity(getActivity().getPackageManager()) == null) {
-            Snackbar.make(
-                    aboutMainLayout,
-                    R.string.about_open_icon_url_error,
-                    Snackbar.LENGTH_SHORT).show();
-            return;
-        }
-        startActivity(urlIntent);
-    }
-
-    @Override
-    public void onResume(){
-        super.onResume();
-        // Set title bar
-        ((MainActivity) Objects.requireNonNull(getActivity())).setupActionBar(getString(R.string.about_label), true);
     }
 
     @Override

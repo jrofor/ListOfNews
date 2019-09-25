@@ -1181,7 +1181,6 @@ id filled
 id fixed
 id fl_intro_activity
 id fl_loading
-id fl_no_data
 id forever
 id frame_details
 id frame_full_screen
@@ -1407,7 +1406,7 @@ layout design_text_input_password_icon
 layout fragment_news_about
 layout fragment_news_details
 layout fragment_news_intro
-layout fragment_news_recycler
+layout fragment_news_list
 layout item_news
 layout layout_error
 layout mtrl_layout_snackbar
@@ -1484,7 +1483,7 @@ string about_email_addresses
 string about_intro
 string about_label
 string about_open_icon_url_error
-string about_send_email_error
+string about_send_email_error_client
 string about_show_error_email_message
 string about_subject
 string about_update
@@ -1514,10 +1513,11 @@ string github_icon_url
 string good_news
 string hide_bottom_view_on_scroll_behavior
 string list_of_news
-string messagePeriodicUpload
+string messagePeriodicUpdate
 string mtrl_chip_close_icon_content_description
 string notiErrorText
-string notiSuccessText
+string notiSuccessText_News_from_the
+string notiSuccessText_updated
 string nytimes_logo_description
 string nytimes_logo_url
 string password_toggle_content_description

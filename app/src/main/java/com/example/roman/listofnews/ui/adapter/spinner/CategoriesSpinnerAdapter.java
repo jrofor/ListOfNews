@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.roman.listofnews.R;
+import com.example.roman.listofnews.data.Storage;
 import com.example.roman.listofnews.ux.NewsCategory;
 
 
@@ -23,7 +24,8 @@ public final class CategoriesSpinnerAdapter extends ArrayAdapter<NewsCategory>  
     private static final String TAG_DROPDOWN = "DROPDOWN";
     private static final String TAG_NON_DROPDOWN = "NON_DROPDOWN";
 
-    private NewsCategory selectedCategory = NewsCategory.HOME;
+    private NewsCategory selectedCategory = NewsCategory.findCategoryByPosition(Storage.getSelectedPositionCategory(getContext()));
+    // NewsCategory.HOME;
     private final LayoutInflater inflater;
     private OnCategorySelectedListener categorySelectedListener;
 
@@ -91,7 +93,8 @@ public final class CategoriesSpinnerAdapter extends ArrayAdapter<NewsCategory>  
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                //saving position to open in next time
+                Storage.setSelectedPositionCategory(getContext(), position);
                 final NewsCategory item = getItem(position);
                 CategoriesSpinnerAdapter.this.selectedCategory = item;
                 categorySelectedListener.onSelected(item);
