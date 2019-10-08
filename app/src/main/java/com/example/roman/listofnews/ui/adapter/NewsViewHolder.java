@@ -22,6 +22,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.example.roman.listofnews.R;
+import com.example.roman.listofnews.ui.adapter.pagedListAdapter.NewsPagedListAdapter;
 
 public class NewsViewHolder extends RecyclerView.ViewHolder {
 
@@ -64,7 +65,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindItem(AllNewsItem allNewsItem,
-                         @NonNull NewsRecyclerAdapter.OnItemClickListener clickListener, Context context) {
+                         @NonNull NewsPagedListAdapter.OnItemClickListener clickListener, Context context) {
         setupUi(allNewsItem);
         setupUx(allNewsItem, clickListener, context);
     }
@@ -98,7 +99,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    private void setupUx(@NonNull AllNewsItem allNewsItem, NewsRecyclerAdapter.OnItemClickListener clickListener, Context context) {
+    private void setupUx(@NonNull AllNewsItem allNewsItem, NewsPagedListAdapter.OnItemClickListener clickListener, Context context) {
 
         itemView.setOnClickListener((View view) -> {
             int position = getAdapterPosition();

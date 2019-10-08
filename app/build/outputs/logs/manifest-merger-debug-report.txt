@@ -8,16 +8,17 @@ MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Ro
 MERGED from [com.github.bumptech.glide:glide:4.8.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\glide-4.8.0.aar\55bb3184706538fc1638f3a072fd1a86\AndroidManifest.xml:2:1-12:12
 MERGED from [com.android.support:design:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\452452e89371280010d3ae210602a84b\AndroidManifest.xml:17:1-24:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\db036d5688bdff7a29c2c4c548a369cb\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.paging:runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.0.1.aar\1ff3bf52c2b46d4bc7684bd4e074bd43\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:recyclerview-v7:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-28.0.0.aar\636c479267596a933ea372db5835cffb\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:cardview-v7:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\cardview-v7-28.0.0.aar\4fd027b611c0d1a90d308defba655d6e\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-v4:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\support-v4-28.0.0.aar\78d71f783391785fb75b7998102b21c6\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.persistence.room:rxjava2:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\rxjava2-1.1.1.aar\ed7b3d188a5612dec8a87d09211147c7\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:17:1-123:12
 MERGED from [android.arch.persistence.room:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\5f629fce5b3c7c6c4f41ea57416ea6ec\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:extensions:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.1.aar\71cf30639c195dbacdcecbde8ad6f112\AndroidManifest.xml:17:1-30:12
 MERGED from [io.reactivex.rxjava2:rxandroid:2.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\rxandroid-2.1.0.aar\7bd45be19eca122ba6a0fc36cffd95cd\AndroidManifest.xml:15:1-20:12
 MERGED from [me.relex:circleindicator:1.2.2] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\circleindicator-1.2.2.aar\8847de45a9a99d46bbf915f79f262853\AndroidManifest.xml:2:1-12:12
 MERGED from [com.github.bumptech.glide:gifdecoder:4.8.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\gifdecoder-4.8.0.aar\d4d96b3b56d5e0f4263643f1a2c5ecc4\AndroidManifest.xml:2:1-11:12
-MERGED from [android.arch.lifecycle:extensions:1.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.0.aar\d711a1783091e86c9cbb42a17c9c2496\AndroidManifest.xml:17:1-30:12
 MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\a3447f2fc6aabc8b5e2d1a7a3c0197ff\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\fa5df6088a0ebc330ba6b41054e8c9eb\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\1811d4ac534d19c100710d9ec7839094\AndroidManifest.xml:17:1-22:12
@@ -38,15 +39,15 @@ MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Roman_\.gr
 MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\1daaf8ef13beeef1bce27fadf5022cef\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.persistence:db-framework:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\db-framework-1.1.1.aar\59bbebd534bc781de7bdce184d01c433\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.persistence:db:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\db-1.1.1.aar\a98a998b34d8914c3cf55f56bb1cb4f9\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\1e34f031c55f266ed77eaf7df4a2ff1c\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\6e32694189378fc91907ed394d1e9688\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\25ddc4cd556b6d7a596c0d39e5b21bfc\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\1451e219d98943a63f23e86a98961c3c\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\d474b3c5e2b78acd831311f21c72ae69\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\c60b96a7f80f1c5cf34ec8ffd092887d\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\864b6c98fb6a8d0708dd690daf7d0f4e\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:print:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\5d832b37e1d22a6cbbc26a566684162e\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\632811564885ab1df521680a83d30ec7\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\1451e219d98943a63f23e86a98961c3c\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\1e34f031c55f266ed77eaf7df4a2ff1c\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\6e32694189378fc91907ed394d1e9688\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\25ddc4cd556b6d7a596c0d39e5b21bfc\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\d474b3c5e2b78acd831311f21c72ae69\AndroidManifest.xml:17:1-22:12
 INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:2:1-51:12
 INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:2:1-51:12
 INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml:2:1-51:12
@@ -90,10 +91,10 @@ MERGED from [com.android.support:design:28.0.0] C:\Users\Roman_\.gradle\caches\t
 MERGED from [com.android.support:design:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\452452e89371280010d3ae210602a84b\AndroidManifest.xml:22:5-20
 MERGED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:27:5-121:19
 MERGED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:27:5-121:19
+MERGED from [android.arch.lifecycle:extensions:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.1.aar\71cf30639c195dbacdcecbde8ad6f112\AndroidManifest.xml:22:5-28:19
+MERGED from [android.arch.lifecycle:extensions:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.1.aar\71cf30639c195dbacdcecbde8ad6f112\AndroidManifest.xml:22:5-28:19
 MERGED from [com.github.bumptech.glide:gifdecoder:4.8.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\gifdecoder-4.8.0.aar\d4d96b3b56d5e0f4263643f1a2c5ecc4\AndroidManifest.xml:9:5-20
 MERGED from [com.github.bumptech.glide:gifdecoder:4.8.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\gifdecoder-4.8.0.aar\d4d96b3b56d5e0f4263643f1a2c5ecc4\AndroidManifest.xml:9:5-20
-MERGED from [android.arch.lifecycle:extensions:1.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.0.aar\d711a1783091e86c9cbb42a17c9c2496\AndroidManifest.xml:22:5-28:19
-MERGED from [android.arch.lifecycle:extensions:1.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.0.aar\d711a1783091e86c9cbb42a17c9c2496\AndroidManifest.xml:22:5-28:19
 MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\93165ac302d311d1d143c22b6614235f\AndroidManifest.xml:22:5-94
 MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\93165ac302d311d1d143c22b6614235f\AndroidManifest.xml:22:5-94
 MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\b7634968a4b6df1ccad3a4dba1bba1bf\AndroidManifest.xml:22:5-23:19
@@ -150,6 +151,8 @@ MERGED from [com.android.support:design:28.0.0] C:\Users\Roman_\.gradle\caches\t
 MERGED from [com.android.support:design:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\452452e89371280010d3ae210602a84b\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\db036d5688bdff7a29c2c4c548a369cb\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\db036d5688bdff7a29c2c4c548a369cb\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.paging:runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.0.1.aar\1ff3bf52c2b46d4bc7684bd4e074bd43\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.paging:runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.0.1.aar\1ff3bf52c2b46d4bc7684bd4e074bd43\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:recyclerview-v7:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-28.0.0.aar\636c479267596a933ea372db5835cffb\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:recyclerview-v7:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-28.0.0.aar\636c479267596a933ea372db5835cffb\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:cardview-v7:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\cardview-v7-28.0.0.aar\4fd027b611c0d1a90d308defba655d6e\AndroidManifest.xml:20:5-44
@@ -162,14 +165,14 @@ MERGED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\cache
 MERGED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:21:5-44
 MERGED from [android.arch.persistence.room:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\5f629fce5b3c7c6c4f41ea57416ea6ec\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.persistence.room:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\5f629fce5b3c7c6c4f41ea57416ea6ec\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:extensions:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.1.aar\71cf30639c195dbacdcecbde8ad6f112\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:extensions:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.1.aar\71cf30639c195dbacdcecbde8ad6f112\AndroidManifest.xml:20:5-44
 MERGED from [io.reactivex.rxjava2:rxandroid:2.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\rxandroid-2.1.0.aar\7bd45be19eca122ba6a0fc36cffd95cd\AndroidManifest.xml:18:5-43
 MERGED from [io.reactivex.rxjava2:rxandroid:2.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\rxandroid-2.1.0.aar\7bd45be19eca122ba6a0fc36cffd95cd\AndroidManifest.xml:18:5-43
 MERGED from [me.relex:circleindicator:1.2.2] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\circleindicator-1.2.2.aar\8847de45a9a99d46bbf915f79f262853\AndroidManifest.xml:8:5-10:41
 MERGED from [me.relex:circleindicator:1.2.2] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\circleindicator-1.2.2.aar\8847de45a9a99d46bbf915f79f262853\AndroidManifest.xml:8:5-10:41
 MERGED from [com.github.bumptech.glide:gifdecoder:4.8.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\gifdecoder-4.8.0.aar\d4d96b3b56d5e0f4263643f1a2c5ecc4\AndroidManifest.xml:5:5-7:41
 MERGED from [com.github.bumptech.glide:gifdecoder:4.8.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\gifdecoder-4.8.0.aar\d4d96b3b56d5e0f4263643f1a2c5ecc4\AndroidManifest.xml:5:5-7:41
-MERGED from [android.arch.lifecycle:extensions:1.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.0.aar\d711a1783091e86c9cbb42a17c9c2496\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:extensions:1.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.0.aar\d711a1783091e86c9cbb42a17c9c2496\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\a3447f2fc6aabc8b5e2d1a7a3c0197ff\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\a3447f2fc6aabc8b5e2d1a7a3c0197ff\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\fa5df6088a0ebc330ba6b41054e8c9eb\AndroidManifest.xml:20:5-44
@@ -210,6 +213,16 @@ MERGED from [android.arch.persistence:db-framework:1.1.1] C:\Users\Roman_\.gradl
 MERGED from [android.arch.persistence:db-framework:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\db-framework-1.1.1.aar\59bbebd534bc781de7bdce184d01c433\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.persistence:db:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\db-1.1.1.aar\a98a998b34d8914c3cf55f56bb1cb4f9\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.persistence:db:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\db-1.1.1.aar\a98a998b34d8914c3cf55f56bb1cb4f9\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\1e34f031c55f266ed77eaf7df4a2ff1c\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\1e34f031c55f266ed77eaf7df4a2ff1c\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\6e32694189378fc91907ed394d1e9688\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\6e32694189378fc91907ed394d1e9688\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\25ddc4cd556b6d7a596c0d39e5b21bfc\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\25ddc4cd556b6d7a596c0d39e5b21bfc\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\1451e219d98943a63f23e86a98961c3c\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\1451e219d98943a63f23e86a98961c3c\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\d474b3c5e2b78acd831311f21c72ae69\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\d474b3c5e2b78acd831311f21c72ae69\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\c60b96a7f80f1c5cf34ec8ffd092887d\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\c60b96a7f80f1c5cf34ec8ffd092887d\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\864b6c98fb6a8d0708dd690daf7d0f4e\AndroidManifest.xml:20:5-44
@@ -218,16 +231,6 @@ MERGED from [com.android.support:print:28.0.0] C:\Users\Roman_\.gradle\caches\tr
 MERGED from [com.android.support:print:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\5d832b37e1d22a6cbbc26a566684162e\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\632811564885ab1df521680a83d30ec7\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\632811564885ab1df521680a83d30ec7\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\1451e219d98943a63f23e86a98961c3c\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\1451e219d98943a63f23e86a98961c3c\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\1e34f031c55f266ed77eaf7df4a2ff1c\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\1e34f031c55f266ed77eaf7df4a2ff1c\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\6e32694189378fc91907ed394d1e9688\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\6e32694189378fc91907ed394d1e9688\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\25ddc4cd556b6d7a596c0d39e5b21bfc\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\25ddc4cd556b6d7a596c0d39e5b21bfc\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\d474b3c5e2b78acd831311f21c72ae69\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\d474b3c5e2b78acd831311f21c72ae69\AndroidManifest.xml:20:5-44
 INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml
 INJECTED from D:\And\Android Studio\AndroidStudioProjects\AAM\ListOfNews\app\src\main\AndroidManifest.xml
 	android:targetSdkVersion
@@ -427,12 +430,12 @@ ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches
 	android:name
 		ADDED from [android.arch.work:work-runtime:1.0.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\work-runtime-1.0.1.aar\b2db82e75da21deafb63b2f573c25544\AndroidManifest.xml:118:25-95
 provider#android.arch.lifecycle.ProcessLifecycleOwnerInitializer
-ADDED from [android.arch.lifecycle:extensions:1.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.0.aar\d711a1783091e86c9cbb42a17c9c2496\AndroidManifest.xml:23:9-27:43
+ADDED from [android.arch.lifecycle:extensions:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.1.aar\71cf30639c195dbacdcecbde8ad6f112\AndroidManifest.xml:23:9-27:43
 	android:authorities
-		ADDED from [android.arch.lifecycle:extensions:1.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.0.aar\d711a1783091e86c9cbb42a17c9c2496\AndroidManifest.xml:25:13-68
+		ADDED from [android.arch.lifecycle:extensions:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.1.aar\71cf30639c195dbacdcecbde8ad6f112\AndroidManifest.xml:25:13-68
 	android:multiprocess
-		ADDED from [android.arch.lifecycle:extensions:1.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.0.aar\d711a1783091e86c9cbb42a17c9c2496\AndroidManifest.xml:27:13-40
+		ADDED from [android.arch.lifecycle:extensions:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.1.aar\71cf30639c195dbacdcecbde8ad6f112\AndroidManifest.xml:27:13-40
 	android:exported
-		ADDED from [android.arch.lifecycle:extensions:1.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.0.aar\d711a1783091e86c9cbb42a17c9c2496\AndroidManifest.xml:26:13-37
+		ADDED from [android.arch.lifecycle:extensions:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.1.aar\71cf30639c195dbacdcecbde8ad6f112\AndroidManifest.xml:26:13-37
 	android:name
-		ADDED from [android.arch.lifecycle:extensions:1.1.0] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.0.aar\d711a1783091e86c9cbb42a17c9c2496\AndroidManifest.xml:24:13-83
+		ADDED from [android.arch.lifecycle:extensions:1.1.1] C:\Users\Roman_\.gradle\caches\transforms-1\files-1.1\extensions-1.1.1.aar\71cf30639c195dbacdcecbde8ad6f112\AndroidManifest.xml:24:13-83
