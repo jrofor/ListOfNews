@@ -24,7 +24,7 @@ public class MyPositionalDataSource extends PositionalDataSource<AllNewsItem> {
                 ", requestedLoadSize = " + params.requestedLoadSize);
         List<AllNewsItem> result = employeeStorage.getData(params.requestedStartPosition, params.requestedLoadSize);
         if (params.placeholdersEnabled) {
-            callback.onResult(result, params.requestedStartPosition, params.requestedLoadSize);
+            callback.onResult(result, params.requestedStartPosition, employeeStorage.outCount());
         } else {
             callback.onResult(result, params.requestedStartPosition); }
     }

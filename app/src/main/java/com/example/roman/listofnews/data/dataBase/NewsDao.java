@@ -1,5 +1,6 @@
 package com.example.roman.listofnews.data.dataBase;
 
+import android.arch.paging.DataSource;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -13,6 +14,9 @@ public interface NewsDao {
 
     @Query("SELECT * FROM newsEntity")
      List<NewsEntity> getAll();
+/*
+    @Query("SELECT * FROM newsEntity")
+    DataSource.Factory<Integer, NewsEntity> getAllForDataSource();*/
 
     @Query("SELECT COUNT(*) from newsEntity")
     Integer newsEntityCount();

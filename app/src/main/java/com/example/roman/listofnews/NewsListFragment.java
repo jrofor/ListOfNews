@@ -1,53 +1,50 @@
 package com.example.roman.listofnews;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
+import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
-
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
-import android.view.LayoutInflater;
-
-import com.arellomobile.mvp.MvpAppCompatFragment;
-import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.arellomobile.mvp.presenter.ProvidePresenter;
-import com.example.roman.listofnews.ui.adapter.pagedListAdapter.MainThreadExecutor;
-import com.example.roman.listofnews.ui.adapter.pagedListAdapter.EmployeeStorage;
-import com.example.roman.listofnews.data.Storage;
-import com.example.roman.listofnews.data.dataBase.NewsDatabaseRepository;
-import com.example.roman.listofnews.mvp.NewsListPresenter;
-import com.example.roman.listofnews.mvp.NewsListView;
-import com.example.roman.listofnews.ui.NewsDetailsFragmentListener;
-import com.example.roman.listofnews.ui.adapter.AllNewsItem;
-import com.example.roman.listofnews.ui.adapter.pagedListAdapter.MyPositionalDataSource;
-import com.example.roman.listofnews.ui.adapter.pagedListAdapter.NewsItemDiffUtilItemCallback;
-import com.example.roman.listofnews.ui.adapter.pagedListAdapter.NewsPagedListAdapter;
-import com.example.roman.listofnews.ui.adapter.spinner.CategoriesSpinnerAdapter;
-import com.example.roman.listofnews.ux.NewsCategory;
-import com.example.roman.listofnews.ui.adapter.NewsRecyclerAdapter;
-import com.example.roman.listofnews.ui.State;
-import com.example.roman.listofnews.ux.RestApi;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.Executors;
-
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.arellomobile.mvp.MvpAppCompatFragment;
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.example.roman.listofnews.data.Storage;
+import com.example.roman.listofnews.data.dataBase.NewsDatabaseRepository;
+import com.example.roman.listofnews.mvp.NewsListPresenter;
+import com.example.roman.listofnews.mvp.NewsListView;
+import com.example.roman.listofnews.ui.NewsDetailsFragmentListener;
+import com.example.roman.listofnews.ui.State;
+import com.example.roman.listofnews.ui.adapter.AllNewsItem;
+import com.example.roman.listofnews.ui.adapter.pagedListAdapter.EmployeeStorage;
+import com.example.roman.listofnews.ui.adapter.pagedListAdapter.NewsItemDiffUtilItemCallback;
+import com.example.roman.listofnews.ui.adapter.pagedListAdapter.NewsPagedListAdapter;
+import com.example.roman.listofnews.ui.adapter.pagedListAdapter.NewsSourceFactory;
+import com.example.roman.listofnews.ui.adapter.spinner.CategoriesSpinnerAdapter;
+import com.example.roman.listofnews.ux.NewsCategory;
+import com.example.roman.listofnews.ux.RestApi;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.Executors;
 
 import io.reactivex.disposables.CompositeDisposable;
 
@@ -67,20 +64,12 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     private RecyclerView rvNews;
     @Nullable
     private Spinner spinnerCategories;
-    //@Nullable
-    //private NewsRecyclerAdapter NewsAdapter;
     @Nullable
     private CategoriesSpinnerAdapter categoriesAdapter;
     @Nullable
-    private NewsPagedListAdapter newsPagedAdapter;
-    //@Nullable
-    //private NewsRecyclerAdapter.OnItemClickListener onItemClickListener;
-    @Nullable
-    private EmployeeStorage employeeStorage = new EmployeeStorage();
-    @Nullable
-    MyPositionalDataSource dataSource = new MyPositionalDataSource(new EmployeeStorage());
-    @Nullable
     NewsItemDiffUtilItemCallback newsItemDiffUtilItemCallback = new NewsItemDiffUtilItemCallback();
+    @Nullable
+    private NewsPagedListAdapter newsPagedAdapter;
     @Nullable
     LinearLayoutManager llm;
     @Nullable
@@ -97,6 +86,8 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     @Nullable
     private NewsDatabaseRepository newsDatabaseRepository;
+    @Nullable
+    private NewsSourceFactory newsSourceFactory;
     private static final String TAG = "myLogs";
     private int mScrollOffsetFAB = 4;
     private NewsDetailsFragmentListener listener;
@@ -120,8 +111,10 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        newsDatabaseRepository = new NewsDatabaseRepository(getActivity());
         //checking where context
+        newsDatabaseRepository = new NewsDatabaseRepository(getActivity());
+        newsPagedAdapter = new NewsPagedListAdapter(newsItemDiffUtilItemCallback, getActivity());
+        //**
         if (getActivity() instanceof NewsDetailsFragmentListener) {
             listener = (NewsDetailsFragmentListener) getActivity();
         }
@@ -169,7 +162,7 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
         unbindUx();
 
         // for test
-        Storage.setCurrentState(getActivity(),"HasData" );//currentState
+        //Storage.setCurrentState(getActivity(),"HasData" );//currentState
         Log.d(TAG, "*** onPause " + currentState);
         //
         //currentListItem = (int) newsPagedAdapter.getCurrentList().getPositionOffset();
@@ -185,16 +178,39 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
             Log.d(TAG, "*** onPause # last_fir " + last_fir);
             Log.d(TAG, "*** onPause # FirstVisible " + llm.findFirstVisibleItemPosition());
         */
+            savedRecyclerLayoutState = llm.onSaveInstanceState();
         }
         Storage.setCurrentListItem(getActivity(), currentListItem);
         Log.d(TAG, "*** onPause #" + currentListItem.toString());
         Log.d(TAG, "*** onPause # LastKey " + newsPagedAdapter.getCurrentList().getLastKey().toString());
-        Toast.makeText(getActivity(), currentListItem.toString(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(getActivity(), currentListItem.toString(), Toast.LENGTH_LONG).show();
         //newsListPresenter.saveCurrentState(currentState, newsDatabaseRepository);
-
-        savedRecyclerLayoutState = rvNews.getLayoutManager().onSaveInstanceState();
         super.onPause();
     }
+
+
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        //if(savedInstanceState != null) {
+//            savedRecyclerLayoutState = savedInstanceState.getParcelable("layout_manager_state");
+        //}
+        Log.d(TAG, "--- ListFragment onViewStateRestored");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        Log.d(TAG, "--- ListFragment onSaveInstanceState");
+            if (rvNews != null) {
+                if (rvNews.getLayoutManager() != null) {
+              //      outState.putParcelable("layout_manager_state", rvNews.getLayoutManager().onSaveInstanceState());
+                }
+            }
+    }
+
 
     private void unbindUx() {
         btnTryAgain.setOnClickListener(null);
@@ -210,7 +226,7 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
         currentState = Storage.getCurrentState(getActivity());
         Log.d(TAG, "*** setupUi " + currentState);
         newsListPresenter.setCurrentScreenState(newsDatabaseRepository, currentState);
-        setupPagedListAdapter();
+
     }
 
     private void setupUx() {
@@ -252,8 +268,8 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     public void updateItems(@Nullable List<AllNewsItem> news) {
         //if (NewsAdapter != null) NewsAdapter.replaceItems(news);
         if (news.size() > 0) {
-            employeeStorage.replaceItems(news);
-            setupPagedList();
+            //employeeStorage.replaceItems(news);
+            setupPagedListAdapter(news);
         }
     }
 
@@ -329,27 +345,51 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
 
 
 
-    private void setupPagedListAdapter() {
+    private void setupPagedListAdapter(List<AllNewsItem> news) {
         //NewsAdapter = new NewsRecyclerAdapter(getActivity());
-        newsPagedAdapter = new NewsPagedListAdapter(newsItemDiffUtilItemCallback, getActivity());
+        //newsSourceFactory = new NewsSourceFactory(new EmployeeStorage(newsDatabaseRepository));
+        newsSourceFactory = new NewsSourceFactory(new EmployeeStorage(news));
+        setupPagedList();
         llm= new LinearLayoutManager(getActivity());
         rvNews.setLayoutManager(llm);
         rvNews.setAdapter(newsPagedAdapter);
     }
-
 
     private void setupPagedList() {
         PagedList.Config config = new PagedList.Config.Builder()
                 .setEnablePlaceholders(false)
                 .setPageSize(pageSizePagedList)
                 .build();
-        PagedList<AllNewsItem> pagedList = new PagedList.Builder<>(dataSource, config)
+
+        LiveData<PagedList<AllNewsItem>> pagedListLiveData = new LivePagedListBuilder<>(
+                newsSourceFactory,
+                config)
+                .setFetchExecutor(Executors.newSingleThreadExecutor())
+                //.setInitialLoadKey(Storage.getCurrentListItem(getActivity()))
+                .build();
+        /*PagedList<AllNewsItem> pagedList = new PagedList.Builder<>(dataSource, config)
                 .setFetchExecutor(Executors.newSingleThreadExecutor())
                 .setNotifyExecutor(new MainThreadExecutor())
                 .setInitialKey(Storage.getCurrentListItem(getActivity())) //
-                .build();
-        Log.d(TAG, "setupPagedList ***" + Storage.getCurrentListItem(getActivity()));
-        newsPagedAdapter.submitList(pagedList);
+                .build();*/
+        pagedListLiveData.observe(getActivity(), new Observer<PagedList<AllNewsItem>>() {
+            @Override
+            public void onChanged(@Nullable PagedList<AllNewsItem> allNewsItems) {
+                Log.d(TAG, "### submit PagedList");
+                newsPagedAdapter.submitList(allNewsItems);
+                restorePosition();
+            }
+        });
+
+        /*Log.d(TAG, "setupPagedList ***" + Storage.getCurrentListItem(getActivity()));
+        newsPagedAdapter.submitList(pagedList);*/
+    }
+
+    private void restorePosition() {
+        if (savedRecyclerLayoutState != null) {
+            rvNews.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
+            savedRecyclerLayoutState = null;
+        }
     }
 
     public boolean onCheckIsTwoPanel(boolean isTwoPanel){
@@ -403,9 +443,6 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
                         fabUpdate.show();
                     }
                 }
-                    if (Math.abs(dy) > 50) {
-
-                    }
                 }
         });
 

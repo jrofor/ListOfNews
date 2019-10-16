@@ -65,7 +65,14 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindItem(AllNewsItem allNewsItem,
-                         @NonNull NewsPagedListAdapter.OnItemClickListener clickListener, Context context) {
+                         @NonNull NewsPagedListAdapter.OnItemClickListener clickListener,
+                         Context context) {
+        /*if (allNewsItem == null) {
+            progressBar.setVisibility(View.VISIBLE);
+            return;*/
+            //AllNewsItem WIAT = AllNewsItem.create("wait","wait","wait","wait","wait","wait");
+            //setupUi(WIAT);
+
         setupUi(allNewsItem);
         setupUx(allNewsItem, clickListener, context);
     }
