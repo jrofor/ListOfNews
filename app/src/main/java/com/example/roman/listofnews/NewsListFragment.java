@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -35,6 +36,7 @@ import com.example.roman.listofnews.ui.NewsDetailsFragmentListener;
 import com.example.roman.listofnews.ui.State;
 import com.example.roman.listofnews.ui.adapter.AllNewsItem;
 import com.example.roman.listofnews.ui.adapter.pagedListAdapter.EmployeeStorage;
+import com.example.roman.listofnews.ui.adapter.pagedListAdapter.MyPositionalDataSource;
 import com.example.roman.listofnews.ui.adapter.pagedListAdapter.NewsItemDiffUtilItemCallback;
 import com.example.roman.listofnews.ui.adapter.pagedListAdapter.NewsPagedListAdapter;
 import com.example.roman.listofnews.ui.adapter.pagedListAdapter.NewsSourceFactory;
@@ -71,7 +73,9 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     @Nullable
     private NewsPagedListAdapter newsPagedAdapter;
     @Nullable
-    LinearLayoutManager llm;
+    private EmployeeStorage employeeStorage;
+    @Nullable
+    private LinearLayoutManager llm;
     @Nullable
     private View viewLoading;
     @Nullable
@@ -96,8 +100,11 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     private String currentState;
     private int last_fir;
     private Integer currentListItem;
+    private int startLoadKey;
     private final int pageSizePagedList = 5;
     private Parcelable savedRecyclerLayoutState;
+
+    private MyPositionalDataSource myPositionalDataSource;
 
 
     public static NewsListFragment newInstance(boolean isTwoPanel) {
@@ -166,24 +173,18 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
         Log.d(TAG, "*** onPause " + currentState);
         //
         //currentListItem = (int) newsPagedAdapter.getCurrentList().getPositionOffset();
-        if(llm != null) {
-            currentListItem = (int) newsPagedAdapter.getCurrentList().getLastKey();
-            /*
-            if ((int) newsPagedAdapter.getCurrentList().getLastKey() > 2) {
-                last_fir = llm.findLastVisibleItemPosition() - llm.findFirstVisibleItemPosition();
-                currentListItem = (int) newsPagedAdapter.getCurrentList().getLastKey() - last_fir;
-            } else {
-                currentListItem = llm.findFirstVisibleItemPosition(); //(int) newsPagedAdapter.getCurrentList().getLastKey();
-            }
-            Log.d(TAG, "*** onPause # last_fir " + last_fir);
-            Log.d(TAG, "*** onPause # FirstVisible " + llm.findFirstVisibleItemPosition());
-        */
+        if(llm != null ) {
             savedRecyclerLayoutState = llm.onSaveInstanceState();
+            if (employeeStorage != null) {
+                currentListItem = (int) llm.findFirstVisibleItemPosition() + employeeStorage.outMinStartPosition();
+            }
+            //newsPagedAdapter.getCurrentList().getPositionOffset();//.getLastKey();
         }
         Storage.setCurrentListItem(getActivity(), currentListItem);
         Log.d(TAG, "*** onPause #" + currentListItem.toString());
         Log.d(TAG, "*** onPause # LastKey " + newsPagedAdapter.getCurrentList().getLastKey().toString());
-        //Toast.makeText(getActivity(), currentListItem.toString(), Toast.LENGTH_LONG).show();
+        Log.d(TAG, "*** onPause # FirstV " + llm.findFirstVisibleItemPosition());
+        Toast.makeText(getActivity(), currentListItem.toString(), Toast.LENGTH_LONG).show();
         //newsListPresenter.saveCurrentState(currentState, newsDatabaseRepository);
         super.onPause();
     }
@@ -196,14 +197,14 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
         //if(savedInstanceState != null) {
 //            savedRecyclerLayoutState = savedInstanceState.getParcelable("layout_manager_state");
         //}
-        Log.d(TAG, "--- ListFragment onViewStateRestored");
+        //Log.d(TAG, "--- ListFragment onViewStateRestored");
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        Log.d(TAG, "--- ListFragment onSaveInstanceState");
+        //Log.d(TAG, "--- ListFragment onSaveInstanceState");
             if (rvNews != null) {
                 if (rvNews.getLayoutManager() != null) {
               //      outState.putParcelable("layout_manager_state", rvNews.getLayoutManager().onSaveInstanceState());
@@ -347,8 +348,10 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
 
     private void setupPagedListAdapter(List<AllNewsItem> news) {
         //NewsAdapter = new NewsRecyclerAdapter(getActivity());
-        //newsSourceFactory = new NewsSourceFactory(new EmployeeStorage(newsDatabaseRepository));
-        newsSourceFactory = new NewsSourceFactory(new EmployeeStorage(news));
+        startLoadKey = Storage.getCurrentListItem(getActivity());
+        employeeStorage = new EmployeeStorage(news, startLoadKey);
+        newsSourceFactory = new NewsSourceFactory(employeeStorage);
+
         setupPagedList();
         llm= new LinearLayoutManager(getActivity());
         rvNews.setLayoutManager(llm);
@@ -359,13 +362,19 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
         PagedList.Config config = new PagedList.Config.Builder()
                 .setEnablePlaceholders(false)
                 .setPageSize(pageSizePagedList)
+                .setPrefetchDistance(pageSizePagedList)
                 .build();
 
+
+        if (startLoadKey > 0) {
+            //startLoadKey += myPositionalDataSource.getLoadRangeStart();
+
+        }
         LiveData<PagedList<AllNewsItem>> pagedListLiveData = new LivePagedListBuilder<>(
                 newsSourceFactory,
                 config)
                 .setFetchExecutor(Executors.newSingleThreadExecutor())
-                //.setInitialLoadKey(Storage.getCurrentListItem(getActivity()))
+                .setInitialLoadKey(startLoadKey)
                 .build();
         /*PagedList<AllNewsItem> pagedList = new PagedList.Builder<>(dataSource, config)
                 .setFetchExecutor(Executors.newSingleThreadExecutor())

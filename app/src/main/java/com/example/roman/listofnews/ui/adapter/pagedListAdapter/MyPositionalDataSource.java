@@ -14,6 +14,8 @@ public class MyPositionalDataSource extends PositionalDataSource<AllNewsItem> {
 
     private static final String TAG = "myLogs";
 
+    private int loadRangeStart;
+
     public MyPositionalDataSource(EmployeeStorage employeeStorage) {
         this.employeeStorage = employeeStorage;
     }
@@ -32,8 +34,13 @@ public class MyPositionalDataSource extends PositionalDataSource<AllNewsItem> {
     @Override
     public void loadRange(@NonNull LoadRangeParams params, @NonNull LoadRangeCallback<AllNewsItem> callback) {
         Log.d(TAG, "loadRange, startPosition = " + params.startPosition + ", loadSize = " + params.loadSize);
+        loadRangeStart = params.startPosition;
         List<AllNewsItem> result = employeeStorage.getData(params.startPosition, params.loadSize);
         callback.onResult(result);
+    }
+
+    public int getLoadRangeStart() {
+        return loadRangeStart;
     }
 }
 

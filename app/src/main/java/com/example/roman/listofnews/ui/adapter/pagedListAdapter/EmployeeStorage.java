@@ -3,6 +3,7 @@ package com.example.roman.listofnews.ui.adapter.pagedListAdapter;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.example.roman.listofnews.data.Storage;
 import com.example.roman.listofnews.ui.adapter.AllNewsItem;
 
 import java.util.ArrayList;
@@ -13,11 +14,13 @@ public class EmployeeStorage {
     @Nullable
     private List<AllNewsItem> news = new ArrayList<>();
     private int stopList;
-    String cnt;
+    private String cnt;
+    private int minStartPosition;
     private static final String TAG = "myLogs";
 
-    public EmployeeStorage(List<AllNewsItem> news) {
+    public EmployeeStorage(List<AllNewsItem> news, int startLoadKey) {
         getDataFromDB(news);
+        minStartPosition = startLoadKey;
     }
 
     private void getDataFromDB(List<AllNewsItem> news) {
@@ -36,26 +39,33 @@ public class EmployeeStorage {
                 for (int i = startPosition; i < startPosition + loadSize; i++) {
                     outNews.add(news.get(i));
                 }
-            } /*else {
+            } else {
                     for (int i = startPosition; i < startPosition + loadSize; i++) {
                         cnt = String.valueOf(i);
                         outNews.add(AllNewsItem.create(cnt, cnt, cnt, cnt, cnt, cnt));
                     }
-                }*/
+                }
         } else if (startPosition < stopList) {
             if (!news.isEmpty()) {
                 for (int i = startPosition; i < stopList; i++) {
                     outNews.add(news.get(i));
                 }
-            } /*else {
+            } else {
                     for (int i = startPosition; i < stopList; i++) {
                         cnt = String.valueOf(i);
-                        outNews.add(AllNewsItem.create(cnt, cnt, cnt, cnt, cnt, cnt)); } } */
+                        outNews.add(AllNewsItem.create(cnt, cnt, cnt, cnt, cnt, cnt)); } }
         }
+
+        if (startPosition <= minStartPosition) minStartPosition = startPosition;
         return outNews;
     }
 
     public int outCount() {
         return stopList;
     }
+
+    public int outMinStartPosition() {
+        return minStartPosition;
+    }
+
 }
