@@ -1,4 +1,4 @@
-#Sat Oct 12 15:17:30 MSK 2019
+#Sun Oct 20 11:05:55 MSK 2019
 path.1=classes.dex
 path.0=classes.dex
 renamed.10=classes11.dex

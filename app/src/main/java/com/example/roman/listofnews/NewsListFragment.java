@@ -69,7 +69,7 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     @Nullable
     private CategoriesSpinnerAdapter categoriesAdapter;
     @Nullable
-    NewsItemDiffUtilItemCallback newsItemDiffUtilItemCallback = new NewsItemDiffUtilItemCallback();
+    NewsItemDiffUtilItemCallback newsItemDiffUtilItemCallback;
     @Nullable
     private NewsPagedListAdapter newsPagedAdapter;
     @Nullable
@@ -104,8 +104,7 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     private final int pageSizePagedList = 5;
     private Parcelable savedRecyclerLayoutState;
 
-    private MyPositionalDataSource myPositionalDataSource;
-
+    private Context context;
 
     public static NewsListFragment newInstance(boolean isTwoPanel) {
         NewsListFragment newsListFragment = new NewsListFragment();
@@ -118,13 +117,10 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        this.context = context;
+        newsDatabaseRepository = new NewsDatabaseRepository(context);
         //checking where context
-        newsDatabaseRepository = new NewsDatabaseRepository(getActivity());
-        newsPagedAdapter = new NewsPagedListAdapter(newsItemDiffUtilItemCallback, getActivity());
-        //**
-        if (getActivity() instanceof NewsDetailsFragmentListener) {
-            listener = (NewsDetailsFragmentListener) getActivity();
-        }
+
 
         isTwoPanel = getArguments().getBoolean(ARGUMENT_IS_TWO_PANEL);
         Log.d(TAG, "--- ListFragment onAttach");
@@ -140,9 +136,14 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(LAYOUT, container, false);
-        Log.d(TAG, "--- ListFragment onCreateView");
+
+        //**
+        if (context instanceof NewsDetailsFragmentListener) {
+            listener = (NewsDetailsFragmentListener) context;
+        }
         setupUi(view);
         //Log.d(TAG, "ListFragment setupUi");
+        Log.d(TAG, "--- ListFragment onCreateView");
         return view;
     }
 
@@ -184,7 +185,7 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
         Log.d(TAG, "*** onPause #" + currentListItem.toString());
         Log.d(TAG, "*** onPause # LastKey " + newsPagedAdapter.getCurrentList().getLastKey().toString());
         Log.d(TAG, "*** onPause # FirstV " + llm.findFirstVisibleItemPosition());
-        Toast.makeText(getActivity(), currentListItem.toString(), Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(),"curLI " + currentListItem.toString() + " FirstV " + llm.findFirstVisibleItemPosition() + " Min "+employeeStorage.outMinStartPosition(), Toast.LENGTH_LONG).show();
         //newsListPresenter.saveCurrentState(currentState, newsDatabaseRepository);
         super.onPause();
     }
@@ -234,11 +235,9 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
         spinnerCategories.setOnTouchListener(spinnerOnTouch);
         fabUpdate.setOnClickListener(v -> onClickFabUpdate(categoriesAdapter.getSelectedCategory().serverValue()));
         btnTryAgain.setOnClickListener(v -> onClickTryAgain(categoriesAdapter.getSelectedCategory().serverValue()));
-        newsPagedAdapter.setOnClickNewsListener(IdItem -> {
-            if (listener != null) {
-                listener.onNewsDetailsByIdClicked(IdItem);
-            }
-        });
+        if (newsPagedAdapter != null) {
+
+        }
     }
 
     private View.OnTouchListener spinnerOnTouch = new View.OnTouchListener() {
@@ -347,6 +346,8 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
 
 
     private void setupPagedListAdapter(List<AllNewsItem> news) {
+        newsItemDiffUtilItemCallback = new NewsItemDiffUtilItemCallback();
+        newsPagedAdapter = new NewsPagedListAdapter(newsItemDiffUtilItemCallback, context);
         //NewsAdapter = new NewsRecyclerAdapter(getActivity());
         startLoadKey = Storage.getCurrentListItem(getActivity());
         employeeStorage = new EmployeeStorage(news, startLoadKey);
@@ -356,20 +357,15 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
         llm= new LinearLayoutManager(getActivity());
         rvNews.setLayoutManager(llm);
         rvNews.setAdapter(newsPagedAdapter);
+        setupClickNewsItem();
     }
 
     private void setupPagedList() {
         PagedList.Config config = new PagedList.Config.Builder()
                 .setEnablePlaceholders(false)
                 .setPageSize(pageSizePagedList)
-                .setPrefetchDistance(pageSizePagedList)
                 .build();
 
-
-        if (startLoadKey > 0) {
-            //startLoadKey += myPositionalDataSource.getLoadRangeStart();
-
-        }
         LiveData<PagedList<AllNewsItem>> pagedListLiveData = new LivePagedListBuilder<>(
                 newsSourceFactory,
                 config)
@@ -386,12 +382,21 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
             public void onChanged(@Nullable PagedList<AllNewsItem> allNewsItems) {
                 Log.d(TAG, "### submit PagedList");
                 newsPagedAdapter.submitList(allNewsItems);
-                restorePosition();
+                //restorePosition();
             }
         });
 
         /*Log.d(TAG, "setupPagedList ***" + Storage.getCurrentListItem(getActivity()));
         newsPagedAdapter.submitList(pagedList);*/
+
+    }
+
+    private void setupClickNewsItem() {
+        newsPagedAdapter.setOnClickNewsListener(IdItem -> {
+            if (listener != null) {
+                listener.onNewsDetailsByIdClicked(IdItem);
+            }
+        });
     }
 
     private void restorePosition() {
@@ -399,6 +404,7 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
             rvNews.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
             savedRecyclerLayoutState = null;
         }
+
     }
 
     public boolean onCheckIsTwoPanel(boolean isTwoPanel){

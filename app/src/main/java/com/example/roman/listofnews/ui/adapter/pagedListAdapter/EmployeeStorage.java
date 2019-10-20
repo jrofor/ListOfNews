@@ -56,7 +56,20 @@ public class EmployeeStorage {
                         outNews.add(AllNewsItem.create(cnt, cnt, cnt, cnt, cnt, cnt)); } }
         }
 
-        if (startPosition <= minStartPosition) minStartPosition = startPosition;
+        /*if (startPosition == stopList) {
+            if (!news.isEmpty()) {
+                for (int i = minStartPosition; i < loadSize; i++) {
+                    outNews.add(news.get(i));
+                }
+            }
+        }*/
+
+        if (startPosition < minStartPosition) {
+            if (startPosition != stopList) {
+                minStartPosition = startPosition;
+            }
+            Log.d(TAG, "minStartPosition" + minStartPosition);
+        }
         return outNews;
     }
 
