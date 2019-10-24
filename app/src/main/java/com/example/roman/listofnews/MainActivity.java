@@ -84,20 +84,17 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
                 getSupportFragmentManager().popBackStack();
                 findViewById(R.id.frame_full_screen).setVisibility(View.VISIBLE);
 
+                //create news fragments under newsAboutFragment
+                if (stateFragment.lastSelection.length()>0) {
+                    onNewsDetailsByIdClicked(stateFragment.lastSelection);
+                }
+
                 NewsAboutFragment newsAboutFragment = new NewsAboutFragment();
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.frame_full_screen, newsAboutFragment, F_ABOUT_TAG)
                         .commit();
-
-                //create news fragments under newsAboutFragment
-                if (stateFragment.lastSelection.length()>0) {
-                    onNewsDetailsByIdClicked(stateFragment.lastSelection);
-                }
-                NewsListFragment backNewsListFragment = NewsListFragment.newInstance(isTwoPanel);
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_list, backNewsListFragment, F_LIST_TAG)
-                        .commit();
+                return;
             }
             if (countBackStack == 2 && introByTag==null) {
                 if (aboutByTag != null){
