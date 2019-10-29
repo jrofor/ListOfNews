@@ -33,6 +33,7 @@ import com.example.roman.listofnews.data.dataBase.NewsDatabaseRepository;
 import com.example.roman.listofnews.mvp.NewsListPresenter;
 import com.example.roman.listofnews.mvp.NewsListView;
 import com.example.roman.listofnews.ui.NewsDetailsFragmentListener;
+import com.example.roman.listofnews.ui.SetTitleActionBarListener;
 import com.example.roman.listofnews.ui.State;
 import com.example.roman.listofnews.ui.adapter.AllNewsItem;
 import com.example.roman.listofnews.ui.adapter.pagedListAdapter.EmployeeStorage;
@@ -101,6 +102,7 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     private Integer currentListItem;
     private int startLoadKey;
     private final int pageSizePagedList = 5;
+    private SetTitleActionBarListener titleActionBarListener;
 
     private Context context;
 
@@ -117,7 +119,12 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
         super.onAttach(context);
         this.context = context;
         newsDatabaseRepository = new NewsDatabaseRepository(context);
-        //checking where context
+        if (context instanceof NewsDetailsFragmentListener) {
+            listener = (NewsDetailsFragmentListener) context;
+        }
+        if (context instanceof SetTitleActionBarListener) {
+            titleActionBarListener = (SetTitleActionBarListener) context;
+        }
         isTwoPanel = getArguments().getBoolean(ARGUMENT_IS_TWO_PANEL);
         Log.d(TAG, "--- ListFragment onAttach");
     }
@@ -137,9 +144,6 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
         if (Storage.getCurrentListItem(getActivity()) < 0) {
             Storage.setCurrentListItem(getActivity(), 0);
         }
-        if (context instanceof NewsDetailsFragmentListener) {
-            listener = (NewsDetailsFragmentListener) context;
-        }
         setupUi(view);
         //Log.d(TAG, "ListFragment setupUi");
         Log.d(TAG, "--- ListFragment onCreateView");
@@ -156,10 +160,10 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         // Set title bar
-        ((MainActivity) Objects.requireNonNull(getActivity())).setupActionBar(getString(R.string.app_name), false);
+        titleActionBarListener.onSetTitleActionBar();
     }
 
     @Override
@@ -173,9 +177,9 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     private void savingCurrentValuesView() {
         // for test
         //Storage.setCurrentState(getActivity(),"HasData" );//currentState
-        Storage.setCurrentState(getActivity(),currentState );
+        Storage.setCurrentState(getActivity(), currentState);
         Log.d(TAG, "*** onPause " + currentState);
-        if(llm != null ) {
+        if (llm != null) {
             if (employeeStorage != null) {
                 currentListItem = (int) llm.findFirstVisibleItemPosition() + employeeStorage.outMinStartPosition();
             }
@@ -316,7 +320,7 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
         newsSourceFactory = new NewsSourceFactory(employeeStorage);
 
         setupPagedList();
-        llm= new LinearLayoutManager(getActivity());
+        llm = new LinearLayoutManager(getActivity());
         rvNews.setLayoutManager(llm);
         rvNews.setAdapter(newsPagedAdapter);
         setupClickNewsItem();
@@ -385,7 +389,7 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     }
 
 
-    public boolean onCheckIsTwoPanel(boolean isTwoPanel){
+    public boolean onCheckIsTwoPanel(boolean isTwoPanel) {
         return isTwoPanel;
     }
 
@@ -414,7 +418,7 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
 
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         compositeDisposable.dispose();
         super.onDestroy();
         Log.d(TAG, "--- ListFragment onDestroy");

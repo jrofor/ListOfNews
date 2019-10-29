@@ -1,6 +1,9 @@
 package com.example.roman.listofnews;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,16 +12,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.bumptech.glide.util.Preconditions;
 import com.example.roman.listofnews.data.Storage;
 import com.example.roman.listofnews.ui.NewsDetailsFragmentListener;
 import com.example.roman.listofnews.ui.NewsIntroFragmentListener;
+import com.example.roman.listofnews.ui.SetTitleActionBarListener;
 
-import java.util.Objects;
-
-public class MainActivity extends AppCompatActivity implements NewsIntroFragmentListener, NewsDetailsFragmentListener {
+public class MainActivity extends AppCompatActivity implements NewsIntroFragmentListener, NewsDetailsFragmentListener, SetTitleActionBarListener {
     private static final String TAG = "myLogs";
     private static final String F_INTRO_TAG = "intro_fragment";
     private static final String F_LIST_TAG = "list_fragment";
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
     private static final String F_ABOUT_TAG = "about_fragment";
     private boolean isTwoPanel;
     SelectionStateFragment stateFragment;
+    private LiveData<String> liveDataTitActBar;
+    private String resultLiveDataTitActBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,9 +109,9 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
                             .replace(R.id.frame_full_screen, newsAboutFragment, F_ABOUT_TAG)
                             .commit();
 
-                    if (stateFragment.lastSelection.length()>0) {
+                    /*if (stateFragment.lastSelection.length()>0) {
                         onNewsDetailsByIdClicked(stateFragment.lastSelection);
-                    }
+                    }*/
                 } else {
                     findViewById(R.id.frame_full_screen).setVisibility(View.GONE);
                     //if don't use newsAboutFragment
@@ -155,12 +158,9 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
                         .commit();
 
                 if (detailsByTag != null) {
-                    NewsDetailsFragment newsDetailsFragment = NewsDetailsFragment.newInstance(stateFragment.lastSelection);
-                    getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.frame_list, newsDetailsFragment, F_DETAILS_TAG)
-                            .addToBackStack(null) //for return to NewsList
-                            .commit();
+                    if (stateFragment.lastSelection.length() > 0) {
+                        onNewsDetailsByIdClicked(stateFragment.lastSelection);
+                    }
                 }
 
                 if (aboutByTag != null) {
@@ -254,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
                     .replace(R.id.frame_details, newsDetailsFragment, F_DETAILS_TAG)
                     .commit();
         } else  {
-            if (countBackStack == 1) {
+            if (countBackStack >= 1) {
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.frame_list, newsDetailsFragment, F_DETAILS_TAG)
@@ -262,6 +262,8 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
                         .commit();
             }
         }
+
+        liveDataTitActBar = newsDetailsFragment.getLiveTitActBar();
         /* //info for testing
         String outMessage = "TwoPanel: "+ String.valueOf(isTwoPanel)+" cntBackStack: "+(String.valueOf(countBackStack));
         Toast.makeText(this, outMessage,Toast.LENGTH_SHORT).show();*/
@@ -302,6 +304,7 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
 
     @Override
     public void onBackPressed() {
+        Fragment listByTag = getSupportFragmentManager().findFragmentByTag(F_LIST_TAG);
         Fragment detailsByTag = getSupportFragmentManager().findFragmentByTag(F_DETAILS_TAG);
         Fragment aboutByTag = getSupportFragmentManager().findFragmentByTag(F_ABOUT_TAG);
         Fragment introByTag = getSupportFragmentManager().findFragmentByTag(F_INTRO_TAG);
@@ -326,6 +329,9 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
                 getSupportFragmentManager().beginTransaction()
                         .remove(aboutByTag)
                         .commit();
+                //set previous details Title on Action Bar
+                if (listByTag != null) setupActionBar(getString(R.string.app_name), false);
+                if (resultLiveDataTitActBar != null) setupActionBar(resultLiveDataTitActBar, false);
             }
             if (introByTag != null) {
                 getSupportFragmentManager().beginTransaction()
@@ -345,6 +351,37 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
         }
 
         super.onBackPressed();
+    }
+
+    @Override
+    public void onSetTitleActionBar() {
+        Fragment listByTag = getSupportFragmentManager().findFragmentByTag(F_LIST_TAG);
+        Fragment detailsByTag = getSupportFragmentManager().findFragmentByTag(F_DETAILS_TAG);
+        Fragment aboutByTag = getSupportFragmentManager().findFragmentByTag(F_ABOUT_TAG);
+
+        if (aboutByTag!= null) {
+            setupActionBar(getString(R.string.about_label), true);
+            return;
+        }
+        if (detailsByTag != null) {
+            liveDataTitActBar.observe(this, new Observer<String>() {
+                @Override
+                public void onChanged(@Nullable String s) {
+                    resultLiveDataTitActBar = s;
+                    if (aboutByTag == null) {
+                        if (!isTwoPanel) {
+                            setupActionBar(s, true);
+                        } else {
+                            setupActionBar(s, false);
+                        }
+                    }
+                }
+            });
+            return;
+        }
+        if (listByTag != null) {
+            setupActionBar(getString(R.string.app_name), false);
+        }
     }
 
     public void setupActionBar(String title, Boolean addBackButton){
