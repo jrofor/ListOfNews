@@ -1,5 +1,7 @@
 package com.example.roman.listofnews;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,6 +20,8 @@ import com.example.roman.listofnews.data.dataBase.NewsDatabaseRepository;
 import com.example.roman.listofnews.data.dataBase.NewsEntity;
 import com.example.roman.listofnews.mvp.NewsDetailsPresenter;
 import com.example.roman.listofnews.mvp.NewsDetailsView;
+import com.example.roman.listofnews.ui.SetTitleActionBarListener;
+
 import java.util.Objects;
 
 public class NewsDetailsFragment extends MvpAppCompatFragment implements NewsDetailsView {
@@ -43,11 +47,13 @@ public class NewsDetailsFragment extends MvpAppCompatFragment implements NewsDet
     private String idItem;
     @NonNull
     private NewsDatabaseRepository newsDatabaseRepository = new NewsDatabaseRepository(getActivity());
+    private MutableLiveData<String> liveTitActBar = new MutableLiveData<>();
+    private SetTitleActionBarListener titleActionBarListener;
 
     public static NewsDetailsFragment newInstance(String idNewsItem) {
         NewsDetailsFragment newsDetailsFragment = new NewsDetailsFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(ARGUMENT_NEWS_ITEM,idNewsItem);
+        bundle.putString(ARGUMENT_NEWS_ITEM, idNewsItem);
         newsDetailsFragment.setArguments(bundle);
         return newsDetailsFragment;
     }
@@ -56,6 +62,9 @@ public class NewsDetailsFragment extends MvpAppCompatFragment implements NewsDet
     public void onAttach(Context context) {
         super.onAttach(context);
         newsDatabaseRepository = new NewsDatabaseRepository(getActivity());
+        if (context instanceof SetTitleActionBarListener) {
+            titleActionBarListener = (SetTitleActionBarListener) context;
+        }
     }
 
     @Override
@@ -92,9 +101,12 @@ public class NewsDetailsFragment extends MvpAppCompatFragment implements NewsDet
         fullTextView.setText(newsEntity.getPreviewText());
         Glide.with(this).load(newsEntity.getImageUrl()).into(imageView);
         textDateView.setText(newsEntity.getUpdatedDate());
-        String titleActionBar = (newsEntity.getTitle());
-        // Set title bar
-        ((MainActivity) Objects.requireNonNull(getActivity())).setupActionBar(titleActionBar,true);
+        //title LiveData for actionBar
+        liveTitActBar.setValue(newsEntity.getTitle());
+    }
+
+    public LiveData<String> getLiveTitActBar() {
+        return liveTitActBar;
     }
 
     private void findView(View view) {
@@ -105,9 +117,16 @@ public class NewsDetailsFragment extends MvpAppCompatFragment implements NewsDet
         categoryView = (TextView) view.findViewById(R.id.details_category);
     }
 
+    @Override
+    public void onResume() {
+        // Set title bar
+        titleActionBarListener.onSetTitleActionBar();
+        Log.d(TAG, "--- NewsDetailsFragment onResume");
+        super.onResume();
+    }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         Log.d(TAG, "--- NewsDetailsFragment onDestroy");
         super.onDestroy();
     }

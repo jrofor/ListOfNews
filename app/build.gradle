@@ -64,6 +64,11 @@ dependencies {
     annotationProcessor "com.arello-mobile:moxy-compiler:$versionMoxy"
     implementation "com.arello-mobile:moxy:$versionMoxy"
 
+    // Paging
+    implementation "android.arch.paging:runtime:1.0.1"
+
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
     //other
     implementation "io.reactivex.rxjava2:rxjava:2.2.2"
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'

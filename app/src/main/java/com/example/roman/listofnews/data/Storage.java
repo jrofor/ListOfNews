@@ -15,6 +15,8 @@ public class Storage {
     private static final String APP_PREFERENCES_tagUploadWorkManager = "tagUploadWorkManager";
     private static final String APP_PREFERENCES_selectedPositionCategory = "selectedPositionCategory";
     private static final String APP_PREFERENCES_currentState = "currentState";
+    private static final String APP_PREFERENCES_currentListItem = "currentListItem";
+
 
 
 //-----------------------------------------------------------
@@ -129,4 +131,18 @@ public class Storage {
     }
 //-----------------------------------------------------------
 
+    public static void setCurrentListItem (Context context, Integer listItem){
+        SharedPreferences mSettings;
+        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putInt(APP_PREFERENCES_currentListItem, listItem) ;
+        editor.apply();
+    }
+
+    public static int getCurrentListItem (Context context) {
+        SharedPreferences mSettings;
+        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        return mSettings.getInt(APP_PREFERENCES_currentListItem, 0);
+    }
+//-----------------------------------------------------------
 }

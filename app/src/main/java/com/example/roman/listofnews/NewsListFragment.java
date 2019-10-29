@@ -1,54 +1,55 @@
 package com.example.roman.listofnews;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
+import android.arch.paging.LivePagedListBuilder;
+import android.arch.paging.PagedList;
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
-
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-
-import com.arellomobile.mvp.MvpAppCompatFragment;
-import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.arellomobile.mvp.presenter.ProvidePresenter;
-import com.example.roman.listofnews.data.Storage;
-import com.example.roman.listofnews.data.dataBase.NewsDatabaseConverter;
-import com.example.roman.listofnews.data.dataBase.NewsDatabaseRepository;
-import com.example.roman.listofnews.data.dataBase.NewsEntity;
-import com.example.roman.listofnews.mvp.NewsListPresenter;
-import com.example.roman.listofnews.mvp.NewsListView;
-import com.example.roman.listofnews.ui.NewsDetailsFragmentListener;
-import com.example.roman.listofnews.ui.adapter.AllNewsItem;
-import com.example.roman.listofnews.ui.adapter.spinner.CategoriesSpinnerAdapter;
-import com.example.roman.listofnews.ux.NewsCategory;
-import com.example.roman.listofnews.ui.adapter.NewsRecyclerAdapter;
-import com.example.roman.listofnews.ui.State;
-import com.example.roman.listofnews.ux.RestApi;
-import com.example.roman.listofnews.ux.TopStoriesMapper;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
-
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import com.arellomobile.mvp.MvpAppCompatFragment;
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.example.roman.listofnews.data.Storage;
+import com.example.roman.listofnews.data.dataBase.NewsDatabaseRepository;
+import com.example.roman.listofnews.mvp.NewsListPresenter;
+import com.example.roman.listofnews.mvp.NewsListView;
+import com.example.roman.listofnews.ui.NewsDetailsFragmentListener;
+import com.example.roman.listofnews.ui.SetTitleActionBarListener;
+import com.example.roman.listofnews.ui.State;
+import com.example.roman.listofnews.ui.adapter.AllNewsItem;
+import com.example.roman.listofnews.ui.adapter.pagedListAdapter.EmployeeStorage;
+import com.example.roman.listofnews.ui.adapter.pagedListAdapter.MyPositionalDataSource;
+import com.example.roman.listofnews.ui.adapter.pagedListAdapter.NewsItemDiffUtilItemCallback;
+import com.example.roman.listofnews.ui.adapter.pagedListAdapter.NewsPagedListAdapter;
+import com.example.roman.listofnews.ui.adapter.pagedListAdapter.NewsSourceFactory;
+import com.example.roman.listofnews.ui.adapter.spinner.CategoriesSpinnerAdapter;
+import com.example.roman.listofnews.ux.NewsCategory;
+import com.example.roman.listofnews.ux.RestApi;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.Executors;
+
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 public class NewsListFragment extends MvpAppCompatFragment implements NewsListView {
 
@@ -67,10 +68,15 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     @Nullable
     private Spinner spinnerCategories;
     @Nullable
-    private NewsRecyclerAdapter NewsAdapter;
-    @Nullable
     private CategoriesSpinnerAdapter categoriesAdapter;
-
+    @Nullable
+    NewsItemDiffUtilItemCallback newsItemDiffUtilItemCallback;
+    @Nullable
+    private NewsPagedListAdapter newsPagedAdapter;
+    @Nullable
+    private EmployeeStorage employeeStorage;
+    @Nullable
+    private LinearLayoutManager llm;
     @Nullable
     private View viewLoading;
     @Nullable
@@ -85,12 +91,20 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     @Nullable
     private NewsDatabaseRepository newsDatabaseRepository;
+    @Nullable
+    private NewsSourceFactory newsSourceFactory;
     private static final String TAG = "myLogs";
-    private int mScrollOffset = 4;
+    private int mScrollOffsetFAB = 4;
     private NewsDetailsFragmentListener listener;
     private boolean isTwoPanel;
     static final String ARGUMENT_IS_TWO_PANEL = "arg_is_two_panel";
     private String currentState;
+    private Integer currentListItem;
+    private int startLoadKey;
+    private final int pageSizePagedList = 5;
+    private SetTitleActionBarListener titleActionBarListener;
+
+    private Context context;
 
     public static NewsListFragment newInstance(boolean isTwoPanel) {
         NewsListFragment newsListFragment = new NewsListFragment();
@@ -103,12 +117,14 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        newsDatabaseRepository = new NewsDatabaseRepository(getActivity());
-        //checking where context
-        if (getActivity() instanceof NewsDetailsFragmentListener) {
-            listener = (NewsDetailsFragmentListener) getActivity();
+        this.context = context;
+        newsDatabaseRepository = new NewsDatabaseRepository(context);
+        if (context instanceof NewsDetailsFragmentListener) {
+            listener = (NewsDetailsFragmentListener) context;
         }
-
+        if (context instanceof SetTitleActionBarListener) {
+            titleActionBarListener = (SetTitleActionBarListener) context;
+        }
         isTwoPanel = getArguments().getBoolean(ARGUMENT_IS_TWO_PANEL);
         Log.d(TAG, "--- ListFragment onAttach");
     }
@@ -123,9 +139,14 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(LAYOUT, container, false);
-        Log.d(TAG, "--- ListFragment onCreateView");
+        //for test
+        //Storage.setCurrentListItem(getActivity(), 0);
+        if (Storage.getCurrentListItem(getActivity()) < 0) {
+            Storage.setCurrentListItem(getActivity(), 0);
+        }
         setupUi(view);
         //Log.d(TAG, "ListFragment setupUi");
+        Log.d(TAG, "--- ListFragment onCreateView");
         return view;
     }
 
@@ -136,24 +157,37 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
         Log.d(TAG, "--- ListFragment onStart");
         setupUx();
         //Log.d(TAG, "ListFragment setupUx");
-        //checkingDatabaseForEmptiness();
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         // Set title bar
-        ((MainActivity) Objects.requireNonNull(getActivity())).setupActionBar(getString(R.string.app_name), false);
+        titleActionBarListener.onSetTitleActionBar();
     }
 
     @Override
     public void onPause() {
         Log.d(TAG, "--- ListFragment onPause");
+        savingCurrentValuesView();
         unbindUx();
+        super.onPause();
+    }
+
+    private void savingCurrentValuesView() {
+        // for test
+        //Storage.setCurrentState(getActivity(),"HasData" );//currentState
         Storage.setCurrentState(getActivity(), currentState);
         Log.d(TAG, "*** onPause " + currentState);
-        //newsListPresenter.saveCurrentState(currentState, newsDatabaseRepository);
-        super.onPause();
+        if (llm != null) {
+            if (employeeStorage != null) {
+                currentListItem = (int) llm.findFirstVisibleItemPosition() + employeeStorage.outMinStartPosition();
+            }
+        }
+        Storage.setCurrentListItem(getActivity(), currentListItem);
+        Log.d(TAG, "*** onPause #" + currentListItem.toString());
+        //for test
+        /*Toast.makeText(getActivity(),"curLI " + currentListItem.toString() + " FirstV " + llm.findFirstVisibleItemPosition() + " Min "+employeeStorage.outMinStartPosition(), Toast.LENGTH_LONG).show();*/
     }
 
     private void unbindUx() {
@@ -163,23 +197,18 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
 
     private void setupUi(View view) {
         findView(view);
-        setupRecyclerViews(view);
         setupSpinner();
-        setupFabScroll();
+        setupScroll();
         currentState = Storage.getCurrentState(getActivity());
         Log.d(TAG, "*** setupUi " + currentState);
         newsListPresenter.setCurrentScreenState(newsDatabaseRepository, currentState);
+
     }
 
     private void setupUx() {
         spinnerCategories.setOnTouchListener(spinnerOnTouch);
         fabUpdate.setOnClickListener(v -> onClickFabUpdate(categoriesAdapter.getSelectedCategory().serverValue()));
         btnTryAgain.setOnClickListener(v -> onClickTryAgain(categoriesAdapter.getSelectedCategory().serverValue()));
-        NewsAdapter.setOnClickNewsListener(IdItem -> {
-            if (listener != null) {
-                listener.onNewsDetailsByIdClicked(IdItem);
-            }
-        });
     }
 
     private View.OnTouchListener spinnerOnTouch = new View.OnTouchListener() {
@@ -189,6 +218,8 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
                     @Override
                     public void onSelected(@NonNull NewsCategory category) {
                         Log.d(TAG, "--- ListFragment onSelected");
+                        //cleaning saved Current List Item position
+                        Storage.setCurrentListItem(getActivity(), 0);
                         newsListPresenter.loadItem(category.serverValue(), newsDatabaseRepository);
                     }
                 }, spinnerCategories);
@@ -197,19 +228,23 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
         }
     };
 
-
     private void onClickFabUpdate(@NonNull String category) {
+        //cleaning saved Current List Item position
+        Storage.setCurrentListItem(getActivity(), 0);
         newsListPresenter.loadItem(category, newsDatabaseRepository);
     }
 
     private void onClickTryAgain(@NonNull String category) {
+        //cleaning saved Current List Item position
+        Storage.setCurrentListItem(getActivity(), 0);
         newsListPresenter.loadItem(category, newsDatabaseRepository);
     }
 
     @Override
     public void updateItems(@Nullable List<AllNewsItem> news) {
-        if (NewsAdapter != null) NewsAdapter.replaceItems(news);
-
+        if (news.size() > 0) {
+            setupPagedListAdapter(news);
+        }
     }
 
 /**
@@ -275,14 +310,86 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
         spinnerCategories = view.findViewById(R.id.spinner_categories);
         fabUpdate = view.findViewById(R.id.fab_update);
     }
-    private void setupRecyclerViews(View view) {
-        NewsAdapter = new NewsRecyclerAdapter(getActivity());
-        rvNews.setAdapter(NewsAdapter);
-        int orientation = getResources().getConfiguration().orientation;
-        onChangeColumnsWithOrientation(orientation, rvNews, view);
+
+    private void setupPagedListAdapter(List<AllNewsItem> news) {
+        newsItemDiffUtilItemCallback = new NewsItemDiffUtilItemCallback();
+        newsPagedAdapter = new NewsPagedListAdapter(newsItemDiffUtilItemCallback, context);
+        //NewsAdapter = new NewsRecyclerAdapter(getActivity());
+        startLoadKey = Storage.getCurrentListItem(getActivity());
+        employeeStorage = new EmployeeStorage(news, startLoadKey);
+        newsSourceFactory = new NewsSourceFactory(employeeStorage);
+
+        setupPagedList();
+        llm = new LinearLayoutManager(getActivity());
+        rvNews.setLayoutManager(llm);
+        rvNews.setAdapter(newsPagedAdapter);
+        setupClickNewsItem();
     }
 
-    public boolean onCheckIsTwoPanel(boolean isTwoPanel){
+    private void setupPagedList() {
+        PagedList.Config config = new PagedList.Config.Builder()
+                .setEnablePlaceholders(false)
+                .setPageSize(pageSizePagedList)
+                .build();
+
+        LiveData<PagedList<AllNewsItem>> pagedListLiveData = new LivePagedListBuilder<>(
+                newsSourceFactory,
+                config)
+                .setFetchExecutor(Executors.newSingleThreadExecutor())
+                .setInitialLoadKey(startLoadKey)
+                .build();
+        /*PagedList<AllNewsItem> pagedList = new PagedList.Builder<>(dataSource, config)
+                .setFetchExecutor(Executors.newSingleThreadExecutor())
+                .setNotifyExecutor(new MainThreadExecutor())
+                .setInitialKey(Storage.getCurrentListItem(getActivity())) //
+                .build();*/
+        pagedListLiveData.observe(getActivity(), new Observer<PagedList<AllNewsItem>>() {
+            @Override
+            public void onChanged(@Nullable PagedList<AllNewsItem> allNewsItems) {
+                Log.d(TAG, "### submit PagedList");
+                newsPagedAdapter.submitList(allNewsItems);
+            }
+        });
+    }
+
+    private void setupClickNewsItem() {
+        newsPagedAdapter.setOnClickNewsListener(IdItem -> {
+            if (listener != null) {
+                listener.onNewsDetailsByIdClicked(IdItem);
+            }
+        });
+    }
+
+    private void setupSpinner() {
+        final NewsCategory[] categories = NewsCategory.values();
+        categoriesAdapter = CategoriesSpinnerAdapter.createDefault(getActivity(), categories);
+        spinnerCategories.setAdapter(categoriesAdapter);
+        spinnerCategories.setSelection(Storage.getSelectedPositionCategory(getActivity()));
+    }
+
+    private void setupScroll() {
+        rvNews.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (Math.abs(dy) > mScrollOffsetFAB) {
+                    if (dy > 0) {
+                        fabUpdate.hide();
+                    } else {
+                        fabUpdate.show();
+                    }
+                }
+            }
+        });
+    }
+
+
+    public boolean onCheckIsTwoPanel(boolean isTwoPanel) {
         return isTwoPanel;
     }
 
@@ -294,11 +401,11 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
         } else {
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         }*/
-            /*if (orientation == Configuration.ORIENTATION_PORTRAIT && !isTwoPanel)*/
-            DividerItemDecoration itemDecorator = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
-            itemDecorator.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(getActivity(), R.drawable.item_ecoration_size_4)));
-            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
-            recyclerView.addItemDecoration(itemDecorator);
+        /*if (orientation == Configuration.ORIENTATION_PORTRAIT && !isTwoPanel)*/
+        DividerItemDecoration itemDecorator = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
+        itemDecorator.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(getActivity(), R.drawable.item_ecoration_size_4)));
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
+        recyclerView.addItemDecoration(itemDecorator);
 
         /*if ((view.findViewById(R.id.tablet_ll)) == null && orientation == Configuration.ORIENTATION_LANDSCAPE) {
             DividerItemDecoration itemDecorator1 = new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL);
@@ -309,46 +416,9 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
 
     }
 
-    private void setupSpinner() {
-        final NewsCategory[] categories = NewsCategory.values();
-        categoriesAdapter = CategoriesSpinnerAdapter.createDefault(getActivity(), categories);
-        spinnerCategories.setAdapter(categoriesAdapter);
-        spinnerCategories.setSelection(Storage.getSelectedPositionCategory(getActivity()));
-    }
-
-    private void setupFabScroll() {
-        rvNews.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (Math.abs(dy) > mScrollOffset) {
-                    if (dy > 0) {
-                        fabUpdate.hide();
-                    } else {
-                        fabUpdate.show();
-                    }
-
-                }
-            }
-        });
-
-    }
-
-
-
-
-
-
-
 
     @Override
-    public void onDestroy(){
-
+    public void onDestroy() {
         compositeDisposable.dispose();
         super.onDestroy();
         Log.d(TAG, "--- ListFragment onDestroy");

@@ -18,19 +18,19 @@ import android.support.v7.widget.RecyclerView;
 
 
 public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder>{
-    @Nullable
+   @Nullable
     private final List<AllNewsItem> news = new ArrayList<>();
     @Nullable
-    private OnItemClickListener newsListener;
+    //private OnItemClickListener newsListener;
     private RequestManager glideRequestManager;
     private final LayoutInflater inflater;
     final String TAG = "myLogs";
     private Context context;
 
 
-    public interface OnItemClickListener {
+    /*public interface OnItemClickListener {
         //void OnItemClick(@NonNull AllNewsItem allnewsItem); }
-        void OnItemClick(@NonNull String IdItem); }
+        void OnItemClick(@NonNull String IdItem); }*/
 
     public NewsRecyclerAdapter(Context context) {
         //@Nullable OnItemClickListener clickListener;
@@ -54,12 +54,12 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder newsViewHolder, int position) {
         final AllNewsItem NIDTO = news.get(position);
-        newsViewHolder.bindItem(NIDTO, newsListener, context);
+       // newsViewHolder.bindItem(NIDTO, newsListener, context);
     }
 
-    public void setOnClickNewsListener(@NonNull OnItemClickListener newsListener) {
+    /*public void setOnClickNewsListener(@NonNull OnItemClickListener newsListener) {
         this.newsListener = newsListener;
-    }
+    }*/
 
     public void replaceItems (List<AllNewsItem> news ) {
         this.news.clear();

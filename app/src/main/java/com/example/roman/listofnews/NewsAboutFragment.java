@@ -29,10 +29,11 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.roman.listofnews.data.Storage;
 import com.example.roman.listofnews.mvp.NewsAboutPresenter;
 import com.example.roman.listofnews.mvp.NewsAboutView;
+import com.example.roman.listofnews.ui.SetTitleActionBarListener;
 
 import java.util.Objects;
 
-public class NewsAboutFragment extends MvpAppCompatFragment implements NewsAboutView{
+public class NewsAboutFragment extends MvpAppCompatFragment implements NewsAboutView {
 
     @InjectPresenter
     NewsAboutPresenter newsAboutPresenter;
@@ -56,10 +57,14 @@ public class NewsAboutFragment extends MvpAppCompatFragment implements NewsAbout
     private LinearLayout aboutMainLayout;
     final String TAG = "myLogs";
     private static final Integer NOTIFY_ID = 0;
+    private SetTitleActionBarListener titleActionBarListener;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        if (context instanceof SetTitleActionBarListener) {
+            titleActionBarListener = (SetTitleActionBarListener) context;
+        }
     }
 
     @Override
@@ -99,10 +104,11 @@ public class NewsAboutFragment extends MvpAppCompatFragment implements NewsAbout
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         // Set title bar
-        ((MainActivity) Objects.requireNonNull(getActivity())).setupActionBar(getString(R.string.about_label), true);
+        titleActionBarListener.onSetTitleActionBar();
+        Log.d(TAG, "--- AboutFragment onResume");
     }
 
 
@@ -140,7 +146,7 @@ public class NewsAboutFragment extends MvpAppCompatFragment implements NewsAbout
 //======================================================================================switchUpdate
 
     private void switchForUpdate() {
-        if (switchUpdate !=null) {
+        if (switchUpdate != null) {
             newsAboutPresenter.setCheckedValueSwUpdate();
         }
     }
@@ -176,9 +182,9 @@ public class NewsAboutFragment extends MvpAppCompatFragment implements NewsAbout
 
     @Override
     public void showWorkPeriodicUpdateService() {
-        Toast toast = Toast.makeText(getActivity(), getString(R.string.messagePeriodicUpdate) , Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getActivity(), getString(R.string.messagePeriodicUpdate), Toast.LENGTH_LONG);
         TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
-        if( v != null) v.setGravity(Gravity.CENTER);
+        if (v != null) v.setGravity(Gravity.CENTER);
         toast.show();
     }
 
@@ -215,7 +221,7 @@ public class NewsAboutFragment extends MvpAppCompatFragment implements NewsAbout
         intent.setData(Uri.parse("mailto:")); // "mailto:"  +""" " only email apps should handle this
         intent.putExtra(Intent.EXTRA_EMAIL, addresses);
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        intent.putExtra(Intent.EXTRA_TEXT,message);
+        intent.putExtra(Intent.EXTRA_TEXT, message);
         if (intent.resolveActivity(getActivity().getPackageManager()) == null) {
             newsAboutPresenter.ErrorEmailClient();
             return;
