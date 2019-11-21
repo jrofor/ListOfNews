@@ -28,8 +28,6 @@ public class NewsIntroFragment extends Fragment {
     PagerAdapter pagerAdapter;
     private NewsIntroFragmentListener listener;
 
-    //private CompositeDisposable compositeDisposable = new CompositeDisposable();
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -53,9 +51,9 @@ public class NewsIntroFragment extends Fragment {
         setupUi(view);
         Log.d(TAG, "--- IntroFragment onCreateView");
         return view;
-        }
+    }
 
-    private void setupUi(View view){
+    private void setupUi(View view) {
         pager = (ViewPager) view.findViewById(R.id.vp_Pager);
         pagerAdapter = new IntroFragmentPagerAdapter(getChildFragmentManager(), pageCount, getContext());
         pager.setAdapter(pagerAdapter);
@@ -64,24 +62,24 @@ public class NewsIntroFragment extends Fragment {
         indicator.setViewPager(pager);
 
         pagerAdapter.registerDataSetObserver(indicator.getDataSetObserver());
-        pager.addOnPageChangeListener (new ViewPager.OnPageChangeListener() {
+        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 Log.d(TAG, "onPageSelected, position = " + position);
                 if (position == 4) {
                     if (listener != null) listener.onNewsIntroFragmentClose();
-                } //startMainActivity(); }
+                }
             }
+
             @Override
             public void onPageScrolled(int position, float positionOffset,
-                                       int positionOffsetPixels) { }
-            @Override
-            public void onPageScrollStateChanged(int state) { }});
-        /*Disposable disposable = Completable.complete()
-                   .delay(10, TimeUnit.SECONDS)
-                   .subscribe(this::startSecondActivity);
-           compositeDisposable.add(disposable);*/
+                                       int positionOffsetPixels) {
+            }
 
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
     }
 
     @Override
