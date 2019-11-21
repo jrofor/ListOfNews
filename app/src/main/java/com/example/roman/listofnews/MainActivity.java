@@ -341,7 +341,7 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
         }
 
         if (countBackStack == 1) {
-             if ((!isTwoPanel) || (isTwoPanel && aboutByTag == null)) {
+             if (!isTwoPanel || aboutByTag == null) {
                  /*//info for testing
                  Toast.makeText(this, String.valueOf(countBackStack), Toast.LENGTH_SHORT).show();
                  Log.d(TAG, "--- mainActivity finish");*/
