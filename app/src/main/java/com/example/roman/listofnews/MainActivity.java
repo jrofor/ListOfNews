@@ -40,14 +40,14 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
 
         if (savedInstanceState == null) {
             // open in first time
-            if (Storage.openFirstTime(this)){
+            if (Storage.openFirstTime(this)) {
                 startIntroFragment();
                 Storage.setFirstTimeShown(this);
                 return;
             } else {
                 // check Switch Intro
                 if (Storage.checkSwitchIntro(this)) {
-                        startIntroFragment();
+                    startIntroFragment();
                     return;
                 }
                 //create first fragment
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
                 findViewById(R.id.frame_full_screen).setVisibility(View.VISIBLE);
 
                 //create news fragments under newsAboutFragment
-                if (stateFragment.lastSelection.length()>0) {
+                if (stateFragment.lastSelection.length() > 0) {
                     onNewsDetailsByIdClicked(stateFragment.lastSelection);
                 }
 
@@ -99,8 +99,8 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
                         .commit();
                 return;
             }
-            if (countBackStack == 2 && introByTag==null) {
-                if (aboutByTag != null){
+            if (countBackStack == 2 && introByTag == null) {
+                if (aboutByTag != null) {
                     //don't use popBackStack, NewsList from portrait set on right
                     findViewById(R.id.frame_full_screen).setVisibility(View.VISIBLE);
                     NewsAboutFragment newsAboutFragment = new NewsAboutFragment();
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
             Fragment aboutByTag = getSupportFragmentManager().findFragmentByTag(F_ABOUT_TAG);
             Fragment detailsByTag = getSupportFragmentManager().findFragmentByTag(F_DETAILS_TAG);
             if (countBackStack >= 2) {
-                for (int i=countBackStack; i>1;  i--){
+                for (int i = countBackStack; i > 1; i--) {
                     getSupportFragmentManager().popBackStack();
                 }
                 NewsListFragment newsListFragment = NewsListFragment.newInstance(isTwoPanel);
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
 
     }
 
-    private void startIntroFragment(){
+    private void startIntroFragment() {
         //create intro fragment
         if (isTwoPanel) {
             findViewById(R.id.frame_full_screen).setVisibility(View.VISIBLE);
@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
         if (isTwoPanel) findViewById(R.id.frame_full_screen).setVisibility(View.GONE);
         getSupportFragmentManager().executePendingTransactions();
         Fragment introByTag = getSupportFragmentManager().findFragmentByTag(F_INTRO_TAG);
-        if (introByTag != null){
+        if (introByTag != null) {
             getSupportFragmentManager().beginTransaction()
                     .remove(introByTag)
                     .commit();
@@ -253,7 +253,7 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
                     .beginTransaction()
                     .replace(R.id.frame_details, newsDetailsFragment, F_DETAILS_TAG)
                     .commit();
-        } else  {
+        } else {
             if (countBackStack >= 1) {
                 getSupportFragmentManager()
                         .beginTransaction()
@@ -270,21 +270,21 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
     }
 
     @Override
-    public boolean onCreateOptionsMenu (Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_list, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId() ){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.item1:
                 int idFrame = R.id.frame_list;
                 if (isTwoPanel) {
                     idFrame = R.id.frame_full_screen;
                     findViewById(R.id.frame_full_screen).setVisibility(View.VISIBLE);
                 }
-                NewsAboutFragment newsAboutFragment = new NewsAboutFragment() ;
+                NewsAboutFragment newsAboutFragment = new NewsAboutFragment();
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(idFrame, newsAboutFragment, F_ABOUT_TAG)
@@ -309,13 +309,13 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
         Fragment aboutByTag = getSupportFragmentManager().findFragmentByTag(F_ABOUT_TAG);
         Fragment introByTag = getSupportFragmentManager().findFragmentByTag(F_INTRO_TAG);
 
-        int  countBackStack = getSupportFragmentManager().getBackStackEntryCount();
+        int countBackStack = getSupportFragmentManager().getBackStackEntryCount();
         //clean idItem in stateFragment when returning to NewsList
-        if ((!isTwoPanel) && (detailsByTag !=null) && (aboutByTag ==null) ) {
+        if ((!isTwoPanel) && (detailsByTag != null) && (aboutByTag == null)) {
             //cleaning details be in portrait for landscape
             stateFragment.lastSelection = "";
             Fragment detailsById = getSupportFragmentManager().findFragmentById(R.id.frame_details);
-            if (detailsById != null){
+            if (detailsById != null) {
                 getSupportFragmentManager().beginTransaction()
                         .remove(detailsById)
                         .commit();
@@ -325,7 +325,7 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
         //clean newsAboutFragment or newsIntroFragment
         if (isTwoPanel) {
             findViewById(R.id.frame_full_screen).setVisibility(View.GONE);
-            if (aboutByTag != null ){
+            if (aboutByTag != null) {
                 getSupportFragmentManager().beginTransaction()
                         .remove(aboutByTag)
                         .commit();
@@ -341,13 +341,13 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
         }
 
         if (countBackStack == 1) {
-             if (!isTwoPanel || aboutByTag == null) {
+            if (!isTwoPanel || aboutByTag == null) {
                  /*//info for testing
                  Toast.makeText(this, String.valueOf(countBackStack), Toast.LENGTH_SHORT).show();
                  Log.d(TAG, "--- mainActivity finish");*/
-                 finish();
-                 return;
-             }
+                finish();
+                return;
+            }
         }
 
         super.onBackPressed();
@@ -359,7 +359,7 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
         Fragment detailsByTag = getSupportFragmentManager().findFragmentByTag(F_DETAILS_TAG);
         Fragment aboutByTag = getSupportFragmentManager().findFragmentByTag(F_ABOUT_TAG);
 
-        if (aboutByTag!= null) {
+        if (aboutByTag != null) {
             setupActionBar(getString(R.string.about_label), true);
             return;
         }
@@ -384,7 +384,7 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
         }
     }
 
-    public void setupActionBar(String title, Boolean addBackButton){
+    public void setupActionBar(String title, Boolean addBackButton) {
         final ActionBar ab = getSupportActionBar();
         final ActionBar actionBar = Preconditions.checkNotNull(ab);
         actionBar.setTitle(title);
@@ -394,7 +394,6 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
             actionBar.setDisplayHomeAsUpEnabled(false);
         }
     }
-
 
 
     @Override

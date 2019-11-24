@@ -16,6 +16,7 @@ import com.example.roman.listofnews.data.background.NetworkUtils;
 public class MyApplication extends Application {
     private static final String TAG = "myLogs";
     private static MyApplication sMyApplication;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -24,10 +25,6 @@ public class MyApplication extends Application {
                 new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         //Log.d(TAG, "Start connectivity receiver with callback");
 
-        NetworkRequest request =
-                new NetworkRequest.Builder()
-                        .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-                        .build();
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N) {
             Log.d(TAG, "Start connectivity receiver with handler");
             registerReceiver(NetworkUtils.sNetworkUtils.getReceiver(),
@@ -40,17 +37,6 @@ public class MyApplication extends Application {
             connectivityManager.registerDefaultNetworkCallback(callback);
 
         }
-
-/*networkConnectionReceiver = new NetworkConnectionReceiver(this);
-            connectivityManager.registerDefaultNetworkCallback(request,connectivityManager.getNetworkCapabilities(Network.fromNetworkHandle(long)) );*/
-
-       /* ConnectivityManager.networkCallback = new CapabilityValidatedCallback();
-
-        registerReceiver(NetworkUtils.sNetworkUtils.getReceiver(),
-                new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-                new IntentFilter(ConnectivityManager.registerNetworkCallback(request, networkCallback));*/
-
-
     }
 
     private static ConnectivityManager.NetworkCallback createSimpleCallback() {

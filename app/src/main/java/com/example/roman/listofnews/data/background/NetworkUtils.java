@@ -25,13 +25,6 @@ public class NetworkUtils {
         return mNetworkReceiver;
     }
 
-    public Single<Boolean> getOnlineNetwork() {
-        return mNetworkState
-                .subscribeOn(Schedulers.io())
-                .filter(online -> online)
-                .firstOrError();
-    }
-
     private boolean isNetworkAvailable() {
         ConnectivityManager cm = (ConnectivityManager)
                 MyApplication.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -43,7 +36,6 @@ public class NetworkUtils {
         // otherwise check if we are connected
         return networkInfo != null && networkInfo.isConnected();
     }
-
 
     public class NetworkReceiver extends BroadcastReceiver {
 

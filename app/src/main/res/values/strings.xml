@@ -8,7 +8,7 @@
     <string name="developerFeedback">Developer Feedback:</string>
     <string name="Send">Send Message</string>
     <string name="Hint">Enter a message…</string>
-    <string name="about_email_addresses" translatable="false">Email</string>
+    <string name="about_email_addresses" translatable="false">rofor.jj@gmail.com</string>
     <string name="about_send_email_error_client">Sorry. You don\'t have any email client</string>
     <string name="about_show_error_email_message">Empty text. Please input message</string>
     <string name="about_subject">Contacting about app NY Times</string>
@@ -78,7 +78,7 @@
     <string name="startService">Updating news</string>
     <string name="cancel_click">cancel</string>
     <string name="notiSuccessText_News_from_the">"News from the "</string>
-    <string name="notiSuccessText_updated">updated</string>
+    <string name="notiSuccessText_updated">" updated"</string>
     <string name="notiErrorText">Error updating</string>
     <string name="messagePeriodicUpdate">"Updates will be coming every 3 hours when device charging."</string>
 
