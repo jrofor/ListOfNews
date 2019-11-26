@@ -4,8 +4,8 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import java.util.List;
-import io.reactivex.Observable;
 import java.util.concurrent.Callable;
+
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
@@ -22,11 +22,8 @@ public class NewsDatabaseRepository {
             @Override
             public Void call() throws Exception {
                 NewsAppDatabase db = NewsAppDatabase.getNewsAppDatabase(mContext);
-
                 NewsEntity[] newsEntities = NewsEntityList.toArray(new NewsEntity[NewsEntityList.size()]);
-
                 db.newsDao().insertAll(newsEntities);
-
                 return null;
             }
         });
@@ -47,9 +44,7 @@ public class NewsDatabaseRepository {
             @Override
             public Void call() throws Exception {
                 NewsAppDatabase db = NewsAppDatabase.getNewsAppDatabase(mContext);
-
                 db.newsDao().deleteAll();
-
                 return null;
             }
         });
@@ -65,7 +60,7 @@ public class NewsDatabaseRepository {
         });
     }
 
-    public Single <NewsEntity> getEntitybyIdFromDatabase(final @NonNull String IdItem) {
+    public Single<NewsEntity> getEntitybyIdFromDatabase(final @NonNull String IdItem) {
         return Single.fromCallable(new Callable<NewsEntity>() {
             @Override
             public NewsEntity call() throws Exception {
@@ -74,11 +69,5 @@ public class NewsDatabaseRepository {
             }
         });
     }
-
-    /*public Observable<List<NewsEntity>> getDataObservable() {
-        NewsAppDatabase db = NewsAppDatabase.getNewsAppDatabase(mContext);
-
-        //return db.newsAsyncDao().getAll();
-    }*/
 
 }

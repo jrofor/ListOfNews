@@ -1,13 +1,12 @@
 package com.example.roman.listofnews;
 
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,8 +14,8 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.roman.listofnews.ui.adapter.introPager.IntroFragmentPagerAdapter;
 import com.example.roman.listofnews.ui.NewsIntroFragmentListener;
+import com.example.roman.listofnews.ui.adapter.introPager.IntroFragmentPagerAdapter;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -24,8 +23,6 @@ public class NewsIntroFragment extends Fragment {
 
     static final String TAG = "myLogs";
     private static final int pageCount = 5; //number of fragments in intro
-    ViewPager pager;
-    PagerAdapter pagerAdapter;
     private NewsIntroFragmentListener listener;
 
     @Override
@@ -54,11 +51,11 @@ public class NewsIntroFragment extends Fragment {
     }
 
     private void setupUi(View view) {
-        pager = (ViewPager) view.findViewById(R.id.vp_Pager);
-        pagerAdapter = new IntroFragmentPagerAdapter(getChildFragmentManager(), pageCount, getContext());
+        ViewPager pager = view.findViewById(R.id.vp_Pager);
+        PagerAdapter pagerAdapter = new IntroFragmentPagerAdapter(getChildFragmentManager(), pageCount, getContext());
         pager.setAdapter(pagerAdapter);
 
-        CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.ci_indicator);
+        CircleIndicator indicator = view.findViewById(R.id.ci_indicator);
         indicator.setViewPager(pager);
 
         pagerAdapter.registerDataSetObserver(indicator.getDataSetObserver());
@@ -96,7 +93,6 @@ public class NewsIntroFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        //compositeDisposable.dispose();
     }
 
     @Override

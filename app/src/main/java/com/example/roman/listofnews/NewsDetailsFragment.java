@@ -22,8 +22,6 @@ import com.example.roman.listofnews.mvp.NewsDetailsPresenter;
 import com.example.roman.listofnews.mvp.NewsDetailsView;
 import com.example.roman.listofnews.ui.SetTitleActionBarListener;
 
-import java.util.Objects;
-
 public class NewsDetailsFragment extends MvpAppCompatFragment implements NewsDetailsView {
 
     private static final int LAYOUT = R.layout.fragment_news_details;
@@ -110,11 +108,11 @@ public class NewsDetailsFragment extends MvpAppCompatFragment implements NewsDet
     }
 
     private void findView(View view) {
-        titleView = (TextView) view.findViewById(R.id.details_title);
-        fullTextView = (TextView) view.findViewById(R.id.details_preview);
-        imageView = (ImageView) view.findViewById(R.id.details_image_avatar);
-        textDateView = (TextView) view.findViewById(R.id.details_textDate);
-        categoryView = (TextView) view.findViewById(R.id.details_category);
+        titleView = view.findViewById(R.id.details_title);
+        fullTextView = view.findViewById(R.id.details_preview);
+        imageView = view.findViewById(R.id.details_image_avatar);
+        textDateView = view.findViewById(R.id.details_textDate);
+        categoryView = view.findViewById(R.id.details_category);
     }
 
     @Override

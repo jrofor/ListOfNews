@@ -3,7 +3,6 @@ package com.example.roman.listofnews.ui.adapter.pagedListAdapter;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.example.roman.listofnews.data.Storage;
 import com.example.roman.listofnews.ui.adapter.AllNewsItem;
 
 import java.util.ArrayList;
@@ -40,29 +39,23 @@ public class EmployeeStorage {
                     outNews.add(news.get(i));
                 }
             } else {
-                    for (int i = startPosition; i < startPosition + loadSize; i++) {
-                        cnt = String.valueOf(i);
-                        outNews.add(AllNewsItem.create(cnt, cnt, cnt, cnt, cnt, cnt));
-                    }
+                for (int i = startPosition; i < startPosition + loadSize; i++) {
+                    cnt = String.valueOf(i);
+                    outNews.add(AllNewsItem.create(cnt, cnt, cnt, cnt, cnt, cnt));
                 }
+            }
         } else if (startPosition < stopList) {
             if (!news.isEmpty()) {
                 for (int i = startPosition; i < stopList; i++) {
                     outNews.add(news.get(i));
                 }
             } else {
-                    for (int i = startPosition; i < stopList; i++) {
-                        cnt = String.valueOf(i);
-                        outNews.add(AllNewsItem.create(cnt, cnt, cnt, cnt, cnt, cnt)); } }
-        }
-
-        /*if (startPosition == stopList) {
-            if (!news.isEmpty()) {
-                for (int i = minStartPosition; i < loadSize; i++) {
-                    outNews.add(news.get(i));
+                for (int i = startPosition; i < stopList; i++) {
+                    cnt = String.valueOf(i);
+                    outNews.add(AllNewsItem.create(cnt, cnt, cnt, cnt, cnt, cnt));
                 }
             }
-        }*/
+        }
 
         if (startPosition < minStartPosition) {
             if (startPosition != stopList) {

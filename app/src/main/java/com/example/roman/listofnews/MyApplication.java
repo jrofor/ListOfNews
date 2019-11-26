@@ -23,7 +23,6 @@ public class MyApplication extends Application {
         sMyApplication = this;
         registerReceiver(NetworkUtils.sNetworkUtils.getReceiver(),
                 new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-        //Log.d(TAG, "Start connectivity receiver with callback");
 
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N) {
             Log.d(TAG, "Start connectivity receiver with handler");
@@ -33,22 +32,7 @@ public class MyApplication extends Application {
             Log.d(TAG, "Start connectivity receiver with callback");
             ConnectivityManager connectivityManager
                     = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-            ConnectivityManager.NetworkCallback callback = createSimpleCallback();
-            connectivityManager.registerDefaultNetworkCallback(callback);
-
         }
-    }
-
-    private static ConnectivityManager.NetworkCallback createSimpleCallback() {
-        return new ConnectivityManager.NetworkCallback() {
-            @Override
-            public void onAvailable(Network network) {
-            }
-
-            @Override
-            public void onLost(Network network) {
-            }
-        };
     }
 
     public static Context getContext() {

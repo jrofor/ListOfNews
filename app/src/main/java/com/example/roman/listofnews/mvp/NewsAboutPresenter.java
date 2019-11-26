@@ -3,14 +3,12 @@ package com.example.roman.listofnews.mvp;
 import android.support.annotation.NonNull;
 
 import com.arellomobile.mvp.InjectViewState;
-import com.example.roman.listofnews.data.Storage;
 import com.example.roman.listofnews.data.background.UploadWork;
 import com.example.roman.listofnews.mvp.common.BasePresenter;
 
 import java.util.concurrent.TimeUnit;
 
 import androidx.work.Constraints;
-import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 

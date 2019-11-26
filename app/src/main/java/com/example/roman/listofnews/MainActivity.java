@@ -1,13 +1,11 @@
 package com.example.roman.listofnews;
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Observer;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -56,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
                         .replace(R.id.frame_list, newsListFragment, F_LIST_TAG)
                         .addToBackStack(null) //for convenient closure
                         .commit();
-                //saveStateFragment();
             }
 
         } else {
@@ -247,7 +244,6 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
         int countBackStack = getSupportFragmentManager().getBackStackEntryCount();
         NewsDetailsFragment newsDetailsFragment = NewsDetailsFragment.newInstance(idItem);
         stateFragment.lastSelection = idItem;
-        //int frameId = isTwoPanel ? R.id.frame_details : R.id.frame_list;
         if (isTwoPanel) {
             getSupportFragmentManager()
                     .beginTransaction()
@@ -364,17 +360,12 @@ public class MainActivity extends AppCompatActivity implements NewsIntroFragment
             return;
         }
         if (detailsByTag != null) {
-            liveDataTitActBar.observe(this, new Observer<String>() {
-                @Override
-                public void onChanged(@Nullable String s) {
-                    resultLiveDataTitActBar = s;
-                    if (aboutByTag == null) {
-                        if (!isTwoPanel) {
-                            setupActionBar(s, true);
-                        } else {
-                            setupActionBar(s, false);
-                        }
-                    }
+            liveDataTitActBar.observe(this, s -> {
+                resultLiveDataTitActBar = s;
+                if (!isTwoPanel) {
+                    setupActionBar(s, true);
+                } else {
+                    setupActionBar(s, false);
                 }
             });
             return;

@@ -13,7 +13,6 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.roman.listofnews.MainActivity;
 import com.example.roman.listofnews.R;
@@ -40,7 +39,6 @@ public class ServiceUpdate extends Service {
     }
 
     private static final String TAG = "myLogs";
-    private Disposable downloadDisposable;
     @Nullable
     private NewsDatabaseRepository newsDatabaseRepository = new NewsDatabaseRepository(this);
     @Nullable
@@ -59,24 +57,23 @@ public class ServiceUpdate extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        //Toast.makeText(getApplicationContext(), "Service is created", Toast.LENGTH_SHORT).show();
         startForeground(FOREGROUND_ID, notificationStartForeground().build());
 
     }
 
-    private Notification.Builder notificationStartForeground(){
+    private Notification.Builder notificationStartForeground() {
         Intent notificationIntent = new Intent(this, MainActivity.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
                 | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                | Intent.FLAG_ACTIVITY_NEW_TASK );
+                | Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
-                notificationIntent,0);
+                notificationIntent, 0);
         Notification.Builder notification;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel();
             notification = new Notification.Builder(getApplicationContext(), CHANNEL_ID);
         } else {
-            notification  =  new Notification.Builder(getApplicationContext());
+            notification = new Notification.Builder(getApplicationContext());
         }
         notification
                 .setSmallIcon(android.R.drawable.stat_sys_download)
@@ -94,8 +91,8 @@ public class ServiceUpdate extends Service {
         return START_STICKY;
     }
 
-    private void loadNews(){
-        Disposable disposable = (Disposable) RestApi.getInstanse()
+    private void loadNews() {
+        Disposable disposable = RestApi.getInstanse()
                 .getTSEndpoint()
                 .setSectionName(
                         NewsCategory.findCategoryByPosition(
@@ -135,12 +132,12 @@ public class ServiceUpdate extends Service {
         Disposable disposable = newsDatabaseRepository.saveToDatabase(NewsEntityList)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe( () -> {
+                .subscribe(() -> {
                             Log.d(TAG, "//s// save NewsEntityList To Database");
                             notifyMessage((getString(R.string.notiSuccessText_News_from_the)
                                     + NewsCategory.findCategoryByPosition(
-                                            Storage.getSelectedPositionCategory(this))
-                                            .serverValue())
+                                    Storage.getSelectedPositionCategory(this))
+                                    .serverValue())
                                     + getString(R.string.notiSuccessText_updated));
                         },
                         throwable -> Log.e(TAG, throwable.toString()));
@@ -148,7 +145,7 @@ public class ServiceUpdate extends Service {
 
     }
 
-    private void handleError (Throwable throwable) {
+    private void handleError(Throwable throwable) {
         if (throwable instanceof IOException) {
             Log.d(TAG, "//s// handleError");
             notifyMessage(getString(R.string.notiErrorText));
@@ -158,14 +155,12 @@ public class ServiceUpdate extends Service {
         stopSelf();
     }
 
-
-    private void notifyMessage(String message) {//
-
+    private void notifyMessage(String message) {
         // Create an explicit intent for an Activity
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
                 | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                | Intent.FLAG_ACTIVITY_NEW_TASK ); // or open existing  //open new activity
+                | Intent.FLAG_ACTIVITY_NEW_TASK); // or open existing  //open new activity
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
@@ -206,7 +201,7 @@ public class ServiceUpdate extends Service {
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         stopSelf();
         if (compositeDisposable != null && !compositeDisposable.isDisposed()) {
             compositeDisposable.dispose();

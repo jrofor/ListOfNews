@@ -36,8 +36,7 @@ public class PageFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.pagefragment_news_intro, null);
-        ImageView ivPage = (ImageView) view.findViewById(R.id.iv_intro_Page);
-        //tvPage.setText("Page" + pageNumber);
+        ImageView ivPage = view.findViewById(R.id.iv_intro_Page);
 
         switch (pageNumber) {
             case 0:

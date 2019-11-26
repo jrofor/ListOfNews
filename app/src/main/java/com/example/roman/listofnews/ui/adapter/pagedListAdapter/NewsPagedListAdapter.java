@@ -15,7 +15,7 @@ import com.example.roman.listofnews.R;
 import com.example.roman.listofnews.ui.adapter.AllNewsItem;
 import com.example.roman.listofnews.ui.adapter.NewsViewHolder;
 
-public class NewsPagedListAdapter extends PagedListAdapter <AllNewsItem, NewsViewHolder> {
+public class NewsPagedListAdapter extends PagedListAdapter<AllNewsItem, NewsViewHolder> {
 
     @Nullable
     private OnItemClickListener newsListener;
@@ -24,8 +24,8 @@ public class NewsPagedListAdapter extends PagedListAdapter <AllNewsItem, NewsVie
     private Context context;
 
     public interface OnItemClickListener {
-        //void OnItemClick(@NonNull AllNewsItem allnewsItem); }
-        void OnItemClick(@NonNull String IdItem); }
+        void OnItemClick(@NonNull String IdItem);
+    }
 
     public NewsPagedListAdapter(@NonNull DiffUtil.ItemCallback<AllNewsItem> diffCallback, Context context) {
         super(diffCallback);
@@ -42,19 +42,16 @@ public class NewsPagedListAdapter extends PagedListAdapter <AllNewsItem, NewsVie
     @NonNull
     @Override
     public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        /*View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.employee, parent, false);
-        EmployeeViewHolder holder = new EmployeeViewHolder(view);
-        return holder;*/
-        return NewsViewHolder.create (inflater, parent, glideRequestManager);
+        return NewsViewHolder.create(inflater, parent, glideRequestManager);
     }
 
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder newsViewHolder, int position) {
         final AllNewsItem NIDTO = getItem(position);
         if (NIDTO != null) {
-            newsViewHolder.bindItem(NIDTO, newsListener, context); }
-        else {
-            newsViewHolder.bindItem(AllNewsItem.create("wait", "wait","wait","wait","wait","wait"), newsListener, context);
+            newsViewHolder.bindItem(NIDTO, newsListener, context);
+        } else {
+            newsViewHolder.bindItem(AllNewsItem.create("wait", "wait", "wait", "wait", "wait", "wait"), newsListener, context);
         }
     }
 

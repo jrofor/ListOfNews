@@ -1,4 +1,5 @@
 package com.example.roman.listofnews.ux;
+
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -18,7 +19,7 @@ public final class TopStoriesMapper {
         throw new AssertionError("Must be no instance");
     }
 
-    public static List<AllNewsItem> map (@NonNull List<NewsItemDTO> dtos) {
+    public static List<AllNewsItem> map(@NonNull List<NewsItemDTO> dtos) {
 
         final List<AllNewsItem> items = new ArrayList<>();
 
@@ -55,8 +56,8 @@ public final class TopStoriesMapper {
             return null;
         }
 
-        final int imageImMaximumQutilityIndex = multimedias.size() - 1;
-        final MultimediaDTO multimedia = multimedias.get(imageImMaximumQutilityIndex);
+        final int imageImMaximumQuantityIndex = multimedias.size() - 1;
+        final MultimediaDTO multimedia = multimedias.get(imageImMaximumQuantityIndex);
 
         if (!multimedia.getType().equals(MULTIMEDIA_TYPE_IMAGE)) {
             return null;
