@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:theme="@style/Base.ThemeOverlay.AppCompat.Dark">
-        <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
 
         <Spinner
             android:id="@+id/spinner_categories"
@@ -37,10 +36,6 @@
 
         <requestFocus />
     </android.support.design.widget.FloatingActionButton>
-
-    <!-- android:clipToPadding="false"
-            android:paddingBottom="48dp"
-    -->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_news"

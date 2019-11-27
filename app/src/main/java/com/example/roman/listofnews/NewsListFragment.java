@@ -6,7 +6,6 @@ import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -23,7 +22,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -37,7 +35,6 @@ import com.example.roman.listofnews.ui.SetTitleActionBarListener;
 import com.example.roman.listofnews.ui.State;
 import com.example.roman.listofnews.ui.adapter.AllNewsItem;
 import com.example.roman.listofnews.ui.adapter.pagedListAdapter.EmployeeStorage;
-import com.example.roman.listofnews.ui.adapter.pagedListAdapter.MyPositionalDataSource;
 import com.example.roman.listofnews.ui.adapter.pagedListAdapter.NewsItemDiffUtilItemCallback;
 import com.example.roman.listofnews.ui.adapter.pagedListAdapter.NewsPagedListAdapter;
 import com.example.roman.listofnews.ui.adapter.pagedListAdapter.NewsSourceFactory;
@@ -99,7 +96,7 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     private boolean isTwoPanel;
     static final String ARGUMENT_IS_TWO_PANEL = "arg_is_two_panel";
     private String currentState;
-    private Integer currentListItem;
+    private Integer currentListItem = 0;
     private int startLoadKey;
     private final int pageSizePagedList = 5;
     private SetTitleActionBarListener titleActionBarListener;
@@ -139,13 +136,10 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(LAYOUT, container, false);
-        //for test
-        //Storage.setCurrentListItem(getActivity(), 0);
         if (Storage.getCurrentListItem(getActivity()) < 0) {
             Storage.setCurrentListItem(getActivity(), 0);
         }
         setupUi(view);
-        //Log.d(TAG, "ListFragment setupUi");
         Log.d(TAG, "--- ListFragment onCreateView");
         return view;
     }
@@ -156,7 +150,6 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
         super.onStart();
         Log.d(TAG, "--- ListFragment onStart");
         setupUx();
-        //Log.d(TAG, "ListFragment setupUx");
     }
 
     @Override
@@ -176,18 +169,15 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
 
     private void savingCurrentValuesView() {
         // for test
-        //Storage.setCurrentState(getActivity(),"HasData" );//currentState
         Storage.setCurrentState(getActivity(), currentState);
         Log.d(TAG, "*** onPause " + currentState);
         if (llm != null) {
             if (employeeStorage != null) {
-                currentListItem = (int) llm.findFirstVisibleItemPosition() + employeeStorage.outMinStartPosition();
+                currentListItem = llm.findFirstVisibleItemPosition() + employeeStorage.outMinStartPosition();
             }
         }
         Storage.setCurrentListItem(getActivity(), currentListItem);
         Log.d(TAG, "*** onPause #" + currentListItem.toString());
-        //for test
-        /*Toast.makeText(getActivity(),"curLI " + currentListItem.toString() + " FirstV " + llm.findFirstVisibleItemPosition() + " Min "+employeeStorage.outMinStartPosition(), Toast.LENGTH_LONG).show();*/
     }
 
     private void unbindUx() {
@@ -214,14 +204,11 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     private View.OnTouchListener spinnerOnTouch = new View.OnTouchListener() {
         public boolean onTouch(View v, MotionEvent event) {
             if (event.getAction() == MotionEvent.ACTION_UP) {
-                categoriesAdapter.setOnCategorySelectedListener(new CategoriesSpinnerAdapter.OnCategorySelectedListener() {
-                    @Override
-                    public void onSelected(@NonNull NewsCategory category) {
-                        Log.d(TAG, "--- ListFragment onSelected");
-                        //cleaning saved Current List Item position
-                        Storage.setCurrentListItem(getActivity(), 0);
-                        newsListPresenter.loadItem(category.serverValue(), newsDatabaseRepository);
-                    }
+                categoriesAdapter.setOnCategorySelectedListener(category -> {
+                    Log.d(TAG, "--- ListFragment onSelected");
+                    //cleaning saved Current List Item position
+                    Storage.setCurrentListItem(getActivity(), 0);
+                    newsListPresenter.loadItem(category.serverValue(), newsDatabaseRepository);
                 }, spinnerCategories);
             }
             return false;
@@ -247,9 +234,9 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
         }
     }
 
-/**
-****************************************************************************************************
-**/
+    /**
+     * ***************************************************************************************************
+     **/
 
     @Override
     public void showState(@NonNull State state) {
@@ -259,7 +246,6 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
                 currentState = State.Loading.name();
                 rvNews.setVisibility(View.GONE);
                 viewError.setVisibility(View.GONE);
-                //viewNoDate.setVisibility(View.GONE);
 
                 viewLoading.setVisibility(View.VISIBLE);
                 break;
@@ -314,7 +300,6 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     private void setupPagedListAdapter(List<AllNewsItem> news) {
         newsItemDiffUtilItemCallback = new NewsItemDiffUtilItemCallback();
         newsPagedAdapter = new NewsPagedListAdapter(newsItemDiffUtilItemCallback, context);
-        //NewsAdapter = new NewsRecyclerAdapter(getActivity());
         startLoadKey = Storage.getCurrentListItem(getActivity());
         employeeStorage = new EmployeeStorage(news, startLoadKey);
         newsSourceFactory = new NewsSourceFactory(employeeStorage);
@@ -338,17 +323,9 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
                 .setFetchExecutor(Executors.newSingleThreadExecutor())
                 .setInitialLoadKey(startLoadKey)
                 .build();
-        /*PagedList<AllNewsItem> pagedList = new PagedList.Builder<>(dataSource, config)
-                .setFetchExecutor(Executors.newSingleThreadExecutor())
-                .setNotifyExecutor(new MainThreadExecutor())
-                .setInitialKey(Storage.getCurrentListItem(getActivity())) //
-                .build();*/
-        pagedListLiveData.observe(getActivity(), new Observer<PagedList<AllNewsItem>>() {
-            @Override
-            public void onChanged(@Nullable PagedList<AllNewsItem> allNewsItems) {
-                Log.d(TAG, "### submit PagedList");
-                newsPagedAdapter.submitList(allNewsItems);
-            }
+        pagedListLiveData.observe(getActivity(), allNewsItems -> {
+            Log.d(TAG, "### submit PagedList");
+            newsPagedAdapter.submitList(allNewsItems);
         });
     }
 
@@ -386,34 +363,6 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
                 }
             }
         });
-    }
-
-
-    public boolean onCheckIsTwoPanel(boolean isTwoPanel) {
-        return isTwoPanel;
-    }
-
-    public void onChangeColumnsWithOrientation(int orientation, RecyclerView recyclerView, View view) {
-        //This method helps change number of columns using Grid spanCount and helps add itemDecoration
-        // Checks the orientation of the screen and TwoPanel fragments for Tablets (if landscape on Tablets 1 column news)
-        /*if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        } else {
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        }*/
-        /*if (orientation == Configuration.ORIENTATION_PORTRAIT && !isTwoPanel)*/
-        DividerItemDecoration itemDecorator = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
-        itemDecorator.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(getActivity(), R.drawable.item_ecoration_size_4)));
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
-        recyclerView.addItemDecoration(itemDecorator);
-
-        /*if ((view.findViewById(R.id.tablet_ll)) == null && orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            DividerItemDecoration itemDecorator1 = new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL);
-            itemDecorator1.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(getActivity(), R.drawable.item_ecoration_size_4)));
-            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-            recyclerView.addItemDecoration(itemDecorator1);
-        }*/
-
     }
 
 

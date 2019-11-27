@@ -3,7 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <!-- preference_for_background_Layuot-->
+    <color name="colorDetails_textDate">#37000000</color>
+    <!-- preference_for_background_Layout-->
     <color name="backgroundL">#FFFFFF</color>
     <!-- preference_for_background_View-->
     <color name="backgroundV">#ce2900</color> <!--#ce2900 C8C8C8 fff59a-->

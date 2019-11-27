@@ -60,6 +60,7 @@ public class RestApi {
                 .readTimeout(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS)
                 .build();
     }
+
     @NonNull
     public TopStoriesEndpoint getTSEndpoint() {
         return TSEndpoint;

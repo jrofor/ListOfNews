@@ -5,10 +5,7 @@ import android.support.v7.util.DiffUtil;
 
 import com.example.roman.listofnews.ui.adapter.AllNewsItem;
 
-import java.util.List;
-
 public class NewsItemDiffUtilItemCallback extends DiffUtil.ItemCallback<AllNewsItem> {
-
 
     @Override
     public boolean areItemsTheSame(@NonNull AllNewsItem oldList, @NonNull AllNewsItem newList) {

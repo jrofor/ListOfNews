@@ -4,10 +4,10 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -111,7 +111,6 @@ public class NewsAboutFragment extends MvpAppCompatFragment implements NewsAbout
         Log.d(TAG, "--- AboutFragment onResume");
     }
 
-
 //=======================================================================================switchIntro
 
     private void switchForIntro() {
@@ -126,12 +125,8 @@ public class NewsAboutFragment extends MvpAppCompatFragment implements NewsAbout
     }
 
     private void onChangeSwitchIntro() {
-        switchIntro.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean on) {
-                newsAboutPresenter.onCheckedChangedSwIntro(on);
-            }
-        });
+        switchIntro.setOnCheckedChangeListener((buttonView, on) ->
+                newsAboutPresenter.onCheckedChangedSwIntro(on));
     }
 
     @Override
@@ -157,12 +152,8 @@ public class NewsAboutFragment extends MvpAppCompatFragment implements NewsAbout
     }
 
     private void onChangeSwitchUpdate() {
-        switchUpdate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean on) {
-                newsAboutPresenter.onCheckedChangedSwUpdate(on);
-            }
-        });
+        switchUpdate.setOnCheckedChangeListener((buttonView, on) ->
+                newsAboutPresenter.onCheckedChangedSwUpdate(on));
     }
 
     @Override
@@ -183,7 +174,7 @@ public class NewsAboutFragment extends MvpAppCompatFragment implements NewsAbout
     @Override
     public void showWorkPeriodicUpdateService() {
         Toast toast = Toast.makeText(getActivity(), getString(R.string.messagePeriodicUpdate), Toast.LENGTH_LONG);
-        TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+        TextView v = toast.getView().findViewById(android.R.id.message);
         if (v != null) v.setGravity(Gravity.CENTER);
         toast.show();
     }
@@ -218,7 +209,7 @@ public class NewsAboutFragment extends MvpAppCompatFragment implements NewsAbout
 
     public void composeEmail(String[] addresses, String subject, String message) {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:")); // "mailto:"  +""" " only email apps should handle this
+        intent.setData(Uri.parse("mailto:"));
         intent.putExtra(Intent.EXTRA_EMAIL, addresses);
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         intent.putExtra(Intent.EXTRA_TEXT, message);

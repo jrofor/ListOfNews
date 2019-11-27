@@ -18,21 +18,20 @@ public class Storage {
     private static final String APP_PREFERENCES_currentListItem = "currentListItem";
 
 
-
 //-----------------------------------------------------------
 
-    public static boolean openFirstTime  (Context context) {
+    public static boolean openFirstTime(Context context) {
         SharedPreferences mSettings;
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         boolean openFT = mSettings.getBoolean(APP_PREFERENCES_FirstTime, true);
         return openFT;
     }
 
-    public static void setFirstTimeShown  (Context context) {
+    public static void setFirstTimeShown(Context context) {
         SharedPreferences mSettings;
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mSettings.edit();
-        editor.putBoolean(APP_PREFERENCES_FirstTime , false) ;
+        editor.putBoolean(APP_PREFERENCES_FirstTime, false);
         editor.apply();
     }
 //-----------------------------------------------------------
@@ -44,19 +43,19 @@ public class Storage {
         return swIntro;
     }
 
-    public static void setSwitchIntroOn  (Context context) {
+    public static void setSwitchIntroOn(Context context) {
         SharedPreferences mSettings;
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mSettings.edit();
-        editor.putBoolean(APP_PREFERENCES_switchIntro ,true ) ;
+        editor.putBoolean(APP_PREFERENCES_switchIntro, true);
         editor.apply();
     }
 
-    public static void setSwitchIntroOff  (Context context) {
+    public static void setSwitchIntroOff(Context context) {
         SharedPreferences mSettings;
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mSettings.edit();
-        editor.putBoolean(APP_PREFERENCES_switchIntro , false) ;
+        editor.putBoolean(APP_PREFERENCES_switchIntro, false);
         editor.apply();
     }
 //-----------------------------------------------------------
@@ -68,19 +67,19 @@ public class Storage {
         return swUpdate;
     }
 
-    public static void setSwitchUpdateOn  (Context context) {
+    public static void setSwitchUpdateOn(Context context) {
         SharedPreferences mSettings;
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mSettings.edit();
-        editor.putBoolean(APP_PREFERENCES_switchUpdate ,true ) ;
+        editor.putBoolean(APP_PREFERENCES_switchUpdate, true);
         editor.apply();
     }
 
-    public static void setSwitchUpdateOff  (Context context) {
+    public static void setSwitchUpdateOff(Context context) {
         SharedPreferences mSettings;
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mSettings.edit();
-        editor.putBoolean(APP_PREFERENCES_switchUpdate , false) ;
+        editor.putBoolean(APP_PREFERENCES_switchUpdate, false);
         editor.apply();
     }
 //-----------------------------------------------------------
@@ -93,53 +92,53 @@ public class Storage {
         editor.apply();
     }*/
 
-    public static String getTagUpdateWork (Context context) {
+    public static String getTagUpdateWork(Context context) {
         SharedPreferences mSettings;
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         return mSettings.getString(APP_PREFERENCES_tagUploadWorkManager, "WORK_MANAGER_UPLOAD_TAG");
     }
 //-----------------------------------------------------------
 
-    public static void setSelectedPositionCategory (Context context, int position){
+    public static void setSelectedPositionCategory(Context context, int position) {
         SharedPreferences mSettings;
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mSettings.edit();
         //editor.putString(APP_PREFERENCES_selectedCategory , category) ;
-        editor.putInt(APP_PREFERENCES_selectedPositionCategory , position) ;
+        editor.putInt(APP_PREFERENCES_selectedPositionCategory, position);
         editor.apply();
     }
 
-    public static int getSelectedPositionCategory (Context context) {
+    public static int getSelectedPositionCategory(Context context) {
         SharedPreferences mSettings;
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         return mSettings.getInt(APP_PREFERENCES_selectedPositionCategory, 0);
     }
 //-----------------------------------------------------------
 
-    public static void setCurrentState (Context context, String nameState){
+    public static void setCurrentState(Context context, String nameState) {
         SharedPreferences mSettings;
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mSettings.edit();
-        editor.putString(APP_PREFERENCES_currentState , nameState) ;
+        editor.putString(APP_PREFERENCES_currentState, nameState);
         editor.apply();
     }
 
-    public static String getCurrentState (Context context) {
+    public static String getCurrentState(Context context) {
         SharedPreferences mSettings;
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         return mSettings.getString(APP_PREFERENCES_currentState, "HasNoData");
     }
 //-----------------------------------------------------------
 
-    public static void setCurrentListItem (Context context, Integer listItem){
+    public static void setCurrentListItem(Context context, Integer listItem) {
         SharedPreferences mSettings;
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mSettings.edit();
-        editor.putInt(APP_PREFERENCES_currentListItem, listItem) ;
+        editor.putInt(APP_PREFERENCES_currentListItem, listItem);
         editor.apply();
     }
 
-    public static int getCurrentListItem (Context context) {
+    public static int getCurrentListItem(Context context) {
         SharedPreferences mSettings;
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         return mSettings.getInt(APP_PREFERENCES_currentListItem, 0);

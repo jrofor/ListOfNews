@@ -3,14 +3,12 @@ package com.example.roman.listofnews.mvp;
 import android.support.annotation.NonNull;
 
 import com.arellomobile.mvp.InjectViewState;
-import com.example.roman.listofnews.data.Storage;
 import com.example.roman.listofnews.data.background.UploadWork;
 import com.example.roman.listofnews.mvp.common.BasePresenter;
 
 import java.util.concurrent.TimeUnit;
 
 import androidx.work.Constraints;
-import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
@@ -38,13 +36,8 @@ public class NewsAboutPresenter extends BasePresenter<NewsAboutView> {
                 .setRequiresCharging(true)
                 .build();
 
-        //for Test
-        /*OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(UploadWork.class)
-                .setConstraints(workConstraints)
-                .addTag(TAG)
-                .build();*/
-
-        PeriodicWorkRequest workRequest = new PeriodicWorkRequest.Builder(UploadWork.class, 185, TimeUnit.MINUTES, 5, TimeUnit.MINUTES)
+        PeriodicWorkRequest workRequest = new PeriodicWorkRequest.Builder(UploadWork.class,
+                185, TimeUnit.MINUTES, 5, TimeUnit.MINUTES)
                 .setConstraints(workConstraints)
                 .addTag(TAG)
                 .build();
@@ -57,12 +50,11 @@ public class NewsAboutPresenter extends BasePresenter<NewsAboutView> {
         WorkManager.getInstance().cancelAllWorkByTag(TAG);
     }
 
-
     public void ErrorEmailMessage() {
         getViewState().showErrorEmailMessage();
     }
 
-    public void onClickSendMessage(@NonNull String message){
+    public void onClickSendMessage(@NonNull String message) {
         getViewState().sendingMessage(message);
     }
 

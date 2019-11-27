@@ -8,28 +8,16 @@ import android.net.NetworkInfo;
 
 import com.example.roman.listofnews.MyApplication;
 
-import io.reactivex.Single;
-import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.Subject;
 
 public class NetworkUtils {
-    //private static final NetworkUtils ourInstance = new NetworkUtils();
-
     public static NetworkUtils sNetworkUtils = new NetworkUtils();
-
     private NetworkReceiver mNetworkReceiver = new NetworkReceiver();
     private Subject<Boolean> mNetworkState = BehaviorSubject.createDefault(isNetworkAvailable());
 
     public NetworkReceiver getReceiver() {
         return mNetworkReceiver;
-    }
-
-    public Single<Boolean> getOnlineNetwork() {
-        return mNetworkState
-                .subscribeOn(Schedulers.io())
-                .filter(online -> online)
-                .firstOrError();
     }
 
     private boolean isNetworkAvailable() {
@@ -43,7 +31,6 @@ public class NetworkUtils {
         // otherwise check if we are connected
         return networkInfo != null && networkInfo.isConnected();
     }
-
 
     public class NetworkReceiver extends BroadcastReceiver {
 

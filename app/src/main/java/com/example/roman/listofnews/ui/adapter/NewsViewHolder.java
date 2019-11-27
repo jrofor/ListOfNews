@@ -37,8 +37,8 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
 
     private static final int layoutItem = R.layout.item_news;
     private static final String TAG = "myLogs";
-    private static String createId  ="";
-    private static String errDbOutMessage = "Error with database. Please reload news." ;
+    private static String createId = "";
+    private static String errDbOutMessage = "Error with database. Please reload news.";
 
     private NewsViewHolder(@NonNull View itemView, RequestManager glideRequestManager) {
         super(itemView);
@@ -47,15 +47,15 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
         findViews(itemView);
     }
 
-    public static NewsViewHolder create (@NonNull LayoutInflater inflater,
-                                         @NonNull ViewGroup parent,
-                                         @NonNull RequestManager glideRequestManager) {
+    public static NewsViewHolder create(@NonNull LayoutInflater inflater,
+                                        @NonNull ViewGroup parent,
+                                        @NonNull RequestManager glideRequestManager) {
         final View view = inflater.inflate(layoutItem, parent, false);
-        return new NewsViewHolder(view, glideRequestManager)  ;
+        return new NewsViewHolder(view, glideRequestManager);
 
     }
 
-    private void findViews (@NonNull View itemView) {
+    private void findViews(@NonNull View itemView) {
         progressBar = itemView.findViewById(R.id.progress_bar);
         tvSubsection = itemView.findViewById(R.id.tv_subsection);
         tvTitle = itemView.findViewById(R.id.tv_title);
@@ -67,25 +67,17 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     public void bindItem(AllNewsItem allNewsItem,
                          @NonNull NewsPagedListAdapter.OnItemClickListener clickListener,
                          Context context) {
-        /*if (allNewsItem == null) {
-            progressBar.setVisibility(View.VISIBLE);
-            return;*/
-            //AllNewsItem WIAT = AllNewsItem.create("wait","wait","wait","wait","wait","wait");
-            //setupUi(WIAT);
-
         setupUi(allNewsItem);
         setupUx(allNewsItem, clickListener, context);
     }
 
-    private void setupUi (AllNewsItem allNewsItem) {
-
+    private void setupUi(AllNewsItem allNewsItem) {
         progressBar.setVisibility(View.VISIBLE);
-
         tvSubsection.setText(allNewsItem.getCategory());
         tvTitle.setText(allNewsItem.getTitle());
         tvAbstract.setText(allNewsItem.getPreviewText());
         tvDate.setText(allNewsItem.getUpdatedDate());
-        imageLoader.load(allNewsItem.getImageUrl()).listener( new RequestListener<Drawable>() {
+        imageLoader.load(allNewsItem.getImageUrl()).listener(new RequestListener<Drawable>() {
 
             @Override
             public boolean onLoadFailed(GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
@@ -113,11 +105,11 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
             if (clickListener != null && position != RecyclerView.NO_POSITION) {
                 try {
                     // adding create id for database Entity
-                    createId = allNewsItem.getTitle().concat(allNewsItem.getUrl()) ;
+                    createId = allNewsItem.getTitle().concat(allNewsItem.getUrl());
                     clickListener.OnItemClick(createId);
                     Log.d(TAG, createId);
-                }catch (NullPointerException e){
-                    Toast.makeText(context, errDbOutMessage,Toast.LENGTH_SHORT).show();
+                } catch (NullPointerException e) {
+                    Toast.makeText(context, errDbOutMessage, Toast.LENGTH_SHORT).show();
                     Log.d(TAG, String.valueOf(e));
                 }
             }

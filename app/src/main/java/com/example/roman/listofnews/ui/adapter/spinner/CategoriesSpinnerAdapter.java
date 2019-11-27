@@ -17,7 +17,7 @@ import com.example.roman.listofnews.data.Storage;
 import com.example.roman.listofnews.ux.NewsCategory;
 
 
-public final class CategoriesSpinnerAdapter extends ArrayAdapter<NewsCategory>  {
+public final class CategoriesSpinnerAdapter extends ArrayAdapter<NewsCategory> {
     private static final int DEFAULT_SPINNER_ITEM = R.layout.categories_spinner_item;
     private static final int DEFAULT_DROP_DOWN_ITEM = R.layout.categories_drop_down_spinner_item;
 
@@ -25,20 +25,19 @@ public final class CategoriesSpinnerAdapter extends ArrayAdapter<NewsCategory>  
     private static final String TAG_NON_DROPDOWN = "NON_DROPDOWN";
 
     private NewsCategory selectedCategory = NewsCategory.findCategoryByPosition(Storage.getSelectedPositionCategory(getContext()));
-    // NewsCategory.HOME;
     private final LayoutInflater inflater;
     private OnCategorySelectedListener categorySelectedListener;
 
-    public CategoriesSpinnerAdapter(Context context, int resource, NewsCategory[] objects) {
+    private CategoriesSpinnerAdapter(Context context, int resource, NewsCategory[] objects) {
         super(context, resource, objects); //
         inflater = LayoutInflater.from(context);
     }
 
     @NonNull
     public static CategoriesSpinnerAdapter createDefault(@NonNull Context context,
-                                                         @NonNull NewsCategory[] categories){
+                                                         @NonNull NewsCategory[] categories) {
         return new CategoriesSpinnerAdapter(context, DEFAULT_SPINNER_ITEM, categories);
-        }
+    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -82,8 +81,8 @@ public final class CategoriesSpinnerAdapter extends ArrayAdapter<NewsCategory>  
         return convertView;
     }
 
-    public void setOnCategorySelectedListener (@Nullable OnCategorySelectedListener categorySelectedListener,
-                                               @NonNull Spinner spinner) {
+    public void setOnCategorySelectedListener(@Nullable OnCategorySelectedListener categorySelectedListener,
+                                              @NonNull Spinner spinner) {
         this.categorySelectedListener = categorySelectedListener;
         if (categorySelectedListener == null) {
             spinner.setOnItemClickListener(null);
@@ -112,7 +111,6 @@ public final class CategoriesSpinnerAdapter extends ArrayAdapter<NewsCategory>  
     public NewsCategory getSelectedCategory() {
         return selectedCategory;
     }
-
 
 
     public interface OnCategorySelectedListener {

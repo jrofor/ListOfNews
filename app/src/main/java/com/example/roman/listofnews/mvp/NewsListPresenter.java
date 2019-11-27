@@ -27,18 +27,17 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
 
 
     private static final String TAG = "myLogs";
-    private RestApi restApi;
     @Nullable
     private NewsDatabaseConverter databaseConverter = new NewsDatabaseConverter();
 
     public NewsListPresenter(@NonNull RestApi instance) {
-        this.restApi = instance;
+        RestApi restApi = instance;
     }
 
-    public void loadItem(@NonNull String category,@NonNull NewsDatabaseRepository newsDatabaseRepository) {
+    public void loadItem(@NonNull String category, @NonNull NewsDatabaseRepository newsDatabaseRepository) {
         getViewState().showState(State.Loading);
 
-        final Disposable disposable = (Disposable) RestApi.getInstanse()
+        final Disposable disposable = RestApi.getInstanse()
                 .getTSEndpoint()
                 .setSectionName(category)
                 .map(response ->
@@ -49,11 +48,11 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         newsItems -> setupNews(newsItems, newsDatabaseRepository),
-                        throwable -> handleError(throwable));
+                        this::handleError);
         disposeOnDestroy(disposable);
     }
 
-    private void setupNews(@NonNull List<AllNewsItem> newsItems,@NonNull NewsDatabaseRepository newsDatabaseRepository) {
+    private void setupNews(@NonNull List<AllNewsItem> newsItems, @NonNull NewsDatabaseRepository newsDatabaseRepository) {
         if (newsItems.isEmpty()) {
             getViewState().showState(State.HasNoData);
             return;
@@ -67,7 +66,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         saveToDatabaseWithRoom(databaseConverter.toDatabase(newsItems), newsDatabaseRepository);
     }
 
-    private void handleError (Throwable throwable) {
+    private void handleError(Throwable throwable) {
         Log.d(TAG, "/// handleError");
         if (throwable instanceof IOException) {
             getViewState().showState(State.NetworkError);
@@ -77,7 +76,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
     }
 
     /**
-     ********************************************Database methods****************************************
+     * *******************************************Database methods****************************************
      **/
 
     private void saveToDatabaseWithRoom(List<NewsEntity> NewsEntityList, @NonNull NewsDatabaseRepository newsDatabaseRepository) {
@@ -97,17 +96,16 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         Disposable disposable = newsDatabaseRepository.getDataFromDatabase()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe( new Consumer<List<NewsEntity>>() {
-                                @Override
-                                public void accept(List<NewsEntity> newsEntities) throws Exception {
-                                    //Log.d(TAG, newsEntities.toString());
-                                    // updating Items in RecyclerView from Database with converting Entities to AllNewsItem
-                                    getViewState().showState(State.HasData);
-                                    getViewState().updateItems(databaseConverter.fromDatabase(newsEntities)) ;
-                                    Log.d(TAG, "updating Items in RecyclerView from Database");
+                .subscribe(new Consumer<List<NewsEntity>>() {
+                               @Override
+                               public void accept(List<NewsEntity> newsEntities) {
+                                   // updating Items in RecyclerView from Database with converting Entities to AllNewsItem
+                                   getViewState().showState(State.HasData);
+                                   getViewState().updateItems(databaseConverter.fromDatabase(newsEntities));
+                                   Log.d(TAG, "updating Items in RecyclerView from Database");
 
-                                }
-                            } ,
+                               }
+                           },
                         throwable -> Log.e(TAG, throwable.toString()));
         disposeOnDestroy(disposable);
     }
