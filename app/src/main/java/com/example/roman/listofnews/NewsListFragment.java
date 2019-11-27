@@ -96,7 +96,7 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
     private boolean isTwoPanel;
     static final String ARGUMENT_IS_TWO_PANEL = "arg_is_two_panel";
     private String currentState;
-    private Integer currentListItem = 0;
+    private int currentListItem;
     private int startLoadKey;
     private final int pageSizePagedList = 5;
     private SetTitleActionBarListener titleActionBarListener;
@@ -177,7 +177,7 @@ public class NewsListFragment extends MvpAppCompatFragment implements NewsListVi
             }
         }
         Storage.setCurrentListItem(getActivity(), currentListItem);
-        Log.d(TAG, "*** onPause #" + currentListItem.toString());
+        Log.d(TAG, "*** onPause #" + currentListItem);
     }
 
     private void unbindUx() {

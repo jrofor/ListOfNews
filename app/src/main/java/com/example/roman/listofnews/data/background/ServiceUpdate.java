@@ -46,8 +46,8 @@ public class ServiceUpdate extends Service {
     @Nullable
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private static final String CHANNEL_ID = "LOAD_NEWS_CHANNEL";
-    private static final Integer NOTIFY_ID = 0;
-    private static final Integer FOREGROUND_ID = 3;
+    private static final int NOTIFY_ID = 0;
+    private static final int FOREGROUND_ID = 3;
 
     @Override
     public IBinder onBind(Intent intent) {
