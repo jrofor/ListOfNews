@@ -130,7 +130,7 @@ public class Storage {
     }
 //-----------------------------------------------------------
 
-    public static void setCurrentListItem(Context context, Integer listItem) {
+    public static void setCurrentListItem(Context context, int listItem) {
         SharedPreferences mSettings;
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mSettings.edit();

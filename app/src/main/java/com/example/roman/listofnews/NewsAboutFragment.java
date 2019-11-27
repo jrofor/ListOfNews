@@ -56,7 +56,7 @@ public class NewsAboutFragment extends MvpAppCompatFragment implements NewsAbout
     ImageView nyTimesLogo;
     private LinearLayout aboutMainLayout;
     final String TAG = "myLogs";
-    private static final Integer NOTIFY_ID = 0;
+    private static final int NOTIFY_ID = 0;
     private SetTitleActionBarListener titleActionBarListener;
 
     @Override

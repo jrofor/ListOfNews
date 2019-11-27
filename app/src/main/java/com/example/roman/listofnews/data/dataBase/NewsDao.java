@@ -14,7 +14,7 @@ public interface NewsDao {
     List<NewsEntity> getAll();
 
     @Query("SELECT COUNT(*) from newsEntity")
-    Integer newsEntityCount();
+    int newsEntityCount();
 
     @Query("SELECT * FROM newsEntity WHERE id = :id")
     NewsEntity getNewsById(String id);
