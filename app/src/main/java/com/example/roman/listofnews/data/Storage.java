@@ -3,8 +3,6 @@ package com.example.roman.listofnews.data;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import static java.lang.String.valueOf;
-
 
 public class Storage {
 
@@ -16,7 +14,6 @@ public class Storage {
     private static final String APP_PREFERENCES_selectedPositionCategory = "selectedPositionCategory";
     private static final String APP_PREFERENCES_currentState = "currentState";
     private static final String APP_PREFERENCES_currentListItem = "currentListItem";
-
 
 //-----------------------------------------------------------
 
@@ -83,14 +80,6 @@ public class Storage {
         editor.apply();
     }
 //-----------------------------------------------------------
-
-    /*public static void setTagUploadWork (Context context) {
-        SharedPreferences mSettings;
-        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mSettings.edit();
-        editor.putString(APP_PREFERENCES_tagUploadWorkManager, "WORK_MANAGER_UPLOAD_TAG");
-        editor.apply();
-    }*/
 
     public static String getTagUpdateWork(Context context) {
         SharedPreferences mSettings;
